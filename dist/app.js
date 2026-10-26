@@ -21,6 +21,15 @@ $('#script-mode').onchange=async()=>{
 };
 function syncFontNote(){$('#font-note').hidden=$('#export-font').value!=='kangxi'}
 $('#export-font').onchange=syncFontNote;
+function setSourceSize(value,save=false){
+ const size=Number(value);if(!Number.isInteger(size)||size<16||size>40)return;
+ document.documentElement.style.setProperty('--source-size',size+'px');
+ $('#source-size').value=size;$('#source-size-value').value=size;$('#source-size').setAttribute('aria-valuetext',size+' 像素');
+ if(save)try{localStorage.setItem('shiju-source-size',String(size))}catch{}
+}
+setSourceSize(23);try{const size=localStorage.getItem('shiju-source-size');if(size!==null)setSourceSize(size)}catch{}
+$('#source-size').oninput=e=>setSourceSize(e.target.value,true);
+$('#source-size-reset').onclick=()=>setSourceSize(23,true);
 const poems=[
  {title:'山居秋暝',author:'唐 · 王维',text:'空山新雨后，天气晚来秋。\n明月松间照，清泉石上流。\n竹喧归浣女，莲动下渔舟。\n随意春芳歇，王孙自可留。'},
  {title:'饮酒·其五',author:'晋 · 陶渊明',text:'结庐在人境，而无车马喧。\n问君何能尔？心远地自偏。\n采菊东篱下，悠然见南山。\n山气日夕佳，飞鸟相与还。\n此中有真意，欲辨已忘言。'},
