@@ -109,20 +109,21 @@ $('#collection').onclick=()=>{renderSaved();$('#collection-dialog').showModal()}
 // Lay out both original and new poem first, so exports grow to fit every line.
 function wrapCells(chars,maxUnits){const lines=[[]];let units=0;for(const t of chars){if(t.c==='\n'){lines.push([]);units=0;continue}const w=t.c===' '?0.5:Array.from(t.c).length;if(units+w>maxUnits&&lines.at(-1).length){lines.push([]);units=0}lines.at(-1).push({...t,w});units+=w}return lines}
 const songtiFamily='"Songti SC","STSong","Noto Serif CJK SC","SimSun",serif';
-let kangxiFontPromise;
-function loadKangxiFont(){
- if(!kangxiFontPromise)kangxiFontPromise=(async()=>{
-  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),90000);
+const exportFonts={kangxi:{family:'Kangxi',label:'康熙字典体',file:'kangxi.woff2'},huiwen:{family:'Huiwen',label:'汇文明朝体',file:'huiwen.woff2'}};
+const fontPromises=new Map();
+function loadExportFont(key){
+ if(!fontPromises.has(key))fontPromises.set(key,(async()=>{
+  const font=exportFonts[key],controller=new AbortController(),timer=setTimeout(()=>controller.abort(),90000);
   try{
-   const response=await fetch('fonts/kangxi.ttf',{signal:controller.signal});
+   const response=await fetch('fonts/'+font.file,{signal:controller.signal});
    if(!response.ok)throw new Error('Font download failed');
-   const face=new FontFace('Kangxi',await response.arrayBuffer());
+   const face=new FontFace(font.family,await response.arrayBuffer());
    await face.load();document.fonts.add(face);
-  }catch{kangxiFontPromise=null;throw new Error('康熙字典体加载失败，请重试或选择宋体导出')}finally{clearTimeout(timer)}
- })();
- return kangxiFontPromise;
+  }catch{fontPromises.delete(key);throw new Error(font.label+'加载失败，请重试或选择宋体导出')}finally{clearTimeout(timer)}
+ })());
+ return fontPromises.get(key);
 }
-async function exportImage(){if(!pickedCount()){toast('请先从原文中选字');return}const colors=getExportColors();const button=$('#export');const useKangxi=$('#export-font').value==='kangxi';const fontFamily=(useKangxi?'"Kangxi",':'')+songtiFamily;button.disabled=true;try{if(useKangxi){button.textContent='正在加载字体…';await loadKangxiFont()}button.textContent='正在生成图片…';const used=new Set(state.tokens.filter(t=>t.id!==null).map(t=>t.id));const source=wrapCells(Array.from(state.source.text).map((c,id)=>({c,hole:used.has(id)})),15);const result=wrapCells(state.tokens,12);const height=Math.max(1060,400+source.length*55,400+result.length*64);if(height>24000)throw new Error('作品太长，请分为较短的篇章导出');const canvas=document.createElement('canvas');canvas.width=1440;canvas.height=height;const ctx=canvas.getContext('2d');if(!ctx)throw new Error('当前浏览器不支持图片导出');ctx.fillStyle=colors['#f7f5ef'];ctx.fillRect(0,0,1440,height);ctx.fillStyle=colors['#b95437'];ctx.fillRect(64,58,49,53);ctx.font='32px '+fontFamily;ctx.fillStyle=colors['#fffefb'];ctx.fillText('拾',72,96);ctx.fillStyle=colors['#343b31'];ctx.font='26px '+fontFamily;ctx.fillText('拾句',130,95);ctx.font='14px sans-serif';ctx.fillStyle=colors['#969b8b'];ctx.fillText('从旧诗里，拾一首新诗。',1040,95);ctx.strokeStyle=colors['#dfe2d5'];ctx.beginPath();ctx.moveTo(64,142);ctx.lineTo(1376,142);ctx.stroke();ctx.fillStyle=colors['#fffefb'];ctx.fillRect(754,190,622,height-310);ctx.fillStyle=colors['#87917b'];ctx.font='14px sans-serif';ctx.fillText('01   原诗 · 摘取后',85,219);ctx.fillText('02   新诗 · 重新排列',794,229);
+async function exportImage(){if(!pickedCount()){toast('请先从原文中选字');return}const colors=getExportColors();const button=$('#export');const fontKey=$('#export-font').value,font=exportFonts[fontKey];const fontFamily=(font?'"'+font.family+'",':'')+songtiFamily;button.disabled=true;try{if(font){button.textContent='正在加载字体…';await loadExportFont(fontKey)}button.textContent='正在生成图片…';const used=new Set(state.tokens.filter(t=>t.id!==null).map(t=>t.id));const source=wrapCells(Array.from(state.source.text).map((c,id)=>({c,hole:used.has(id)})),15);const result=wrapCells(state.tokens,12);const height=Math.max(1060,400+source.length*55,400+result.length*64);if(height>24000)throw new Error('作品太长，请分为较短的篇章导出');const canvas=document.createElement('canvas');canvas.width=1440;canvas.height=height;const ctx=canvas.getContext('2d');if(!ctx)throw new Error('当前浏览器不支持图片导出');ctx.fillStyle=colors['#f7f5ef'];ctx.fillRect(0,0,1440,height);ctx.fillStyle=colors['#b95437'];ctx.fillRect(64,58,49,53);ctx.font='32px '+fontFamily;ctx.fillStyle=colors['#fffefb'];ctx.fillText('拾',72,96);ctx.fillStyle=colors['#343b31'];ctx.font='26px '+fontFamily;ctx.fillText('拾句',130,95);ctx.font='14px sans-serif';ctx.fillStyle=colors['#969b8b'];ctx.fillText('从旧诗里，拾一首新诗。',1040,95);ctx.strokeStyle=colors['#dfe2d5'];ctx.beginPath();ctx.moveTo(64,142);ctx.lineTo(1376,142);ctx.stroke();ctx.fillStyle=colors['#fffefb'];ctx.fillRect(754,190,622,height-310);ctx.fillStyle=colors['#87917b'];ctx.font='14px sans-serif';ctx.fillText('01   原诗 · 摘取后',85,219);ctx.fillText('02   新诗 · 重新排列',794,229);
  function drawWrappedTitle(text,x,y,width,size=30){ctx.font=size+'px '+fontFamily;let str='';let row=0;for(const c of Array.from(text)){if(ctx.measureText(str+c).width>width){ctx.fillText(str,x,y+row*(size+10));str=c;row++}else str+=c}ctx.fillText(str,x,y+row*(size+10));return y+row*(size+10)}
  ctx.fillStyle=colors['#343b31'];const sy=drawWrappedTitle(state.source.title,85,280,560);ctx.font='15px sans-serif';ctx.fillStyle=colors['#929985'];ctx.fillText(state.source.author,85,sy+32);ctx.fillStyle=colors['#343b31'];const ny=drawWrappedTitle(state.title.trim(),794,290,540,46);
  // Titles can take multiple lines; reserve the extra rows in layout by limiting canvas text area through dynamic extension.
