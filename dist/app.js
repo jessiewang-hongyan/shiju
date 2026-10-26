@@ -22,7 +22,7 @@ $('#script-mode').onchange=async()=>{
 function syncFontNote(){$('#font-note').hidden=$('#export-font').value!=='kangxi'}
 $('#export-font').onchange=syncFontNote;
 function setSourceSize(value,save=false){
- const size=Number(value);if(!Number.isInteger(size)||size<16||size>40)return;
+ const size=Number(value);if(!Number.isInteger(size)||size<5||size>25)return;
  document.documentElement.style.setProperty('--source-size',size+'px');
  $('#source-size').value=size;$('#source-size-value').value=size;$('#source-size').setAttribute('aria-valuetext',size+' 像素');
  if(save)try{localStorage.setItem('shiju-source-size',String(size))}catch{}
