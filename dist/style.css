@@ -116,6 +116,24 @@ html[data-night-colors] input::placeholder,html[data-night-colors] textarea::pla
 
 .script-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 18px;font-size:12px}.script-controls select{font:inherit;padding:8px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:4px}#script-note{color:var(--muted)}#font-note{margin:0 0 20px}
 
-.source-size-controls{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-top:16px;font-size:12px;color:var(--ink);flex-wrap:wrap}.source-size-controls input[type=range]{width:120px;max-width:40vw;accent-color:var(--ink)}.source-size-controls output{min-width:2ch;font-variant-numeric:tabular-nums}.source-size-controls button{padding:5px 8px;border:1px solid var(--line);border-radius:4px}#source-poem{font-size:var(--source-size,23px)}#source-poem .char{font-size:inherit;width:calc(var(--source-size,23px)*1.45);height:calc(var(--source-size,23px)*1.9)}#source-poem .source-punctuation{font-size:inherit}#source-poem .char.picked{font-size:0}#source-poem .char.picked:after{width:var(--source-size,23px);height:calc(var(--source-size,23px)*1.2)}
+#source-poem{font-size:var(--source-size,23px)}#source-poem .char{font-size:inherit;width:calc(var(--source-size,23px)*1.45);height:calc(var(--source-size,23px)*1.9)}#source-poem .source-punctuation{font-size:inherit}#source-poem .char.picked{font-size:0}#source-poem .char.picked:after{width:var(--source-size,23px);height:calc(var(--source-size,23px)*1.2)}
 
-.source-size-controls input[type=number]{width:52px;padding:5px 4px;text-align:center;font:inherit;font-variant-numeric:tabular-nums;color:inherit;background:var(--paper);border:1px solid var(--line);border-radius:4px}.source-size-controls input[type=number]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+/* Keep the size control together, including on narrow screens. */
+.source-size-controls{display:grid;grid-template-columns:auto minmax(36px,1fr) auto auto;align-items:center;gap:12px;width:100%;max-width:440px;margin:18px 0 0 auto;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);font-size:12px}
+.source-size-controls>label{white-space:nowrap;color:var(--muted)}
+.source-size-controls input[type=range]{appearance:none;-webkit-appearance:none;width:100%;min-width:0;height:28px;margin:0;background:transparent;cursor:pointer;accent-color:var(--ink)}
+.source-size-controls input[type=range]::-webkit-slider-runnable-track{height:3px;border-radius:3px;background:var(--line)}
+.source-size-controls input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;margin-top:-5.5px;background:var(--ink);border:2px solid var(--paper);box-shadow:0 0 0 1px var(--line)}
+.source-size-controls input[type=range]::-moz-range-track{height:3px;border-radius:3px;background:var(--line)}
+.source-size-controls input[type=range]::-moz-range-thumb{width:10px;height:10px;border-radius:50%;background:var(--ink);border:2px solid var(--paper);box-shadow:0 0 0 1px var(--line)}
+.source-size-stepper{display:flex;align-items:center;height:32px;border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.source-size-stepper button{width:30px;height:30px;padding:0;font-size:16px;line-height:1;border:0;border-radius:0}
+.source-size-stepper button:hover:not(:disabled){background:var(--line);color:var(--ink)}
+.source-size-stepper input[type=number]{appearance:textfield;-moz-appearance:textfield;width:38px;min-width:0;height:30px;padding:0;text-align:center;font:inherit;font-variant-numeric:tabular-nums;color:inherit;background:transparent;border:0;border-left:1px solid var(--line);border-right:1px solid var(--line);border-radius:0}
+.source-size-stepper input::-webkit-inner-spin-button,.source-size-stepper input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.source-size-stepper:focus-within{outline:2px solid var(--muted);outline-offset:2px}
+.source-size-stepper input:focus{outline:none}
+#source-size-reset{padding:6px 0;border:0;color:var(--muted);font-size:12px;white-space:nowrap}
+#source-size-reset:hover{color:var(--ink)}
+.source-size-controls input[type=range]:focus-visible{outline:2px solid var(--muted);outline-offset:2px;border-radius:3px}
+@media(max-width:380px){.source-size-controls{gap:8px;padding:8px}.source-size-stepper button{width:28px}.source-size-stepper input[type=number]{width:32px}}
