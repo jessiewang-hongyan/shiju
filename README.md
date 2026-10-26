@@ -2,6 +2,8 @@
 
 选择诗词中的字，重新排列成诗。纯静态网页，无需后端服务。
 
+在线使用：https://jessiewang-hongyan.github.io/shiju/
+
 ## 功能
 
 - 诗词文集检索、自定义原文与连续段落截取
