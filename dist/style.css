@@ -113,3 +113,5 @@ html[data-night-colors] input::placeholder,html[data-night-colors] textarea::pla
 #export-color-sample{padding:18px 24px;margin:20px 0;border:1px solid #8885;border-radius:4px;font-family:var(--serif)}#export-color-sample>span{font-size:14px}#export-color-sample p{font-size:22px;line-height:1.8;margin:8px 0 0;color:inherit}.bottom-actions{flex-wrap:wrap}
 
 .export-font-control{display:flex;align-items:center;gap:8px;font-size:12px}.export-font-control select{font:inherit;color:inherit;background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:9px 6px}
+
+.script-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 18px;font-size:12px}.script-controls select{font:inherit;padding:8px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:4px}#script-note{color:var(--muted)}#font-note{margin:0 0 20px}
