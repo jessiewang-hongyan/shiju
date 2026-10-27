@@ -1146,3 +1146,52 @@ test("dark cloud paper preserves independent selections and readable ink on tran
   assert.equal(x.w.localStorage.getItem("shiju-paper-poem"), "cloud-dark");
   x.close();
 });
+
+test("paper strength is independent, persistent, bounded and shared by fields and crops", async () => {
+  const x = setup();
+  x.w.HTMLImageElement.prototype.decode = async () => {};
+  x.w.HTMLCanvasElement.prototype.toDataURL = () =>
+    "data:image/png;base64,test";
+  const papers = await import(
+    "../dist/modules/paper-materials.js?v=20261027paperstrength1"
+  );
+  for (const kind of ["source", "poem"]) {
+    x.$(`#${kind}-paper`).value = "cloud";
+    await x.$(`#${kind}-paper`).onchange({ target: x.$(`#${kind}-paper`) });
+    assert.equal(x.$(`#${kind}-paper-strength-row`).hidden, false);
+  }
+  x.input("#source-paper-strength", "25");
+  x.input("#poem-paper-strength-value", "75");
+  assert.equal(x.appearance.sourcePaperStrength, 25);
+  assert.equal(x.appearance.poemPaperStrength, 75);
+  assert.equal(x.$("#source-paper-strength-value").value, "25");
+  assert.equal(x.$("#poem-paper-strength").value, "75");
+  assert.equal(localStorage.getItem("shiju-paper-strength-source"), "25");
+  assert.match(x.$("#summary-paper").textContent, /25%.*75%/);
+  const faint = papers.getPaper("cloud", 25);
+  assert.equal(faint.tile.getContext("2d").globalAlpha, 0.25);
+  assert.equal(papers.getPaper("cloud", 25), faint);
+  const ctx = document.createElement("canvas").getContext("2d");
+  const box = { x: 0, y: 0, width: 100, height: 100 };
+  papers.paintPaperCrop(ctx, "cloud", "#fff", box, box, box, 25);
+  const record = x.records.find((r) => r.canvas.getContext("2d") === ctx);
+  assert(
+    record.calls.some((c) => c[0] === "createPattern" && c[1] === faint.tile),
+  );
+  x.input("#source-paper-strength-value", "-10");
+  assert.equal(x.appearance.sourcePaperStrength, 0);
+  assert.equal(
+    papers.getPaper("cloud", 0).tile.getContext("2d").globalAlpha,
+    0,
+  );
+  x.input("#source-paper-strength-value", "120");
+  assert.equal(x.appearance.sourcePaperStrength, 100);
+  x.$("#source-paper").value = "none";
+  await x.$("#source-paper").onchange({ target: x.$("#source-paper") });
+  assert.equal(x.$("#source-paper-strength-row").hidden, true);
+  assert.equal(x.$("#source-paper-strength").disabled, true);
+  x.$("#colors-reset").click();
+  assert.equal(x.appearance.poemPaperStrength, 100);
+  assert.equal(localStorage.getItem("shiju-paper-strength-poem"), "100");
+  x.close();
+});

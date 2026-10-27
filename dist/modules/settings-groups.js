@@ -8,8 +8,13 @@ export function syncSettingsGroups() {
     `${label("#image-orientation")} · ${label("#image-layout")}`;
   $("#summary-text").textContent =
     `${label("#export-font")} · ${value("#image-size")} · ${value("#text-color")}`;
+  const paperLabel = (kind) =>
+    label(`#${kind}-paper`) +
+    (value(`#${kind}-paper`) === "none"
+      ? ""
+      : ` ${value(`#${kind}-paper-strength`)}%`);
   $("#summary-paper").textContent =
-    `原文：${label("#source-paper")} · 集句：${label("#poem-paper")}`;
+    `原文：${paperLabel("source")} · 集句：${paperLabel("poem")}`;
   const collage = $("#export-collage").checked;
   const effects = [
     $("#export-rough").checked ? `毛边 ${value("#rough-strength")}%` : "直边",

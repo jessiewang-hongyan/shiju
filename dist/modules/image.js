@@ -1,4 +1,4 @@
-import { syncSettingsGroups } from "./settings-groups.js";
+import { syncSettingsGroups } from "./settings-groups.js?v=20261027paperstrength1";
 import {
   sourceParts,
   partCells,
@@ -8,7 +8,7 @@ import {
   paperInk,
   paintPaperField,
   paintPaperCrop,
-} from "./paper-materials.js?v=20261027darkcloud1";
+} from "./paper-materials.js?v=20261027paperstrength1";
 import { $, toast } from "./ui.js";
 import { exportFonts, songtiFamily } from "./fonts.js?v=20261027release3";
 import {
@@ -325,6 +325,9 @@ export function createImage({ editor, typography, fonts, appearance }) {
         isSource
           ? sourceBox
           : { x: left, y: top, width: 500, height: sectionHeight },
+        isSource
+          ? appearance.sourcePaperStrength
+          : appearance.poemPaperStrength,
       );
       ctx.restore();
       ctx.fillStyle = isSource ? sourceInk : poemInk;
@@ -382,6 +385,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
                           height: point.height,
                         },
                         target,
+                        appearance.sourcePaperStrength,
                       );
                   }
                 : undefined,
@@ -675,14 +679,21 @@ export function createImage({ editor, typography, fonts, appearance }) {
           appearance.sourcePaper,
           colors["#f7f5ef"],
           sourceBox,
+          appearance.sourcePaperStrength,
         );
       if (showPoem)
-        paintPaperField(ctx, appearance.poemPaper, colors.poemBackground, {
-          x: newX - panelPadding,
-          y: newTop,
-          width: panelWidth,
-          height: newPanelHeight,
-        });
+        paintPaperField(
+          ctx,
+          appearance.poemPaper,
+          colors.poemBackground,
+          {
+            x: newX - panelPadding,
+            y: newTop,
+            width: panelWidth,
+            height: newPanelHeight,
+          },
+          appearance.poemPaperStrength,
+        );
       function paintMetadata(lines, size, step, startY, lineStep, section) {
         ctx.font = size + "px " + fontFamily;
         lines.forEach((line, row) => {
@@ -842,6 +853,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
                               height: point.height || target.height,
                             },
                             target,
+                            appearance.sourcePaperStrength,
                           );
                       }
                     : undefined,

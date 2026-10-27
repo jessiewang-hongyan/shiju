@@ -2392,3 +2392,22 @@ html[data-night-colors] #new-poem.editor-textured .poem-token {
     grid-column: 1 / -1;
   }
 }
+
+#source-paper-strength-row,
+#poem-paper-strength-row {
+  gap: 10px;
+}
+#source-paper-strength-row > label,
+#poem-paper-strength-row > label {
+  flex: 0 0 6.5em;
+}
+#source-paper-strength-row input[type="range"],
+#poem-paper-strength-row input[type="range"] {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+}
+#source-paper-strength-row input[type="number"],
+#poem-paper-strength-row input[type="number"] {
+  width: 64px;
+}

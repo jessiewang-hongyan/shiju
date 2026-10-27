@@ -15,7 +15,7 @@
           document.documentElement.dataset.theme = "dark";
       } catch {}
     </script>
-    <link rel="stylesheet" href="style.css?v=20261027darkcloud1" />
+    <link rel="stylesheet" href="style.css?v=20261027paperstrength1" />
   </head>
   <body>
     <header>
@@ -481,6 +481,26 @@
               <option value="kraft">微皱牛皮纸</option>
             </select>
           </div>
+          <div id="source-paper-strength-row" class="color-row" hidden>
+            <label for="source-paper-strength">原文纸纹深浅</label>
+            <input
+              id="source-paper-strength"
+              type="range"
+              min="0"
+              max="100"
+              step="1"
+              value="100"
+            />
+            <input
+              id="source-paper-strength-value"
+              type="number"
+              min="0"
+              max="100"
+              step="1"
+              value="100"
+              aria-label="原文纸纹深浅百分比"
+            />
+          </div>
           <div id="source-background-row" class="color-row">
             <label for="background-color">原文背景色</label
             ><input type="color" id="background-color" /><input
@@ -503,6 +523,26 @@
               <option value="newsprint">旧新闻纸</option>
               <option value="kraft">微皱牛皮纸</option>
             </select>
+          </div>
+          <div id="poem-paper-strength-row" class="color-row" hidden>
+            <label for="poem-paper-strength">集句纸纹深浅</label>
+            <input
+              id="poem-paper-strength"
+              type="range"
+              min="0"
+              max="100"
+              step="1"
+              value="100"
+            />
+            <input
+              id="poem-paper-strength-value"
+              type="number"
+              min="0"
+              max="100"
+              step="1"
+              value="100"
+              aria-label="集句纸纹深浅百分比"
+            />
           </div>
           <div id="poem-background-row" class="color-row">
             <label for="collage-background-color">集句背景色</label
@@ -549,7 +589,8 @@
             </button>
           </div>
           <p class="dialog-note">
-            拼贴字块保留原文对应位置的纸纹和图案。十竹斋装饰只出现一次，长文延伸纸纹。手工纤维纸源自
+            纸纹深浅
+            0–100%，数值越低越淡。拼贴字块保留原文对应位置的纸纹和图案。十竹斋装饰只出现一次，长文延伸纸纹。手工纤维纸源自
             Lokta，洒金为程序纹理。
           </p>
         </div>
@@ -725,6 +766,6 @@
       ><button id="move-right" aria-label="向后移动">→</button>
     </div>
     <div id="toast" role="status"></div>
-    <script type="module" src="app.js?v=20261027darkcloud1"></script>
+    <script type="module" src="app.js?v=20261027paperstrength1"></script>
   </body>
 </html>

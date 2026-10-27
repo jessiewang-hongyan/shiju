@@ -2,7 +2,7 @@ import {
   paperInk,
   paperCSS,
   paintPaperCrop,
-} from "./paper-materials.js?v=20261027darkcloud1";
+} from "./paper-materials.js?v=20261027paperstrength1";
 import {
   paintPaperRect,
   handmadePlacement,
@@ -98,6 +98,9 @@ export function initEditorPaper({ appearance }) {
           index === 0 ? appearance.sourcePaper : appearance.poemPaper,
           root.getBoundingClientRect().width,
           root.getBoundingClientRect().height,
+          index === 0
+            ? appearance.sourcePaperStrength
+            : appearance.poemPaperStrength,
         ),
       );
       root.classList.toggle("editor-textured", Boolean(textured));
@@ -214,6 +217,7 @@ export function initEditorPaper({ appearance }) {
                     width: run.width - 2,
                     height: run.height - 8,
                   },
+                  appearance.sourcePaperStrength,
                 );
               }
             : undefined,

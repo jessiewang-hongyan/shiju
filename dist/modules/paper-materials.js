@@ -166,14 +166,50 @@ export async function loadPaper(key) {
     throw e;
   }
 }
-export function getPaper(key) {
+const strengthCache = new Map();
+const paperBases = {
+  "ten-bamboo": "#e6ddc6",
+  lokta: "#f1e9d8",
+  gold: "#e5d7b8",
+  cloud: "#f6f1e6",
+  "cloud-dark": "#26363b",
+  newsprint: "#f6f1e6",
+  kraft: "#f6f1e6",
+};
+export function getPaper(key, strength = 100) {
   const p = cache.get(key);
-  return p?.tile ? p : null;
+  if (!p?.tile) return null;
+  const amount = Math.max(0, Math.min(100, Number(strength)));
+  if (!Number.isFinite(amount) || amount === 100) return p;
+  const previous = strengthCache.get(key);
+  if (previous?.amount === amount) return previous.paper;
+  const tile = canvas(840, 840),
+    ctx = tile.getContext("2d");
+  ctx.fillStyle = paperBases[key];
+  ctx.fillRect(0, 0, 840, 840);
+  ctx.globalAlpha = amount / 100;
+  ctx.drawImage(p.tile, 0, 0);
+  let decoration;
+  if (p.decoration) {
+    decoration = canvas(p.decoration.width, p.decoration.height);
+    const d = decoration.getContext("2d");
+    d.globalAlpha = amount / 100;
+    d.drawImage(p.decoration, 0, 0);
+  }
+  const paper = {
+    tile,
+    decoration,
+    tileUrl: tile.toDataURL(),
+    decorationUrl: decoration?.toDataURL(),
+  };
+  // Keep only the latest adjusted tile per material; slider movement cannot grow the cache.
+  strengthCache.set(key, { amount, paper });
+  return paper;
 }
-export function paintPaperField(ctx, key, bg, box) {
+export function paintPaperField(ctx, key, bg, box, strength = 100) {
   ctx.fillStyle = bg;
   ctx.fillRect(box.x, box.y, box.width, box.height);
-  const p = getPaper(key);
+  const p = getPaper(key, strength);
   if (!p) return;
   ctx.save();
   ctx.beginPath();
@@ -196,16 +232,24 @@ export function paintPaperField(ctx, key, bg, box) {
   }
   ctx.restore();
 }
-export function paintPaperCrop(ctx, key, bg, box, source, target) {
+export function paintPaperCrop(
+  ctx,
+  key,
+  bg,
+  box,
+  source,
+  target,
+  strength = 100,
+) {
   ctx.save();
   ctx.translate(target.x, target.y);
   ctx.scale(target.width / source.width, target.height / source.height);
   ctx.translate(-source.x, -source.y);
-  paintPaperField(ctx, key, bg, box);
+  paintPaperField(ctx, key, bg, box, strength);
   ctx.restore();
 }
-export function paperCSS(key, width = 840, height = 590) {
-  const p = getPaper(key);
+export function paperCSS(key, width = 840, height = 590, strength = 100) {
+  const p = getPaper(key, strength);
   return p
     ? {
         backgroundImage: p.decoration

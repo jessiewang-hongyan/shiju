@@ -1,4 +1,7 @@
-import { paperKeys, loadPaper } from "./paper-materials.js?v=20261027darkcloud1";
+import {
+  paperKeys,
+  loadPaper,
+} from "./paper-materials.js?v=20261027paperstrength1";
 import { $, toast } from "./ui.js";
 import { paperEdgePoints } from "./image-drawing.js";
 export function mixColors(a, b, weight) {
@@ -24,7 +27,33 @@ export function createAppearance({
 }) {
   let sourcePaper = "none",
     poemPaper = "none";
+  const paperStrength = { source: 100, poem: 100 };
+  function setPaperStrength(kind, value, save = false) {
+    const number = Number(value);
+    if (value === "" || !Number.isFinite(number)) return;
+    const amount = Math.max(0, Math.min(100, Math.round(number)));
+    paperStrength[kind] = amount;
+    $("#" + kind + "-paper-strength").value = amount;
+    $("#" + kind + "-paper-strength-value").value = amount;
+    if (save) {
+      try {
+        localStorage.setItem("shiju-paper-strength-" + kind, String(amount));
+      } catch {}
+      syncColorControls();
+    }
+  }
   for (const kind of ["source", "poem"]) {
+    try {
+      const saved = localStorage.getItem("shiju-paper-strength-" + kind);
+      if (saved !== null) setPaperStrength(kind, saved);
+    } catch {}
+    for (const suffix of ["", "-value"]) {
+      const input = $("#" + kind + "-paper-strength" + suffix);
+      input.oninput = () => setPaperStrength(kind, input.value, true);
+      input.onchange = () =>
+        setPaperStrength(kind, input.value || paperStrength[kind], true);
+    }
+
     let key;
     try {
       key = localStorage.getItem("shiju-paper-" + kind);
@@ -288,6 +317,12 @@ export function createAppearance({
         ),
       );
     });
+    for (const kind of ["source", "poem"]) {
+      const hidden = (kind === "source" ? sourcePaper : poemPaper) === "none";
+      $("#" + kind + "-paper-strength-row").hidden = hidden;
+      $("#" + kind + "-paper-strength").disabled = hidden;
+      $("#" + kind + "-paper-strength-value").disabled = hidden;
+    }
     $("#source-background-row").hidden = sourcePaper !== "none";
     $("#poem-background-row").hidden = poemPaper !== "none";
     $("#background-presets").hidden = sourcePaper !== "none";
@@ -432,6 +467,7 @@ export function createAppearance({
     exportPalette = null;
     sourcePaper = poemPaper = "none";
     for (const kind of ["source", "poem"]) {
+      setPaperStrength(kind, 100, true);
       $("#" + kind + "-paper").value = "none";
       try {
         localStorage.setItem("shiju-paper-" + kind, "none");
@@ -473,6 +509,12 @@ export function createAppearance({
   return {
     setSourceSize,
     readyPapers,
+    get sourcePaperStrength() {
+      return paperStrength.source;
+    },
+    get poemPaperStrength() {
+      return paperStrength.poem;
+    },
     get sourcePaper() {
       return sourcePaper;
     },
