@@ -63,6 +63,29 @@ export function createImage({ editor, typography, fonts, appearance }) {
       }
     }
   }
+  const layouts = [
+    "source-left",
+    "source-right",
+    "source-top",
+    "source-bottom",
+  ];
+  try {
+    const saved = localStorage.getItem("shiju-image-layout");
+    if (layouts.includes(saved)) $("#image-layout").value = saved;
+  } catch {}
+  function layoutOptions() {
+    const value = $("#image-layout").value;
+    return {
+      vertical: value === "source-top" || value === "source-bottom",
+      sourceFirst: value === "source-left" || value === "source-top",
+    };
+  }
+  $("#image-layout").onchange = () => {
+    try {
+      localStorage.setItem("shiju-image-layout", $("#image-layout").value);
+    } catch {}
+    drawImagePreview();
+  };
   function drawImagePreview() {
     const c = $("#image-preview"),
       ctx = c.getContext("2d"),
@@ -96,25 +119,34 @@ export function createImage({ editor, typography, fonts, appearance }) {
       line.forEach((t) => sourceRows.set(t.id, row)),
     );
     const selected = (t) => Number.isInteger(t.id);
+    const { vertical, sourceFirst } = layoutOptions();
+    c.width = vertical ? 500 : 1000;
+    c.height = vertical ? 360 : 180;
     ctx.clearRect(0, 0, c.width, c.height);
-    ctx.fillStyle = colors.poemBackground;
-    ctx.fillRect(0, 0, 500, 180);
-    ctx.fillStyle = colors["#f7f5ef"];
-    ctx.fillRect(0, 180, 500, 180);
-    for (const [label, lines, top, isSource] of [
-      ["集句", result, 0, false],
-      ["原文", source, 180, true],
-    ]) {
+    const sections = sourceFirst
+      ? [
+          ["原文", source, true],
+          ["集句", result, false],
+        ]
+      : [
+          ["集句", result, false],
+          ["原文", source, true],
+        ];
+    for (const [index, [label, lines, isSource]] of sections.entries()) {
+      const top = vertical ? index * 180 : 0;
+      const left = vertical ? 0 : index * 500;
+      ctx.fillStyle = isSource ? colors["#f7f5ef"] : colors.poemBackground;
+      ctx.fillRect(left, top, 500, 180);
       ctx.fillStyle = colors["#343b31"];
       ctx.font = "12px sans-serif";
-      ctx.fillText(label, 20, top + 23);
+      ctx.fillText(label, left + 20, top + 23);
       if (lines.length > 2) {
         ctx.textAlign = "right";
-        ctx.fillText("仅预览前两行", 480, top + 23);
+        ctx.fillText("仅预览前两行", left + 480, top + 23);
         ctx.textAlign = "left";
       }
       if (!isSource && !editor.state.tokens.length) {
-        ctx.fillText("尚未选字", 20, top + 70);
+        ctx.fillText("尚未选字", left + 20, top + 70);
         continue;
       }
       ctx.font = px + "px " + family;
@@ -136,7 +168,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
           ctx.setLineDash(isSource && !rough ? [3, 4] : []);
           paintPaperRect(
             ctx,
-            18 + run.offset * step,
+            left + 18 + run.offset * step,
             y,
             step * run.width - 3,
             step - 3,
@@ -145,7 +177,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
           );
           ctx.setLineDash([]);
         }
-        let x = 20;
+        let x = left + 20;
         for (const token of line) {
           ctx.fillStyle = colors["#343b31"];
           if (isSource) {
@@ -210,29 +242,62 @@ export function createImage({ editor, typography, fonts, appearance }) {
       const used = new Set(
         editor.state.tokens.filter((t) => t.id !== null).map((t) => t.id),
       );
+      const { vertical, sourceFirst } = layoutOptions();
+      const panelWidth = vertical ? 1312 : 622;
+      const textWidth = panelWidth - 80;
       const source = wrapCells(
         Array.from(displayText(editor.state.source.text)).map((c, id) => ({
           c,
           id,
           hole: used.has(id),
         })),
-        Math.floor(560 / advance),
+        Math.max(1, Math.floor(textWidth / advance)),
       );
       const result = wrapCells(
         displayTokens(editor.state.tokens),
-        Math.floor(540 / advance),
+        Math.max(1, Math.floor(textWidth / advance)),
       );
-      const height = Math.max(
-        1060,
-        400 + source.length * lineHeight,
-        400 + result.length * lineHeight,
-      );
-      if (height > 24000) throw new Error("作品太长，请分为较短的篇章导出");
       const canvas = document.createElement("canvas");
-      canvas.width = 1440;
-      canvas.height = height;
       const ctx = canvas.getContext("2d");
       if (!ctx) throw new Error("当前浏览器不支持图片导出");
+      function titleLines(text, size) {
+        if (!text) return [];
+        ctx.font = size + "px " + fontFamily;
+        const lines = [];
+        let line = "";
+        for (const c of Array.from(text)) {
+          if (line && ctx.measureText(line + c).width > textWidth) {
+            lines.push(line);
+            line = "";
+          }
+          line += c;
+        }
+        lines.push(line);
+        return lines;
+      }
+      const sourceTitle = titleLines(
+        displayText(editor.state.source.title),
+        30,
+      );
+      const newTitle = titleLines(displayText(editor.state.title.trim()), 46);
+      const sourceOffset = 60 + sourceTitle.length * 40 + 53;
+      const newOffset = newTitle.length ? 60 + newTitle.length * 56 + 24 : 60;
+      const sourceHeight = sourceOffset + source.length * lineHeight + 40;
+      const newHeight = newOffset + result.length * lineHeight + 110;
+      const sharedHeight = Math.max(750, sourceHeight, newHeight);
+      const sourcePanelHeight = vertical ? sourceHeight : sharedHeight;
+      const newPanelHeight = vertical ? newHeight : sharedHeight;
+      const firstHeight = sourceFirst ? sourcePanelHeight : newPanelHeight;
+      const sourceTop = vertical && !sourceFirst ? 190 + firstHeight + 40 : 190;
+      const newTop = vertical && sourceFirst ? 190 + firstHeight + 40 : 190;
+      const sourceX = !vertical && !sourceFirst ? 794 : 104;
+      const newX = !vertical && sourceFirst ? 794 : 104;
+      const height = vertical
+        ? 190 + sourceHeight + newHeight + 40 + 120
+        : 190 + sharedHeight + 120;
+      if (height > 24000) throw new Error("作品太长，请分为较短的篇章导出");
+      canvas.width = 1440;
+      canvas.height = height;
       ctx.fillStyle = colors["#f7f5ef"];
       ctx.fillRect(0, 0, 1440, height);
       ctx.fillStyle = colors["#b95437"];
@@ -252,53 +317,26 @@ export function createImage({ editor, typography, fonts, appearance }) {
       ctx.lineTo(1376, 142);
       ctx.stroke();
       ctx.fillStyle = colors.poemBackground;
-      ctx.fillRect(754, 190, 622, height - 310);
-      ctx.fillStyle = colors["#87917b"];
-      ctx.font = "14px sans-serif";
-      function drawWrappedTitle(text, x, y, width, size = 30) {
-        ctx.font = size + "px " + fontFamily;
-        let str = "";
-        let row = 0;
-        for (const c of Array.from(text)) {
-          if (ctx.measureText(str + c).width > width) {
-            ctx.fillText(str, x, y + row * (size + 10));
-            str = c;
-            row++;
-          } else str += c;
-        }
-        ctx.fillText(str, x, y + row * (size + 10));
-        return y + row * (size + 10);
-      }
+      ctx.fillRect(newX - 40, newTop, panelWidth, newPanelHeight);
       ctx.fillStyle = colors["#343b31"];
-      const sy = drawWrappedTitle(
-        displayText(editor.state.source.title),
-        85,
-        240,
-        560,
+      ctx.font = "30px " + fontFamily;
+      sourceTitle.forEach((line, i) =>
+        ctx.fillText(line, sourceX, sourceTop + 50 + i * 40),
       );
       ctx.font = "15px sans-serif";
       ctx.fillStyle = colors["#929985"];
-      ctx.fillText(displayText(editor.state.source.author), 85, sy + 32);
+      ctx.fillText(
+        displayText(editor.state.source.author),
+        sourceX,
+        sourceTop + 50 + sourceTitle.length * 40,
+      );
       ctx.fillStyle = colors["#343b31"];
-      const ny = drawWrappedTitle(
-        displayText(editor.state.title.trim()),
-        794,
-        250,
-        540,
-        46,
+      ctx.font = "46px " + fontFamily;
+      newTitle.forEach((line, i) =>
+        ctx.fillText(line, newX, newTop + 60 + i * 56),
       );
-      // Titles can take multiple lines; reserve the extra rows in layout by limiting canvas text area through dynamic extension.
-      const sourceStart = sy + 93,
-        newStart = editor.state.title.trim() ? ny + 80 : 250;
-      const need = Math.max(
-        sourceStart + source.length * lineHeight + 150,
-        newStart + result.length * lineHeight + 210,
-        height,
-      );
-      if (need > height) {
-        canvas.height = need;
-        return await exportWithHeight(need);
-      }
+      const sourceStart = sourceTop + sourceOffset;
+      const newStart = newTop + newOffset;
       paintBody(ctx, source, result, sourceStart, newStart, height);
       download(canvas);
       function paintBody(ctx, source, result, sourceStart, newStart, h) {
@@ -311,7 +349,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
         source.forEach((line, row) => {
           const y = sourceStart + row * lineHeight;
           for (const run of paperRuns(line, (t) => t.hole, sourceRows)) {
-            const x = 85 + run.offset * advance,
+            const x = sourceX + run.offset * advance,
               t = run.tokens[0];
             if (t.hole) {
               ctx.fillStyle = colors["#edf0e4"];
@@ -342,7 +380,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
               ctx.lineWidth = 1;
               paintPaperRect(
                 ctx,
-                793 + run.offset * advance,
+                newX - 1 + run.offset * advance,
                 y - bodySize * 0.87,
                 advance * run.width - 4,
                 advance - 4,
@@ -350,7 +388,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
                 rough,
               );
             }
-          let x = 794;
+          let x = newX;
           for (const t of line) {
             ctx.fillStyle = colors["#343b31"];
             if (collage && selected(t))
@@ -371,8 +409,8 @@ export function createImage({ editor, typography, fonts, appearance }) {
         ctx.textAlign = "right";
         ctx.fillText(
           "— " + displayText(editor.state.signature || "拾句的人"),
-          1336,
-          h - 180,
+          newX - 40 + panelWidth - 40,
+          newTop + newPanelHeight - 60,
         );
         ctx.textAlign = "left";
         ctx.strokeStyle = colors["#dfe2d5"];
@@ -390,32 +428,6 @@ export function createImage({ editor, typography, fonts, appearance }) {
           h - 50,
         );
         ctx.textAlign = "left";
-      }
-      async function exportWithHeight(h) {
-        canvas.height = h;
-        ctx.fillStyle = colors["#f7f5ef"];
-        ctx.fillRect(0, 0, 1440, h);
-        ctx.fillStyle = colors.poemBackground;
-        ctx.fillRect(754, 190, 622, h - 310);
-        ctx.fillStyle = colors["#b95437"];
-        ctx.font = "32px " + fontFamily;
-        ctx.fillText("拾句", 64, 95);
-        ctx.fillStyle = colors["#87917b"];
-        ctx.font = "14px sans-serif";
-        ctx.fillStyle = colors["#343b31"];
-        drawWrappedTitle(displayText(editor.state.source.title), 85, 240, 560);
-        drawWrappedTitle(
-          displayText(editor.state.title.trim()),
-          794,
-          250,
-          540,
-          46,
-        );
-        ctx.font = "15px sans-serif";
-        ctx.fillStyle = colors["#929985"];
-        ctx.fillText(displayText(editor.state.source.author), 85, sy + 32);
-        paintBody(ctx, source, result, sourceStart, newStart, h);
-        download(canvas);
       }
       function download(c) {
         c.toBlob((blob) => {

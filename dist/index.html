@@ -318,6 +318,15 @@
         <button class="close" aria-label="关闭">×</button>
       </div>
       <p class="dialog-note" id="colors-mode"></p>
+      <label class="export-font-control" for="image-layout"
+        >排列方式
+        <select id="image-layout">
+          <option value="source-left">原左新右</option>
+          <option value="source-right">原右新左</option>
+          <option value="source-top">原上新下</option>
+          <option value="source-bottom">原下新上</option>
+        </select>
+      </label>
       <label class="export-font-control" for="export-font"
         >图片字体<select id="export-font">
           <option value="songti">宋体</option>
@@ -515,6 +524,6 @@
       ><button id="move-right" aria-label="向后移动">→</button>
     </div>
     <div id="toast" role="status"></div>
-    <script type="module" src="app.js?v=20261027q"></script>
+    <script type="module" src="app.js?v=20261027s"></script>
   </body>
 </html>

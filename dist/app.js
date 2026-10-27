@@ -7,7 +7,7 @@ import { initLibrary } from "./modules/library.js";
 import { createTypography, initTypography } from "./modules/typography.js";
 import { createFontLoader } from "./modules/fonts.js?v=20261027n";
 import { createAppearance } from "./modules/appearance.js?v=20261027n";
-import { createImage } from "./modules/image.js?v=20261027q";
+import { createImage } from "./modules/image.js?v=20261027s";
 
 // Initialize services, then controllers; callbacks connect sibling modules.
 initUI();

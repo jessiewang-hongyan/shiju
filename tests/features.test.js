@@ -274,7 +274,7 @@ test("appearance: separate night/export colors, size bounds, collage, roughness 
   assert($("#background-hex").checkValidity());
   assert.equal(appearance.getExportColors()["#f7f5ef"], "#123456");
   assert(records[0].calls.some((c) => c[0] === "fillText" && c[1] === "空"));
-  assert.equal($("#image-preview").height, 360);
+  assert.equal($("#image-preview").height, 180);
   assert(records[0].calls.some((c) => c[1] === "仅预览前两行"));
   x.close();
 });
@@ -503,4 +503,54 @@ test("traditional font hint is optional and converts through the existing script
     globalThis.FontFace = oldFontFace;
     x.close();
   }
+});
+
+test("all four image layouts position source, poem, background and signature consistently", async () => {
+  const x = setup();
+  x.$("#source-poem button").click();
+  x.input("#poem-title", "新作");
+  for (const layout of [
+    "source-left",
+    "source-right",
+    "source-top",
+    "source-bottom",
+  ]) {
+    x.input("#image-layout", layout, "change");
+    assert.equal(localStorage.getItem("shiju-image-layout"), layout);
+    const vertical = ["source-top", "source-bottom"].includes(layout);
+    assert.equal(x.$("#image-preview").width, vertical ? 500 : 1000);
+    assert.equal(x.$("#image-preview").height, vertical ? 360 : 180);
+    for (const collage of [true, false]) {
+      x.input("#export-collage", collage, "change");
+      await x.$("#export").onclick();
+      const { calls, canvas } = x.records.filter((r) => !r.canvas.id).at(-1);
+      const source = calls.find(
+        (c) => c[0] === "fillText" && c[1] === "山居秋暝",
+      );
+      const poem = calls.find((c) => c[0] === "fillText" && c[1] === "新作");
+      const signature = calls.find(
+        (c) => c[0] === "fillText" && c[1].startsWith("— "),
+      );
+      const panel = calls.filter((c) => c[0] === "fillRect")[2];
+      assert.equal(panel[1], poem[2] - 40);
+      assert(signature[2] > poem[2] && signature[2] < panel[1] + panel[3]);
+      assert(signature[3] > poem[3] && signature[3] < panel[2] + panel[4]);
+      assert(panel[2] + panel[4] <= canvas.height - 120);
+      if (vertical) {
+        assert.equal(source[2], poem[2]);
+        assert.equal(source[3] < poem[3], layout === "source-top");
+      } else {
+        assert.equal(source[2] < poem[2], layout === "source-left");
+        assert.equal(panel[2], 190);
+      }
+      assert(
+        calls.every(
+          (c) =>
+            c[0] !== "fillText" ||
+            (Number.isFinite(c[2]) && c[3] >= 0 && c[3] < canvas.height),
+        ),
+      );
+    }
+  }
+  x.close();
 });

@@ -68,3 +68,7 @@
 ### 字号联动
 
 页面原文字号和图片字号共用 5–25 范围。`appearance.setSourceSize` 在用户操作时通过 `onSourceSizeChange` 通知图片模块；`image.setImageSize` 更新预览、图片控件，并无回调地同步页面控件，避免递归。两份旧存储键同步保存，启动时优先使用原文字号、其次图片字号。导出原文与集句正文均按该值相对 23 的比例缩放。
+
+### 图片布局
+
+`image-layout` 支持 source-left/source-right/source-top/source-bottom，默认原左新右，保存至 `shiju-image-layout`。预览按布局排列两个最多两行的模块；导出先按模块宽度换行、测量标题，再计算模块高度与位置。上下布局使用全宽，署名始终属于集句模块。长文超过 24000 像素时沿用长度保护。
