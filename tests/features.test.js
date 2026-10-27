@@ -324,7 +324,7 @@ test("image export contains source and composition; blank/long titles, all sizes
         r.calls.some((c) => c[0] === "fillText" && c[1] === "山居秋暝") &&
         !r.calls.some(
           (c) =>
-            c[0] === "fillText" && /原诗 · 摘取后|新诗 · 重新排列/.test(c[1]),
+            c[0] === "fillText" && /原诗 · 摘取后|新诗 · 重新排列|拾自《/.test(c[1]),
         ),
     ),
   );
@@ -338,7 +338,7 @@ test("image export contains source and composition; blank/long titles, all sizes
         (r) =>
           !r.calls.some(
             (c) =>
-              c[0] === "fillText" && /原诗 · 摘取后|新诗 · 重新排列/.test(c[1]),
+              c[0] === "fillText" && /原诗 · 摘取后|新诗 · 重新排列|拾自《/.test(c[1]),
           ),
       ),
   );

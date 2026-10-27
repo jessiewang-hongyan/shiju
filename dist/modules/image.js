@@ -421,13 +421,6 @@ export function createImage({ editor, typography, fonts, appearance }) {
         ctx.font = "14px sans-serif";
         ctx.fillStyle = colors["#959e89"];
         ctx.fillText("字句有来处，诗意无边界。", 64, h - 50);
-        ctx.textAlign = "right";
-        ctx.fillText(
-          `拾自《${displayText(editor.state.source.title)}》 · 已拾 ${editor.pickedCount()} 字`,
-          1376,
-          h - 50,
-        );
-        ctx.textAlign = "left";
       }
       function download(c) {
         c.toBlob((blob) => {
