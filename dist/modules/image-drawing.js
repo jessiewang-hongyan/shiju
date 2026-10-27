@@ -93,15 +93,17 @@ function paintCenteredGlyph(ctx, text, x, y, w, h) {
   ctx.restore();
 }
 function paintPaperRect(ctx, x, y, w, h, id, rough) {
+  ctx.save();
+  ctx.strokeStyle = ctx.fillStyle;
   if (!rough) {
     ctx.fillRect(x, y, w, h);
     ctx.strokeRect(x, y, w, h);
+    ctx.restore();
     return;
   }
   const intensity = Number(rough) / 100,
     unit = Math.min(w, h) / 42;
   const points = paperEdgePoints(id, rough, w, h);
-  ctx.save();
   ctx.beginPath();
   points.forEach(([u, v], i) =>
     ctx[i ? "lineTo" : "moveTo"](x + u * w, y + v * h),
@@ -109,8 +111,7 @@ function paintPaperRect(ctx, x, y, w, h, id, rough) {
   ctx.closePath();
   ctx.fill();
   // Translucent strands follow the same seeded edge on the cutout and its hole.
-  const ink = ctx.strokeStyle;
-  ctx.strokeStyle = ctx.fillStyle;
+  // Every strand uses the paper fill; opacity provides the fiber texture.
   ctx.lineJoin = "round";
   ctx.lineWidth = (0.8 + intensity * 2) * unit;
   ctx.globalAlpha = 0.3 + intensity * 0.35;
@@ -129,7 +130,6 @@ function paintPaperRect(ctx, x, y, w, h, id, rough) {
     const len = (0.4 + intensity * (1.5 + r * 4)) * unit;
     ctx.globalAlpha = 0.25 + intensity * 0.45;
     ctx.lineWidth = (0.2 + intensity * 0.4 + r * 0.2) * unit;
-    ctx.strokeStyle = i % 3 === 0 ? ink : ctx.fillStyle;
     ctx.beginPath();
     ctx.moveTo(x + u * w - n[0] * unit, y + v * h - n[1] * unit);
     ctx.lineTo(

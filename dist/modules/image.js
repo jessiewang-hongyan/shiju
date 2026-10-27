@@ -1,12 +1,11 @@
 import { $, toast } from "./ui.js";
 import { exportFonts, songtiFamily } from "./fonts.js?v=20261027l";
-import { mixColors } from "./appearance.js";
 import {
   wrapCells,
   paperRuns,
   paintCenteredGlyph,
   paintPaperRect,
-} from "./image-drawing.js";
+} from "./image-drawing.js?v=20261027m";
 export function createImage({ editor, typography, fonts, appearance }) {
   const { displayText, displayTokens } = typography;
   const { loadExportFont } = fonts;
@@ -116,7 +115,6 @@ export function createImage({ editor, typography, fonts, appearance }) {
           )
             continue;
           ctx.fillStyle = isSource ? colors["#edf0e4"] : colors["#f7f5ef"];
-          ctx.strokeStyle = colors["#bfc8b0"];
           ctx.setLineDash(isSource && !rough ? [3, 4] : []);
           paintPaperRect(
             ctx,
@@ -299,7 +297,6 @@ export function createImage({ editor, typography, fonts, appearance }) {
               t = run.tokens[0];
             if (t.hole) {
               ctx.fillStyle = colors["#edf0e4"];
-              ctx.strokeStyle = colors["#bfc8b0"];
               ctx.setLineDash(rough ? [] : [3, 4]);
               paintPaperRect(
                 ctx,
@@ -324,11 +321,6 @@ export function createImage({ editor, typography, fonts, appearance }) {
               const t = run.tokens[0];
               if (!selected(t)) continue;
               ctx.fillStyle = colors["#f7f5ef"];
-              ctx.strokeStyle = mixColors(
-                colors["#343b31"],
-                colors["#f7f5ef"],
-                0.16,
-              );
               ctx.lineWidth = 1;
               paintPaperRect(
                 ctx,
