@@ -31,3 +31,9 @@ python3 -m http.server 4173 --directory dist
 
 诗词来源及许可证见 POETRY-SOURCE.md 和 dist/data/LICENSE-*.txt。
 字体来源及授权确认状态见 FONT-SOURCE.md。发布前请核实字体的网页嵌入和再分发许可。
+
+## 文集加载
+
+文集以不超过 200 KB 的 JSON 小批次加载，最多同时请求两份资源。首批完成后即可选用和搜索；加载途中显示已载入篇数。暂时失败自动重试两次，仍失败时保留已加载内容，点击“继续加载”仅补载未完成批次（同一页面内）。加载完成前，搜索仅覆盖已载入内容。
+
+更新原始 `dist/data/*.json` 后运行 `python3 scripts/split-collections.py` 重新生成分片；分片文件名按内容计算，供浏览器缓存复用。运行 `node tests/library-loader.cjs` 检查失败恢复、缓存与并发限制。

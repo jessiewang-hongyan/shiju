@@ -22,7 +22,9 @@ jobs:
         with:
           node-version: '22'
       - name: Check JavaScript
-        run: node --check dist/app.js
+        run: |
+          node --check dist/app.js
+          node tests/library-loader.cjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
