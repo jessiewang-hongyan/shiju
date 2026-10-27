@@ -159,11 +159,19 @@ function loadExportFont(key){
  return fontPromises.get(key);
 }
 // A source position always produces the same torn outline, even after reordering.
-function paperEdgePoints(id,strength=35){
+function paperEdgePoints(id,strength=35,width=1,height=1){
  let seed=(Number(id)+1)*2654435761>>>0;const random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296};
- const points=[],steps=36;
- for(let side=0;side<4;side++)for(let i=0;i<steps;i++){const t=i/steps,d=.01+random()*(.012+strength/100*.065);points.push(side===0?[t,d]:side===1?[1-d,t]:side===2?[1-t,1-d]:[d,1-t])}
+ const points=[],steps=36;const short=Math.min(width,height);
+ for(let side=0;side<4;side++)for(let i=0;i<steps;i++){const t=i/steps,d=(.01+random()*(.012+strength/100*.065))*short;points.push(side===0?[t,d/height]:side===1?[1-d/width,t]:side===2?[1-t,1-d/height]:[d/width,1-t])}
  return points;
+}
+// Group by source occurrence, never by character value. Wrapped source rows remain separate cuts.
+function paperRuns(line,eligible,sourceRows){
+ const runs=[];let offset=0;
+ for(const token of line){const width=token.w??1,last=runs.at(-1),previous=last?.tokens.at(-1);
+  const join=eligible(token)&&previous&&eligible(previous)&&Number.isInteger(token.id)&&token.id===previous.id+1&&(!sourceRows||sourceRows.get(token.id)===sourceRows.get(previous.id));
+  if(join){last.tokens.push(token);last.width+=width}else runs.push({tokens:[token],offset,width});offset+=width;
+ }return runs;
 }
 // Center the visible glyph, rather than its font baseline, inside a paper tile.
 function paintCenteredGlyph(ctx,text,x,y,w,h){
@@ -177,7 +185,7 @@ function paintCenteredGlyph(ctx,text,x,y,w,h){
 }
 function paintPaperRect(ctx,x,y,w,h,id,rough){
  if(!rough){ctx.fillRect(x,y,w,h);ctx.strokeRect(x,y,w,h);return}
- const intensity=Number(rough)/100,unit=Math.min(w,h)/42;const points=paperEdgePoints(id,rough);ctx.save();ctx.beginPath();points.forEach(([u,v],i)=>ctx[i?'lineTo':'moveTo'](x+u*w,y+v*h));ctx.closePath();ctx.fill();
+ const intensity=Number(rough)/100,unit=Math.min(w,h)/42;const points=paperEdgePoints(id,rough,w,h);ctx.save();ctx.beginPath();points.forEach(([u,v],i)=>ctx[i?'lineTo':'moveTo'](x+u*w,y+v*h));ctx.closePath();ctx.fill();
  // Translucent strands follow the same seeded edge on the cutout and its hole.
  const ink=ctx.strokeStyle;ctx.strokeStyle=ctx.fillStyle;ctx.lineJoin='round';ctx.lineWidth=(.8+intensity*2)*unit;ctx.globalAlpha=.3+intensity*.35;ctx.stroke();
  points.forEach(([u,v],i)=>{const side=Math.floor(i/(points.length/4)),n=side===0?[0,-1]:side===1?[1,0]:side===2?[0,1]:[-1,0],r=((i*17+Number(id)*7)%23)/23;const len=(.4+intensity*(1.5+r*4))*unit;ctx.globalAlpha=.25+intensity*.45;ctx.lineWidth=(.2+intensity*.4+r*.2)*unit;ctx.strokeStyle=i%3===0?ink:ctx.fillStyle;ctx.beginPath();ctx.moveTo(x+u*w-n[0]*unit,y+v*h-n[1]*unit);ctx.lineTo(x+u*w+n[0]*len-n[1]*(r-.5)*len*.7,y+v*h+n[1]*len+n[0]*(r-.5)*len*.7);ctx.stroke();
@@ -196,8 +204,9 @@ function drawImagePreview(){
  ctx.clearRect(0,0,c.width,c.height);ctx.fillStyle=colors.poemBackground;ctx.fillRect(0,0,500,120);ctx.fillStyle=colors['#f7f5ef'];ctx.fillRect(0,120,500,120);
  ctx.font='12px sans-serif';ctx.fillStyle=colors['#343b31'];ctx.fillText('集句',20,23);ctx.fillText('原文',20,145);
  const line=Array.from('明月松间照，清泉');ctx.font=px+'px '+family;
- line.forEach((ch,i)=>{const x=20+i*step;if(x+step>490)return;const selected=i<5;if(selected){if(exportCollage){ctx.fillStyle=colors['#f7f5ef'];ctx.strokeStyle=colors['#bfc8b0'];paintPaperRect(ctx,x-2,48,step-3,step-3,i,rough)}ctx.fillStyle=colors['#343b31'];if(exportCollage)paintCenteredGlyph(ctx,ch,x-2,48,step-3,step-3);else ctx.fillText(ch,x,48+px)}
- if(selected){ctx.fillStyle=colors['#edf0e4'];ctx.strokeStyle=colors['#bfc8b0'];paintPaperRect(ctx,x-2,167,step-3,step-3,i,rough)}else{ctx.fillStyle=colors['#343b31'];ctx.fillText(ch,x,167+px)}});
+ if(exportCollage){ctx.fillStyle=colors['#f7f5ef'];ctx.strokeStyle=colors['#bfc8b0'];paintPaperRect(ctx,18,48,step*5-3,step-3,0,rough)}
+ ctx.fillStyle=colors['#edf0e4'];ctx.strokeStyle=colors['#bfc8b0'];paintPaperRect(ctx,18,167,step*5-3,step-3,0,rough);
+ line.forEach((ch,i)=>{const x=20+i*step;if(x+step>490)return;if(i<5){ctx.fillStyle=colors['#343b31'];if(exportCollage)paintCenteredGlyph(ctx,ch,x-2,48,step-3,step-3);else ctx.fillText(ch,x,48+px)}else{ctx.fillStyle=colors['#343b31'];ctx.fillText(ch,x,167+px)}});
 }
 function setImageSize(value){const n=Math.round(Number(value));if(!Number.isFinite(n)||n<5||n>25)return;$('#image-size').value=n;$('#image-size-range').value=n;drawImagePreview();try{localStorage.setItem('shiju-image-size',n)}catch{}}
 $('#image-size').oninput=e=>{if(e.target.value)setImageSize(e.target.value)};
@@ -212,7 +221,18 @@ async function exportImage(){if(!pickedCount()){toast('请先从原文中选字'
  const sourceStart=sy+93,newStart=state.title.trim()?ny+80:290;const need=Math.max(sourceStart+source.length*lineHeight+150,newStart+result.length*lineHeight+210,height);
  if(need>height){canvas.height=need;return await exportWithHeight(need)}
  paintBody(ctx,source,result,sourceStart,newStart,height);download(canvas);
- function paintBody(ctx,source,result,sourceStart,newStart,h){ctx.font=bodySize+'px '+fontFamily;source.forEach((line,row)=>{let x=85;for(const t of line){if(t.hole){ctx.fillStyle=colors['#edf0e4'];ctx.strokeStyle=colors['#bfc8b0'];ctx.setLineDash(rough?[]:[3,4]);paintPaperRect(ctx,x+2,sourceStart+row*lineHeight-bodySize*.87,advance-4,advance-4,t.id,rough);ctx.setLineDash([])}else{ctx.fillStyle=colors['#5d6754'];ctx.fillText(t.c,x,sourceStart+row*lineHeight)}x+=advance*t.w}});ctx.font=bodySize+'px '+fontFamily;ctx.fillStyle=colors['#343b31'];result.forEach((line,row)=>{let x=794;for(const t of line){const y=newStart+row*lineHeight;if(collage&&t.id!==null&&t.id!==undefined){ctx.fillStyle=colors['#f7f5ef'];ctx.strokeStyle=mixColors(colors['#343b31'],colors['#f7f5ef'],.16);ctx.lineWidth=1;paintPaperRect(ctx,x-1,y-bodySize*.87,advance-4,advance-4,t.id,rough)}ctx.fillStyle=colors['#343b31'];if(collage&&t.id!==null&&t.id!==undefined)paintCenteredGlyph(ctx,t.c,x-1,y-bodySize*.87,advance-4,advance-4);else ctx.fillText(t.c,x,y);x+=advance*t.w}});ctx.font='20px '+fontFamily;ctx.fillStyle=colors['#7e886e'];ctx.textAlign='right';ctx.fillText('— '+displayText(state.signature||'拾句的人'),1336,h-180);ctx.textAlign='left';ctx.strokeStyle=colors['#dfe2d5'];ctx.beginPath();ctx.moveTo(64,h-90);ctx.lineTo(1376,h-90);ctx.stroke();ctx.font='14px sans-serif';ctx.fillStyle=colors['#959e89'];ctx.fillText('字句有来处，诗意无边界。',64,h-50);ctx.textAlign='right';ctx.fillText(`拾自《${displayText(state.source.title)}》 · 已拾 ${pickedCount()} 字`,1376,h-50);ctx.textAlign='left'}
+ function paintBody(ctx,source,result,sourceStart,newStart,h){
+ const sourceRows=new Map();source.forEach((line,row)=>line.forEach(t=>sourceRows.set(t.id,row)));
+ const selected=t=>Number.isInteger(t.id);ctx.font=bodySize+'px '+fontFamily;
+ source.forEach((line,row)=>{const y=sourceStart+row*lineHeight;
+  for(const run of paperRuns(line,t=>t.hole,sourceRows)){const x=85+run.offset*advance,t=run.tokens[0];
+   if(t.hole){ctx.fillStyle=colors['#edf0e4'];ctx.strokeStyle=colors['#bfc8b0'];ctx.setLineDash(rough?[]:[3,4]);paintPaperRect(ctx,x+2,y-bodySize*.87,advance*run.width-4,advance-4,t.id,rough);ctx.setLineDash([])}else{ctx.fillStyle=colors['#5d6754'];ctx.fillText(t.c,x,y)}
+  }
+ });
+ result.forEach((line,row)=>{const y=newStart+row*lineHeight;
+  if(collage)for(const run of paperRuns(line,selected,sourceRows)){const t=run.tokens[0];if(!selected(t))continue;ctx.fillStyle=colors['#f7f5ef'];ctx.strokeStyle=mixColors(colors['#343b31'],colors['#f7f5ef'],.16);ctx.lineWidth=1;paintPaperRect(ctx,793+run.offset*advance,y-bodySize*.87,advance*run.width-4,advance-4,t.id,rough)}
+  let x=794;for(const t of line){ctx.fillStyle=colors['#343b31'];if(collage&&selected(t))paintCenteredGlyph(ctx,t.c,x-1,y-bodySize*.87,advance-4,advance-4);else ctx.fillText(t.c,x,y);x+=advance*t.w}
+ });ctx.font='20px '+fontFamily;ctx.fillStyle=colors['#7e886e'];ctx.textAlign='right';ctx.fillText('— '+displayText(state.signature||'拾句的人'),1336,h-180);ctx.textAlign='left';ctx.strokeStyle=colors['#dfe2d5'];ctx.beginPath();ctx.moveTo(64,h-90);ctx.lineTo(1376,h-90);ctx.stroke();ctx.font='14px sans-serif';ctx.fillStyle=colors['#959e89'];ctx.fillText('字句有来处，诗意无边界。',64,h-50);ctx.textAlign='right';ctx.fillText(`拾自《${displayText(state.source.title)}》 · 已拾 ${pickedCount()} 字`,1376,h-50);ctx.textAlign='left'}
  async function exportWithHeight(h){canvas.height=h;ctx.fillStyle=colors['#f7f5ef'];ctx.fillRect(0,0,1440,h);ctx.fillStyle=colors.poemBackground;ctx.fillRect(754,190,622,h-310);ctx.fillStyle=colors['#b95437'];ctx.font='32px '+fontFamily;ctx.fillText('拾句',64,95);ctx.fillStyle=colors['#87917b'];ctx.font='14px sans-serif';ctx.fillText('01   原诗 · 摘取后',85,219);ctx.fillText('02   新诗 · 重新排列',794,229);ctx.fillStyle=colors['#343b31'];drawWrappedTitle(displayText(state.source.title),85,280,560);drawWrappedTitle(displayText(state.title.trim()),794,290,540,46);ctx.font='15px sans-serif';ctx.fillStyle=colors['#929985'];ctx.fillText(displayText(state.source.author),85,sy+32);paintBody(ctx,source,result,sourceStart,newStart,h);download(canvas)}
  function download(c){c.toBlob(blob=>{if(!blob){toast('生成图片失败，请尝试更短的诗材');return}const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`拾句-${(state.title.trim()||'集句').replace(/[\\/:*?"<>|]/g,'')}.png`;a.click();setTimeout(()=>URL.revokeObjectURL(url),60000);toast('图片已生成，包含挖空原诗与新诗')},'image/png')}
  }catch(e){toast(e.message||'导出失败，请稍后重试')}finally{button.disabled=false;button.textContent='保存图片'}}
