@@ -2103,3 +2103,13 @@ html[data-night-colors] textarea::placeholder {
 #font-to-traditional:active:not(:disabled) {
   transform: translateY(1px);
 }
+
+html[data-theme="dark"] #font-to-traditional {
+  background: color-mix(in srgb, var(--ink) 18%, var(--paper));
+  border-color: color-mix(in srgb, var(--ink) 50%, var(--paper));
+  color: var(--ink);
+}
+html[data-theme="dark"] #font-to-traditional:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--ink) 25%, var(--paper));
+  color: var(--ink);
+}
