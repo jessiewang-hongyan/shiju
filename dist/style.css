@@ -2075,3 +2075,31 @@ html[data-night-colors] textarea::placeholder {
   border-style: solid;
   box-shadow: 0 0 0 1px var(--muted);
 }
+
+/* Keep the conversion action distinct in both day and night palettes. */
+#font-traditional-hint {
+  margin: 0 0 22px;
+}
+#font-traditional-hint .dialog-note {
+  margin: 0 0 12px;
+}
+#font-to-traditional {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 20px;
+  border: 1px solid var(--ink);
+  border-radius: 6px;
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 600;
+  line-height: 1.4;
+}
+#font-to-traditional:hover:not(:disabled) {
+  background: var(--paper);
+  color: var(--ink);
+}
+#font-to-traditional:active:not(:disabled) {
+  transform: translateY(1px);
+}
