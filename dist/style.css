@@ -2243,3 +2243,48 @@ html[data-night-colors] #new-poem.editor-textured .poem-token {
 #source-sheet.editor-textured .source-heading {
   color: inherit;
 }
+
+#colors-dialog {
+  --settings-padding: 30px;
+}
+#colors-dialog > .dialog-heading {
+  position: sticky;
+  top: calc(-1 * var(--settings-padding));
+  z-index: 5;
+  background: inherit;
+  margin: calc(-1 * var(--settings-padding)) calc(-1 * var(--settings-padding))
+    18px;
+  padding: var(--settings-padding) var(--settings-padding) 10px;
+  border-bottom: 1px solid var(--line);
+}
+#colors-dialog .color-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+#colors-export {
+  grid-column: 1 / -1;
+}
+@media (max-width: 720px) {
+  #colors-dialog {
+    --settings-padding: 23px;
+  }
+}
+@media (max-width: 420px) {
+  #colors-dialog .image-spacing-row {
+    grid-template-columns: 84px minmax(24px, 1fr) 56px;
+    gap: 8px;
+  }
+  #colors-dialog #collage-background-controls .color-row {
+    grid-template-columns: 64px minmax(24px, 1fr) 56px;
+    gap: 8px;
+  }
+  #colors-dialog #handmade-controls input[type="number"],
+  #colors-dialog #collage-gap-value {
+    width: 56px;
+  }
+  #colors-dialog .color-row select,
+  #colors-dialog .export-font-control select {
+    min-width: 0;
+    max-width: 65%;
+  }
+}

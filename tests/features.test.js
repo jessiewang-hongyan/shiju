@@ -1005,3 +1005,28 @@ test("metadata holes export with body picks and remain available for single-poem
   }
   x.close();
 });
+
+test("settings export uses current configuration and shares the busy state with page export", async () => {
+  const x = setup();
+  x.$("#source-title button").click();
+  x.input("#image-layout", "poem-only", "change");
+  x.$("#colors-open").click();
+  let ready;
+  x.appearance.readyPapers = () =>
+    new Promise((resolve) => {
+      ready = resolve;
+    });
+  const exportTask = x.$("#colors-export").onclick();
+  assert(x.$("#colors-export").disabled);
+  assert(x.$("#export").disabled);
+  await x.$("#export").onclick();
+  ready();
+  await exportTask;
+  assert.equal(x.downloads.length, 1);
+  assert.equal(x.$("#colors-export").disabled, false);
+  assert.equal(x.$("#colors-export").textContent, "导出图片");
+  assert(x.$("#colors-dialog").open);
+  const calls = x.records.find((r) => r.canvas === x.downloads[0]).calls;
+  assert(!calls.some((c) => c[0] === "fillText" && c[1] === "山居秋暝"));
+  x.close();
+});

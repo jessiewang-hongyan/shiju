@@ -1,14 +1,14 @@
-import { initEditorPaper } from "./modules/editor-paper.js?v=20261027metadata1";
+import { initEditorPaper } from "./modules/editor-paper.js?v=20261027settingsfooter1";
 import { initUI } from "./modules/ui.js";
 import { poems } from "./modules/poems.js";
 import { createStore } from "./modules/storage.js";
-import { createEditor } from "./modules/editor.js?v=20261027metadata1";
+import { createEditor } from "./modules/editor.js?v=20261027settingsfooter1";
 import { initCollection } from "./modules/collection.js";
 import { initLibrary } from "./modules/library.js";
 import { createTypography, initTypography } from "./modules/typography.js";
-import { createFontLoader } from "./modules/fonts.js?v=20261027metadata1";
-import { createAppearance } from "./modules/appearance.js?v=20261027metadata1";
-import { createImage } from "./modules/image.js?v=20261027metadata1";
+import { createFontLoader } from "./modules/fonts.js?v=20261027settingsfooter1";
+import { createAppearance } from "./modules/appearance.js?v=20261027settingsfooter1";
+import { createImage } from "./modules/image.js?v=20261027settingsfooter1";
 
 // Initialize services, then controllers; callbacks connect sibling modules.
 initUI();

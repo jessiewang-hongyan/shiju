@@ -423,6 +423,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
   $("#image-size-plus").onclick = () =>
     setImageSize(Number($("#image-size").value) + 1);
   async function exportImage() {
+    if ($("#export").disabled) return;
     if (!editor.pickedCount() && layoutOptions().showPoem) {
       toast("请先从原文中选字");
       return;
@@ -441,14 +442,18 @@ export function createImage({ editor, typography, fonts, appearance }) {
     const fontKey = $("#export-font").value,
       font = exportFonts[fontKey];
     const fontFamily = (font ? '"' + font.family + '",' : "") + songtiFamily;
-    button.disabled = true;
+    const settingsButton = $("#colors-export");
+    const status = (text) => {
+      button.textContent = settingsButton.textContent = text;
+    };
+    button.disabled = settingsButton.disabled = true;
     try {
       await appearance.readyPapers();
       if (font) {
-        button.textContent = "正在加载字体…";
+        status("正在加载字体…");
         await loadExportFont(fontKey);
       }
-      button.textContent = "正在生成图片…";
+      status("正在生成图片…");
       const used = new Set(
         editor.state.tokens.filter((t) => t.id !== null).map((t) => t.id),
       );
@@ -843,11 +848,13 @@ export function createImage({ editor, typography, fonts, appearance }) {
     } catch (e) {
       toast(e.message || "导出失败，请稍后重试");
     } finally {
-      button.disabled = false;
+      button.disabled = settingsButton.disabled = false;
       button.textContent = "保存图片";
+      settingsButton.textContent = "导出图片";
     }
   }
   $("#export").onclick = exportImage;
+  $("#colors-export").onclick = exportImage;
 
   return { drawImagePreview, updateFontPreview, setImageSize };
 }
