@@ -1,13 +1,16 @@
-import { paintPaperField, paintPaperCrop } from "./paper-materials.js";
+import {
+  paintPaperField,
+  paintPaperCrop,
+} from "./paper-materials.js?v=20261027release3";
 import { $, toast } from "./ui.js";
-import { exportFonts, songtiFamily } from "./fonts.js?v=20261027n";
+import { exportFonts, songtiFamily } from "./fonts.js?v=20261027release3";
 import {
   wrapCells,
   paintCollageLine,
   paperRuns,
   paintCenteredGlyph,
   paintPaperRect,
-} from "./image-drawing.js?v=20261027paper2";
+} from "./image-drawing.js?v=20261027release3";
 export function createImage({ editor, typography, fonts, appearance }) {
   const { displayText, displayTokens } = typography;
   const { loadExportFont } = fonts;
@@ -15,6 +18,8 @@ export function createImage({ editor, typography, fonts, appearance }) {
   function syncFontNote() {
     const key = $("#export-font").value;
     const notes = {
+      wenkai:
+        "霞鹜文楷 · LXGW，SIL OFL 1.1 授权，按作品用字加载；缺失字符回退宋体。",
       kangxi:
         "康熙字典体采用繁体、旧字形，部分简体字符也会显示为繁体字形。如需保持简体字形，请选择宋体。",
       chenyu:
@@ -77,9 +82,42 @@ export function createImage({ editor, typography, fonts, appearance }) {
     const saved = localStorage.getItem("shiju-image-layout");
     if (layouts.includes(saved)) $("#image-layout").value = saved;
   } catch {}
+  try {
+    const saved = localStorage.getItem("shiju-image-orientation");
+    $("#image-orientation").value = ["landscape", "portrait"].includes(saved)
+      ? saved
+      : ["source-top", "source-bottom"].includes($("#image-layout").value)
+        ? "portrait"
+        : "landscape";
+  } catch {}
+  function syncOrientation() {
+    const portrait = $("#image-orientation").value === "portrait";
+    const map = portrait
+      ? { "source-left": "source-top", "source-right": "source-bottom" }
+      : { "source-top": "source-left", "source-bottom": "source-right" };
+    const select = $("#image-layout");
+    select.value = map[select.value] || select.value;
+    for (const option of select.options) {
+      option.hidden = option.disabled = portrait
+        ? ["source-left", "source-right"].includes(option.value)
+        : ["source-top", "source-bottom"].includes(option.value);
+    }
+  }
+  syncOrientation();
+  $("#image-orientation").onchange = () => {
+    syncOrientation();
+    try {
+      localStorage.setItem(
+        "shiju-image-orientation",
+        $("#image-orientation").value,
+      );
+    } catch {}
+    $("#image-layout").onchange();
+  };
   function layoutOptions() {
     const value = $("#image-layout").value;
     return {
+      portrait: $("#image-orientation").value === "portrait",
       single: value === "source-only" || value === "poem-only",
       showSource: value !== "poem-only",
       showPoem: value !== "source-only",
@@ -93,6 +131,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
     };
   }
   $("#image-layout").onchange = () => {
+    syncOrientation();
     try {
       localStorage.setItem("shiju-image-layout", $("#image-layout").value);
     } catch {}
@@ -363,31 +402,23 @@ export function createImage({ editor, typography, fonts, appearance }) {
       const used = new Set(
         editor.state.tokens.filter((t) => t.id !== null).map((t) => t.id),
       );
-      const { vertical, sourceFirst, single, showSource, showPoem } =
+      const { vertical, sourceFirst, single, showSource, showPoem, portrait } =
         layoutOptions();
-      const panelWidth = vertical ? 1312 : 622;
-      const textWidth = panelWidth - 80;
-      const source = wrapCells(
-        Array.from(displayText(editor.state.source.text)).map((c, id) => ({
-          c,
-          id,
-          hole: used.has(id),
-        })),
-        Math.max(1, Math.floor(textWidth / advance)),
-      );
-      const layoutRows = new Map();
-      source.forEach((line, row) =>
-        line.forEach((t) => layoutRows.set(t.id, row)),
-      );
-      const result = wrapCells(
-        displayTokens(editor.state.tokens),
-        Math.max(1, Math.floor(textWidth / advance)),
-        collage ? ((appearance.collageGap || 0) * scale) / advance : 0,
-        layoutRows,
-      );
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
       if (!ctx) throw new Error("当前浏览器不支持图片导出");
+      let width = portrait ? 1080 : 1440,
+        height,
+        panelWidth,
+        textWidth;
+      let source,
+        result,
+        sourceTitle,
+        newTitle,
+        sourceOffset,
+        newOffset,
+        sourceHeight,
+        newHeight;
       function titleLines(text, size) {
         if (!text) return [];
         ctx.font = size + "px " + fontFamily;
@@ -403,35 +434,77 @@ export function createImage({ editor, typography, fonts, appearance }) {
         lines.push(line);
         return lines;
       }
-      const sourceTitle = titleLines(
-        displayText(editor.state.source.title),
-        30,
-      );
-      const newTitle = titleLines(displayText(editor.state.title.trim()), 46);
-      const sourceOffset = 60 + sourceTitle.length * 40 + 53;
-      const newOffset = newTitle.length ? 60 + newTitle.length * 56 + 24 : 60;
-      const sourceHeight = sourceOffset + source.length * lineHeight + 40;
-      const newHeight = newOffset + result.length * lineHeight + 110;
-      const sharedHeight = Math.max(750, sourceHeight, newHeight);
-      const sourcePanelHeight = vertical ? sourceHeight : sharedHeight;
-      const newPanelHeight = vertical ? newHeight : sharedHeight;
+      // Grow the page at a fixed aspect ratio and reflow; never shrink the chosen font.
+      while (true) {
+        height = Math.round(width * (portrait ? 4 / 3 : 3 / 4));
+        if (Math.max(width, height) > 24000 || width * height > 64000000)
+          throw new Error("作品太长，请分为较短的篇章导出");
+        panelWidth = vertical ? width - 128 : (width - 196) / 2;
+        textWidth = panelWidth - 80;
+        source = wrapCells(
+          Array.from(displayText(editor.state.source.text)).map((c, id) => ({
+            c,
+            id,
+            hole: used.has(id),
+          })),
+          Math.max(1, Math.floor(textWidth / advance)),
+        );
+        const rows = new Map();
+        source.forEach((line, row) => line.forEach((t) => rows.set(t.id, row)));
+        result = wrapCells(
+          displayTokens(editor.state.tokens),
+          Math.max(1, Math.floor(textWidth / advance)),
+          collage ? ((appearance.collageGap || 0) * scale) / advance : 0,
+          rows,
+        );
+        sourceTitle = titleLines(displayText(editor.state.source.title), 30);
+        newTitle = titleLines(displayText(editor.state.title.trim()), 46);
+        sourceOffset = 60 + sourceTitle.length * 40 + 53;
+        newOffset = newTitle.length ? 60 + newTitle.length * 56 + 24 : 60;
+        sourceHeight = sourceOffset + source.length * lineHeight + 40;
+        newHeight = newOffset + result.length * lineHeight + 110;
+        const needed =
+          310 +
+          (single
+            ? showSource
+              ? sourceHeight
+              : newHeight
+            : vertical
+              ? sourceHeight + newHeight + 40
+              : Math.max(sourceHeight, newHeight));
+        if (needed <= height) break;
+        width =
+          Math.ceil(
+            (width + Math.max(64, width * (Math.sqrt(needed / height) - 1))) /
+              12,
+          ) * 12;
+      }
+      const spare = height - 310 - sourceHeight - newHeight - 40;
+      const sourcePanelHeight = single
+        ? showSource
+          ? height - 310
+          : sourceHeight
+        : vertical
+          ? sourceHeight + spare / 2
+          : height - 310;
+      const newPanelHeight = single
+        ? showPoem
+          ? height - 310
+          : newHeight
+        : vertical
+          ? newHeight + spare / 2
+          : height - 310;
       const firstHeight = sourceFirst ? sourcePanelHeight : newPanelHeight;
       const sourceTop =
         vertical && !single && !sourceFirst ? 190 + firstHeight + 40 : 190;
       const newTop =
         vertical && !single && sourceFirst ? 190 + firstHeight + 40 : 190;
-      const sourceX = !vertical && !sourceFirst ? 794 : 104;
-      const newX = !vertical && sourceFirst ? 794 : 104;
-      const height = single
-        ? 190 + (showSource ? sourceHeight : newHeight) + 120
-        : vertical
-          ? 190 + sourceHeight + newHeight + 40 + 120
-          : 190 + sharedHeight + 120;
-      if (height > 24000) throw new Error("作品太长，请分为较短的篇章导出");
-      canvas.width = 1440;
+      const sourceX = !vertical && !sourceFirst ? 104 + panelWidth + 68 : 104;
+      const newX = !vertical && sourceFirst ? 104 + panelWidth + 68 : 104;
+      canvas.width = width;
       canvas.height = height;
       ctx.fillStyle = colors["#f7f5ef"];
-      ctx.fillRect(0, 0, 1440, height);
+      ctx.fillRect(0, 0, width, height);
       ctx.fillStyle = colors["#b95437"];
       ctx.fillRect(64, 58, 49, 53);
       ctx.font = "32px " + fontFamily;
@@ -442,11 +515,11 @@ export function createImage({ editor, typography, fonts, appearance }) {
       ctx.fillText("拾句", 130, 95);
       ctx.font = "14px sans-serif";
       ctx.fillStyle = colors["#969b8b"];
-      ctx.fillText("从旧诗里，拾一首新诗。", 1040, 95);
+      ctx.fillText("从旧诗里，拾一首新诗。", width - 400, 95);
       ctx.strokeStyle = colors["#dfe2d5"];
       ctx.beginPath();
       ctx.moveTo(64, 142);
-      ctx.lineTo(1376, 142);
+      ctx.lineTo(width - 64, 142);
       ctx.stroke();
       ctx.fillStyle = colors.poemBackground;
       if (showPoem) ctx.fillRect(newX - 40, newTop, panelWidth, newPanelHeight);
@@ -612,7 +685,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
         ctx.strokeStyle = colors["#dfe2d5"];
         ctx.beginPath();
         ctx.moveTo(64, h - 90);
-        ctx.lineTo(1376, h - 90);
+        ctx.lineTo(width - 64, h - 90);
         ctx.stroke();
         ctx.font = "14px sans-serif";
         ctx.fillStyle = colors["#959e89"];

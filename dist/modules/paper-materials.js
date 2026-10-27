@@ -1,5 +1,13 @@
 // Shared virtual paper field. Only small seamless tiles are allocated, even for long poems.
-export const paperKeys = ["none", "ten-bamboo", "lokta", "gold"];
+export const paperKeys = [
+  "none",
+  "ten-bamboo",
+  "lokta",
+  "gold",
+  "cloud",
+  "newsprint",
+  "kraft",
+];
 const cache = new Map();
 function canvas(w, h) {
   const c = document.createElement("canvas");
@@ -83,12 +91,18 @@ export async function loadPaper(key) {
     if (key === "gold") tile = gold();
     else {
       const img = document.createElement("img");
-      img.src = new URL(
-        `../assets/papers/${key === "lokta" ? "lokta" : "ten-bamboo"}.jpg`,
-        import.meta.url,
-      ).href;
+      img.src = new URL(`../assets/papers/${key}.jpg`, import.meta.url).href;
       await img.decode();
-      if (key === "lokta") {
+      if (["cloud", "newsprint", "kraft"].includes(key)) {
+        tile = canvas(840, 840);
+        const x = tile.getContext("2d");
+        x.fillStyle = "#f6f1e6";
+        x.fillRect(0, 0, 840, 840);
+        x.globalAlpha = key === "cloud" ? 0.65 ** 4 : 0.65;
+        // Preserve the approved preview scale: two source tiles across the paper.
+        for (let y = 0; y < 840; y += 420)
+          for (let a = 0; a < 840; a += 420) x.drawImage(img, a, y, 420, 420);
+      } else if (key === "lokta") {
         const bright = canvas(img.width, img.height),
           b = bright.getContext("2d");
         b.filter = "brightness(1.65) sepia(0.18)";

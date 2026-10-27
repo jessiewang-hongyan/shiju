@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-CN">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  /><title>拾句 · 新纸张预览</title
+  ><style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background: #efede8;
+      color: #34372f;
+      font: 14px system-ui;
+    }
+    main {
+      max-width: 1500px;
+      margin: 36px auto;
+      padding: 0 24px;
+    }
+    h1 {
+      font:
+        30px "Songti SC",
+        serif;
+      margin: 0 0 12px;
+    }
+    p {
+      line-height: 1.8;
+      color: #66695f;
+    }
+    nav {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      padding: 20px 0;
+      border-block: 1px solid #d3d2c9;
+    }
+    label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    input {
+      accent-color: #666f59;
+    }
+    section {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 26px;
+    }
+    h2 {
+      font-size: 18px;
+      font-weight: 500;
+    }
+    canvas {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: white;
+      margin: 15px 0;
+      box-shadow: 0 2px 12px #0000000c;
+    }
+    small {
+      display: block;
+      min-height: 42px;
+      line-height: 1.7;
+      color: #6a6c62;
+    }
+    a {
+      color: #56634d;
+    }
+    button {
+      padding: 9px 15px;
+      background: #fafaf7;
+      color: inherit;
+      border: 1px solid #bfc4b5;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    @media (max-width: 800px) {
+      section {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+        margin: 24px auto;
+      }
+    }
+    #status {
+      min-height: 24px;
+    }
+  </style>
+  <main>
+    <h1>云纹、旧纸与牛皮纸</h1>
+    <p>
+      同一首《山居秋暝》，上方集句，下方挖空原文。字块保留原位置的图案。仅供确认，未接入正式页面。
+    </p>
+    <nav>
+      <label
+        >纸纹浓度
+        <input
+          id="intensity"
+          type="range"
+          min="0"
+          max="100"
+          value="65"
+        /><output id="amount">65%</output></label
+      ><label
+        >字号
+        <input id="size" type="range" min="20" max="44" value="32" /><output
+          id="size-label"
+          >32</output
+        ></label
+      ><label><input type="checkbox" id="long" />长文平铺对照</label>
+    </nav>
+    <p>
+      调整字号会重新排版、重新取样，纸片上的图案可能随之变化。长文模式重复诗句，仅用于检查纸纹接缝。
+    </p>
+    <section id="samples"></section>
+    <p id="status" role="status"></p>
+    <p>
+      素材：TextureCan · CC0。云纹为中式压花图案，其余为旧新闻纸和微皱包装纸。<a
+        href="https://www.texturecan.com/terms/"
+        >许可说明</a
+      >
+    </p>
+  </main>
+  <script type="module" src="preview.js"></script>
+</html>

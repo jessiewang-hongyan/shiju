@@ -15,7 +15,7 @@
           document.documentElement.dataset.theme = "dark";
       } catch {}
     </script>
-    <link rel="stylesheet" href="style.css?v=20261027single1" />
+    <link rel="stylesheet" href="style.css?v=20261027release3" />
   </head>
   <body>
     <header>
@@ -325,6 +325,9 @@
           <option value="ten-bamboo">十竹斋笺纸</option>
           <option value="lokta">手工纤维纸</option>
           <option value="gold">仿洒金纸</option>
+          <option value="cloud">云纹压花纸</option>
+          <option value="newsprint">旧新闻纸</option>
+          <option value="kraft">微皱牛皮纸</option>
         </select>
       </div>
       <div class="color-row">
@@ -334,11 +337,25 @@
           <option value="ten-bamboo">十竹斋笺纸</option>
           <option value="lokta">手工纤维纸</option>
           <option value="gold">仿洒金纸</option>
+          <option value="cloud">云纹压花纸</option>
+          <option value="newsprint">旧新闻纸</option>
+          <option value="kraft">微皱牛皮纸</option>
         </select>
       </div>
       <p class="dialog-note">
         拼贴字块保留原文对应位置的纸纹和图案。十竹斋装饰只出现一次，长文延伸纸纹。手工纤维纸源自
         Lokta，洒金为程序纹理。
+      </p>
+      <label class="export-font-control" for="image-orientation"
+        >图片方向
+        <select id="image-orientation">
+          <option value="landscape">横屏 · 4:3</option>
+          <option value="portrait">竖屏 · 3:4</option>
+        </select>
+      </label>
+      <p class="dialog-note">
+        横屏起始 1440 × 1080，竖屏起始 1080 ×
+        1440。长内容等比例扩大画布，不缩小字号。
       </p>
       <label class="export-font-control" for="image-layout"
         >排列方式
@@ -354,6 +371,7 @@
       <label class="export-font-control" for="export-font"
         >图片字体<select id="export-font">
           <option value="songti">宋体</option>
+          <option value="wenkai">霞鹜文楷</option>
           <option value="kangxi">康熙字典体</option>
           <option value="huiwen">汇文明朝体</option>
           <option value="chenyu">拾句细手写</option>
@@ -620,6 +638,6 @@
       ><button id="move-right" aria-label="向后移动">→</button>
     </div>
     <div id="toast" role="status"></div>
-    <script type="module" src="app.js?v=20261027single1"></script>
+    <script type="module" src="app.js?v=20261027release3"></script>
   </body>
 </html>

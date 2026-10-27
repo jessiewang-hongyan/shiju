@@ -1,7 +1,8 @@
 function wrapCells(chars, maxUnits, gapUnits = 0, sourceRows) {
   const lines = [[]];
   let units = 0;
-  for (const t of chars) {
+  for (let index = 0; index < chars.length; index++) {
+    const t = chars[index];
     if (t.c === "\n") {
       lines.push([]);
       units = 0;
@@ -19,7 +20,31 @@ function wrapCells(chars, maxUnits, gapUnits = 0, sourceRows) {
       )
         ? gapUnits
         : 0;
-    if (units + gapBefore + w > maxUnits && lines.at(-1).length) {
+    // Move a connected cut as a unit when it fits on an empty line. Extra
+    // spacing may move the cut, but must not split or stretch its characters.
+    let pieceWidth = w;
+    if (sourceRows && Number.isInteger(t.id)) {
+      for (let j = index + 1; j < chars.length; j++) {
+        const next = chars[j],
+          prior = chars[j - 1];
+        if (
+          next.c === "\n" ||
+          !Number.isInteger(next.id) ||
+          next.id !== prior.id + 1 ||
+          sourceRows.get(next.id) !== sourceRows.get(prior.id)
+        )
+          break;
+        pieceWidth += next.c === " " ? 0.5 : Array.from(next.c).length;
+      }
+    }
+    const previousOnSource =
+      previous &&
+      Number.isInteger(t.id) &&
+      t.id === previous.id + 1 &&
+      (!sourceRows || sourceRows.get(t.id) === sourceRows.get(previous.id));
+    const required =
+      !previousOnSource && pieceWidth <= maxUnits ? pieceWidth : w;
+    if (units + gapBefore + required > maxUnits && lines.at(-1).length) {
       lines.push([]);
       units = 0;
       gapBefore = 0;

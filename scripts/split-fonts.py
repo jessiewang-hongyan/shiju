@@ -14,7 +14,7 @@ def fast_compress(data, **kwargs):
     return _compress(data, **kwargs)
 brotli.compress=fast_compress
 ROOT=Path(__file__).resolve().parents[1]
-SOURCES={'kangxi':'kangxi.ttf','huiwen':'huiwen.woff2','bakudai':'bakudai.woff2','chenyu':'chenyu.ttf'}
+SOURCES={'wenkai':'wenkai.ttf','kangxi':'kangxi.ttf','huiwen':'huiwen.woff2','bakudai':'bakudai.woff2','chenyu':'chenyu.ttf'}
 def build(key):
     src=ROOT/'dist/fonts'/SOURCES[key]
     font=TTFont(src); cmap=font.getBestCmap(); counts=Counter()

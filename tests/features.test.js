@@ -525,6 +525,13 @@ test("all four image layouts position source, poem, background and signature con
     "source-top",
     "source-bottom",
   ]) {
+    x.input(
+      "#image-orientation",
+      ["source-top", "source-bottom"].includes(layout)
+        ? "portrait"
+        : "landscape",
+      "change",
+    );
     x.input("#image-layout", layout, "change");
     assert.equal(localStorage.getItem("shiju-image-layout"), layout);
     const vertical = ["source-top", "source-bottom"].includes(layout);
@@ -690,6 +697,13 @@ test("single-panel exports omit the other section and use only the visible conte
   x.input("#poem-title", "独立集句");
   x.$("#source-poem button").click();
   for (const layout of ["poem-only", "source-only"]) {
+    x.input(
+      "#image-orientation",
+      ["source-top", "source-bottom"].includes(layout)
+        ? "portrait"
+        : "landscape",
+      "change",
+    );
     x.input("#image-layout", layout, "change");
     assert.equal(localStorage.getItem("shiju-image-layout"), layout);
     assert.equal(x.$("#image-preview").width, 500);
@@ -711,7 +725,7 @@ test("single-panel exports omit the other section and use only the visible conte
       texts.some((t) => t.startsWith("— ")),
       layout === "poem-only",
     );
-    assert(canvas.height < 1060);
+    assert.equal(canvas.width / canvas.height, 4 / 3);
     assert(
       calls.every(
         (c) => c[0] !== "fillText" || (c[3] >= 0 && c[3] < canvas.height),
@@ -732,5 +746,106 @@ test("source-only export works without picked characters", async () => {
       (c) => c[0] === "fillText" && String(c[1]).startsWith("— "),
     ),
   );
+  x.close();
+});
+
+test("orientation filters layouts, maps the current pair, and exports both single panels at the chosen ratio", async () => {
+  const x = setup();
+  x.$("#source-poem button").click();
+  for (const orientation of ["portrait", "landscape"]) {
+    x.input("#image-orientation", orientation, "change");
+    const portrait = orientation === "portrait";
+    assert.equal(localStorage.getItem("shiju-image-orientation"), orientation);
+    const allowed = [...x.$("#image-layout").options]
+      .filter((o) => !o.disabled)
+      .map((o) => o.value);
+    assert.deepEqual(
+      allowed,
+      portrait
+        ? ["source-top", "source-bottom", "poem-only", "source-only"]
+        : ["source-left", "source-right", "poem-only", "source-only"],
+    );
+    for (const layout of allowed) {
+      x.input("#image-layout", layout, "change");
+      await x.$("#export").onclick();
+      const canvas = x.downloads.at(-1);
+      assert.equal(canvas.width / canvas.height, portrait ? 3 / 4 : 4 / 3);
+      assert.equal(canvas.width, portrait ? 1080 : 1440);
+    }
+  }
+  x.close();
+});
+
+test("long original grows the page without changing orientation or clipping text", async () => {
+  const x = setup({
+    source: {
+      title: "长篇验收",
+      author: "",
+      text: "明月松间照，清泉石上流。\n".repeat(80),
+    },
+    title: "",
+    signature: "",
+    tokens: [],
+  });
+  x.input("#image-layout", "source-only", "change");
+  for (const direction of ["portrait", "landscape"]) {
+    x.input("#image-orientation", direction, "change");
+    await x.$("#export").onclick();
+    const { canvas, calls } = x.records.filter((r) => !r.canvas.id).at(-1);
+    assert.equal(
+      canvas.width / canvas.height,
+      direction === "portrait" ? 3 / 4 : 4 / 3,
+    );
+    assert(canvas.width > (direction === "portrait" ? 1080 : 1440));
+    assert(
+      calls
+        .filter((c) => c[0] === "fillText")
+        .every(
+          (c) =>
+            c[2] >= 0 &&
+            c[2] < canvas.width &&
+            c[3] >= 0 &&
+            c[3] < canvas.height,
+        ),
+    );
+  }
+  x.close();
+});
+
+test("collage gaps move connected pieces without stretching their internal letter spacing", async () => {
+  const rows = new Map([
+    [0, 0],
+    [5, 0],
+    [6, 0],
+    [7, 0],
+  ]);
+  const tokens = [
+    { c: "甲", id: 0 },
+    { c: "明", id: 5 },
+    { c: "月", id: 6 },
+    { c: "松", id: 7 },
+  ];
+  const wrapped = wrapCells(tokens, 4, 0.5, rows);
+  assert.deepEqual(
+    wrapped.map((line) => line.map((t) => t.c).join("")),
+    ["甲", "明月松"],
+  );
+  assert(wrapped[1].every((t) => t.gapBefore === 0));
+  const x = setup();
+  const buttons = x.w.document.querySelectorAll("#source-poem button");
+  for (const i of [0, 2, 3]) buttons[i].click();
+  x.input("#export-collage", true, "change");
+  x.input("#export-handmade", false, "change");
+  const offsets = [];
+  for (const gap of [0, 24]) {
+    x.input("#collage-gap-value", String(gap));
+    await x.$("#export").onclick();
+    const calls = x.records.filter((r) => !r.canvas.id).at(-1).calls;
+    const pos = (ch) =>
+      calls.filter((c) => c[0] === "fillText" && c[1] === ch).at(-1)[2];
+    offsets.push([pos("新") - pos("空"), pos("雨") - pos("新")]);
+  }
+  assert(offsets[1][0] > offsets[0][0]);
+  assert.equal(offsets[1][1], offsets[0][1]);
   x.close();
 });

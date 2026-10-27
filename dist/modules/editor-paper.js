@@ -1,8 +1,8 @@
-import { paperCSS, paintPaperCrop } from "./paper-materials.js";
+import { paperCSS, paintPaperCrop } from "./paper-materials.js?v=20261027release3";
 import {
   paintPaperRect,
   handmadePlacement,
-} from "./image-drawing.js?v=20261027paper2";
+} from "./image-drawing.js?v=20261027release3";
 
 // Source occurrence and actual wrapped row both matter when joining paper pieces.
 export function groupPaperRects(items, sourceRows) {

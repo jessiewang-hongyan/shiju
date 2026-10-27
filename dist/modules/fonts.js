@@ -1,6 +1,7 @@
 export const songtiFamily =
   '"Songti SC","STSong","Noto Serif CJK SC","SimSun",serif';
 export const exportFonts = {
+  wenkai: { family: "LXGWWenKai", label: "霞鹜文楷", file: "wenkai.ttf" },
   kangxi: { family: "Kangxi", label: "康熙字典体", file: "kangxi.woff2" },
   chenyu: {
     family: "ShijuThinHand",

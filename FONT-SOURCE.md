@@ -68,3 +68,12 @@
 - 为遵守保留名称条款，分片衍生版对用户显示为“拾句细手写”，内部字体名 Shiju Thin Hand；说明文字注明来源，不表示原作者背书。
 - 40 个 WOFF2 分片，保留全部 10,137 个码位，最大片 174,024 字节。
 - 以繁体字为主，缺失字符回退宋体；仅选择时按当前作品用字加载。
+
+## 霞鹜文楷
+
+- 官方来源：https://github.com/lxgw/LxgwWenKai ，`fonts/TTF/LXGWWenKai-Regular.ttf`；1.530（2026-10-18）。
+- 原始字体保存在 `dist/fonts/wenkai.ttf`，版权及 OFL 1.1 全文见 `dist/fonts/LICENSE-wenkai.txt`。
+- 作者附加许可允许仅为网页加载进行格式转换和分片时保留名称；本项目分片只用于网页，不作为可安装桌面字体提供。原始 TTF 保持不变。
+- 184 个 WOFF2 分片，共 46,926 个码位，最大片 114,848 字节；按当前作品用字加载，同时最多三片。已检查“渔、间、漁、間”等简繁常用字。
+- 原始文件 SHA-256：`2d73eea94ad808999d90c0000c239a84a33b09d4bc6ab6c5b8bbf1eda8a7fc8b`。
+- 重新生成：`python3 scripts/split-fonts.py wenkai`。
