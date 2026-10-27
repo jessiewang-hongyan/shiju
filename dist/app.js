@@ -5,9 +5,9 @@ import { createEditor } from "./modules/editor.js";
 import { initCollection } from "./modules/collection.js";
 import { initLibrary } from "./modules/library.js";
 import { createTypography, initTypography } from "./modules/typography.js";
-import { createFontLoader } from "./modules/fonts.js?v=20261027l";
-import { createAppearance } from "./modules/appearance.js";
-import { createImage } from "./modules/image.js?v=20261027m";
+import { createFontLoader } from "./modules/fonts.js?v=20261027n";
+import { createAppearance } from "./modules/appearance.js?v=20261027n";
+import { createImage } from "./modules/image.js?v=20261027n";
 
 // Initialize services, then controllers; callbacks connect sibling modules.
 initUI();
@@ -21,6 +21,7 @@ let image;
 const appearance = createAppearance({
   drawImagePreview: () => image?.drawImagePreview(),
   updateFontPreview: () => image?.updateFontPreview(),
+  onSourceSizeChange: (size) => image?.setImageSize(size),
 });
 image = createImage({ editor, typography, fonts, appearance });
 initTypography({
@@ -33,5 +34,10 @@ initTypography({
 editor.render();
 appearance.init();
 try {
-  image.setImageSize(Number(localStorage.getItem("shiju-image-size")) || 23);
+  image.setImageSize(
+    Number(
+      localStorage.getItem("shiju-source-size") ??
+        localStorage.getItem("shiju-image-size"),
+    ) || 23,
+  );
 } catch {}

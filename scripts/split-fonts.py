@@ -14,7 +14,7 @@ def fast_compress(data, **kwargs):
     return _compress(data, **kwargs)
 brotli.compress=fast_compress
 ROOT=Path(__file__).resolve().parents[1]
-SOURCES={'kangxi':'kangxi.ttf','huiwen':'huiwen.woff2','bakudai':'bakudai.woff2'}
+SOURCES={'kangxi':'kangxi.ttf','huiwen':'huiwen.woff2','bakudai':'bakudai.woff2','chenyu':'chenyu.ttf'}
 def build(key):
     src=ROOT/'dist/fonts'/SOURCES[key]
     font=TTFont(src); cmap=font.getBestCmap(); counts=Counter()
@@ -25,9 +25,10 @@ def build(key):
     for index,start in enumerate(range(0,len(codes),256)):
         chars=codes[start:start+256]; part=TTFont(io.BytesIO(sfnt));options=subset.Options();options.flavor='woff2';options.layout_features=['*'];options.recalc_bounds=True
         worker=subset.Subsetter(options=options);worker.populate(unicodes=chars);worker.subset(part);part.flavor='woff2'
-        if key=='bakudai':
+        if key in ('bakudai','chenyu'):
             # OFL reserves Bakudai: name the modified subset family separately.
             names={1:'Shiju Brush',3:'ShijuBrush-Regular',4:'Shiju Brush Regular',6:'ShijuBrush-Regular',16:'Shiju Brush',17:'Regular'}
+            if key=='chenyu':names={1:'Shiju Thin Hand',3:'ShijuThinHand-Regular',4:'Shiju Thin Hand Regular',6:'ShijuThinHand-Regular',16:'Shiju Thin Hand',17:'Regular'}
             for record in part['name'].names:
                 if record.nameID in names:record.string=names[record.nameID].encode(record.getEncoding())
         name=f'{index:03}.woff2';part.save(out/name)

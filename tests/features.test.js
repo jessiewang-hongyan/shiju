@@ -96,6 +96,7 @@ function setup(draft) {
   const appearance = createAppearance({
     drawImagePreview: () => image?.drawImagePreview(),
     updateFontPreview: () => image?.updateFontPreview(),
+    onSourceSizeChange: (size) => image?.setImageSize(size),
   });
   image = createImage({ editor, typography, fonts, appearance });
   initTypography({ typography, onChange: editor.render });
@@ -243,6 +244,7 @@ test("appearance: separate night/export colors, size bounds, collage, roughness 
   assert($("#colors-dialog").open);
   input("#source-size-value", "5");
   assert.equal($("#source-size").value, "5");
+  assert.equal($("#image-size").value, "5");
   assert($("#source-size-minus").disabled);
   input("#source-size-value", "25");
   assert($("#source-size-plus").disabled);
@@ -254,6 +256,7 @@ test("appearance: separate night/export colors, size bounds, collage, roughness 
   input("#image-size", "25");
   $("#image-size-plus").click();
   assert.equal($("#image-size").value, "25");
+  assert.equal($("#source-size-value").value, "25");
   $("[data-preset=green]").click();
   input("#export-collage", true, "change");
   input("#export-rough", true, "change");
@@ -433,5 +436,25 @@ test("long source extends image; excessive length fails gracefully and restores 
   assert.equal(x.downloads.length, 1);
   assert.match(x.$("#toast").textContent, /作品太长/);
   assert(!x.$("#export").disabled);
+  x.close();
+});
+
+test("source size controls the actual exported font size in both poem sections", async () => {
+  const x = setup();
+  x.$("#source-poem button").click();
+  for (const size of [5, 14, 25]) {
+    x.input("#source-size-value", String(size));
+    await x.$("#export").onclick();
+    const output = x.records.filter((r) => !r.canvas.id).at(-1);
+    const glyphs = output.calls.filter(
+      (c) => c[0] === "fillText" && ["空", "山"].includes(c[1]),
+    );
+    assert(glyphs.length >= 2);
+    assert(
+      glyphs.every(
+        (c) => Math.abs(parseFloat(c.at(-1)) - (38 * size) / 23) < 1e-8,
+      ),
+    );
+  }
   x.close();
 });

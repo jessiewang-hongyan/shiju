@@ -1,5 +1,5 @@
 import { $, toast } from "./ui.js";
-import { exportFonts, songtiFamily } from "./fonts.js?v=20261027l";
+import { exportFonts, songtiFamily } from "./fonts.js?v=20261027n";
 import {
   wrapCells,
   paperRuns,
@@ -15,6 +15,8 @@ export function createImage({ editor, typography, fonts, appearance }) {
     const notes = {
       kangxi:
         "康熙字典体采用繁体、旧字形，部分简体字符也会显示为繁体字形。如需保持简体字形，请选择宋体。",
+      chenyu:
+        "源自辰宇落雁体 2.0，按 OFL 授权制作分片版。以繁体字为主，缺失字符使用宋体；细笔画建议使用较大字号。",
       bakudai:
         "莫大毛笔字体以繁体字为主，建议搭配繁体显示；缺失的字符使用宋体。",
     };
@@ -146,8 +148,10 @@ export function createImage({ editor, typography, fonts, appearance }) {
     if (!Number.isFinite(n) || n < 5 || n > 25) return;
     $("#image-size").value = n;
     $("#image-size-range").value = n;
+    appearance.setSourceSize(n);
     drawImagePreview();
     try {
+      localStorage.setItem("shiju-source-size", n);
       localStorage.setItem("shiju-image-size", n);
     } catch {}
   }

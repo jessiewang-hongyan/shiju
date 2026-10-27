@@ -15,7 +15,11 @@ export function mixColors(a, b, weight) {
       .join("")
   );
 }
-export function createAppearance({ drawImagePreview, updateFontPreview }) {
+export function createAppearance({
+  drawImagePreview,
+  updateFontPreview,
+  onSourceSizeChange = () => {},
+}) {
   function setSourceSize(value, save = false) {
     const size = Number(value);
     if (!Number.isInteger(size) || size < 5 || size > 25) return;
@@ -29,6 +33,7 @@ export function createAppearance({ drawImagePreview, updateFontPreview }) {
       try {
         localStorage.setItem("shiju-source-size", String(size));
       } catch {}
+    if (save) onSourceSizeChange(size);
   }
   setSourceSize(23);
   try {
@@ -198,7 +203,7 @@ export function createAppearance({ drawImagePreview, updateFontPreview }) {
     $("#background-hex").value = p.bg;
     $("#text-color").value = p.fg;
     $("#text-hex").value = p.fg;
-    $("#colors-mode").textContent = "仅用于导出图片，不改变页面或夜览配色。";
+    $("#colors-mode").textContent = "配色仅用于导出图片，不改变页面或夜览配色。";
     $("#background-hex").setCustomValidity("");
     $("#text-hex").setCustomValidity("");
     const sample = $("#export-color-sample"),
@@ -339,6 +344,7 @@ export function createAppearance({ drawImagePreview, updateFontPreview }) {
     return colors;
   }
   return {
+    setSourceSize,
     getExportColors,
     get exportCollage() {
       return exportCollage;

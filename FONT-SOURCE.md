@@ -59,3 +59,12 @@
 - 下载站 https://www.fonts.net.cn/font-34404687589.html 的通用说明另有限制嵌入用途，不能作为作者授权的替代。
 - 对 GitHub zispace/hanzi-fonts-ext 的 `Joker9-手书体/手书体.ttf` 临时副本检查：版权 JiaZhiyong 2017，无 name ID 13/14 许可文字或网址；OS/2 fsType=8 是技术嵌入标记，不能替代法律许可。该镜像文件未加入本项目。
 - 第三方站点声称 OFL，尚未找到作者的 OFL 原文，不能据此认定可公开分发。当前结论是授权范围未确认，而非认定禁止；需作者明确同意公开托管、网页加载及 WOFF2 分片。
+
+## 拾句细手写（源自辰宇落雁体）
+
+- 原作：Wang, Li-Yu 与 Liu, Wei-Chen；辰宇落雁体 2.0 Thin。
+- 官方来源：https://github.com/Chenyu-otf/chenyuluoyan_thin ，`ChenYuluoyan-2.0-Thin.ttf`。
+- 源文件 `dist/fonts/chenyu.ttf`；SIL OFL 1.1 版权及许可在 `dist/fonts/LICENSE-chenyu.txt`。
+- 为遵守保留名称条款，分片衍生版对用户显示为“拾句细手写”，内部字体名 Shiju Thin Hand；说明文字注明来源，不表示原作者背书。
+- 40 个 WOFF2 分片，保留全部 10,137 个码位，最大片 174,024 字节。
+- 以繁体字为主，缺失字符回退宋体；仅选择时按当前作品用字加载。
