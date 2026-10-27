@@ -81,19 +81,20 @@ function paperRuns(line, eligible, sourceRows) {
   return runs;
 }
 // Stable per-piece placement; cap corner rise so long cuts stay inside their row.
-export function handmadePlacement(id, width, height) {
+export function handmadePlacement(id, width, height, tilt = 50, drift = 50) {
   const seed = Math.imul(Number(id) + 1, 2654435761) >>> 0;
   const angle =
     (((seed % 997) / 996) * 2 - 1) *
-    Math.min(0.075, (height * 0.24) / Math.max(width, 1));
-  const dy = ((((seed >>> 10) % 991) / 990) * 2 - 1) * height * 0.12;
+    Math.min((0.075 * tilt) / 50, (height * 0.24) / Math.max(width, 1));
+  const dy =
+    (((((seed >>> 10) % 991) / 990) * 2 - 1) * height * 0.12 * drift) / 50;
   return { angle, dy };
 }
 export function paintCollageLine(
   ctx,
   line,
   sourceRows,
-  { x, y, step, inset, baseline, paper, ink, rough, handmade },
+  { x, y, step, inset, baseline, paper, ink, rough, handmade, tilt, drift },
 ) {
   const selected = (t) => Number.isInteger(t.id);
   for (const run of paperRuns(line, selected, sourceRows)) {
@@ -104,7 +105,7 @@ export function paintCollageLine(
     ctx.save();
     if (selected(first)) {
       if (handmade) {
-        const pose = handmadePlacement(first.id, width, height);
+        const pose = handmadePlacement(first.id, width, height, tilt, drift);
         ctx.translate(left + width / 2, y + height / 2 + pose.dy);
         ctx.rotate(pose.angle);
         ctx.translate(-left - width / 2, -y - height / 2);

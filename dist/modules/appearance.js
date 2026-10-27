@@ -82,6 +82,8 @@ export function createAppearance({
     exportCollage = false,
     exportRough = false,
     handmade = false,
+    handmadeTilt = 50,
+    handmadeDrift = 50,
     roughStrength = 35,
     collageGap = 0,
     collageBackground = "#ffffff";
@@ -91,6 +93,14 @@ export function createAppearance({
     const strength = Number(localStorage.getItem("shiju-rough-strength"));
     if (Number.isInteger(strength) && strength >= 1 && strength <= 100)
       roughStrength = strength;
+    for (const kind of ["tilt", "drift"]) {
+      const raw = localStorage.getItem("shiju-handmade-" + kind);
+      const n = Number(raw);
+      if (raw !== null && Number.isInteger(n) && n >= 0 && n <= 100) {
+        if (kind === "tilt") handmadeTilt = n;
+        else handmadeDrift = n;
+      }
+    }
     handmade = localStorage.getItem("shiju-handmade") === "true";
     exportRough = localStorage.getItem("shiju-export-rough") === "true";
     exportCollage = localStorage.getItem("shiju-export-collage") === "true";
@@ -117,6 +127,22 @@ export function createAppearance({
       localStorage.setItem("shiju-rough-strength", String(roughStrength));
     } catch {}
   };
+  for (const kind of ["tilt", "drift"]) {
+    const set = (e) => {
+      if (e.target.value === "") return;
+      const n = Number(e.target.value);
+      if (!Number.isInteger(n) || n < 0 || n > 100) return;
+      if (kind === "tilt") handmadeTilt = n;
+      else handmadeDrift = n;
+      syncColorControls();
+      try {
+        localStorage.setItem("shiju-handmade-" + kind, String(n));
+      } catch {}
+    };
+    $("#handmade-" + kind).oninput = set;
+    $("#handmade-" + kind + "-value").oninput = set;
+    $("#handmade-" + kind + "-value").onblur = syncColorControls;
+  }
   $("#export-handmade").onchange = (e) => {
     handmade = e.target.checked;
     syncColorControls();
@@ -252,6 +278,14 @@ export function createAppearance({
     const rough = exportCollage && exportRough ? roughStrength : 0;
     $("#export-rough").checked = exportRough;
     $("#export-handmade").checked = handmade;
+    $("#handmade-controls").hidden = !handmade;
+    for (const [kind, value] of [
+      ["tilt", handmadeTilt],
+      ["drift", handmadeDrift],
+    ]) {
+      $("#handmade-" + kind).value = value;
+      $("#handmade-" + kind + "-value").value = value;
+    }
     $("#rough-hole-preview").hidden = !rough;
     $("#rough-strength-controls").hidden = !rough;
     $("#collage-gap").value = collageGap;
@@ -382,6 +416,12 @@ export function createAppearance({
     },
     get exportRough() {
       return exportRough;
+    },
+    get handmadeTilt() {
+      return handmadeTilt;
+    },
+    get handmadeDrift() {
+      return handmadeDrift;
     },
     get handmade() {
       return handmade;

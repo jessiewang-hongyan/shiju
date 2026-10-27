@@ -16,6 +16,7 @@ import { createImage } from "../dist/modules/image.js";
 import { initUI } from "../dist/modules/ui.js";
 import { poems } from "../dist/modules/poems.js";
 import {
+  handmadePlacement,
   wrapCells,
   paperRuns,
   paperEdgePoints,
@@ -628,5 +629,29 @@ test("handmade collage rotates each connected piece once and persists the option
   assert.deepEqual(poses[0], poses[1]);
   assert.notEqual(poses[0][0], poses[0][1]);
   assert.equal(x.w.localStorage.getItem("shiju-handmade"), "false");
+  x.close();
+});
+
+test("handmade strengths control independent bounded per-piece amplitudes and persist", () => {
+  const zero = handmadePlacement(3, 40, 40, 0, 0);
+  assert.equal(Math.abs(zero.angle), 0);
+  assert.equal(Math.abs(zero.dy), 0);
+  for (let id = 0; id < 30; id++) {
+    const low = handmadePlacement(id, 40, 40, 25, 25);
+    const high = handmadePlacement(id, 40, 40, 50, 50);
+    assert(Math.abs(high.angle - low.angle * 2) < 1e-10);
+    assert(Math.abs(high.dy - low.dy * 2) < 1e-10);
+    const verticalOnly = handmadePlacement(id, 40, 40, 0, 100);
+    assert.equal(Math.abs(verticalOnly.angle), 0);
+    assert(Math.abs(verticalOnly.dy) <= 9.6);
+  }
+  const x = setup();
+  x.input("#handmade-tilt-value", "0");
+  x.input("#handmade-drift", "100");
+  assert.equal(x.appearance.handmadeTilt, 0);
+  assert.equal(x.appearance.handmadeDrift, 100);
+  assert.equal(x.$("#handmade-tilt").value, "0");
+  assert.equal(x.$("#handmade-drift-value").value, "100");
+  assert.equal(x.w.localStorage.getItem("shiju-handmade-drift"), "100");
   x.close();
 });

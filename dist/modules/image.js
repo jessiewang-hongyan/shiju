@@ -6,7 +6,7 @@ import {
   paperRuns,
   paintCenteredGlyph,
   paintPaperRect,
-} from "./image-drawing.js?v=20261027y";
+} from "./image-drawing.js?v=20261027z";
 export function createImage({ editor, typography, fonts, appearance }) {
   const { displayText, displayTokens } = typography;
   const { loadExportFont } = fonts;
@@ -128,8 +128,10 @@ export function createImage({ editor, typography, fonts, appearance }) {
     );
     const selected = (t) => Number.isInteger(t.id);
     const { vertical, sourceFirst } = layoutOptions();
+    const sectionHeight =
+      appearance.exportCollage && appearance.handmade ? 210 : 180;
     c.width = vertical ? 500 : 1000;
-    c.height = vertical ? 360 : 180;
+    c.height = vertical ? sectionHeight * 2 : sectionHeight;
     ctx.clearRect(0, 0, c.width, c.height);
     const sections = sourceFirst
       ? [
@@ -141,10 +143,10 @@ export function createImage({ editor, typography, fonts, appearance }) {
           ["原文", source, true],
         ];
     for (const [index, [label, lines, isSource]] of sections.entries()) {
-      const top = vertical ? index * 180 : 0;
+      const top = vertical ? index * sectionHeight : 0;
       const left = vertical ? 0 : index * 500;
       ctx.fillStyle = isSource ? colors["#f7f5ef"] : colors.poemBackground;
-      ctx.fillRect(left, top, 500, 180);
+      ctx.fillRect(left, top, 500, sectionHeight);
       ctx.fillStyle = colors["#343b31"];
       ctx.font = "12px sans-serif";
       ctx.fillText(label, left + 20, top + 23);
@@ -159,7 +161,10 @@ export function createImage({ editor, typography, fonts, appearance }) {
       }
       ctx.font = px + "px " + family;
       lines.slice(0, 2).forEach((line, row) => {
-        const y = top + 48 + row * 58;
+        const y =
+          top +
+          48 +
+          row * (appearance.exportCollage && appearance.handmade ? 76 : 58);
         if (!isSource && appearance.exportCollage) {
           paintCollageLine(ctx, line, sourceRows, {
             x: left + 18,
@@ -171,6 +176,8 @@ export function createImage({ editor, typography, fonts, appearance }) {
             ink: colors["#343b31"],
             rough,
             handmade: appearance.handmade,
+            tilt: appearance.handmadeTilt,
+            drift: appearance.handmadeDrift,
           });
           return;
         }
@@ -250,7 +257,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
     const scale = Number($("#image-size").value) / 23,
       bodySize = 38 * scale,
       advance = 46 * scale,
-      lineHeight = 64 * scale;
+      lineHeight = (collage && appearance.handmade ? 80 : 64) * scale;
     const button = $("#export");
     const fontKey = $("#export-font").value,
       font = exportFonts[fontKey];
@@ -412,6 +419,8 @@ export function createImage({ editor, typography, fonts, appearance }) {
               ink: colors["#343b31"],
               rough,
               handmade: appearance.handmade,
+              tilt: appearance.handmadeTilt,
+              drift: appearance.handmadeDrift,
             });
             return;
           }

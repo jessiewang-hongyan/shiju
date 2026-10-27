@@ -15,7 +15,7 @@
           document.documentElement.dataset.theme = "dark";
       } catch {}
     </script>
-    <link rel="stylesheet" href="style.css?v=20261027x" />
+    <link rel="stylesheet" href="style.css?v=20261027z" />
   </head>
   <body>
     <header>
@@ -437,6 +437,50 @@
         <p class="dialog-note">
           纸片轻微倾斜、上下错落，连字保持整块。同步到编辑页，原文空缺保持原位。
         </p>
+        <div id="handmade-controls" hidden>
+          <div class="color-row handmade-row">
+            <label for="handmade-tilt">倾斜程度</label
+            ><input
+              id="handmade-tilt"
+              type="range"
+              min="0"
+              max="100"
+              step="1"
+              value="50"
+            /><input
+              id="handmade-tilt-value"
+              aria-label="倾斜程度最大强度"
+              type="number"
+              min="0"
+              max="100"
+              step="1"
+              value="50"
+            />
+          </div>
+          <div class="color-row handmade-row">
+            <label for="handmade-drift">上下起伏</label
+            ><input
+              id="handmade-drift"
+              type="range"
+              min="0"
+              max="100"
+              step="1"
+              value="50"
+            /><input
+              id="handmade-drift-value"
+              aria-label="上下起伏最大强度"
+              type="number"
+              min="0"
+              max="100"
+              step="1"
+              value="50"
+            />
+          </div>
+          <p class="dialog-note">
+            0–100 控制最大幅度，各纸片在正负范围内均匀取值，位置固定。0
+            为关闭该项；长纸片的倾角会适当限制。
+          </p>
+        </div>
         <div class="color-row">
           <label for="collage-gap">拼贴间隔</label
           ><input
@@ -552,6 +596,6 @@
       ><button id="move-right" aria-label="向后移动">→</button>
     </div>
     <div id="toast" role="status"></div>
-    <script type="module" src="app.js?v=20261027y"></script>
+    <script type="module" src="app.js?v=20261027z"></script>
   </body>
 </html>

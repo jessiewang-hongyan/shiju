@@ -1,7 +1,7 @@
 import {
   paintPaperRect,
   handmadePlacement,
-} from "./image-drawing.js?v=20261027y";
+} from "./image-drawing.js?v=20261027z";
 
 // Source occurrence and actual wrapped row both matter when joining paper pieces.
 export function groupPaperRects(items, sourceRows) {
@@ -40,8 +40,10 @@ export function initEditorPaper({ appearance }) {
   }
   function draw() {
     const enabled = appearance.exportCollage;
+    roots[1].style.lineHeight = enabled && appearance.handmade ? "2.5" : "";
     const poemTokens = [...roots[1].querySelectorAll(".poem-token")];
     poemTokens.forEach((el) => {
+      el.style.lineHeight = enabled && appearance.handmade ? "1.8" : "";
       el.style.transform = "";
       el.style.transformOrigin = "";
     });
@@ -117,7 +119,13 @@ export function initEditorPaper({ appearance }) {
           rough,
         );
         if (index === 1 && appearance.handmade) {
-          const pose = handmadePlacement(run.id, run.width - 2, run.height - 8);
+          const pose = handmadePlacement(
+            run.id,
+            run.width - 2,
+            run.height - 8,
+            appearance.handmadeTilt,
+            appearance.handmadeDrift,
+          );
           const transform = `translateY(${pose.dy}px) rotate(${pose.angle}rad)`;
           canvas.style.transform = transform;
           for (const el of poemTokens) {
