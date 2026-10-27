@@ -2,6 +2,11 @@ export const songtiFamily =
   '"Songti SC","STSong","Noto Serif CJK SC","SimSun",serif';
 export const exportFonts = {
   kangxi: { family: "Kangxi", label: "康熙字典体", file: "kangxi.woff2" },
+  bakudai: {
+    family: "ShijuBrush",
+    label: "莫大毛笔字体",
+    file: "bakudai.woff2",
+  },
   huiwen: { family: "Huiwen", label: "汇文明朝体", file: "huiwen.woff2" },
 };
 export function createFontLoader({ getState, typography }) {

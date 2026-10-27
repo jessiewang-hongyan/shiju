@@ -19,8 +19,8 @@ test("all eight bundled collections preserve every poem, order and metadata acro
     );
   }
 });
-test("both font manifests reference present WOFF2 shards and unique code points", () => {
-  for (const key of ["kangxi", "huiwen"]) {
+test("all font manifests reference present WOFF2 shards and unique code points", () => {
+  for (const key of ["kangxi", "huiwen", "bakudai"]) {
     const manifest = JSON.parse(
       readFileSync("dist/fonts/" + key + "/manifest.json"),
     );
@@ -34,6 +34,9 @@ test("both font manifests reference present WOFF2 shards and unique code points"
         codes.add(code);
       }
     }
-    assert.equal(codes.size, key === "kangxi" ? 25375 : 14070);
+    assert.equal(
+      codes.size,
+      { kangxi: 25375, huiwen: 14070, bakudai: 24495 }[key],
+    );
   }
 });

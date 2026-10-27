@@ -25,6 +25,8 @@ python3 scripts/split-collections.py
 python3 scripts/compress-font.py
 # 重新生成全部字体分片（耗时较长）
 python3 scripts/split-fonts.py
+# 只生成指定字体
+python3 scripts/split-fonts.py bakudai
 ```
 
 分片按本地文集字频排列，每片最多 256 个码位；生成时检查 cmap 覆盖一致。正文、标题、署名及固定导出文案都参与所需字判断。

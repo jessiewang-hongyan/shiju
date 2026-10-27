@@ -41,3 +41,21 @@
 - 预览与导出共享缓存；加载失败可点击提示重试；缺字继续回退系统宋体。
 - 生成脚本逐片核对 cmap，并检查所有分片合并后与原字库一致。
 - 《山居秋暝》及导出固定文案：康熙约 2.46 MB、汇文约 1.41 MB（不含小型 manifest），实际体积取决于作品用字。
+
+## 莫大毛笔字体
+
+- 上游：https://github.com/max32002/bakudaifont ，`webfont/Bakudai-Regular.woff2`。
+- 字体内版本为 1.46；完整源文件保留在 `dist/fonts/bakudai.woff2`。
+- SIL OFL 1.1，版权与完整许可见 `dist/fonts/LICENSE-bakudai.txt`。
+- 分片属于修改版本，为遵守 Reserved Font Name 条款，内部字体名改为 Shiju Brush；界面以“莫大毛笔字体”说明来源。
+- 96 片，覆盖源文件全部 24,495 个码位，最大片 139,104 字节；按需加载，不随页面启动加载。
+- 以繁体字为主，缺少部分简体字，缺字回退系统宋体，不自动转换文字。
+
+## 手书体授权调查（2026-10-27，暂未接入）
+
+- 作者贾智勇（Joker9）原发布：https://www.zcool.com.cn/work/ZMjI2MDk1MDg=.html
+- 作者素材页：https://www.zcool.com.cn/assets/7336575706190862041.html
+- 作者明确免费商用，列举 slogan、banner、海报、商标。已查阅声明没有明确网页字体分发、修改或分片条款。
+- 下载站 https://www.fonts.net.cn/font-34404687589.html 的通用说明另有限制嵌入用途，不能作为作者授权的替代。
+- 对 GitHub zispace/hanzi-fonts-ext 的 `Joker9-手书体/手书体.ttf` 临时副本检查：版权 JiaZhiyong 2017，无 name ID 13/14 许可文字或网址；OS/2 fsType=8 是技术嵌入标记，不能替代法律许可。该镜像文件未加入本项目。
+- 第三方站点声称 OFL，尚未找到作者的 OFL 原文，不能据此认定可公开分发。当前结论是授权范围未确认，而非认定禁止；需作者明确同意公开托管、网页加载及 WOFF2 分片。

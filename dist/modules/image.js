@@ -1,5 +1,5 @@
 import { $, toast } from "./ui.js";
-import { exportFonts, songtiFamily } from "./fonts.js";
+import { exportFonts, songtiFamily } from "./fonts.js?v=20261027l";
 import { mixColors } from "./appearance.js";
 import {
   wrapCells,
@@ -12,7 +12,15 @@ export function createImage({ editor, typography, fonts, appearance }) {
   const { loadExportFont } = fonts;
   const { getExportColors } = appearance;
   function syncFontNote() {
-    $("#font-note").hidden = $("#export-font").value !== "kangxi";
+    const key = $("#export-font").value;
+    const notes = {
+      kangxi:
+        "康熙字典体采用繁体、旧字形，部分简体字符也会显示为繁体字形。如需保持简体字形，请选择宋体。",
+      bakudai:
+        "莫大毛笔字体以繁体字为主，建议搭配繁体显示；缺失的字符使用宋体。",
+    };
+    $("#font-note").textContent = notes[key] || "";
+    $("#font-note").hidden = !notes[key];
   }
   $("#export-font").onchange = () => {
     syncFontNote();

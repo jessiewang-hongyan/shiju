@@ -12,7 +12,7 @@ for (const file of files) {
   execFileSync(process.execPath, ["--check", file]);
   const imports = [
     ...readFileSync(file, "utf8").matchAll(/from\s+["']([^"']+)["']/g),
-  ].map((m) => resolve(dirname(file), m[1]));
+  ].map((m) => resolve(dirname(file), m[1].split(/[?#]/)[0]));
   for (const path of imports)
     if (!existsSync(path))
       throw new Error(`Missing import: ${file} -> ${path}`);
