@@ -22,13 +22,29 @@ export function createImage({ editor, typography, fonts, appearance }) {
     };
     $("#font-note").textContent = notes[key] || "";
     $("#font-note").hidden = !notes[key];
+    $("#font-traditional-hint").hidden =
+      !["chenyu", "bakudai"].includes(key) || typography.mode === "traditional";
   }
   $("#export-font").onchange = () => {
     syncFontNote();
     updateFontPreview();
   };
+  $("#font-to-traditional").onclick = async () => {
+    const button = $("#font-to-traditional"),
+      control = $("#script-mode");
+    button.disabled = true;
+    try {
+      control.value = "traditional";
+      await control.onchange();
+      syncFontNote();
+      await updateFontPreview();
+    } finally {
+      button.disabled = false;
+    }
+  };
   let fontPreviewVersion = 0;
   async function updateFontPreview() {
+    syncFontNote();
     const version = ++fontPreviewVersion,
       key = $("#export-font").value,
       status = $("#font-preview-status");

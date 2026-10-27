@@ -458,3 +458,36 @@ test("source size controls the actual exported font size in both poem sections",
   }
   x.close();
 });
+
+test("traditional font hint is optional and converts through the existing script control", async () => {
+  const x = setup();
+  x.w.eval(readFileSync("dist/vendor/opencc/opencc.js", "utf8"));
+  globalThis.OpenCC = x.w.OpenCC;
+  // Use an empty manifest to isolate the prompt from font network requests.
+  const oldFetch = globalThis.fetch,
+    oldFontFace = globalThis.FontFace;
+  globalThis.fetch = async () => ({ ok: true, json: async () => [] });
+  globalThis.FontFace = class {};
+  document.fonts = { load: async () => [] };
+  try {
+    for (const key of ["chenyu", "bakudai"]) {
+      x.input("#export-font", key, "change");
+      assert.equal(x.$("#font-traditional-hint").hidden, false);
+      assert.equal(x.typography.mode, "original");
+    }
+    const pending = x.$("#font-to-traditional").onclick();
+    document.querySelector('script[src="vendor/opencc/opencc.js"]').onload();
+    await pending;
+    assert.equal(x.typography.mode, "traditional");
+    assert.equal(x.$("#script-mode").value, "traditional");
+    assert.equal(x.$("#font-traditional-hint").hidden, true);
+    assert.equal(x.typography.displayText("渔间"), "漁間");
+    await x.typography.setMode("original");
+    x.input("#export-font", "songti", "change");
+    assert.equal(x.$("#font-traditional-hint").hidden, true);
+  } finally {
+    globalThis.fetch = oldFetch;
+    globalThis.FontFace = oldFontFace;
+    x.close();
+  }
+});
