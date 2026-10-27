@@ -34,7 +34,7 @@ test("editor paper joins only consecutive source occurrences on the same source 
 
 test("editor paper follows settings, redraws after returns, and leaves interactive text intact", async () => {
   const dom = new JSDOM(
-    '<div id="source-poem"><button class="char picked" data-source-id="0">明</button><button class="char picked" data-source-id="1">月</button></div><div id="new-poem"><span class="poem-token" data-source-id="0">明</span><span class="poem-token" data-source-id="1">月</span></div>',
+    '<div id="source-sheet"><div id="source-poem"><button class="char picked" data-source-id="0">明</button><button class="char picked" data-source-id="1">月</button></div></div><div id="new-poem"><span class="poem-token" data-source-id="0">明</span><span class="poem-token" data-source-id="1">月</span></div>',
   );
   const w = dom.window;
   globalThis.document = w.document;
@@ -55,10 +55,10 @@ test("editor paper follows settings, redraws after returns, and leaves interacti
         set: () => true,
       },
     );
-  const roots = [...w.document.querySelectorAll("#source-poem, #new-poem")];
+  const roots = [...w.document.querySelectorAll("#source-sheet, #new-poem")];
   for (const root of roots) {
     root.getBoundingClientRect = () => ({ left: 0, top: 0 });
-    [...root.children].forEach((el, i) => {
+    [...root.querySelectorAll("[data-source-id]")].forEach((el, i) => {
       el.getBoundingClientRect = () => ({
         left: i * 20,
         top: 0,

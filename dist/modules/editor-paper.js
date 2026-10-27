@@ -1,4 +1,7 @@
-import { paperCSS, paintPaperCrop } from "./paper-materials.js?v=20261027release3";
+import {
+  paperCSS,
+  paintPaperCrop,
+} from "./paper-materials.js?v=20261027release3";
 import {
   paintPaperRect,
   handmadePlacement,
@@ -26,7 +29,7 @@ export function groupPaperRects(items, sourceRows) {
 
 export function initEditorPaper({ appearance }) {
   const roots = [
-    document.querySelector("#source-poem"),
+    document.querySelector("#source-sheet"),
     document.querySelector("#new-poem"),
   ];
   let queued = false,
@@ -208,7 +211,10 @@ export function initEditorPaper({ appearance }) {
     }
   }
   const mutations = new window.MutationObserver(refresh);
-  roots.forEach((root) => mutations.observe(root, { childList: true }));
+  [
+    roots[1],
+    ...roots[0].querySelectorAll("#source-title, #source-author, #source-poem"),
+  ].forEach((root) => mutations.observe(root, { childList: true }));
   // Theme changes update colors; source size changes update measured paper geometry.
   mutations.observe(document.documentElement, {
     attributes: true,

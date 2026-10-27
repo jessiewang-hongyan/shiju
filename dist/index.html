@@ -15,7 +15,7 @@
           document.documentElement.dataset.theme = "dark";
       } catch {}
     </script>
-    <link rel="stylesheet" href="style.css?v=20261027singlegap1" />
+    <link rel="stylesheet" href="style.css?v=20261027metadata1" />
   </head>
   <body>
     <header>
@@ -136,17 +136,20 @@
               重置
             </button>
           </div>
-          <div class="source-heading">
-            <h2 id="source-title"></h2>
-            <p id="source-author"></p>
+          <div id="source-sheet">
+            <div class="source-heading">
+              <h2 id="source-title"></h2>
+              <p id="source-author"></p>
+            </div>
+            <div
+              id="source-poem"
+              class="source-poem"
+              aria-label="点击原诗中的字以摘取"
+            ></div>
           </div>
-          <div
-            id="source-poem"
-            class="source-poem"
-            aria-label="点击原诗中的字以摘取"
-          ></div>
           <div class="source-foot">
-            <span>点击选字，点击空缺归还</span><span id="source-count"></span>
+            <span>标题、作者、正文均可选字，点击空缺归还</span
+            ><span id="source-count"></span>
           </div>
         </article>
       </section>
@@ -678,6 +681,6 @@
       ><button id="move-right" aria-label="向后移动">→</button>
     </div>
     <div id="toast" role="status"></div>
-    <script type="module" src="app.js?v=20261027singlegap1"></script>
+    <script type="module" src="app.js?v=20261027metadata1"></script>
   </body>
 </html>

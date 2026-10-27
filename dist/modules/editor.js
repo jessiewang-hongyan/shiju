@@ -1,3 +1,4 @@
+import { sourceParts } from "./source-parts.js";
 import { $, toast } from "./ui.js";
 export const isLetter = (c) => /[\p{L}\p{N}]/u.test(c);
 export function createEditor({ store, typography }) {
@@ -31,52 +32,62 @@ export function createEditor({ store, typography }) {
     return model.state.tokens.filter((t) => t.id !== null).length;
   }
   function render() {
-    $("#source-title").textContent = displayText(model.state.source.title);
-    $("#source-author").textContent = displayText(model.state.source.author);
     $("#poem-title").value = displayText(model.state.title);
     $("#signature").value = displayText(model.state.signature);
     const used = new Set(
       model.state.tokens.filter((t) => t.id !== null).map((t) => t.id),
     );
-    const root = $("#source-poem");
-    root.replaceChildren();
-    let line = document.createElement("div");
-    line.className = "source-line";
-    root.append(line);
-    Array.from(displayText(model.state.source.text)).forEach((c, id) => {
-      if (c === "\n") {
-        line = document.createElement("div");
-        line.className = "source-line";
-        root.append(line);
-        return;
-      }
-      if (!isLetter(c)) {
-        const el = document.createElement("span");
-        el.className = "source-punctuation";
-        el.textContent = c;
-        line.append(el);
-        return;
-      }
-      const b = document.createElement("button");
-      b.className = "char" + (used.has(id) ? " picked" : "");
-      b.textContent = c;
-      b.dataset.sourceId = String(id);
-      b.setAttribute("aria-label", used.has(id) ? "归还：" + c : "摘取：" + c);
-      b.title = used.has(id) ? "点击归还“" + c + "”" : "点击摘取“" + c + "”";
-      b.onclick = () => {
-        const index = model.state.tokens.findIndex((t) => t.id === id);
-        if (index >= 0) removeToken(index);
-        else
-          mutate(() =>
-            model.state.tokens.push({
-              c: Array.from(model.state.source.text)[id],
-              id,
-            }),
-          );
-      };
-      line.append(b);
-    });
-    const total = Array.from(model.state.source.text).filter(isLetter).length;
+    const parts = sourceParts(model.state.source);
+    for (const part of parts) {
+      const root = $(
+        part.key === "text" ? "#source-poem" : "#source-" + part.key,
+      );
+      root.replaceChildren();
+      let line = document.createElement("div");
+      line.className = "source-line";
+      root.append(line);
+      Array.from(displayText(part.text)).forEach((c, index) => {
+        const id = part.start + index;
+        if (c === "\n") {
+          line = document.createElement("div");
+          line.className = "source-line";
+          root.append(line);
+          return;
+        }
+        if (!isLetter(c)) {
+          const el = document.createElement("span");
+          el.className = "source-punctuation";
+          el.textContent = c;
+          line.append(el);
+          return;
+        }
+        const b = document.createElement("button");
+        b.className = "char" + (used.has(id) ? " picked" : "");
+        b.textContent = c;
+        b.dataset.sourceId = String(id);
+        b.setAttribute(
+          "aria-label",
+          used.has(id) ? "归还：" + c : "摘取：" + c,
+        );
+        b.title = used.has(id) ? "点击归还“" + c + "”" : "点击摘取“" + c + "”";
+        b.onclick = () => {
+          const tokenIndex = model.state.tokens.findIndex((t) => t.id === id);
+          if (tokenIndex >= 0) removeToken(tokenIndex);
+          else
+            mutate(() =>
+              model.state.tokens.push({
+                c: Array.from(part.text)[index],
+                id,
+              }),
+            );
+        };
+        line.append(b);
+      });
+    }
+    const total = parts.reduce(
+      (sum, part) => sum + Array.from(part.text).filter(isLetter).length,
+      0,
+    );
     $("#source-count").textContent = `${used.size} / ${total} 字已选`;
     $("#picked-count").textContent = `已选 ${used.size} 字`;
     $("#empty-hint").hidden = model.state.tokens.length > 0;

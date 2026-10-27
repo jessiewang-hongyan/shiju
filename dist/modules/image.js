@@ -1,3 +1,4 @@
+import { sourceParts, partCells } from "./source-parts.js";
 import {
   paintPaperField,
   paintPaperCrop,
@@ -189,13 +190,15 @@ export function createImage({ editor, typography, fonts, appearance }) {
         .filter((t) => Number.isInteger(t.id))
         .map((t) => t.id),
     );
-    const source = wrapCells(
-      Array.from(displayText(editor.state.source.text)).map((ch, id) => ({
-        c: ch,
-        id,
-        hole: used.has(id),
-      })),
-      maxUnits,
+    const parts = sourceParts(editor.state.source);
+    // When metadata is used, show its holes before the body (still at most two rows).
+    const previewParts = parts.filter(
+      (part) =>
+        part.key === "text" ||
+        partCells(part, displayText, used).some((t) => t.hole),
+    );
+    const source = previewParts.flatMap((part) =>
+      wrapCells(partCells(part, displayText, used), maxUnits),
     );
     const sourceRows = new Map();
     source.forEach((line, row) =>
@@ -461,6 +464,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
       let source,
         result,
         sourceTitle,
+        sourceAuthor,
         newTitle,
         sourceOffset,
         newOffset,
@@ -481,6 +485,9 @@ export function createImage({ editor, typography, fonts, appearance }) {
         lines.push(line);
         return lines;
       }
+      const parts = sourceParts(editor.state.source);
+      const metadataPositions = new Map(),
+        metadataRows = new Map();
       // Grow the page at a fixed aspect ratio and reflow; never shrink the chosen font.
       while (true) {
         height = Math.round(width * (portrait ? 4 / 3 : 3 / 4));
@@ -496,17 +503,31 @@ export function createImage({ editor, typography, fonts, appearance }) {
           })),
           Math.max(1, Math.floor(textWidth / advance)),
         );
+        sourceTitle = wrapCells(
+          partCells(parts[0], displayText, used),
+          Math.max(1, Math.floor(textWidth / 34)),
+        );
+        sourceAuthor = wrapCells(
+          partCells(parts[1], displayText, used),
+          Math.max(1, Math.floor(textWidth / 19)),
+        );
         const rows = new Map();
-        source.forEach((line, row) => line.forEach((t) => rows.set(t.id, row)));
+        [...sourceTitle, ...sourceAuthor, ...source].forEach((line, row) =>
+          line.forEach((t) => rows.set(t.id, row)),
+        );
         result = wrapCells(
           displayTokens(editor.state.tokens),
           Math.max(1, Math.floor(textWidth / advance)),
           collage ? ((appearance.collageGap || 0) * scale) / advance : 0,
           rows,
         );
-        sourceTitle = titleLines(displayText(editor.state.source.title), 30);
         newTitle = titleLines(displayText(editor.state.title.trim()), 46);
-        sourceOffset = panelPadding + 20 + sourceTitle.length * 40 + 53;
+        sourceOffset =
+          panelPadding +
+          20 +
+          sourceTitle.length * 40 +
+          sourceAuthor.length * 26 +
+          27;
         newOffset = newTitle.length
           ? panelPadding + 20 + newTitle.length * 56 + 24
           : panelPadding + advance + 10;
@@ -598,20 +619,67 @@ export function createImage({ editor, typography, fonts, appearance }) {
           width: panelWidth,
           height: newPanelHeight,
         });
-      ctx.fillStyle = colors["#343b31"];
-      ctx.font = "30px " + fontFamily;
-      if (showSource)
-        sourceTitle.forEach((line, i) =>
-          ctx.fillText(line, sourceX, sourceTop + panelPadding + 30 + i * 40),
-        );
-      ctx.font = "15px sans-serif";
-      ctx.fillStyle = colors["#929985"];
-      if (showSource)
-        ctx.fillText(
-          displayText(editor.state.source.author),
-          sourceX,
-          sourceTop + panelPadding + 30 + sourceTitle.length * 40,
-        );
+      function paintMetadata(lines, size, step, startY, lineStep, section) {
+        ctx.font = size + "px " + fontFamily;
+        lines.forEach((line, row) => {
+          const y = startY + row * lineStep;
+          let offset = 0;
+          for (const t of line) {
+            metadataRows.set(t.id, section + ":" + row);
+            metadataPositions.set(t.id, {
+              x: sourceX + offset * step + 2,
+              y: y - size * 0.87,
+              width: step * t.w - 4,
+              height: step - 4,
+            });
+            offset += t.w;
+          }
+          if (!showSource) return;
+          if (!line.some((t) => t.hole)) {
+            ctx.fillStyle = colors["#343b31"];
+            ctx.fillText(line.map((t) => t.c).join(""), sourceX, y);
+            return;
+          }
+          for (const run of paperRuns(line, (t) => t.hole, metadataRows)) {
+            const t = run.tokens[0],
+              x = sourceX + run.offset * step;
+            if (t.hole) {
+              ctx.fillStyle =
+                appearance.sourcePaper !== "none"
+                  ? colors.poemBackground
+                  : colors["#edf0e4"];
+              paintPaperRect(
+                ctx,
+                x + 2,
+                y - size * 0.87,
+                step * run.width - 4,
+                step - 4,
+                t.id,
+                rough,
+              );
+            } else {
+              ctx.fillStyle = colors["#343b31"];
+              ctx.fillText(t.c, x, y);
+            }
+          }
+        });
+      }
+      paintMetadata(
+        sourceTitle,
+        30,
+        34,
+        sourceTop + panelPadding + 30,
+        40,
+        "title",
+      );
+      paintMetadata(
+        sourceAuthor,
+        15,
+        19,
+        sourceTop + panelPadding + 30 + sourceTitle.length * 40,
+        26,
+        "author",
+      );
       ctx.fillStyle = colors["#343b31"];
       ctx.font = "46px " + fontFamily;
       if (showPoem)
@@ -623,11 +691,11 @@ export function createImage({ editor, typography, fonts, appearance }) {
       paintBody(ctx, source, result, sourceStart, newStart, height);
       download(canvas);
       function paintBody(ctx, source, result, sourceStart, newStart, h) {
-        const sourceRows = new Map();
+        const sourceRows = new Map(metadataRows);
         source.forEach((line, row) =>
           line.forEach((t) => sourceRows.set(t.id, row)),
         );
-        const sourcePositions = new Map();
+        const sourcePositions = new Map(metadataPositions);
         source.forEach((line, row) => {
           let offset = 0;
           line.forEach((t) => {
@@ -700,8 +768,13 @@ export function createImage({ editor, typography, fonts, appearance }) {
                             sourceBox,
                             {
                               ...point,
-                              width: target.width,
-                              height: target.height,
+                              width: point.width
+                                ? sourcePositions.get(run.tokens.at(-1).id).x +
+                                  sourcePositions.get(run.tokens.at(-1).id)
+                                    .width -
+                                  point.x
+                                : target.width,
+                              height: point.height || target.height,
                             },
                             target,
                           );

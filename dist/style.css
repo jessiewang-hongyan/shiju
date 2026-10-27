@@ -2069,13 +2069,13 @@ html[data-night-colors] textarea::placeholder {
   margin: 0;
 }
 
-#source-poem .char.picked:hover,
-#source-poem .char.picked:focus-visible {
+#source-sheet .char.picked:hover,
+#source-sheet .char.picked:focus-visible {
   color: transparent !important;
   cursor: pointer;
 }
-#source-poem .char.picked:hover:after,
-#source-poem .char.picked:focus-visible:after {
+#source-sheet .char.picked:hover:after,
+#source-sheet .char.picked:focus-visible:after {
   border-style: solid;
   box-shadow: 0 0 0 1px var(--muted);
 }
@@ -2130,7 +2130,7 @@ html[data-theme="dark"] #font-to-traditional:hover:not(:disabled) {
   pointer-events: none;
   z-index: -1;
 }
-#source-poem.editor-collage .char.picked:after {
+#source-sheet.editor-collage .char.picked:after {
   display: none;
 }
 #new-poem.editor-collage .poem-token[data-source-id] {
@@ -2162,12 +2162,12 @@ html[data-theme="dark"] #font-to-traditional:hover:not(:disabled) {
 }
 
 /* Paper fields use the export ink so night chrome does not wash out the artwork. */
-#source-poem.editor-textured .char,
-#source-poem.editor-textured .source-punctuation,
+#source-sheet.editor-textured .char,
+#source-sheet.editor-textured .source-punctuation,
 #new-poem.editor-textured .poem-token {
   color: inherit;
 }
-#source-poem.editor-textured .char:not(.picked) {
+#source-sheet.editor-textured .char:not(.picked) {
   background: transparent;
 }
 .color-row select#source-paper,
@@ -2182,10 +2182,10 @@ html[data-theme="dark"] #font-to-traditional:hover:not(:disabled) {
   max-width: 100%;
 }
 
-html[data-night-colors] #source-poem.editor-textured,
+html[data-night-colors] #source-sheet.editor-textured,
 html[data-night-colors] #new-poem.editor-textured,
-html[data-night-colors] #source-poem.editor-textured .char:not(.picked),
-html[data-night-colors] #source-poem.editor-textured .source-punctuation,
+html[data-night-colors] #source-sheet.editor-textured .char:not(.picked),
+html[data-night-colors] #source-sheet.editor-textured .source-punctuation,
 html[data-night-colors] #new-poem.editor-textured .poem-token {
   color: var(--paper-ink) !important;
 }
@@ -2213,4 +2213,33 @@ html[data-night-colors] #new-poem.editor-textured .poem-token {
 
 #image-panel-gap-row[hidden] {
   display: none;
+}
+
+#source-sheet {
+  position: relative;
+  isolation: isolate;
+}
+#source-title .char,
+#source-author .char {
+  font: inherit;
+  width: 1.45em;
+  height: 1.9em;
+  color: inherit;
+}
+#source-title .char.picked,
+#source-author .char.picked {
+  color: transparent !important;
+}
+#source-title .char.picked:after,
+#source-author .char.picked:after {
+  position: absolute;
+  width: 1em;
+  height: 1.2em;
+}
+#source-title .source-punctuation,
+#source-author .source-punctuation {
+  font: inherit;
+}
+#source-sheet.editor-textured .source-heading {
+  color: inherit;
 }

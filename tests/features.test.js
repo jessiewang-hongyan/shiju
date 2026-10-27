@@ -934,3 +934,74 @@ test("module padding and gap control actual export geometry and persist", async 
   assert.equal(x.$("#image-panel-gap-value").value, "40");
   x.close();
 });
+
+test("title and author picks keep occurrence IDs, return independently, undo and survive reload", () => {
+  let x = setup();
+  x.$("#source-title button").click();
+  x.$('#source-author button[aria-label="摘取：王"]').click();
+  x.$('#source-poem button[aria-label="摘取：山"]').click();
+  assert.equal(x.editor.textOf(), "山王山");
+  assert.equal(new Set(x.editor.state.tokens.map((t) => t.id)).size, 3);
+  assert.equal(x.editor.state.tokens[2].id, 1); // Existing body IDs stay unchanged.
+  const saved = JSON.parse(x.w.localStorage.getItem("shiju-draft"));
+  x.close();
+  x = setup(saved);
+  assert.equal(
+    x.$("#source-title button").getAttribute("aria-label"),
+    "归还：山",
+  );
+  x.$("#source-title button").click();
+  assert.equal(x.editor.textOf(), "王山");
+  assert(x.$('#source-poem button[aria-label="归还：山"]'));
+  x.$("#undo").click();
+  assert.equal(x.editor.textOf(), "山王山");
+  x.$('#source-author button[aria-label="归还：王"]').click();
+  assert.equal(x.editor.textOf(), "山山");
+  x.close();
+});
+
+test("metadata holes export with body picks and remain available for single-poem paper crops", async () => {
+  const x = setup();
+  x.$("#source-title button").click();
+  x.$('#source-title button[aria-label="摘取：居"]').click();
+  x.$('#source-author button[aria-label="摘取：维"]').click();
+  x.input("#export-collage", true, "change");
+  x.input("#export-rough", true, "change");
+  x.w.HTMLCanvasElement.prototype.toDataURL = () =>
+    "data:image/png;base64,test";
+  x.$("#source-paper").value = "gold";
+  await x.$("#source-paper").onchange({ target: x.$("#source-paper") });
+  for (const layout of [
+    "source-left",
+    "source-right",
+    "source-top",
+    "source-bottom",
+    "source-only",
+    "poem-only",
+  ]) {
+    x.input(
+      "#image-orientation",
+      layout.includes("left") || layout.includes("right")
+        ? "landscape"
+        : "portrait",
+      "change",
+    );
+    x.input("#image-layout", layout, "change");
+    await x.$("#export").onclick();
+    const output = x.records.find((r) => r.canvas === x.downloads.at(-1));
+    assert(output);
+    const text = output.calls
+      .filter((c) => c[0] === "fillText")
+      .map((c) => c[1]);
+    assert.equal(text.includes("山居秋暝"), false);
+    assert.equal(text.includes("居"), layout !== "source-only");
+    assert.equal(text.includes("维"), layout !== "source-only");
+    if (layout !== "source-only")
+      assert(
+        output.calls.some(
+          (c) => c[0] === "scale" && Number.isFinite(c[1]) && c[1] !== 1,
+        ),
+      );
+  }
+  x.close();
+});
