@@ -159,18 +159,20 @@ function loadExportFont(key){
  return fontPromises.get(key);
 }
 // A source position always produces the same torn outline, even after reordering.
-function paperEdgePoints(id){
+function paperEdgePoints(id,strength=35){
  let seed=(Number(id)+1)*2654435761>>>0;const random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296};
  const points=[],steps=36;
- for(let side=0;side<4;side++)for(let i=0;i<steps;i++){const t=i/steps,d=.014+random()*.027;points.push(side===0?[t,d]:side===1?[1-d,t]:side===2?[1-t,1-d]:[d,1-t])}
+ for(let side=0;side<4;side++)for(let i=0;i<steps;i++){const t=i/steps,d=.01+random()*(.012+strength/100*.065);points.push(side===0?[t,d]:side===1?[1-d,t]:side===2?[1-t,1-d]:[d,1-t])}
  return points;
 }
 function paintPaperRect(ctx,x,y,w,h,id,rough){
  if(!rough){ctx.fillRect(x,y,w,h);ctx.strokeRect(x,y,w,h);return}
- const points=paperEdgePoints(id);ctx.save();ctx.beginPath();points.forEach(([u,v],i)=>ctx[i?'lineTo':'moveTo'](x+u*w,y+v*h));ctx.closePath();ctx.fill();
+ const intensity=Number(rough)/100,unit=Math.min(w,h)/42;const points=paperEdgePoints(id,rough);ctx.save();ctx.beginPath();points.forEach(([u,v],i)=>ctx[i?'lineTo':'moveTo'](x+u*w,y+v*h));ctx.closePath();ctx.fill();
  // Translucent strands follow the same seeded edge on the cutout and its hole.
- const ink=ctx.strokeStyle;ctx.strokeStyle=ctx.fillStyle;ctx.lineJoin='round';ctx.lineWidth=1.8;ctx.globalAlpha=.5;ctx.stroke();
- points.forEach(([u,v],i)=>{const side=Math.floor(i/(points.length/4)),n=side===0?[0,-1]:side===1?[1,0]:side===2?[0,1]:[-1,0];const len=.5+((i*17+Number(id)*7)%11)/5;ctx.globalAlpha=.25+(i%4)*.12;ctx.lineWidth=.3+(i%3)*.18;ctx.strokeStyle=i%3?ctx.fillStyle:ink;ctx.beginPath();ctx.moveTo(x+u*w-n[0],y+v*h-n[1]);ctx.lineTo(x+u*w+n[0]*len+(i%3-1)*.5,y+v*h+n[1]*len);ctx.stroke()});ctx.restore();
+ const ink=ctx.strokeStyle;ctx.strokeStyle=ctx.fillStyle;ctx.lineJoin='round';ctx.lineWidth=(.8+intensity*2)*unit;ctx.globalAlpha=.3+intensity*.35;ctx.stroke();
+ points.forEach(([u,v],i)=>{const side=Math.floor(i/(points.length/4)),n=side===0?[0,-1]:side===1?[1,0]:side===2?[0,1]:[-1,0],r=((i*17+Number(id)*7)%23)/23;const len=(.4+intensity*(1.5+r*4))*unit;ctx.globalAlpha=.25+intensity*.45;ctx.lineWidth=(.2+intensity*.4+r*.2)*unit;ctx.strokeStyle=i%3===0?ink:ctx.fillStyle;ctx.beginPath();ctx.moveTo(x+u*w-n[0]*unit,y+v*h-n[1]*unit);ctx.lineTo(x+u*w+n[0]*len-n[1]*(r-.5)*len*.7,y+v*h+n[1]*len+n[0]*(r-.5)*len*.7);ctx.stroke();
+ if(intensity>.5&&i%2===0){ctx.globalAlpha=.2+intensity*.25;ctx.lineWidth=.25*unit;ctx.beginPath();ctx.moveTo(x+u*w+n[0]*len*.4,y+v*h+n[1]*len*.4);ctx.lineTo(x+u*w+n[0]*len-n[1]*unit,y+v*h+n[1]*len+n[0]*unit);ctx.stroke()}
+ });ctx.restore();
 }
 let fontPreviewVersion=0;
 async function updateFontPreview(){
@@ -180,7 +182,7 @@ async function updateFontPreview(){
 }
 function drawImagePreview(){
  const c=$('#image-preview'),ctx=c.getContext('2d'),colors=getExportColors(),font=exportFonts[$('#export-font').value],family=(font?'"'+font.family+'",':'')+songtiFamily;
- const size=Number($('#image-size').value),px=size*1.5,step=px+9,rough=exportCollage&&exportRough;
+ const size=Number($('#image-size').value),px=size*1.5,step=px+9,rough=exportCollage&&exportRough?roughStrength:0;
  ctx.clearRect(0,0,c.width,c.height);ctx.fillStyle=colors.poemBackground;ctx.fillRect(0,0,500,120);ctx.fillStyle=colors['#f7f5ef'];ctx.fillRect(0,120,500,120);
  ctx.font='12px sans-serif';ctx.fillStyle=colors['#343b31'];ctx.fillText('集句',20,23);ctx.fillText('原文',20,145);
  const line=Array.from('明月松间照，清泉');ctx.font=px+'px '+family;
@@ -193,7 +195,7 @@ $('#image-size').onblur=e=>setImageSize(Math.max(5,Math.min(25,Number(e.target.v
 $('#image-size-range').oninput=e=>setImageSize(e.target.value);
 $('#image-size-minus').onclick=()=>setImageSize(Number($('#image-size').value)-1);
 $('#image-size-plus').onclick=()=>setImageSize(Number($('#image-size').value)+1);
-async function exportImage(){if(!pickedCount()){toast('请先从原文中选字');return}const colors=getExportColors(),collage=exportCollage,rough=exportCollage&&exportRough;const scale=Number($('#image-size').value)/23,bodySize=38*scale,advance=46*scale,lineHeight=64*scale;const button=$('#export');const fontKey=$('#export-font').value,font=exportFonts[fontKey];const fontFamily=(font?'"'+font.family+'",':'')+songtiFamily;button.disabled=true;try{if(font){button.textContent='正在加载字体…';await loadExportFont(fontKey)}button.textContent='正在生成图片…';const used=new Set(state.tokens.filter(t=>t.id!==null).map(t=>t.id));const source=wrapCells(Array.from(displayText(state.source.text)).map((c,id)=>({c,id,hole:used.has(id)})),Math.floor(560/advance));const result=wrapCells(displayTokens(state.tokens),Math.floor(540/advance));const height=Math.max(1060,400+source.length*lineHeight,400+result.length*lineHeight);if(height>24000)throw new Error('作品太长，请分为较短的篇章导出');const canvas=document.createElement('canvas');canvas.width=1440;canvas.height=height;const ctx=canvas.getContext('2d');if(!ctx)throw new Error('当前浏览器不支持图片导出');ctx.fillStyle=colors['#f7f5ef'];ctx.fillRect(0,0,1440,height);ctx.fillStyle=colors['#b95437'];ctx.fillRect(64,58,49,53);ctx.font='32px '+fontFamily;ctx.fillStyle=colors['#fffefb'];ctx.fillText('拾',72,96);ctx.fillStyle=colors['#343b31'];ctx.font='26px '+fontFamily;ctx.fillText('拾句',130,95);ctx.font='14px sans-serif';ctx.fillStyle=colors['#969b8b'];ctx.fillText('从旧诗里，拾一首新诗。',1040,95);ctx.strokeStyle=colors['#dfe2d5'];ctx.beginPath();ctx.moveTo(64,142);ctx.lineTo(1376,142);ctx.stroke();ctx.fillStyle=colors.poemBackground;ctx.fillRect(754,190,622,height-310);ctx.fillStyle=colors['#87917b'];ctx.font='14px sans-serif';ctx.fillText('01   原诗 · 摘取后',85,219);ctx.fillText('02   新诗 · 重新排列',794,229);
+async function exportImage(){if(!pickedCount()){toast('请先从原文中选字');return}const colors=getExportColors(),collage=exportCollage,rough=exportCollage&&exportRough?roughStrength:0;const scale=Number($('#image-size').value)/23,bodySize=38*scale,advance=46*scale,lineHeight=64*scale;const button=$('#export');const fontKey=$('#export-font').value,font=exportFonts[fontKey];const fontFamily=(font?'"'+font.family+'",':'')+songtiFamily;button.disabled=true;try{if(font){button.textContent='正在加载字体…';await loadExportFont(fontKey)}button.textContent='正在生成图片…';const used=new Set(state.tokens.filter(t=>t.id!==null).map(t=>t.id));const source=wrapCells(Array.from(displayText(state.source.text)).map((c,id)=>({c,id,hole:used.has(id)})),Math.floor(560/advance));const result=wrapCells(displayTokens(state.tokens),Math.floor(540/advance));const height=Math.max(1060,400+source.length*lineHeight,400+result.length*lineHeight);if(height>24000)throw new Error('作品太长，请分为较短的篇章导出');const canvas=document.createElement('canvas');canvas.width=1440;canvas.height=height;const ctx=canvas.getContext('2d');if(!ctx)throw new Error('当前浏览器不支持图片导出');ctx.fillStyle=colors['#f7f5ef'];ctx.fillRect(0,0,1440,height);ctx.fillStyle=colors['#b95437'];ctx.fillRect(64,58,49,53);ctx.font='32px '+fontFamily;ctx.fillStyle=colors['#fffefb'];ctx.fillText('拾',72,96);ctx.fillStyle=colors['#343b31'];ctx.font='26px '+fontFamily;ctx.fillText('拾句',130,95);ctx.font='14px sans-serif';ctx.fillStyle=colors['#969b8b'];ctx.fillText('从旧诗里，拾一首新诗。',1040,95);ctx.strokeStyle=colors['#dfe2d5'];ctx.beginPath();ctx.moveTo(64,142);ctx.lineTo(1376,142);ctx.stroke();ctx.fillStyle=colors.poemBackground;ctx.fillRect(754,190,622,height-310);ctx.fillStyle=colors['#87917b'];ctx.font='14px sans-serif';ctx.fillText('01   原诗 · 摘取后',85,219);ctx.fillText('02   新诗 · 重新排列',794,229);
  function drawWrappedTitle(text,x,y,width,size=30){ctx.font=size+'px '+fontFamily;let str='';let row=0;for(const c of Array.from(text)){if(ctx.measureText(str+c).width>width){ctx.fillText(str,x,y+row*(size+10));str=c;row++}else str+=c}ctx.fillText(str,x,y+row*(size+10));return y+row*(size+10)}
  ctx.fillStyle=colors['#343b31'];const sy=drawWrappedTitle(displayText(state.source.title),85,280,560);ctx.font='15px sans-serif';ctx.fillStyle=colors['#929985'];ctx.fillText(displayText(state.source.author),85,sy+32);ctx.fillStyle=colors['#343b31'];const ny=drawWrappedTitle(displayText(state.title.trim()),794,290,540,46);
  // Titles can take multiple lines; reserve the extra rows in layout by limiting canvas text area through dynamic extension.
@@ -210,8 +212,9 @@ $('#export').onclick=exportImage;render();
 const colorPresets={cream:{bg:'#f5f0e6',fg:'#453e34'},green:{bg:'#e8efe5',fg:'#344535'},gray:{bg:'#25282b',fg:'#d9d7d0'}};
 const nightPresets={gray:{bg:'#1c1e20',fg:'#d8d6d0'},blue:{bg:'#192630',fg:'#d3dde3'},warm:{bg:'#29231e',fg:'#e0d5c3'}};
 const validHex=value=>typeof value==='string'&&/^#[0-9a-f]{6}$/i.test(value);
-let exportPalette=null,nightPreset='gray',exportCollage=false,exportRough=false,collageBackground='#ffffff';
-try{exportRough=localStorage.getItem('shiju-export-rough')==='true';exportCollage=localStorage.getItem('shiju-export-collage')==='true';const bg=localStorage.getItem('shiju-collage-background');if(validHex(bg))collageBackground=bg}catch{}
+let exportPalette=null,nightPreset='gray',exportCollage=false,exportRough=false,roughStrength=35,collageBackground='#ffffff';
+try{const strength=Number(localStorage.getItem('shiju-rough-strength'));if(Number.isInteger(strength)&&strength>=1&&strength<=100)roughStrength=strength;exportRough=localStorage.getItem('shiju-export-rough')==='true';exportCollage=localStorage.getItem('shiju-export-collage')==='true';const bg=localStorage.getItem('shiju-collage-background');if(validHex(bg))collageBackground=bg}catch{}
+$('#rough-strength').oninput=e=>{roughStrength=Math.max(1,Math.min(100,Number(e.target.value)||35));syncColorControls();try{localStorage.setItem('shiju-rough-strength',String(roughStrength))}catch{}};
 $('#export-rough').onchange=e=>{exportRough=e.target.checked;syncColorControls();try{localStorage.setItem('shiju-export-rough',String(exportRough))}catch{}};
 $('#export-collage').onchange=e=>{exportCollage=e.target.checked;syncColorControls();try{localStorage.setItem('shiju-export-collage',String(exportCollage))}catch{}};
 try{const p=JSON.parse(localStorage.getItem('shiju-export-colors')||'null');if(p&&validHex(p.bg)&&validHex(p.fg))exportPalette={bg:p.bg,fg:p.fg};const n=localStorage.getItem('shiju-night-preset');if(Object.hasOwn(nightPresets,n))nightPreset=n}catch{}
@@ -236,7 +239,7 @@ function syncColorControls(){
  $('#background-color').value=p.bg;$('#background-hex').value=p.bg;$('#text-color').value=p.fg;$('#text-hex').value=p.fg;
  $('#colors-mode').textContent='仅用于导出图片，不改变页面或夜览配色。';$('#background-hex').setCustomValidity('');$('#text-hex').setCustomValidity('');
  const sample=$('#export-color-sample'),colors=getExportColors();sample.style.backgroundColor=colors.poemBackground;sample.style.color=p.fg;sample.style.setProperty('--tile-bg',colors['#f7f5ef']);sample.style.setProperty('--tile-edge',mixColors(p.fg,colors['#f7f5ef'],.16));sample.classList.toggle('collage',exportCollage);$('#export-collage').checked=exportCollage;$('#collage-background-controls').hidden=!exportCollage;$('#collage-background-color').value=collageBackground;$('#collage-background-hex').value=collageBackground;$('#collage-background-hex').setCustomValidity('');
- const rough=exportCollage&&exportRough;$('#export-rough').checked=exportRough;$('#rough-hole-preview').hidden=!rough;
+ const rough=exportCollage&&exportRough?roughStrength:0;$('#export-rough').checked=exportRough;$('#rough-hole-preview').hidden=!rough;$('#rough-strength-controls').hidden=!rough;$('#rough-strength').value=roughStrength;$('#rough-strength-value').textContent=roughStrength+'%';$('#rough-strength').setAttribute('aria-valuetext',roughStrength+'%');
  drawImagePreview();
  const clip=i=>'polygon('+paperEdgePoints(i).map(([x,y])=>`${x*100}% ${y*100}%`).join(',')+')';
  sample.querySelectorAll('p>span').forEach((span,i)=>span.style.clipPath=rough?clip(i):'');
