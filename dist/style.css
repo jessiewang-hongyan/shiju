@@ -1576,7 +1576,7 @@ html[data-theme="dark"] dialog::backdrop {
   border-radius: 4px;
   cursor: pointer;
 }
-.color-row input:not([type="color"]) {
+.color-row input:not([type="color"]):not([type="range"]) {
   width: 96px;
   padding: 9px 8px;
   border: 1px solid var(--line);
@@ -2148,6 +2148,10 @@ html[data-theme="dark"] #font-to-traditional:hover:not(:disabled) {
 }
 #collage-gap {
   width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
   accent-color: var(--ink);
 }
 #collage-gap-value {
