@@ -62,6 +62,11 @@ function setup(draft) {
       }),
     };
     for (const method of [
+      "rect",
+      "clip",
+      "scale",
+      "drawImage",
+      "createPattern",
       "clearRect",
       "fillRect",
       "strokeRect",
@@ -654,4 +659,28 @@ test("handmade strengths control independent bounded per-piece amplitudes and pe
   assert.equal(x.$("#handmade-drift-value").value, "100");
   assert.equal(x.w.localStorage.getItem("shiju-handmade-drift"), "100");
   x.close();
+});
+
+test("paper choices are independent, persisted and reset without changing poem content", async () => {
+  const x = setup();
+  x.w.HTMLCanvasElement.prototype.toDataURL = () =>
+    "data:image/png;base64,test";
+  try {
+    const before = JSON.stringify(x.editor.state);
+    x.$("#source-paper").value = "gold";
+    await x.$("#source-paper").onchange({ target: x.$("#source-paper") });
+    assert.equal(x.appearance.sourcePaper, "gold");
+    assert.equal(x.appearance.poemPaper, "none");
+    assert.equal(x.w.localStorage.getItem("shiju-paper-source"), "gold");
+    x.$("#poem-paper").value = "gold";
+    await x.$("#poem-paper").onchange({ target: x.$("#poem-paper") });
+    assert.equal(x.appearance.poemPaper, "gold");
+    assert.equal(JSON.stringify(x.editor.state), before);
+    x.$("#colors-reset").click();
+    assert.equal(x.appearance.sourcePaper, "none");
+    assert.equal(x.appearance.poemPaper, "none");
+    assert.equal(x.w.localStorage.getItem("shiju-paper-source"), "none");
+  } finally {
+    x.close();
+  }
 });

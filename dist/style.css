@@ -2160,3 +2160,32 @@ html[data-theme="dark"] #font-to-traditional:hover:not(:disabled) {
 #handmade-controls input[type="number"] {
   width: 64px;
 }
+
+/* Paper fields use the export ink so night chrome does not wash out the artwork. */
+#source-poem.editor-textured .char,
+#source-poem.editor-textured .source-punctuation,
+#new-poem.editor-textured .poem-token {
+  color: inherit;
+}
+#source-poem.editor-textured .char:not(.picked) {
+  background: transparent;
+}
+.color-row select#source-paper,
+.color-row select#poem-paper {
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 8px 10px;
+  min-width: 150px;
+  max-width: 100%;
+}
+
+html[data-night-colors] #source-poem.editor-textured,
+html[data-night-colors] #new-poem.editor-textured,
+html[data-night-colors] #source-poem.editor-textured .char:not(.picked),
+html[data-night-colors] #source-poem.editor-textured .source-punctuation,
+html[data-night-colors] #new-poem.editor-textured .poem-token {
+  color: var(--paper-ink) !important;
+}

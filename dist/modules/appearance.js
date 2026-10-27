@@ -1,3 +1,4 @@
+import { paperKeys, loadPaper } from "./paper-materials.js";
 import { $, toast } from "./ui.js";
 import { paperEdgePoints } from "./image-drawing.js";
 export function mixColors(a, b, weight) {
@@ -21,6 +22,41 @@ export function createAppearance({
   onSourceSizeChange = () => {},
   onPaperChange = () => {},
 }) {
+  let sourcePaper = "none",
+    poemPaper = "none";
+  for (const kind of ["source", "poem"]) {
+    let key;
+    try {
+      key = localStorage.getItem("shiju-paper-" + kind);
+    } catch {}
+    if (!paperKeys.includes(key)) key = "none";
+    if (kind === "source") sourcePaper = key;
+    else poemPaper = key;
+    $("#" + kind + "-paper").value = key;
+    let requestVersion = 0;
+    $("#" + kind + "-paper").onchange = async (e) => {
+      const version = ++requestVersion;
+      const next = e.target.value;
+      if (!paperKeys.includes(next)) return;
+      try {
+        await loadPaper(next);
+        if (version !== requestVersion) return;
+        if (kind === "source") sourcePaper = next;
+        else poemPaper = next;
+        try {
+          localStorage.setItem("shiju-paper-" + kind, next);
+        } catch {}
+        syncColorControls();
+      } catch {
+        if (version !== requestVersion) return;
+        e.target.value = kind === "source" ? sourcePaper : poemPaper;
+        toast("纸张加载失败，请重新选择重试");
+      }
+    };
+  }
+  async function readyPapers() {
+    await Promise.all([loadPaper(sourcePaper), loadPaper(poemPaper)]);
+  }
   function setSourceSize(value, save = false) {
     const size = Number(value);
     if (!Number.isInteger(size) || size < 5 || size > 25) return;
@@ -257,7 +293,7 @@ export function createAppearance({
     $("#text-color").value = p.fg;
     $("#text-hex").value = p.fg;
     $("#colors-mode").textContent =
-      "配色仅用于导出图片，不改变页面或夜览配色。";
+      "纸张同步到编辑页和图片；选用纸张时，正文区域使用图片配色。";
     $("#background-hex").setCustomValidity("");
     $("#text-hex").setCustomValidity("");
     const sample = $("#export-color-sample"),
@@ -271,7 +307,7 @@ export function createAppearance({
     );
     sample.classList.toggle("collage", exportCollage);
     $("#export-collage").checked = exportCollage;
-    $("#collage-background-controls").hidden = !exportCollage;
+    $("#collage-background-controls").hidden = false;
     $("#collage-background-color").value = collageBackground;
     $("#collage-background-hex").value = collageBackground;
     $("#collage-background-hex").setCustomValidity("");
@@ -375,6 +411,13 @@ export function createAppearance({
   };
   $("#colors-reset").onclick = () => {
     exportPalette = null;
+    sourcePaper = poemPaper = "none";
+    for (const kind of ["source", "poem"]) {
+      $("#" + kind + "-paper").value = "none";
+      try {
+        localStorage.setItem("shiju-paper-" + kind, "none");
+      } catch {}
+    }
     setCollageBackground("#ffffff");
     persistColors();
   };
@@ -410,6 +453,13 @@ export function createAppearance({
   }
   return {
     setSourceSize,
+    readyPapers,
+    get sourcePaper() {
+      return sourcePaper;
+    },
+    get poemPaper() {
+      return poemPaper;
+    },
     getExportColors,
     get exportCollage() {
       return exportCollage;
@@ -435,6 +485,10 @@ export function createAppearance({
     init() {
       applyTheme(document.documentElement.dataset.theme === "dark");
       syncColorControls();
+      if (sourcePaper !== "none" || poemPaper !== "none")
+        readyPapers()
+          .then(syncColorControls)
+          .catch(() => toast("纸张加载失败，重新选择可重试"));
     },
   };
 }

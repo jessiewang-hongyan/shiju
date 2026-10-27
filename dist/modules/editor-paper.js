@@ -1,7 +1,8 @@
+import { paperCSS, paintPaperCrop } from "./paper-materials.js";
 import {
   paintPaperRect,
   handmadePlacement,
-} from "./image-drawing.js?v=20261027z";
+} from "./image-drawing.js?v=20261027paper2";
 
 // Source occurrence and actual wrapped row both matter when joining paper pieces.
 export function groupPaperRects(items, sourceRows) {
@@ -47,8 +48,14 @@ export function initEditorPaper({ appearance }) {
       el.style.transform = "";
       el.style.transformOrigin = "";
     });
-    const sourceRows = new Map();
+    const sourceRows = new Map(),
+      sourcePositions = new Map();
+    const sourceBounds = roots[0].getBoundingClientRect();
     roots[0].querySelectorAll("[data-source-id]").forEach((el) => {
+      sourcePositions.set(
+        Number(el.dataset.sourceId),
+        el.getBoundingClientRect(),
+      );
       sourceRows.set(
         Number(el.dataset.sourceId),
         Math.round(el.getBoundingClientRect().top),
@@ -57,6 +64,28 @@ export function initEditorPaper({ appearance }) {
     const style = window.getComputedStyle(document.documentElement);
     const ink = style.getPropertyValue("--ink").trim();
     const paper = style.getPropertyValue("--paper").trim();
+    const textured =
+      (appearance.sourcePaper && appearance.sourcePaper !== "none") ||
+      (appearance.poemPaper && appearance.poemPaper !== "none");
+    const colors = appearance.getExportColors?.();
+    roots.forEach((root, index) => {
+      Object.assign(
+        root.style,
+        paperCSS(
+          index === 0 ? appearance.sourcePaper : appearance.poemPaper,
+          root.getBoundingClientRect().width,
+          root.getBoundingClientRect().height,
+        ),
+      );
+      root.classList.toggle("editor-textured", Boolean(textured));
+      root.style.backgroundColor = textured
+        ? index === 0
+          ? colors["#f7f5ef"]
+          : colors.poemBackground
+        : "";
+      root.style.color = textured ? colors["#343b31"] : "";
+      root.style.setProperty("--paper-ink", textured ? colors["#343b31"] : "");
+    });
     // Resolve theme-dependent CSS colors through the browser, including night palettes.
     for (const [index, root] of roots.entries()) {
       root.classList.toggle("editor-collage", enabled);
@@ -109,6 +138,9 @@ export function initEditorPaper({ appearance }) {
         ctx.fillStyle = paper;
         // A subtle tint keeps paper visible without importing the export palette.
         ctx.fillStyle = `color-mix(in srgb, ${ink} ${index === 0 ? 18 : 12}%, ${paper})`;
+        if (textured)
+          ctx.fillStyle =
+            index === 0 ? colors.poemBackground : colors["#f7f5ef"];
         paintPaperRect(
           ctx,
           padding + 1,
@@ -117,6 +149,36 @@ export function initEditorPaper({ appearance }) {
           Math.max(1, run.height - 8),
           run.id,
           rough,
+          index === 1 && textured
+            ? () => {
+                const first = sourcePositions.get(run.id),
+                  last = sourcePositions.get(run.lastId);
+                if (!first || !last) return;
+                paintPaperCrop(
+                  ctx,
+                  appearance.sourcePaper,
+                  colors["#f7f5ef"],
+                  {
+                    x: 0,
+                    y: 0,
+                    width: sourceBounds.width,
+                    height: sourceBounds.height,
+                  },
+                  {
+                    x: first.left - sourceBounds.left + 1,
+                    y: first.top - sourceBounds.top + 4,
+                    width: last.right - first.left - 2,
+                    height: first.height - 8,
+                  },
+                  {
+                    x: padding + 1,
+                    y: padding + 4,
+                    width: run.width - 2,
+                    height: run.height - 8,
+                  },
+                );
+              }
+            : undefined,
         );
         if (index === 1 && appearance.handmade) {
           const pose = handmadePlacement(

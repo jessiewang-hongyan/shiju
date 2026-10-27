@@ -15,7 +15,7 @@
           document.documentElement.dataset.theme = "dark";
       } catch {}
     </script>
-    <link rel="stylesheet" href="style.css?v=20261027z" />
+    <link rel="stylesheet" href="style.css?v=20261027paper2" />
   </head>
   <body>
     <header>
@@ -318,6 +318,28 @@
         <button class="close" aria-label="关闭">×</button>
       </div>
       <p class="dialog-note" id="colors-mode"></p>
+      <div class="color-row">
+        <label for="source-paper">原文纸张</label
+        ><select id="source-paper">
+          <option value="none">纯色</option>
+          <option value="ten-bamboo">十竹斋笺纸</option>
+          <option value="lokta">手工纤维纸</option>
+          <option value="gold">仿洒金纸</option>
+        </select>
+      </div>
+      <div class="color-row">
+        <label for="poem-paper">集句纸张</label
+        ><select id="poem-paper">
+          <option value="none">纯色</option>
+          <option value="ten-bamboo">十竹斋笺纸</option>
+          <option value="lokta">手工纤维纸</option>
+          <option value="gold">仿洒金纸</option>
+        </select>
+      </div>
+      <p class="dialog-note">
+        拼贴字块保留原文对应位置的纸纹和图案。十竹斋装饰只出现一次，长文延伸纸纹。手工纤维纸源自
+        Lokta，洒金为程序纹理。
+      </p>
       <label class="export-font-control" for="image-layout"
         >排列方式
         <select id="image-layout">
@@ -596,6 +618,6 @@
       ><button id="move-right" aria-label="向后移动">→</button>
     </div>
     <div id="toast" role="status"></div>
-    <script type="module" src="app.js?v=20261027z"></script>
+    <script type="module" src="app.js?v=20261027paper2"></script>
   </body>
 </html>

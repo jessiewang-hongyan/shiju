@@ -94,7 +94,20 @@ export function paintCollageLine(
   ctx,
   line,
   sourceRows,
-  { x, y, step, inset, baseline, paper, ink, rough, handmade, tilt, drift },
+  {
+    x,
+    y,
+    step,
+    inset,
+    baseline,
+    paper,
+    ink,
+    rough,
+    handmade,
+    tilt,
+    drift,
+    paperPainter,
+  },
 ) {
   const selected = (t) => Number.isInteger(t.id);
   for (const run of paperRuns(line, selected, sourceRows)) {
@@ -111,7 +124,18 @@ export function paintCollageLine(
         ctx.translate(-left - width / 2, -y - height / 2);
       }
       ctx.fillStyle = paper;
-      paintPaperRect(ctx, left, y, width, height, first.id, rough);
+      paintPaperRect(
+        ctx,
+        left,
+        y,
+        width,
+        height,
+        first.id,
+        rough,
+        paperPainter
+          ? () => paperPainter(ctx, run, { x: left, y, width, height })
+          : undefined,
+      );
       ctx.fillStyle = ink;
       let offset = 0;
       for (const token of run.tokens) {
@@ -158,7 +182,22 @@ function paintCenteredGlyph(ctx, text, x, y, w, h) {
   );
   ctx.restore();
 }
-function paintPaperRect(ctx, x, y, w, h, id, rough) {
+function paintPaperRect(ctx, x, y, w, h, id, rough, painter) {
+  if (painter) {
+    paintPaperRect(ctx, x, y, w, h, id, rough);
+    ctx.save();
+    ctx.beginPath();
+    if (rough) {
+      paperEdgePoints(id, rough, w, h).forEach(([u, v], i) =>
+        ctx[i ? "lineTo" : "moveTo"](x + u * w, y + v * h),
+      );
+      ctx.closePath();
+    } else ctx.rect(x, y, w, h);
+    ctx.clip();
+    painter();
+    ctx.restore();
+    return;
+  }
   ctx.save();
   ctx.strokeStyle = ctx.fillStyle;
   if (!rough) {
