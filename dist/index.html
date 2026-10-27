@@ -15,7 +15,7 @@
           document.documentElement.dataset.theme = "dark";
       } catch {}
     </script>
-    <link rel="stylesheet" href="style.css?v=20261027release3" />
+    <link rel="stylesheet" href="style.css?v=20261027spacing1" />
   </head>
   <body>
     <header>
@@ -368,6 +368,43 @@
           <option value="source-only">仅原文</option>
         </select>
       </label>
+      <div class="image-spacing-row">
+        <label for="image-padding">模块内留白</label
+        ><input
+          id="image-padding"
+          type="range"
+          min="0"
+          max="120"
+          value="40"
+        /><input
+          id="image-padding-value"
+          aria-label="模块内留白数值"
+          type="number"
+          min="0"
+          max="120"
+          value="40"
+        />
+      </div>
+      <div class="image-spacing-row">
+        <label for="image-panel-gap">模块间隔</label
+        ><input
+          id="image-panel-gap"
+          type="range"
+          min="0"
+          max="160"
+          value="40"
+        /><input
+          id="image-panel-gap-value"
+          aria-label="模块间隔数值"
+          type="number"
+          min="0"
+          max="160"
+          value="40"
+        />
+      </div>
+      <p class="dialog-note">
+        单位为导出像素。模块按内容高度排版，不再拉高填满画布；单模块导出不使用模块间隔。
+      </p>
       <label class="export-font-control" for="export-font"
         >图片字体<select id="export-font">
           <option value="songti">宋体</option>
@@ -638,6 +675,6 @@
       ><button id="move-right" aria-label="向后移动">→</button>
     </div>
     <div id="toast" role="status"></div>
-    <script type="module" src="app.js?v=20261027release3"></script>
+    <script type="module" src="app.js?v=20261027spacing1"></script>
   </body>
 </html>

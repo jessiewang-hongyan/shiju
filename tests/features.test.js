@@ -535,8 +535,8 @@ test("all four image layouts position source, poem, background and signature con
     x.input("#image-layout", layout, "change");
     assert.equal(localStorage.getItem("shiju-image-layout"), layout);
     const vertical = ["source-top", "source-bottom"].includes(layout);
-    assert.equal(x.$("#image-preview").width, vertical ? 500 : 1000);
-    assert.equal(x.$("#image-preview").height, vertical ? 360 : 180);
+    assert.equal(x.$("#image-preview").width, vertical ? 500 : 1020);
+    assert.equal(x.$("#image-preview").height, vertical ? 380 : 180);
     for (const collage of [true, false]) {
       x.input("#export-collage", collage, "change");
       await x.$("#export").onclick();
@@ -558,7 +558,7 @@ test("all four image layouts position source, poem, background and signature con
         assert.equal(source[3] < poem[3], layout === "source-top");
       } else {
         assert.equal(source[2] < poem[2], layout === "source-left");
-        assert.equal(panel[2], 190);
+        assert(panel[2] >= 190);
       }
       assert(
         calls.every(
@@ -847,5 +847,72 @@ test("collage gaps move connected pieces without stretching their internal lette
   }
   assert(offsets[1][0] > offsets[0][0]);
   assert.equal(offsets[1][1], offsets[0][1]);
+  x.close();
+});
+
+test("module padding and gap control actual export geometry and persist", async () => {
+  const x = setup();
+  x.$("#source-poem button").click();
+  x.input("#poem-title", "留白验收");
+  for (const orientation of ["landscape", "portrait"]) {
+    x.input("#image-orientation", orientation, "change");
+    x.input(
+      "#image-layout",
+      orientation === "portrait" ? "source-top" : "source-left",
+      "change",
+    );
+    for (const [padding, gap] of [
+      [0, 0],
+      [80, 100],
+      [120, 160],
+    ]) {
+      x.input("#image-padding-value", String(padding));
+      x.input("#image-panel-gap-value", String(gap));
+      assert.equal(x.$("#image-padding").value, String(padding));
+      assert.equal(localStorage.getItem("shiju-image-panel-gap"), String(gap));
+      await x.$("#export").onclick();
+      const { canvas, calls } = x.records.filter((r) => !r.canvas.id).at(-1);
+      const panels = calls.filter(
+        (c) => c[0] === "fillRect" && c[2] >= 190 && c[3] > 200,
+      );
+      const sourceTitle = calls.find(
+        (c) => c[0] === "fillText" && c[1] === "山居秋暝",
+      );
+      const poemTitle = calls.find(
+        (c) => c[0] === "fillText" && c[1] === "留白验收",
+      );
+      const source = panels.find(
+        (c) =>
+          c[1] === sourceTitle[2] - padding &&
+          c[2] === sourceTitle[3] - padding - 30,
+      );
+      const poem = panels.find(
+        (c) =>
+          c[1] === poemTitle[2] - padding &&
+          c[2] === poemTitle[3] - padding - 46,
+      );
+      assert(source);
+      assert(poem);
+      if (orientation === "portrait")
+        assert.equal(poem[2] - (source[2] + source[4]), gap);
+      else assert.equal(poem[1] - (source[1] + source[3]), gap);
+      assert(
+        calls
+          .filter((c) => c[0] === "fillText")
+          .every(
+            (c) =>
+              c[2] >= 0 &&
+              c[2] < canvas.width &&
+              c[3] >= 0 &&
+              c[3] < canvas.height,
+          ),
+      );
+    }
+  }
+  x.input("#image-layout", "poem-only", "change");
+  assert(x.$("#image-panel-gap").disabled);
+  x.$("#colors-reset").click();
+  assert.equal(x.$("#image-padding-value").value, "40");
+  assert.equal(x.$("#image-panel-gap-value").value, "40");
   x.close();
 });

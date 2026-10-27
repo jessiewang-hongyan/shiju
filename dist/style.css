@@ -2189,3 +2189,18 @@ html[data-night-colors] #source-poem.editor-textured .source-punctuation,
 html[data-night-colors] #new-poem.editor-textured .poem-token {
   color: var(--paper-ink) !important;
 }
+
+.image-spacing-row {
+  display: grid;
+  grid-template-columns: 100px minmax(60px, 1fr) 64px;
+  gap: 12px;
+  align-items: center;
+  margin: 16px 0;
+}
+.image-spacing-row input {
+  width: 100%;
+  min-width: 0;
+}
+.image-spacing-row input[type="range"] {
+  accent-color: var(--ink);
+}
