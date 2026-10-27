@@ -1811,8 +1811,12 @@ html[data-night-colors] textarea::placeholder {
   margin: 0 0 20px;
 }
 
-#source-poem {
+#source-poem,
+#new-poem {
   font-size: var(--source-size, 23px);
+}
+#new-poem .poem-token {
+  min-width: 1.45em;
 }
 #source-poem .char {
   font-size: inherit;
