@@ -200,13 +200,25 @@ async function updateFontPreview(){
 }
 function drawImagePreview(){
  const c=$('#image-preview'),ctx=c.getContext('2d'),colors=getExportColors(),font=exportFonts[$('#export-font').value],family=(font?'"'+font.family+'",':'')+songtiFamily;
- const size=Number($('#image-size').value),px=size*1.5,step=px+9,rough=exportCollage&&exportRough?roughStrength:0;
- ctx.clearRect(0,0,c.width,c.height);ctx.fillStyle=colors.poemBackground;ctx.fillRect(0,0,500,120);ctx.fillStyle=colors['#f7f5ef'];ctx.fillRect(0,120,500,120);
- ctx.font='12px sans-serif';ctx.fillStyle=colors['#343b31'];ctx.fillText('集句',20,23);ctx.fillText('原文',20,145);
- const line=Array.from('明月松间照，清泉');ctx.font=px+'px '+family;
- if(exportCollage){ctx.fillStyle=colors['#f7f5ef'];ctx.strokeStyle=colors['#bfc8b0'];paintPaperRect(ctx,18,48,step*5-3,step-3,0,rough)}
- ctx.fillStyle=colors['#edf0e4'];ctx.strokeStyle=colors['#bfc8b0'];paintPaperRect(ctx,18,167,step*5-3,step-3,0,rough);
- line.forEach((ch,i)=>{const x=20+i*step;if(x+step>490)return;if(i<5){ctx.fillStyle=colors['#343b31'];if(exportCollage)paintCenteredGlyph(ctx,ch,x-2,48,step-3,step-3);else ctx.fillText(ch,x,48+px)}else{ctx.fillStyle=colors['#343b31'];ctx.fillText(ch,x,167+px)}});
+ const size=Number($('#image-size').value),px=size*1.5,step=px+9,rough=exportCollage&&exportRough?roughStrength:0,maxUnits=Math.floor(460/step);
+ const used=new Set(state.tokens.filter(t=>Number.isInteger(t.id)).map(t=>t.id));
+ const source=wrapCells(Array.from(displayText(state.source.text)).map((ch,id)=>({c:ch,id,hole:used.has(id)})),maxUnits);
+ const result=wrapCells(displayTokens(state.tokens),maxUnits),sourceRows=new Map();source.forEach((line,row)=>line.forEach(t=>sourceRows.set(t.id,row)));
+ const selected=t=>Number.isInteger(t.id);
+ ctx.clearRect(0,0,c.width,c.height);ctx.fillStyle=colors.poemBackground;ctx.fillRect(0,0,500,180);ctx.fillStyle=colors['#f7f5ef'];ctx.fillRect(0,180,500,180);
+ for(const [label,lines,top,isSource] of [['集句',result,0,false],['原文',source,180,true]]){
+  ctx.fillStyle=colors['#343b31'];ctx.font='12px sans-serif';ctx.fillText(label,20,top+23);
+  if(lines.length>2){ctx.textAlign='right';ctx.fillText('仅预览前两行',480,top+23);ctx.textAlign='left'}
+  if(!isSource&&!state.tokens.length){ctx.fillText('尚未选字',20,top+70);continue}
+  ctx.font=px+'px '+family;
+  lines.slice(0,2).forEach((line,row)=>{const y=top+48+row*58;
+   for(const run of paperRuns(line,isSource?t=>t.hole:selected,sourceRows)){const token=run.tokens[0];if(isSource?!token.hole:!exportCollage||!selected(token))continue;
+    ctx.fillStyle=isSource?colors['#edf0e4']:colors['#f7f5ef'];ctx.strokeStyle=colors['#bfc8b0'];ctx.setLineDash(isSource&&!rough?[3,4]:[]);paintPaperRect(ctx,18+run.offset*step,y,step*run.width-3,step-3,token.id,rough);ctx.setLineDash([]);
+   }
+   let x=20;for(const token of line){ctx.fillStyle=colors['#343b31'];if(isSource){if(!token.hole)ctx.fillText(token.c,x,y+px)}else if(exportCollage&&selected(token))paintCenteredGlyph(ctx,token.c,x-2,y,step-3,step-3);else ctx.fillText(token.c,x,y+px);x+=step*token.w}
+  });
+ }
+ c.setAttribute('aria-label','当前集句与挖空原文预览，各最多两行');
 }
 function setImageSize(value){const n=Math.round(Number(value));if(!Number.isFinite(n)||n<5||n>25)return;$('#image-size').value=n;$('#image-size-range').value=n;drawImagePreview();try{localStorage.setItem('shiju-image-size',n)}catch{}}
 $('#image-size').oninput=e=>{if(e.target.value)setImageSize(e.target.value)};
