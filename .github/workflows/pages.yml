@@ -21,10 +21,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Check JavaScript
+      - name: Install development checks
+        run: npm ci --ignore-scripts
+      - name: Check modules and regression tests
         run: |
-          node --check dist/app.js
-          node tests/library-loader.cjs
+          npm run check
+          npm test
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

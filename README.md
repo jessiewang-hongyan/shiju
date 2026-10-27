@@ -29,7 +29,7 @@ python3 -m http.server 4173 --directory dist
 
 ## 数据与字体
 
-诗词来源及许可证见 POETRY-SOURCE.md 和 dist/data/LICENSE-*.txt。
+诗词来源及许可证见 POETRY-SOURCE.md 和 dist/data/LICENSE-\*.txt。
 字体来源及授权确认状态见 FONT-SOURCE.md。发布前请核实字体的网页嵌入和再分发许可。
 
 ## 文集加载
@@ -37,3 +37,18 @@ python3 -m http.server 4173 --directory dist
 文集以不超过 200 KB 的 JSON 小批次加载，最多同时请求两份资源。首批完成后即可选用和搜索；加载途中显示已载入篇数。暂时失败自动重试两次，仍失败时保留已加载内容，点击“继续加载”仅补载未完成批次（同一页面内）。加载完成前，搜索仅覆盖已载入内容。
 
 更新原始 `dist/data/*.json` 后运行 `python3 scripts/split-collections.py` 重新生成分片；分片文件名按内容计算，供浏览器缓存复用。运行 `node tests/library-loader.cjs` 检查失败恢复、缓存与并发限制。
+
+## 开发与维护
+
+源码使用浏览器原生 ES modules：`dist/app.js` 负责组装，功能代码位于 `dist/modules/`。无需构建，`dist/` 直接发布。开发工具仅用于检查和格式化。
+
+```sh
+npm ci --ignore-scripts
+npm run check
+npm test
+npm run format
+```
+
+- [架构与数据约定](docs/architecture.md)
+- [诗词与字体资源维护](docs/resources.md)
+- [功能验收与检查记录](docs/acceptance.md)
