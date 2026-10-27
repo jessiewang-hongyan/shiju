@@ -1,7 +1,8 @@
 import {
+  paperInk,
   paperCSS,
   paintPaperCrop,
-} from "./paper-materials.js?v=20261027release3";
+} from "./paper-materials.js?v=20261027darkcloud1";
 import {
   paintPaperRect,
   handmadePlacement,
@@ -105,8 +106,23 @@ export function initEditorPaper({ appearance }) {
           ? colors["#f7f5ef"]
           : colors.poemBackground
         : "";
-      root.style.color = textured ? colors["#343b31"] : "";
-      root.style.setProperty("--paper-ink", textured ? colors["#343b31"] : "");
+      const sectionInk = textured
+        ? paperInk(
+            index === 0 ? appearance.sourcePaper : appearance.poemPaper,
+            colors["#343b31"],
+          )
+        : "";
+      root.style.color = sectionInk;
+      root.style.setProperty("--paper-ink", sectionInk);
+    });
+    poemTokens.forEach((el) => {
+      const key =
+        enabled && el.hasAttribute("data-source-id")
+          ? appearance.sourcePaper
+          : appearance.poemPaper;
+      const color = textured ? paperInk(key, colors["#343b31"]) : "";
+      el.style.color = color;
+      el.style.setProperty("--paper-ink", color);
     });
     // Resolve theme-dependent CSS colors through the browser, including night palettes.
     for (const [index, root] of roots.entries()) {

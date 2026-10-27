@@ -1106,3 +1106,43 @@ test("settings groups default to layout and summarize changes while exposing onl
   assert(x.$("#source-background-row").hidden);
   x.close();
 });
+
+test("dark cloud paper preserves independent selections and readable ink on transferred pieces", async () => {
+  const x = setup();
+  x.w.HTMLImageElement.prototype.decode = async () => {};
+  x.w.HTMLCanvasElement.prototype.toDataURL = () =>
+    "data:image/png;base64,test";
+  x.$('#source-poem button[aria-label="摘取：空"]').click();
+  x.input("#export-collage", true, "change");
+  x.$("#source-paper").value = "cloud-dark";
+  await x.$("#source-paper").onchange({ target: x.$("#source-paper") });
+  assert.equal(x.appearance.sourcePaper, "cloud-dark");
+  assert.equal(x.appearance.poemPaper, "none");
+  assert.match(x.$("#summary-paper").textContent, /深色云纹/);
+  await x.$("#export").onclick();
+  let calls = x.records.find((r) => r.canvas === x.downloads.at(-1)).calls;
+  assert(
+    calls.some(
+      (c) => c[0] === "fillText" && c[1] === "空" && c.at(-2) === "#eee7d9",
+    ),
+  );
+  x.input("#export-collage", false, "change");
+  await x.$("#export").onclick();
+  calls = x.records.find((r) => r.canvas === x.downloads.at(-1)).calls;
+  assert(
+    calls.some(
+      (c) => c[0] === "fillText" && c[1] === "空" && c.at(-2) === "#343b31",
+    ),
+  );
+  x.$("#poem-paper").value = "cloud-dark";
+  await x.$("#poem-paper").onchange({ target: x.$("#poem-paper") });
+  await x.$("#export").onclick();
+  calls = x.records.find((r) => r.canvas === x.downloads.at(-1)).calls;
+  assert(
+    calls.some(
+      (c) => c[0] === "fillText" && c[1] === "空" && c.at(-2) === "#eee7d9",
+    ),
+  );
+  assert.equal(x.w.localStorage.getItem("shiju-paper-poem"), "cloud-dark");
+  x.close();
+});

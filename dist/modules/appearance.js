@@ -1,4 +1,4 @@
-import { paperKeys, loadPaper } from "./paper-materials.js?v=20261027release3";
+import { paperKeys, loadPaper } from "./paper-materials.js?v=20261027darkcloud1";
 import { $, toast } from "./ui.js";
 import { paperEdgePoints } from "./image-drawing.js";
 export function mixColors(a, b, weight) {

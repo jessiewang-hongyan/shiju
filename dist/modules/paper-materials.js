@@ -5,6 +5,7 @@ export const paperKeys = [
   "lokta",
   "gold",
   "cloud",
+  "cloud-dark",
   "newsprint",
   "kraft",
 ];
@@ -91,14 +92,19 @@ export async function loadPaper(key) {
     if (key === "gold") tile = gold();
     else {
       const img = document.createElement("img");
-      img.src = new URL(`../assets/papers/${key}.jpg`, import.meta.url).href;
+      img.src = new URL(
+        `../assets/papers/${key === "cloud-dark" ? "cloud" : key}.jpg`,
+        import.meta.url,
+      ).href;
       await img.decode();
-      if (["cloud", "newsprint", "kraft"].includes(key)) {
+      if (["cloud", "cloud-dark", "newsprint", "kraft"].includes(key)) {
         tile = canvas(840, 840);
         const x = tile.getContext("2d");
-        x.fillStyle = "#f6f1e6";
+        x.fillStyle = key === "cloud-dark" ? "#26363b" : "#f6f1e6";
         x.fillRect(0, 0, 840, 840);
-        x.globalAlpha = key === "cloud" ? 0.65 ** 4 : 0.65;
+        x.globalAlpha =
+          key === "cloud-dark" ? 0.18 : key === "cloud" ? 0.65 ** 4 : 0.65;
+        if (key === "cloud-dark") x.filter = "grayscale(1)";
         // Preserve the approved preview scale: two source tiles across the paper.
         for (let y = 0; y < 840; y += 420)
           for (let a = 0; a < 840; a += 420) x.drawImage(img, a, y, 420, 420);
@@ -217,4 +223,14 @@ export function paperCSS(key, width = 840, height = 590) {
         backgroundPosition: "",
         backgroundRepeat: "",
       };
+}
+
+// Preserve a readable ink on the dark paper, including transferred source pieces.
+export function paperInk(key, ink) {
+  if (key !== "cloud-dark") return ink;
+  const channels = [1, 3, 5].map((i) => parseInt(ink.slice(i, i + 2), 16));
+  return channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722 <
+    150
+    ? "#eee7d9"
+    : ink;
 }

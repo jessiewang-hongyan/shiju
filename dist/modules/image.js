@@ -5,9 +5,10 @@ import {
   sourceMetrics,
 } from "./source-parts.js?v=20261027sourcesizes1";
 import {
+  paperInk,
   paintPaperField,
   paintPaperCrop,
-} from "./paper-materials.js?v=20261027release3";
+} from "./paper-materials.js?v=20261027darkcloud1";
 import { $, toast } from "./ui.js";
 import { exportFonts, songtiFamily } from "./fonts.js?v=20261027release3";
 import {
@@ -180,6 +181,8 @@ export function createImage({ editor, typography, fonts, appearance }) {
     const c = $("#image-preview"),
       ctx = c.getContext("2d"),
       colors = getExportColors(),
+      sourceInk = paperInk(appearance.sourcePaper, colors["#343b31"]),
+      poemInk = paperInk(appearance.poemPaper, colors["#343b31"]),
       font = exportFonts[$("#export-font").value],
       family = (font ? '"' + font.family + '",' : "") + songtiFamily;
     const previewPad = panelPadding / 2,
@@ -324,7 +327,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
           : { x: left, y: top, width: 500, height: sectionHeight },
       );
       ctx.restore();
-      ctx.fillStyle = colors["#343b31"];
+      ctx.fillStyle = isSource ? sourceInk : poemInk;
       ctx.font = "12px sans-serif";
       ctx.fillText(label, left + previewPad, top + previewPad + 13);
       if (lines.length > 2) {
@@ -355,7 +358,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
             inset: 3,
             baseline: y + px,
             paper: colors["#f7f5ef"],
-            ink: colors["#343b31"],
+            ink: sourceInk,
             rough,
             handmade: appearance.handmade,
             tilt: appearance.handmadeTilt,
@@ -417,7 +420,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
         let x = left + previewPad;
         for (const token of line) {
           x += step * (token.gapBefore || 0);
-          ctx.fillStyle = colors["#343b31"];
+          ctx.fillStyle = isSource ? sourceInk : poemInk;
           ctx.font = (token.fontSize ?? px) + "px " + family;
           if (isSource) {
             if (!token.hole)
@@ -468,6 +471,8 @@ export function createImage({ editor, typography, fonts, appearance }) {
       return;
     }
     const colors = getExportColors(),
+      sourceInk = paperInk(appearance.sourcePaper, colors["#343b31"]),
+      poemInk = paperInk(appearance.poemPaper, colors["#343b31"]),
       collage = appearance.exportCollage,
       rough =
         appearance.exportCollage && appearance.exportRough
@@ -695,7 +700,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
           }
           if (!showSource) return;
           if (!line.some((t) => t.hole)) {
-            ctx.fillStyle = colors["#343b31"];
+            ctx.fillStyle = sourceInk;
             ctx.fillText(line.map((t) => t.c).join(""), sourceX, y);
             return;
           }
@@ -717,7 +722,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
                 rough,
               );
             } else {
-              ctx.fillStyle = colors["#343b31"];
+              ctx.fillStyle = sourceInk;
               ctx.fillText(t.c, x, y);
             }
           }
@@ -739,7 +744,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
         26,
         "author",
       );
-      ctx.fillStyle = colors["#343b31"];
+      ctx.fillStyle = poemInk;
       ctx.font = "46px " + fontFamily;
       if (showPoem)
         newTitle.forEach((line, i) =>
@@ -793,7 +798,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
                 ctx.fillStyle =
                   appearance.sourcePaper !== "none" ||
                   appearance.poemPaper !== "none"
-                    ? colors["#343b31"]
+                    ? sourceInk
                     : colors["#5d6754"];
                 ctx.fillText(t.c, x, y);
               }
@@ -811,7 +816,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
                 inset: 4,
                 baseline: y,
                 paper: colors["#f7f5ef"],
-                ink: colors["#343b31"],
+                ink: sourceInk,
                 rough,
                 handmade: appearance.handmade,
                 tilt: appearance.handmadeTilt,
@@ -846,7 +851,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
             let x = newX;
             for (const t of line) {
               x += advance * (t.gapBefore || 0);
-              ctx.fillStyle = colors["#343b31"];
+              ctx.fillStyle = poemInk;
               if (collage && selected(t))
                 paintCenteredGlyph(
                   ctx,
@@ -868,7 +873,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
             }
           });
         ctx.font = "20px " + fontFamily;
-        ctx.fillStyle = colors["#7e886e"];
+        ctx.fillStyle = paperInk(appearance.poemPaper, colors["#7e886e"]);
         ctx.textAlign = "right";
         if (showPoem)
           ctx.fillText(
