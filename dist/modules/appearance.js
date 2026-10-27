@@ -82,8 +82,11 @@ export function createAppearance({
     exportCollage = false,
     exportRough = false,
     roughStrength = 35,
+    collageGap = 0,
     collageBackground = "#ffffff";
   try {
+    const gap = Number(localStorage.getItem("shiju-collage-gap"));
+    if (Number.isInteger(gap) && gap >= 0 && gap <= 24) collageGap = gap;
     const strength = Number(localStorage.getItem("shiju-rough-strength"));
     if (Number.isInteger(strength) && strength >= 1 && strength <= 100)
       roughStrength = strength;
@@ -92,6 +95,19 @@ export function createAppearance({
     const bg = localStorage.getItem("shiju-collage-background");
     if (validHex(bg)) collageBackground = bg;
   } catch {}
+  function setCollageGap(value) {
+    if (value === "") return;
+    const n = Number(value);
+    if (!Number.isInteger(n) || n < 0 || n > 24) return;
+    collageGap = n;
+    syncColorControls();
+    try {
+      localStorage.setItem("shiju-collage-gap", String(n));
+    } catch {}
+  }
+  $("#collage-gap").oninput = (e) => setCollageGap(e.target.value);
+  $("#collage-gap-value").oninput = (e) => setCollageGap(e.target.value);
+  $("#collage-gap-value").onblur = () => syncColorControls();
   $("#rough-strength").oninput = (e) => {
     roughStrength = Math.max(1, Math.min(100, Number(e.target.value) || 35));
     syncColorControls();
@@ -228,6 +244,8 @@ export function createAppearance({
     $("#export-rough").checked = exportRough;
     $("#rough-hole-preview").hidden = !rough;
     $("#rough-strength-controls").hidden = !rough;
+    $("#collage-gap").value = collageGap;
+    $("#collage-gap-value").value = collageGap;
     $("#rough-strength").value = roughStrength;
     $("#rough-strength-value").textContent = roughStrength + "%";
     $("#rough-strength").setAttribute("aria-valuetext", roughStrength + "%");
@@ -354,6 +372,9 @@ export function createAppearance({
     },
     get exportRough() {
       return exportRough;
+    },
+    get collageGap() {
+      return collageGap;
     },
     get roughStrength() {
       return roughStrength;

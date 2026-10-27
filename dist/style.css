@@ -2140,3 +2140,16 @@ html[data-theme="dark"] #font-to-traditional:hover:not(:disabled) {
   outline: 1px solid var(--ink);
   outline-offset: 2px;
 }
+
+#collage-background-controls .color-row:has(#collage-gap) {
+  display: grid;
+  grid-template-columns: auto minmax(80px, 1fr) 64px;
+  gap: 16px;
+}
+#collage-gap {
+  width: 100%;
+  accent-color: var(--ink);
+}
+#collage-gap-value {
+  width: 64px;
+}

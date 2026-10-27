@@ -324,7 +324,8 @@ test("image export contains source and composition; blank/long titles, all sizes
         r.calls.some((c) => c[0] === "fillText" && c[1] === "山居秋暝") &&
         !r.calls.some(
           (c) =>
-            c[0] === "fillText" && /原诗 · 摘取后|新诗 · 重新排列|拾自《/.test(c[1]),
+            c[0] === "fillText" &&
+            /原诗 · 摘取后|新诗 · 重新排列|拾自《/.test(c[1]),
         ),
     ),
   );
@@ -338,7 +339,8 @@ test("image export contains source and composition; blank/long titles, all sizes
         (r) =>
           !r.calls.some(
             (c) =>
-              c[0] === "fillText" && /原诗 · 摘取后|新诗 · 重新排列|拾自《/.test(c[1]),
+              c[0] === "fillText" &&
+              /原诗 · 摘取后|新诗 · 重新排列|拾自《/.test(c[1]),
           ),
       ),
   );
@@ -552,5 +554,50 @@ test("all four image layouts position source, poem, background and signature con
       );
     }
   }
+  x.close();
+});
+
+test("collage spacing preserves connected cuts, wraps with gaps and changes exported positions", async () => {
+  const chars = [
+    { c: "明", id: 0 },
+    { c: "月", id: 1 },
+    { c: "清", id: 5 },
+  ];
+  const rows = new Map([
+    [0, 0],
+    [1, 0],
+    [5, 0],
+  ]);
+  const spaced = wrapCells(chars, 10, 0.5, rows);
+  assert.deepEqual(
+    spaced[0].map((t) => t.gapBefore),
+    [0, 0, 0.5],
+  );
+  assert.equal(paperRuns(spaced[0], () => true, rows)[1].offset, 2.5);
+  const wrapped = wrapCells(chars, 3, 0.5, rows);
+  assert.equal(wrapped.length, 2);
+  assert.equal(wrapped[1][0].gapBefore, 0);
+  const x = setup();
+  const buttons = x.w.document.querySelectorAll("#source-poem button");
+  buttons[0].click();
+  buttons[2].click();
+  x.$("#export-collage").checked = true;
+  x.$("#export-collage").onchange({ target: x.$("#export-collage") });
+  x.input("#image-size", "23");
+  const positions = [];
+  for (const gap of [0, 24]) {
+    x.input("#collage-gap-value", String(gap));
+    assert.equal(x.appearance.collageGap, gap);
+    assert.equal(x.$("#collage-gap").value, String(gap));
+    await x.$("#export").onclick();
+    const output = x.records.filter((r) => !r.canvas.id).at(-1);
+    positions.push(
+      output.calls
+        .filter((c) => c[0] === "fillText" && c[1] === "新")
+        .at(-1)[2],
+    );
+  }
+  assert.equal(positions[1] - positions[0], 24);
+  assert.equal(x.w.localStorage.getItem("shiju-collage-gap"), "24");
   x.close();
 });

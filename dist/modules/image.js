@@ -5,7 +5,7 @@ import {
   paperRuns,
   paintCenteredGlyph,
   paintPaperRect,
-} from "./image-drawing.js?v=20261027m";
+} from "./image-drawing.js?v=20261027w";
 export function createImage({ editor, typography, fonts, appearance }) {
   const { displayText, displayTokens } = typography;
   const { loadExportFont } = fonts;
@@ -113,10 +113,17 @@ export function createImage({ editor, typography, fonts, appearance }) {
       })),
       maxUnits,
     );
-    const result = wrapCells(displayTokens(editor.state.tokens), maxUnits),
-      sourceRows = new Map();
+    const sourceRows = new Map();
     source.forEach((line, row) =>
       line.forEach((t) => sourceRows.set(t.id, row)),
+    );
+    const result = wrapCells(
+      displayTokens(editor.state.tokens),
+      maxUnits,
+      appearance.exportCollage
+        ? ((appearance.collageGap || 0) * px) / 38 / step
+        : 0,
+      sourceRows,
     );
     const selected = (t) => Number.isInteger(t.id);
     const { vertical, sourceFirst } = layoutOptions();
@@ -179,6 +186,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
         }
         let x = left + 20;
         for (const token of line) {
+          x += step * (token.gapBefore || 0);
           ctx.fillStyle = colors["#343b31"];
           if (isSource) {
             if (!token.hole) ctx.fillText(token.c, x, y + px);
@@ -253,9 +261,15 @@ export function createImage({ editor, typography, fonts, appearance }) {
         })),
         Math.max(1, Math.floor(textWidth / advance)),
       );
+      const layoutRows = new Map();
+      source.forEach((line, row) =>
+        line.forEach((t) => layoutRows.set(t.id, row)),
+      );
       const result = wrapCells(
         displayTokens(editor.state.tokens),
         Math.max(1, Math.floor(textWidth / advance)),
+        collage ? ((appearance.collageGap || 0) * scale) / advance : 0,
+        layoutRows,
       );
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
@@ -390,6 +404,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
             }
           let x = newX;
           for (const t of line) {
+            x += advance * (t.gapBefore || 0);
             ctx.fillStyle = colors["#343b31"];
             if (collage && selected(t))
               paintCenteredGlyph(

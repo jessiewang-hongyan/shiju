@@ -7,8 +7,8 @@ import { initCollection } from "./modules/collection.js";
 import { initLibrary } from "./modules/library.js";
 import { createTypography, initTypography } from "./modules/typography.js";
 import { createFontLoader } from "./modules/fonts.js?v=20261027n";
-import { createAppearance } from "./modules/appearance.js?v=20261027u";
-import { createImage } from "./modules/image.js?v=20261027t";
+import { createAppearance } from "./modules/appearance.js?v=20261027w";
+import { createImage } from "./modules/image.js?v=20261027w";
 
 // Initialize services, then controllers; callbacks connect sibling modules.
 initUI();

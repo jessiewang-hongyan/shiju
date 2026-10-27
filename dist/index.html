@@ -15,7 +15,7 @@
           document.documentElement.dataset.theme = "dark";
       } catch {}
     </script>
-    <link rel="stylesheet" href="style.css?v=20261027v" />
+    <link rel="stylesheet" href="style.css?v=20261027w" />
   </head>
   <body>
     <header>
@@ -367,9 +367,7 @@
           /><button id="image-size-plus" aria-label="增大图片字号">+</button>
         </div>
       </div>
-      <p class="dialog-note">
-        与编辑页字号同步，同时调整原文和集句。
-      </p>
+      <p class="dialog-note">与编辑页字号同步，同时调整原文和集句。</p>
       <button
         id="font-preview-status"
         class="text-button"
@@ -433,6 +431,28 @@
         原文中相邻的字按原顺序连排时，共用一块纸片。拼贴与毛边效果同步显示在编辑页。
       </p>
       <div id="collage-background-controls" hidden>
+        <div class="color-row">
+          <label for="collage-gap">拼贴间隔</label
+          ><input
+            id="collage-gap"
+            type="range"
+            min="0"
+            max="24"
+            step="1"
+            value="0"
+          /><input
+            id="collage-gap-value"
+            type="number"
+            min="0"
+            max="24"
+            step="1"
+            value="0"
+            aria-label="拼贴额外间隔"
+          />
+        </div>
+        <p class="dialog-note">
+          额外增加 0–24 像素间隔，仅用于图片中的独立纸片；连在一起的字不拆开。
+        </p>
         <label class="export-collage-option"
           ><input type="checkbox" id="export-rough" /> 毛边效果</label
         >
@@ -526,6 +546,6 @@
       ><button id="move-right" aria-label="向后移动">→</button>
     </div>
     <div id="toast" role="status"></div>
-    <script type="module" src="app.js?v=20261027u"></script>
+    <script type="module" src="app.js?v=20261027w"></script>
   </body>
 </html>

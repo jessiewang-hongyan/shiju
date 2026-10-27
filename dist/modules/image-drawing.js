@@ -1,4 +1,4 @@
-function wrapCells(chars, maxUnits) {
+function wrapCells(chars, maxUnits, gapUnits = 0, sourceRows) {
   const lines = [[]];
   let units = 0;
   for (const t of chars) {
@@ -8,12 +8,24 @@ function wrapCells(chars, maxUnits) {
       continue;
     }
     const w = t.c === " " ? 0.5 : Array.from(t.c).length;
-    if (units + w > maxUnits && lines.at(-1).length) {
+    const previous = lines.at(-1).at(-1);
+    let gapBefore =
+      gapUnits &&
+      Number.isInteger(t.id) &&
+      Number.isInteger(previous?.id) &&
+      !(
+        t.id === previous.id + 1 &&
+        (!sourceRows || sourceRows.get(t.id) === sourceRows.get(previous.id))
+      )
+        ? gapUnits
+        : 0;
+    if (units + gapBefore + w > maxUnits && lines.at(-1).length) {
       lines.push([]);
       units = 0;
+      gapBefore = 0;
     }
-    lines.at(-1).push({ ...t, w });
-    units += w;
+    lines.at(-1).push({ ...t, w, gapBefore });
+    units += w + gapBefore;
   }
   return lines;
 }
@@ -48,11 +60,13 @@ function paperRuns(line, eligible, sourceRows) {
   const runs = [];
   let offset = 0;
   for (const token of line) {
+    offset += token.gapBefore || 0;
     const width = token.w ?? 1,
       last = runs.at(-1),
       previous = last?.tokens.at(-1);
     const join =
       eligible(token) &&
+      !token.gapBefore &&
       previous &&
       eligible(previous) &&
       Number.isInteger(token.id) &&
