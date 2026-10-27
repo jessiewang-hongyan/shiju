@@ -70,6 +70,8 @@ export function createImage({ editor, typography, fonts, appearance }) {
     "source-right",
     "source-top",
     "source-bottom",
+    "source-only",
+    "poem-only",
   ];
   try {
     const saved = localStorage.getItem("shiju-image-layout");
@@ -78,7 +80,15 @@ export function createImage({ editor, typography, fonts, appearance }) {
   function layoutOptions() {
     const value = $("#image-layout").value;
     return {
-      vertical: value === "source-top" || value === "source-bottom",
+      single: value === "source-only" || value === "poem-only",
+      showSource: value !== "poem-only",
+      showPoem: value !== "source-only",
+      vertical: [
+        "source-top",
+        "source-bottom",
+        "source-only",
+        "poem-only",
+      ].includes(value),
       sourceFirst: value === "source-left" || value === "source-top",
     };
   }
@@ -128,13 +138,27 @@ export function createImage({ editor, typography, fonts, appearance }) {
       sourceRows,
     );
     const selected = (t) => Number.isInteger(t.id);
-    const { vertical, sourceFirst } = layoutOptions();
+    const { vertical, sourceFirst, single, showSource, showPoem } =
+      layoutOptions();
     const sectionHeight =
       appearance.exportCollage && appearance.handmade ? 210 : 180;
     c.width = vertical ? 500 : 1000;
-    c.height = vertical ? sectionHeight * 2 : sectionHeight;
+    c.height = vertical && !single ? sectionHeight * 2 : sectionHeight;
+    c.setAttribute(
+      "aria-label",
+      single
+        ? showSource
+          ? "当前挖空原文预览，最多两行"
+          : "当前集句预览，最多两行"
+        : "当前集句与挖空原文预览，各最多两行",
+    );
+    $(".export-note").textContent = single
+      ? showSource
+        ? "图片仅包含挖空后的原文。"
+        : "图片仅包含集句。"
+      : "图片包含挖空的原文和新诗。";
     ctx.clearRect(0, 0, c.width, c.height);
-    const sections = sourceFirst
+    let sections = sourceFirst
       ? [
           ["原文", source, true],
           ["集句", result, false],
@@ -143,7 +167,10 @@ export function createImage({ editor, typography, fonts, appearance }) {
           ["集句", result, false],
           ["原文", source, true],
         ];
-    const sourceIndex = sourceFirst ? 0 : 1;
+    sections = sections.filter(([, , isSource]) =>
+      isSource ? showSource : showPoem,
+    );
+    const sourceIndex = single || sourceFirst ? 0 : 1;
     const sourceBox = {
       x: vertical ? 0 : sourceIndex * 500,
       y: vertical ? sourceIndex * sectionHeight : 0,
@@ -283,7 +310,6 @@ export function createImage({ editor, typography, fonts, appearance }) {
         }
       });
     }
-    c.setAttribute("aria-label", "当前集句与挖空原文预览，各最多两行");
   }
   function setImageSize(value) {
     const n = Math.round(Number(value));
@@ -308,7 +334,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
   $("#image-size-plus").onclick = () =>
     setImageSize(Number($("#image-size").value) + 1);
   async function exportImage() {
-    if (!editor.pickedCount()) {
+    if (!editor.pickedCount() && layoutOptions().showPoem) {
       toast("请先从原文中选字");
       return;
     }
@@ -337,7 +363,8 @@ export function createImage({ editor, typography, fonts, appearance }) {
       const used = new Set(
         editor.state.tokens.filter((t) => t.id !== null).map((t) => t.id),
       );
-      const { vertical, sourceFirst } = layoutOptions();
+      const { vertical, sourceFirst, single, showSource, showPoem } =
+        layoutOptions();
       const panelWidth = vertical ? 1312 : 622;
       const textWidth = panelWidth - 80;
       const source = wrapCells(
@@ -389,13 +416,17 @@ export function createImage({ editor, typography, fonts, appearance }) {
       const sourcePanelHeight = vertical ? sourceHeight : sharedHeight;
       const newPanelHeight = vertical ? newHeight : sharedHeight;
       const firstHeight = sourceFirst ? sourcePanelHeight : newPanelHeight;
-      const sourceTop = vertical && !sourceFirst ? 190 + firstHeight + 40 : 190;
-      const newTop = vertical && sourceFirst ? 190 + firstHeight + 40 : 190;
+      const sourceTop =
+        vertical && !single && !sourceFirst ? 190 + firstHeight + 40 : 190;
+      const newTop =
+        vertical && !single && sourceFirst ? 190 + firstHeight + 40 : 190;
       const sourceX = !vertical && !sourceFirst ? 794 : 104;
       const newX = !vertical && sourceFirst ? 794 : 104;
-      const height = vertical
-        ? 190 + sourceHeight + newHeight + 40 + 120
-        : 190 + sharedHeight + 120;
+      const height = single
+        ? 190 + (showSource ? sourceHeight : newHeight) + 120
+        : vertical
+          ? 190 + sourceHeight + newHeight + 40 + 120
+          : 190 + sharedHeight + 120;
       if (height > 24000) throw new Error("作品太长，请分为较短的篇章导出");
       canvas.width = 1440;
       canvas.height = height;
@@ -418,42 +449,47 @@ export function createImage({ editor, typography, fonts, appearance }) {
       ctx.lineTo(1376, 142);
       ctx.stroke();
       ctx.fillStyle = colors.poemBackground;
-      ctx.fillRect(newX - 40, newTop, panelWidth, newPanelHeight);
+      if (showPoem) ctx.fillRect(newX - 40, newTop, panelWidth, newPanelHeight);
       const sourceBox = {
         x: sourceX - 40,
         y: sourceTop,
         width: panelWidth,
         height: sourcePanelHeight,
       };
-      paintPaperField(
-        ctx,
-        appearance.sourcePaper,
-        colors["#f7f5ef"],
-        sourceBox,
-      );
-      paintPaperField(ctx, appearance.poemPaper, colors.poemBackground, {
-        x: newX - 40,
-        y: newTop,
-        width: panelWidth,
-        height: newPanelHeight,
-      });
+      if (showSource)
+        paintPaperField(
+          ctx,
+          appearance.sourcePaper,
+          colors["#f7f5ef"],
+          sourceBox,
+        );
+      if (showPoem)
+        paintPaperField(ctx, appearance.poemPaper, colors.poemBackground, {
+          x: newX - 40,
+          y: newTop,
+          width: panelWidth,
+          height: newPanelHeight,
+        });
       ctx.fillStyle = colors["#343b31"];
       ctx.font = "30px " + fontFamily;
-      sourceTitle.forEach((line, i) =>
-        ctx.fillText(line, sourceX, sourceTop + 50 + i * 40),
-      );
+      if (showSource)
+        sourceTitle.forEach((line, i) =>
+          ctx.fillText(line, sourceX, sourceTop + 50 + i * 40),
+        );
       ctx.font = "15px sans-serif";
       ctx.fillStyle = colors["#929985"];
-      ctx.fillText(
-        displayText(editor.state.source.author),
-        sourceX,
-        sourceTop + 50 + sourceTitle.length * 40,
-      );
+      if (showSource)
+        ctx.fillText(
+          displayText(editor.state.source.author),
+          sourceX,
+          sourceTop + 50 + sourceTitle.length * 40,
+        );
       ctx.fillStyle = colors["#343b31"];
       ctx.font = "46px " + fontFamily;
-      newTitle.forEach((line, i) =>
-        ctx.fillText(line, newX, newTop + 60 + i * 56),
-      );
+      if (showPoem)
+        newTitle.forEach((line, i) =>
+          ctx.fillText(line, newX, newTop + 60 + i * 56),
+        );
       const sourceStart = sourceTop + sourceOffset;
       const newStart = newTop + newOffset;
       paintBody(ctx, source, result, sourceStart, newStart, height);
@@ -476,99 +512,102 @@ export function createImage({ editor, typography, fonts, appearance }) {
         });
         const selected = (t) => Number.isInteger(t.id);
         ctx.font = bodySize + "px " + fontFamily;
-        source.forEach((line, row) => {
-          const y = sourceStart + row * lineHeight;
-          for (const run of paperRuns(line, (t) => t.hole, sourceRows)) {
-            const x = sourceX + run.offset * advance,
-              t = run.tokens[0];
-            if (t.hole) {
-              ctx.fillStyle =
-                appearance.sourcePaper !== "none"
-                  ? colors.poemBackground
-                  : colors["#edf0e4"];
-              ctx.setLineDash(rough ? [] : [3, 4]);
-              paintPaperRect(
-                ctx,
-                x + 2,
-                y - bodySize * 0.87,
-                advance * run.width - 4,
-                advance - 4,
-                t.id,
-                rough,
-              );
-              ctx.setLineDash([]);
-            } else {
-              ctx.fillStyle =
-                appearance.sourcePaper !== "none" ||
-                appearance.poemPaper !== "none"
-                  ? colors["#343b31"]
-                  : colors["#5d6754"];
-              ctx.fillText(t.c, x, y);
+        if (showSource)
+          source.forEach((line, row) => {
+            const y = sourceStart + row * lineHeight;
+            for (const run of paperRuns(line, (t) => t.hole, sourceRows)) {
+              const x = sourceX + run.offset * advance,
+                t = run.tokens[0];
+              if (t.hole) {
+                ctx.fillStyle =
+                  appearance.sourcePaper !== "none"
+                    ? colors.poemBackground
+                    : colors["#edf0e4"];
+                ctx.setLineDash(rough ? [] : [3, 4]);
+                paintPaperRect(
+                  ctx,
+                  x + 2,
+                  y - bodySize * 0.87,
+                  advance * run.width - 4,
+                  advance - 4,
+                  t.id,
+                  rough,
+                );
+                ctx.setLineDash([]);
+              } else {
+                ctx.fillStyle =
+                  appearance.sourcePaper !== "none" ||
+                  appearance.poemPaper !== "none"
+                    ? colors["#343b31"]
+                    : colors["#5d6754"];
+                ctx.fillText(t.c, x, y);
+              }
             }
-          }
-        });
-        result.forEach((line, row) => {
-          const y = newStart + row * lineHeight;
-          if (collage) {
-            paintCollageLine(ctx, line, sourceRows, {
-              x: newX - 1,
-              y: y - bodySize * 0.87,
-              step: advance,
-              inset: 4,
-              baseline: y,
-              paper: colors["#f7f5ef"],
-              ink: colors["#343b31"],
-              rough,
-              handmade: appearance.handmade,
-              tilt: appearance.handmadeTilt,
-              drift: appearance.handmadeDrift,
-              paperPainter:
-                appearance.sourcePaper !== "none"
-                  ? (context, run, target) => {
-                      const point = sourcePositions.get(run.tokens[0].id);
-                      if (point)
-                        paintPaperCrop(
-                          context,
-                          appearance.sourcePaper,
-                          colors["#f7f5ef"],
-                          sourceBox,
-                          {
-                            ...point,
-                            width: target.width,
-                            height: target.height,
-                          },
-                          target,
-                        );
-                    }
-                  : undefined,
-            });
-            return;
-          }
-          let x = newX;
-          for (const t of line) {
-            x += advance * (t.gapBefore || 0);
-            ctx.fillStyle = colors["#343b31"];
-            if (collage && selected(t))
-              paintCenteredGlyph(
-                ctx,
-                t.c,
-                x - 1,
-                y - bodySize * 0.87,
-                advance - 4,
-                advance - 4,
-              );
-            else ctx.fillText(t.c, x, y);
-            x += advance * t.w;
-          }
-        });
+          });
+        if (showPoem)
+          result.forEach((line, row) => {
+            const y = newStart + row * lineHeight;
+            if (collage) {
+              paintCollageLine(ctx, line, sourceRows, {
+                x: newX - 1,
+                y: y - bodySize * 0.87,
+                step: advance,
+                inset: 4,
+                baseline: y,
+                paper: colors["#f7f5ef"],
+                ink: colors["#343b31"],
+                rough,
+                handmade: appearance.handmade,
+                tilt: appearance.handmadeTilt,
+                drift: appearance.handmadeDrift,
+                paperPainter:
+                  appearance.sourcePaper !== "none"
+                    ? (context, run, target) => {
+                        const point = sourcePositions.get(run.tokens[0].id);
+                        if (point)
+                          paintPaperCrop(
+                            context,
+                            appearance.sourcePaper,
+                            colors["#f7f5ef"],
+                            sourceBox,
+                            {
+                              ...point,
+                              width: target.width,
+                              height: target.height,
+                            },
+                            target,
+                          );
+                      }
+                    : undefined,
+              });
+              return;
+            }
+            let x = newX;
+            for (const t of line) {
+              x += advance * (t.gapBefore || 0);
+              ctx.fillStyle = colors["#343b31"];
+              if (collage && selected(t))
+                paintCenteredGlyph(
+                  ctx,
+                  t.c,
+                  x - 1,
+                  y - bodySize * 0.87,
+                  advance - 4,
+                  advance - 4,
+                );
+              else ctx.fillText(t.c, x, y);
+              x += advance * t.w;
+            }
+          });
         ctx.font = "20px " + fontFamily;
         ctx.fillStyle = colors["#7e886e"];
         ctx.textAlign = "right";
-        ctx.fillText(
-          "— " + displayText(editor.state.signature || "拾句的人"),
-          newX - 40 + panelWidth - 40,
-          newTop + newPanelHeight - 60,
-        );
+        if (showPoem)
+          ctx.fillText(
+            "— " + displayText(editor.state.signature || "拾句的人"),
+            newX - 40 + panelWidth - 40,
+            newTop + newPanelHeight - 60,
+          );
         ctx.textAlign = "left";
         ctx.strokeStyle = colors["#dfe2d5"];
         ctx.beginPath();
@@ -588,10 +627,16 @@ export function createImage({ editor, typography, fonts, appearance }) {
           const url = URL.createObjectURL(blob),
             a = document.createElement("a");
           a.href = url;
-          a.download = `拾句-${(editor.state.title.trim() || "集句").replace(/[\\/:*?"<>|]/g, "")}.png`;
+          a.download = `拾句-${(showPoem ? editor.state.title.trim() || "集句" : editor.state.source.title || "原文").replace(/[\\/:*?"<>|]/g, "")}.png`;
           a.click();
           setTimeout(() => URL.revokeObjectURL(url), 60000);
-          toast("图片已生成，包含挖空原诗与新诗");
+          toast(
+            single
+              ? showSource
+                ? "图片已生成，仅包含挖空原文"
+                : "图片已生成，仅包含集句"
+              : "图片已生成，包含挖空原诗与新诗",
+          );
         }, "image/png");
       }
     } catch (e) {

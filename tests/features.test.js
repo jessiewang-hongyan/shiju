@@ -684,3 +684,53 @@ test("paper choices are independent, persisted and reset without changing poem c
     x.close();
   }
 });
+
+test("single-panel exports omit the other section and use only the visible content height", async () => {
+  const x = setup();
+  x.input("#poem-title", "独立集句");
+  x.$("#source-poem button").click();
+  for (const layout of ["poem-only", "source-only"]) {
+    x.input("#image-layout", layout, "change");
+    assert.equal(localStorage.getItem("shiju-image-layout"), layout);
+    assert.equal(x.$("#image-preview").width, 500);
+    assert.equal(x.$("#image-preview").height, 180);
+    assert.equal(
+      x.$("#image-preview").getAttribute("aria-label"),
+      layout === "source-only"
+        ? "当前挖空原文预览，最多两行"
+        : "当前集句预览，最多两行",
+    );
+    const preview = x.records.find((r) => r.canvas.id === "image-preview");
+    assert(preview);
+    await x.$("#export").onclick();
+    const { calls, canvas } = x.records.filter((r) => !r.canvas.id).at(-1);
+    const texts = calls.filter((c) => c[0] === "fillText").map((c) => c[1]);
+    assert.equal(texts.includes("山居秋暝"), layout === "source-only");
+    assert.equal(texts.includes("独立集句"), layout === "poem-only");
+    assert.equal(
+      texts.some((t) => t.startsWith("— ")),
+      layout === "poem-only",
+    );
+    assert(canvas.height < 1060);
+    assert(
+      calls.every(
+        (c) => c[0] !== "fillText" || (c[3] >= 0 && c[3] < canvas.height),
+      ),
+    );
+  }
+  x.close();
+});
+
+test("source-only export works without picked characters", async () => {
+  const x = setup();
+  x.input("#image-layout", "source-only", "change");
+  await x.$("#export").onclick();
+  const output = x.records.filter((r) => !r.canvas.id).at(-1);
+  assert(output.calls.some((c) => c[0] === "fillText" && c[1] === "山居秋暝"));
+  assert(
+    !output.calls.some(
+      (c) => c[0] === "fillText" && String(c[1]).startsWith("— "),
+    ),
+  );
+  x.close();
+});
