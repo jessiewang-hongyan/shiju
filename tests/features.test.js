@@ -1030,3 +1030,34 @@ test("settings export uses current configuration and shares the busy state with 
   assert(!calls.some((c) => c[0] === "fillText" && c[1] === "山居秋暝"));
   x.close();
 });
+
+test("cut title, author and body keep source font and paper dimensions at every body size", async () => {
+  const x = setup();
+  x.$('#source-title button[aria-label="摘取：居"]').click();
+  x.$('#source-author button[aria-label="摘取：维"]').click();
+  x.$('#source-poem button[aria-label="摘取：空"]').click();
+  x.input("#export-collage", true, "change");
+  for (const size of [5, 23, 25]) {
+    x.input("#image-size", size);
+    await x.$("#export").onclick();
+    const calls = x.records.find((r) => r.canvas === x.downloads.at(-1)).calls;
+    for (const [char, font, width] of [
+      ["居", 30, 30],
+      ["维", 15, 15],
+      ["空", (38 * size) / 23, (46 * size) / 23 - 4],
+    ]) {
+      const glyph = calls.find((c) => c[0] === "fillText" && c[1] === char);
+      assert(Math.abs(parseFloat(glyph.at(-1)) - font) < 0.001);
+      // Original hole and its moved paper have the same dimensions.
+      assert(
+        calls.filter(
+          (c) =>
+            c[0] === "fillRect" &&
+            Math.abs(c[3] - width) < 0.001 &&
+            Math.abs(c[4] - width) < 0.001,
+        ).length >= 2,
+      );
+    }
+  }
+  x.close();
+});

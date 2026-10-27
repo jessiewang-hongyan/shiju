@@ -1,4 +1,8 @@
-import { sourceParts, partCells } from "./source-parts.js";
+import {
+  sourceParts,
+  partCells,
+  sourceMetrics,
+} from "./source-parts.js?v=20261027sourcesizes1";
 import {
   paintPaperField,
   paintPaperCrop,
@@ -11,7 +15,7 @@ import {
   paperRuns,
   paintCenteredGlyph,
   paintPaperRect,
-} from "./image-drawing.js?v=20261027release3";
+} from "./image-drawing.js?v=20261027sourcesizes1";
 export function createImage({ editor, typography, fonts, appearance }) {
   const { displayText, displayTokens } = typography;
   const { loadExportFont } = fonts;
@@ -198,14 +202,29 @@ export function createImage({ editor, typography, fonts, appearance }) {
         partCells(part, displayText, used).some((t) => t.hole),
     );
     const source = previewParts.flatMap((part) =>
-      wrapCells(partCells(part, displayText, used), maxUnits),
+      wrapCells(
+        sourceMetrics(
+          partCells(part, displayText, used),
+          editor.state.source,
+          px,
+          step,
+          (1.5 * 23) / 38,
+        ),
+        maxUnits,
+      ),
     );
     const sourceRows = new Map();
     source.forEach((line, row) =>
       line.forEach((t) => sourceRows.set(t.id, row)),
     );
     const result = wrapCells(
-      displayTokens(editor.state.tokens),
+      sourceMetrics(
+        displayTokens(editor.state.tokens),
+        editor.state.source,
+        px,
+        step,
+        (1.5 * 23) / 38,
+      ),
       maxUnits,
       appearance.exportCollage
         ? ((appearance.collageGap || 0) * px) / 38 / step
@@ -276,7 +295,10 @@ export function createImage({ editor, typography, fonts, appearance }) {
             sourceBox.y +
             previewPad +
             28 +
-            row * (appearance.exportCollage && appearance.handmade ? 76 : 58),
+            row * (appearance.exportCollage && appearance.handmade ? 76 : 58) +
+            (step - (t.cellStep ?? step)) / 2,
+          width: t.w * step - 3,
+          height: (t.cellStep ?? step) - 3,
         });
         offset += t.w;
       });
@@ -347,8 +369,11 @@ export function createImage({ editor, typography, fonts, appearance }) {
                         sourceBox,
                         {
                           ...point,
-                          width: target.width,
-                          height: target.height,
+                          width:
+                            previewPositions.get(run.tokens.at(-1).id).x +
+                            previewPositions.get(run.tokens.at(-1).id).width -
+                            point.x,
+                          height: point.height,
                         },
                         target,
                       );
@@ -378,9 +403,9 @@ export function createImage({ editor, typography, fonts, appearance }) {
           paintPaperRect(
             ctx,
             left + previewPad - 2 + run.offset * step,
-            y,
+            y + (step - (token.cellStep ?? step)) / 2,
             step * run.width - 3,
-            step - 3,
+            (token.cellStep ?? step) - 3,
             token.id,
             rough,
           );
@@ -390,11 +415,22 @@ export function createImage({ editor, typography, fonts, appearance }) {
         for (const token of line) {
           x += step * (token.gapBefore || 0);
           ctx.fillStyle = colors["#343b31"];
+          ctx.font = (token.fontSize ?? px) + "px " + family;
           if (isSource) {
-            if (!token.hole) ctx.fillText(token.c, x, y + px);
+            if (!token.hole)
+              ctx.fillText(
+                token.c,
+                x,
+                y + px + ((token.fontSize ?? px) - px) / 2,
+              );
           } else if (appearance.exportCollage && selected(token))
             paintCenteredGlyph(ctx, token.c, x - 2, y, step - 3, step - 3);
-          else ctx.fillText(token.c, x, y + px);
+          else
+            ctx.fillText(
+              token.c,
+              x,
+              y + px + ((token.fontSize ?? px) - px) / 2,
+            );
           x += step * token.w;
         }
       });
@@ -474,7 +510,8 @@ export function createImage({ editor, typography, fonts, appearance }) {
         sourceOffset,
         newOffset,
         sourceHeight,
-        newHeight;
+        newHeight,
+        resultLineHeight;
       function titleLines(text, size) {
         if (!text) return [];
         ctx.font = size + "px " + fontFamily;
@@ -521,10 +558,23 @@ export function createImage({ editor, typography, fonts, appearance }) {
           line.forEach((t) => rows.set(t.id, row)),
         );
         result = wrapCells(
-          displayTokens(editor.state.tokens),
+          sourceMetrics(
+            displayTokens(editor.state.tokens),
+            editor.state.source,
+            bodySize,
+            advance,
+          ),
           Math.max(1, Math.floor(textWidth / advance)),
           collage ? ((appearance.collageGap || 0) * scale) / advance : 0,
           rows,
+        );
+        const maxStep = Math.max(
+          advance,
+          ...result.flat().map((t) => t.cellStep || advance),
+        );
+        resultLineHeight = Math.max(
+          lineHeight,
+          maxStep * (collage && appearance.handmade ? 80 / 46 : 64 / 46),
         );
         newTitle = titleLines(displayText(editor.state.title.trim()), 46);
         sourceOffset =
@@ -535,9 +585,10 @@ export function createImage({ editor, typography, fonts, appearance }) {
           27;
         newOffset = newTitle.length
           ? panelPadding + 20 + newTitle.length * 56 + 24
-          : panelPadding + advance + 10;
+          : panelPadding + Math.max(advance, maxStep) + 10;
         sourceHeight = sourceOffset + source.length * lineHeight + panelPadding;
-        newHeight = newOffset + result.length * lineHeight + panelPadding + 70;
+        newHeight =
+          newOffset + result.length * resultLineHeight + panelPadding + 70;
         const needed =
           310 +
           (single
@@ -747,8 +798,9 @@ export function createImage({ editor, typography, fonts, appearance }) {
           });
         if (showPoem)
           result.forEach((line, row) => {
-            const y = newStart + row * lineHeight;
+            const y = newStart + row * resultLineHeight;
             if (collage) {
+              ctx.font = bodySize + "px " + fontFamily;
               paintCollageLine(ctx, line, sourceRows, {
                 x: newX - 1,
                 y: y - bodySize * 0.87,
@@ -801,7 +853,14 @@ export function createImage({ editor, typography, fonts, appearance }) {
                   advance - 4,
                   advance - 4,
                 );
-              else ctx.fillText(t.c, x, y);
+              else {
+                ctx.font = (t.fontSize ?? bodySize) + "px " + fontFamily;
+                ctx.fillText(
+                  t.c,
+                  x,
+                  y + ((t.fontSize ?? bodySize) - bodySize) / 2,
+                );
+              }
               x += advance * t.w;
             }
           });

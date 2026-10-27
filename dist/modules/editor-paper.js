@@ -5,7 +5,7 @@ import {
 import {
   paintPaperRect,
   handmadePlacement,
-} from "./image-drawing.js?v=20261027release3";
+} from "./image-drawing.js?v=20261027sourcesizes1";
 
 // Source occurrence and actual wrapped row both matter when joining paper pieces.
 export function groupPaperRects(items, sourceRows) {
@@ -50,6 +50,25 @@ export function initEditorPaper({ appearance }) {
       el.style.lineHeight = enabled && appearance.handmade ? "1.8" : "";
       el.style.transform = "";
       el.style.transformOrigin = "";
+    });
+    poemTokens.forEach((el) => {
+      const source = roots[0].querySelector(
+        '[data-source-id="' + el.dataset.sourceId + '"]',
+      );
+      el.style.fontSize =
+        el.style.width =
+        el.style.height =
+        el.style.minWidth =
+          "";
+      if (!source) return;
+      const bounds = source.getBoundingClientRect();
+      // Picked body buttons hide text with font-size:0; read the containing line.
+      const font = window.getComputedStyle(
+        source.closest(".source-line") || source,
+      );
+      el.style.fontSize = font.fontSize;
+      el.style.width = el.style.minWidth = bounds.width + "px";
+      el.style.height = bounds.height + "px";
     });
     const sourceRows = new Map(),
       sourcePositions = new Map();

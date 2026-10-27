@@ -8,7 +8,7 @@ function wrapCells(chars, maxUnits, gapUnits = 0, sourceRows) {
       units = 0;
       continue;
     }
-    const w = t.c === " " ? 0.5 : Array.from(t.c).length;
+    const w = t.units ?? (t.c === " " ? 0.5 : Array.from(t.c).length);
     const previous = lines.at(-1).at(-1);
     let gapBefore =
       gapUnits &&
@@ -34,7 +34,8 @@ function wrapCells(chars, maxUnits, gapUnits = 0, sourceRows) {
           sourceRows.get(next.id) !== sourceRows.get(prior.id)
         )
           break;
-        pieceWidth += next.c === " " ? 0.5 : Array.from(next.c).length;
+        pieceWidth +=
+          next.units ?? (next.c === " " ? 0.5 : Array.from(next.c).length);
       }
     }
     const previousOnSource =
@@ -135,30 +136,35 @@ export function paintCollageLine(
   },
 ) {
   const selected = (t) => Number.isInteger(t.id);
+  const baseFont = ctx.font;
   for (const run of paperRuns(line, selected, sourceRows)) {
     const first = run.tokens[0];
     const left = x + run.offset * step;
     const width = run.width * step - inset;
-    const height = step - inset;
+    const height = (first.cellStep ?? step) - inset;
+    const top = y + (step - inset - height) / 2;
     ctx.save();
+    ctx.font = first.fontSize
+      ? baseFont.replace(/^[\d.]+px/, first.fontSize + "px")
+      : baseFont;
     if (selected(first)) {
       if (handmade) {
         const pose = handmadePlacement(first.id, width, height, tilt, drift);
-        ctx.translate(left + width / 2, y + height / 2 + pose.dy);
+        ctx.translate(left + width / 2, top + height / 2 + pose.dy);
         ctx.rotate(pose.angle);
-        ctx.translate(-left - width / 2, -y - height / 2);
+        ctx.translate(-left - width / 2, -top - height / 2);
       }
       ctx.fillStyle = paper;
       paintPaperRect(
         ctx,
         left,
-        y,
+        top,
         width,
         height,
         first.id,
         rough,
         paperPainter
-          ? () => paperPainter(ctx, run, { x: left, y, width, height })
+          ? () => paperPainter(ctx, run, { x: left, y: top, width, height })
           : undefined,
       );
       ctx.fillStyle = ink;
@@ -168,8 +174,8 @@ export function paintCollageLine(
           ctx,
           token.c,
           left + offset * step,
-          y,
-          step - inset,
+          top,
+          token.w * step - inset,
           height,
         );
         offset += token.w;
@@ -179,6 +185,7 @@ export function paintCollageLine(
       ctx.fillText(first.c, left, baseline);
     }
     ctx.restore();
+    ctx.font = baseFont;
   }
 }
 // Center the visible glyph, rather than its font baseline, inside a paper tile.

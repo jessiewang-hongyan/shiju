@@ -1,4 +1,4 @@
-import { sourceParts } from "./source-parts.js";
+import { sourceParts } from "./source-parts.js?v=20261027sourcesizes1";
 import { $, toast } from "./ui.js";
 export const isLetter = (c) => /[\p{L}\p{N}]/u.test(c);
 export function createEditor({ store, typography }) {

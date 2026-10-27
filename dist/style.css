@@ -2288,3 +2288,9 @@ html[data-night-colors] #new-poem.editor-textured .poem-token {
     max-width: 65%;
   }
 }
+
+#new-poem .poem-token[data-source-id] {
+  vertical-align: middle;
+  padding: 0;
+  box-sizing: border-box;
+}
