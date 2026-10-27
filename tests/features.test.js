@@ -924,6 +924,11 @@ test("module padding and gap control actual export geometry and persist", async 
   }
   x.input("#image-layout", "poem-only", "change");
   assert(x.$("#image-panel-gap").disabled);
+  assert(x.$("#image-panel-gap-row").hidden);
+  x.input("#image-layout", "source-only", "change");
+  assert(x.$("#image-panel-gap-row").hidden);
+  x.input("#image-layout", "source-bottom", "change");
+  assert.equal(x.$("#image-panel-gap-row").hidden, false);
   x.$("#colors-reset").click();
   assert.equal(x.$("#image-padding-value").value, "40");
   assert.equal(x.$("#image-panel-gap-value").value, "40");

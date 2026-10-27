@@ -231,6 +231,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
         ? "图片仅包含挖空后的原文。"
         : "图片仅包含集句。"
       : "图片包含挖空的原文和新诗。";
+    $("#image-panel-gap-row").hidden = single;
     $("#image-panel-gap").disabled = $("#image-panel-gap-value").disabled =
       single;
     ctx.clearRect(0, 0, c.width, c.height);

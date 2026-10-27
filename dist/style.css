@@ -2210,3 +2210,7 @@ html[data-night-colors] #new-poem.editor-textured .poem-token {
 #background-presets[hidden] {
   display: none;
 }
+
+#image-panel-gap-row[hidden] {
+  display: none;
+}
