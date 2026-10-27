@@ -255,8 +255,6 @@ export function createImage({ editor, typography, fonts, appearance }) {
       ctx.fillRect(754, 190, 622, height - 310);
       ctx.fillStyle = colors["#87917b"];
       ctx.font = "14px sans-serif";
-      ctx.fillText("01   原诗 · 摘取后", 85, 219);
-      ctx.fillText("02   新诗 · 重新排列", 794, 229);
       function drawWrappedTitle(text, x, y, width, size = 30) {
         ctx.font = size + "px " + fontFamily;
         let str = "";
@@ -275,7 +273,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
       const sy = drawWrappedTitle(
         displayText(editor.state.source.title),
         85,
-        280,
+        240,
         560,
       );
       ctx.font = "15px sans-serif";
@@ -285,13 +283,13 @@ export function createImage({ editor, typography, fonts, appearance }) {
       const ny = drawWrappedTitle(
         displayText(editor.state.title.trim()),
         794,
-        290,
+        250,
         540,
         46,
       );
       // Titles can take multiple lines; reserve the extra rows in layout by limiting canvas text area through dynamic extension.
       const sourceStart = sy + 93,
-        newStart = editor.state.title.trim() ? ny + 80 : 290;
+        newStart = editor.state.title.trim() ? ny + 80 : 250;
       const need = Math.max(
         sourceStart + source.length * lineHeight + 150,
         newStart + result.length * lineHeight + 210,
@@ -404,14 +402,12 @@ export function createImage({ editor, typography, fonts, appearance }) {
         ctx.fillText("拾句", 64, 95);
         ctx.fillStyle = colors["#87917b"];
         ctx.font = "14px sans-serif";
-        ctx.fillText("01   原诗 · 摘取后", 85, 219);
-        ctx.fillText("02   新诗 · 重新排列", 794, 229);
         ctx.fillStyle = colors["#343b31"];
-        drawWrappedTitle(displayText(editor.state.source.title), 85, 280, 560);
+        drawWrappedTitle(displayText(editor.state.source.title), 85, 240, 560);
         drawWrappedTitle(
           displayText(editor.state.title.trim()),
           794,
-          290,
+          250,
           540,
           46,
         );

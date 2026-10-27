@@ -321,14 +321,27 @@ test("image export contains source and composition; blank/long titles, all sizes
   assert(
     output.every(
       (r) =>
-        r.calls.some(
-          (c) => c[0] === "fillText" && c[1] === "01   原诗 · 摘取后",
-        ) && r.calls.some((c) => c[1] === "02   新诗 · 重新排列"),
+        r.calls.some((c) => c[0] === "fillText" && c[1] === "山居秋暝") &&
+        !r.calls.some(
+          (c) =>
+            c[0] === "fillText" && /原诗 · 摘取后|新诗 · 重新排列/.test(c[1]),
+        ),
     ),
   );
   input("#poem-title", "长标题".repeat(20));
   await $("#export").onclick();
   assert.equal(downloads.length, 7);
+  assert(
+    records
+      .filter((r) => !r.canvas.id)
+      .every(
+        (r) =>
+          !r.calls.some(
+            (c) =>
+              c[0] === "fillText" && /原诗 · 摘取后|新诗 · 重新排列/.test(c[1]),
+          ),
+      ),
+  );
   assert(!$("#export").disabled);
   x.close();
 });
