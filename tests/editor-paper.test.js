@@ -69,6 +69,7 @@ test("editor paper follows settings, redraws after returns, and leaves interacti
   }
   const appearance = {
     exportCollage: true,
+    handmade: true,
     exportRough: false,
     roughStrength: 80,
   };
@@ -76,6 +77,11 @@ test("editor paper follows settings, redraws after returns, and leaves interacti
   pending();
   assert.equal(w.document.querySelectorAll("canvas").length, 2);
   assert.equal(roots[1].textContent, "明月");
+  assert.match(roots[1].querySelector("span").style.transform, /rotate/);
+  assert.equal(
+    roots[1].querySelector("span").style.transform,
+    roots[1].querySelector("canvas").style.transform,
+  );
   assert.ok(calls.some((c) => c[0] === "fillRect"));
   calls.length = 0;
   appearance.exportRough = true;
@@ -91,6 +97,7 @@ test("editor paper follows settings, redraws after returns, and leaves interacti
   pending();
   assert.equal(w.document.querySelectorAll("canvas").length, 0);
   assert.equal(roots[0].classList.contains("editor-collage"), false);
+  assert.equal(roots[1].querySelector("span").style.transform, "");
   paper.dispose();
   dom.window.close();
   delete globalThis.document;

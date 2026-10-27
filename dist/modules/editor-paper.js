@@ -1,4 +1,7 @@
-import { paintPaperRect } from "./image-drawing.js?v=20261027m";
+import {
+  paintPaperRect,
+  handmadePlacement,
+} from "./image-drawing.js?v=20261027y";
 
 // Source occurrence and actual wrapped row both matter when joining paper pieces.
 export function groupPaperRects(items, sourceRows) {
@@ -37,6 +40,11 @@ export function initEditorPaper({ appearance }) {
   }
   function draw() {
     const enabled = appearance.exportCollage;
+    const poemTokens = [...roots[1].querySelectorAll(".poem-token")];
+    poemTokens.forEach((el) => {
+      el.style.transform = "";
+      el.style.transformOrigin = "";
+    });
     const sourceRows = new Map();
     roots[0].querySelectorAll("[data-source-id]").forEach((el) => {
       sourceRows.set(
@@ -108,6 +116,23 @@ export function initEditorPaper({ appearance }) {
           run.id,
           rough,
         );
+        if (index === 1 && appearance.handmade) {
+          const pose = handmadePlacement(run.id, run.width - 2, run.height - 8);
+          const transform = `translateY(${pose.dy}px) rotate(${pose.angle}rad)`;
+          canvas.style.transform = transform;
+          for (const el of poemTokens) {
+            const id = Number(el.dataset.sourceId);
+            if (
+              !el.hasAttribute("data-source-id") ||
+              id < run.id ||
+              id > run.lastId
+            )
+              continue;
+            const rect = el.getBoundingClientRect();
+            el.style.transformOrigin = `${box.left + run.left + run.width / 2 - rect.left}px ${box.top + run.top + run.height / 2 - rect.top}px`;
+            el.style.transform = transform;
+          }
+        }
         layer.append(canvas);
       }
     }

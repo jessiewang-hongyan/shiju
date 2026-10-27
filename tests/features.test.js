@@ -65,6 +65,8 @@ function setup(draft) {
       "fillRect",
       "strokeRect",
       "save",
+      "translate",
+      "rotate",
       "restore",
       "beginPath",
       "closePath",
@@ -599,5 +601,32 @@ test("collage spacing preserves connected cuts, wraps with gaps and changes expo
   }
   assert.equal(positions[1] - positions[0], 24);
   assert.equal(x.w.localStorage.getItem("shiju-collage-gap"), "24");
+  x.close();
+});
+
+test("handmade collage rotates each connected piece once and persists the optional setting", async () => {
+  const x = setup();
+  const buttons = x.w.document.querySelectorAll("#source-poem button");
+  buttons[0].click();
+  buttons[1].click();
+  buttons[3].click();
+  x.$("#export-collage").checked = true;
+  x.$("#export-collage").onchange({ target: x.$("#export-collage") });
+  const poses = [];
+  for (const enabled of [true, true, false]) {
+    x.$("#export-handmade").checked = enabled;
+    x.$("#export-handmade").onchange({ target: x.$("#export-handmade") });
+    await x.$("#export").onclick();
+    const out = x.records.filter((r) => !r.canvas.id).at(-1);
+    const rotations = out.calls
+      .filter((c) => c[0] === "rotate")
+      .map((c) => c[1]);
+    assert.equal(rotations.length, enabled ? 2 : 0);
+    assert(rotations.every((angle) => Math.abs(angle) <= 0.075));
+    poses.push(rotations);
+  }
+  assert.deepEqual(poses[0], poses[1]);
+  assert.notEqual(poses[0][0], poses[0][1]);
+  assert.equal(x.w.localStorage.getItem("shiju-handmade"), "false");
   x.close();
 });

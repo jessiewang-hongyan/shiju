@@ -80,6 +80,57 @@ function paperRuns(line, eligible, sourceRows) {
   }
   return runs;
 }
+// Stable per-piece placement; cap corner rise so long cuts stay inside their row.
+export function handmadePlacement(id, width, height) {
+  const seed = Math.imul(Number(id) + 1, 2654435761) >>> 0;
+  const angle =
+    (((seed % 997) / 996) * 2 - 1) *
+    Math.min(0.075, (height * 0.24) / Math.max(width, 1));
+  const dy = ((((seed >>> 10) % 991) / 990) * 2 - 1) * height * 0.12;
+  return { angle, dy };
+}
+export function paintCollageLine(
+  ctx,
+  line,
+  sourceRows,
+  { x, y, step, inset, baseline, paper, ink, rough, handmade },
+) {
+  const selected = (t) => Number.isInteger(t.id);
+  for (const run of paperRuns(line, selected, sourceRows)) {
+    const first = run.tokens[0];
+    const left = x + run.offset * step;
+    const width = run.width * step - inset;
+    const height = step - inset;
+    ctx.save();
+    if (selected(first)) {
+      if (handmade) {
+        const pose = handmadePlacement(first.id, width, height);
+        ctx.translate(left + width / 2, y + height / 2 + pose.dy);
+        ctx.rotate(pose.angle);
+        ctx.translate(-left - width / 2, -y - height / 2);
+      }
+      ctx.fillStyle = paper;
+      paintPaperRect(ctx, left, y, width, height, first.id, rough);
+      ctx.fillStyle = ink;
+      let offset = 0;
+      for (const token of run.tokens) {
+        paintCenteredGlyph(
+          ctx,
+          token.c,
+          left + offset * step,
+          y,
+          step - inset,
+          height,
+        );
+        offset += token.w;
+      }
+    } else {
+      ctx.fillStyle = ink;
+      ctx.fillText(first.c, left, baseline);
+    }
+    ctx.restore();
+  }
+}
 // Center the visible glyph, rather than its font baseline, inside a paper tile.
 function paintCenteredGlyph(ctx, text, x, y, w, h) {
   ctx.save();

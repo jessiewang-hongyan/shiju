@@ -2,10 +2,11 @@ import { $, toast } from "./ui.js";
 import { exportFonts, songtiFamily } from "./fonts.js?v=20261027n";
 import {
   wrapCells,
+  paintCollageLine,
   paperRuns,
   paintCenteredGlyph,
   paintPaperRect,
-} from "./image-drawing.js?v=20261027w";
+} from "./image-drawing.js?v=20261027y";
 export function createImage({ editor, typography, fonts, appearance }) {
   const { displayText, displayTokens } = typography;
   const { loadExportFont } = fonts;
@@ -159,6 +160,20 @@ export function createImage({ editor, typography, fonts, appearance }) {
       ctx.font = px + "px " + family;
       lines.slice(0, 2).forEach((line, row) => {
         const y = top + 48 + row * 58;
+        if (!isSource && appearance.exportCollage) {
+          paintCollageLine(ctx, line, sourceRows, {
+            x: left + 18,
+            y,
+            step,
+            inset: 3,
+            baseline: y + px,
+            paper: colors["#f7f5ef"],
+            ink: colors["#343b31"],
+            rough,
+            handmade: appearance.handmade,
+          });
+          return;
+        }
         for (const run of paperRuns(
           line,
           isSource ? (t) => t.hole : selected,
@@ -386,22 +401,20 @@ export function createImage({ editor, typography, fonts, appearance }) {
         });
         result.forEach((line, row) => {
           const y = newStart + row * lineHeight;
-          if (collage)
-            for (const run of paperRuns(line, selected, sourceRows)) {
-              const t = run.tokens[0];
-              if (!selected(t)) continue;
-              ctx.fillStyle = colors["#f7f5ef"];
-              ctx.lineWidth = 1;
-              paintPaperRect(
-                ctx,
-                newX - 1 + run.offset * advance,
-                y - bodySize * 0.87,
-                advance * run.width - 4,
-                advance - 4,
-                t.id,
-                rough,
-              );
-            }
+          if (collage) {
+            paintCollageLine(ctx, line, sourceRows, {
+              x: newX - 1,
+              y: y - bodySize * 0.87,
+              step: advance,
+              inset: 4,
+              baseline: y,
+              paper: colors["#f7f5ef"],
+              ink: colors["#343b31"],
+              rough,
+              handmade: appearance.handmade,
+            });
+            return;
+          }
           let x = newX;
           for (const t of line) {
             x += advance * (t.gapBefore || 0);

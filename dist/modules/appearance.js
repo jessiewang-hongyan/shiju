@@ -81,6 +81,7 @@ export function createAppearance({
     nightPreset = "gray",
     exportCollage = false,
     exportRough = false,
+    handmade = false,
     roughStrength = 35,
     collageGap = 0,
     collageBackground = "#ffffff";
@@ -90,6 +91,7 @@ export function createAppearance({
     const strength = Number(localStorage.getItem("shiju-rough-strength"));
     if (Number.isInteger(strength) && strength >= 1 && strength <= 100)
       roughStrength = strength;
+    handmade = localStorage.getItem("shiju-handmade") === "true";
     exportRough = localStorage.getItem("shiju-export-rough") === "true";
     exportCollage = localStorage.getItem("shiju-export-collage") === "true";
     const bg = localStorage.getItem("shiju-collage-background");
@@ -113,6 +115,13 @@ export function createAppearance({
     syncColorControls();
     try {
       localStorage.setItem("shiju-rough-strength", String(roughStrength));
+    } catch {}
+  };
+  $("#export-handmade").onchange = (e) => {
+    handmade = e.target.checked;
+    syncColorControls();
+    try {
+      localStorage.setItem("shiju-handmade", String(handmade));
     } catch {}
   };
   $("#export-rough").onchange = (e) => {
@@ -242,6 +251,7 @@ export function createAppearance({
     $("#collage-background-hex").setCustomValidity("");
     const rough = exportCollage && exportRough ? roughStrength : 0;
     $("#export-rough").checked = exportRough;
+    $("#export-handmade").checked = handmade;
     $("#rough-hole-preview").hidden = !rough;
     $("#rough-strength-controls").hidden = !rough;
     $("#collage-gap").value = collageGap;
@@ -372,6 +382,9 @@ export function createAppearance({
     },
     get exportRough() {
       return exportRough;
+    },
+    get handmade() {
+      return handmade;
     },
     get collageGap() {
       return collageGap;
