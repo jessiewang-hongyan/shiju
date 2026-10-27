@@ -317,14 +317,14 @@ export function createAppearance({
     );
     sample.classList.toggle("collage", exportCollage);
     $("#export-collage").checked = exportCollage;
-    $("#collage-background-controls").hidden = false;
+    $("#collage-background-controls").hidden = !exportCollage;
     $("#collage-background-color").value = collageBackground;
     $("#collage-background-hex").value = collageBackground;
     $("#collage-background-hex").setCustomValidity("");
     const rough = exportCollage && exportRough ? roughStrength : 0;
     $("#export-rough").checked = exportRough;
     $("#export-handmade").checked = handmade;
-    $("#handmade-controls").hidden = !handmade;
+    $("#handmade-controls").hidden = !exportCollage || !handmade;
     for (const [kind, value] of [
       ["tilt", handmadeTilt],
       ["drift", handmadeDrift],
@@ -407,16 +407,25 @@ export function createAppearance({
   );
   $("#colors-open").onclick = () => {
     syncColorControls();
+    document.querySelectorAll(".settings-group").forEach((group) => {
+      group.open = group.id === "settings-layout";
+    });
     $("#colors-dialog").showModal();
     updateFontPreview();
   };
   $("#colors-done").onclick = () => {
-    if (
-      !$("#background-hex").reportValidity() ||
-      !$("#text-hex").reportValidity() ||
-      (exportCollage && !$("#collage-background-hex").reportValidity())
-    )
-      return;
+    for (const id of [
+      "#background-hex",
+      "#text-hex",
+      "#collage-background-hex",
+    ]) {
+      const input = $(id);
+      if (!input.disabled && !input.checkValidity()) {
+        input.closest("details").open = true;
+        input.reportValidity();
+        return;
+      }
+    }
     $("#colors-dialog").close();
   };
   $("#colors-reset").onclick = () => {

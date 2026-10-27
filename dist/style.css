@@ -2294,3 +2294,101 @@ html[data-night-colors] #new-poem.editor-textured .poem-token {
   padding: 0;
   box-sizing: border-box;
 }
+
+.settings-preview {
+  margin: 0 0 16px;
+}
+.settings-preview #image-preview {
+  max-height: 150px;
+  object-fit: contain;
+  margin: 0;
+}
+.settings-group {
+  border-top: 1px solid var(--line);
+}
+.settings-group:last-of-type {
+  border-bottom: 1px solid var(--line);
+}
+.settings-group > summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 18px;
+  gap: 5px 12px;
+  padding: 16px 0;
+  cursor: pointer;
+  list-style: none;
+  color: var(--ink);
+}
+.settings-group > summary::-webkit-details-marker {
+  display: none;
+}
+.settings-group > summary > span:first-child {
+  font-size: 15px;
+  font-weight: 600;
+}
+.settings-summary {
+  grid-column: 1;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.settings-group > summary::after {
+  content: "+";
+  grid-column: 2;
+  grid-row: 1 / 3;
+  align-self: center;
+  font-size: 20px;
+  text-align: center;
+  color: var(--muted);
+}
+.settings-group[open] > summary::after {
+  content: "−";
+}
+.settings-group > summary:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+.settings-content {
+  padding-bottom: 16px;
+}
+#colors-dialog .settings-content > :first-child {
+  margin-top: 4px;
+}
+#colors-dialog .settings-content > :last-child {
+  margin-bottom: 0;
+}
+#colors-dialog .color-actions {
+  position: sticky;
+  bottom: calc(-1 * var(--settings-padding));
+  z-index: 5;
+  background: inherit;
+  margin: 16px calc(-1 * var(--settings-padding))
+    calc(-1 * var(--settings-padding));
+  padding: 14px var(--settings-padding) var(--settings-padding);
+  border-top: 1px solid var(--line);
+}
+#colors-dialog [hidden] {
+  display: none !important;
+}
+#colors-dialog .color-actions {
+  grid-template-columns: 1fr 1fr 1.4fr;
+  gap: 10px;
+  padding-top: 12px;
+  padding-bottom: 16px;
+}
+#colors-export {
+  grid-column: auto;
+}
+@media (max-width: 420px) {
+  #colors-dialog .color-actions {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding-bottom: 14px;
+  }
+  #colors-dialog .color-actions button {
+    padding: 9px 8px;
+  }
+  #colors-export {
+    grid-column: 1 / -1;
+  }
+}

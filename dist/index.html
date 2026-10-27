@@ -15,7 +15,7 @@
           document.documentElement.dataset.theme = "dark";
       } catch {}
     </script>
-    <link rel="stylesheet" href="style.css?v=20261027sourcesizes1" />
+    <link rel="stylesheet" href="style.css?v=20261027groups1" />
   </head>
   <body>
     <header>
@@ -51,7 +51,7 @@
             </div>
           </div>
           <div class="poem-paper">
-            <span id="today" hidden></span
+            <span id="today" hidden=""></span
             ><label class="title-label" for="poem-title"
               >题目 <span>选填</span></label
             ><input
@@ -192,10 +192,10 @@
             <option value="yuan">元曲</option>
             <option value="all">全部文集</option></select
           ><span id="library-status" role="status"></span
-          ><button id="library-retry" hidden>继续加载</button>
+          ><button id="library-retry" hidden="">继续加载</button>
         </div>
         <div id="poem-list"></div>
-        <button id="library-more" class="secondary" hidden>显示更多</button>
+        <button id="library-more" class="secondary" hidden="">显示更多</button>
         <p class="dialog-note">
           数据来自
           <a
@@ -211,13 +211,13 @@
           >，保留原库文字，可能存在异体字或错字。
         </p>
       </div>
-      <form id="custom-tab" hidden>
+      <form id="custom-tab" hidden="">
         <input
           id="custom-title"
           class="field"
           placeholder="原作标题"
           maxlength="60"
-          required
+          required=""
         /><input
           id="custom-author"
           class="field"
@@ -228,7 +228,7 @@
           class="field"
           placeholder="粘贴诗词或文章"
           maxlength="3000"
-          required
+          required=""
         ></textarea>
         <p class="dialog-note">最多 3000 字。更换原文会清空当前新诗。</p>
         <button class="primary" type="submit">使用此原文</button>
@@ -244,7 +244,7 @@
         <label
           ><input type="checkbox" id="excerpt-enabled" /> 只选连续片段</label
         >
-        <div id="excerpt-range" hidden>
+        <div id="excerpt-range" hidden="">
           <label
             >从第
             <input
@@ -271,7 +271,7 @@
       </div>
       <div id="preview-text" tabindex="0" aria-label="原文全文"></div>
       <div class="preview-footer">
-        <p id="preview-warning" class="dialog-note" hidden>
+        <p id="preview-warning" class="dialog-note" hidden="">
           将清空当前集句，可撤销恢复。
         </p>
         <div>
@@ -320,320 +320,361 @@
         <h2>图片设置</h2>
         <button class="close" aria-label="关闭">×</button>
       </div>
-      <p class="dialog-note" id="colors-mode"></p>
-      <div class="color-row">
-        <label for="source-paper">原文纸张</label
-        ><select id="source-paper">
-          <option value="none">纯色</option>
-          <option value="ten-bamboo">十竹斋笺纸</option>
-          <option value="lokta">手工纤维纸</option>
-          <option value="gold">仿洒金纸</option>
-          <option value="cloud">云纹压花纸</option>
-          <option value="newsprint">旧新闻纸</option>
-          <option value="kraft">微皱牛皮纸</option>
-        </select>
+      <div class="settings-preview">
+        <canvas
+          id="image-preview"
+          width="500"
+          height="360"
+          aria-label="当前集句与挖空原文预览，各最多两行"
+        ></canvas
+        ><button
+          id="font-preview-status"
+          class="text-button"
+          aria-live="polite"
+        ></button>
       </div>
-      <div class="color-row">
-        <label for="poem-paper">集句纸张</label
-        ><select id="poem-paper">
-          <option value="none">纯色</option>
-          <option value="ten-bamboo">十竹斋笺纸</option>
-          <option value="lokta">手工纤维纸</option>
-          <option value="gold">仿洒金纸</option>
-          <option value="cloud">云纹压花纸</option>
-          <option value="newsprint">旧新闻纸</option>
-          <option value="kraft">微皱牛皮纸</option>
-        </select>
-      </div>
-      <p class="dialog-note">
-        拼贴字块保留原文对应位置的纸纹和图案。十竹斋装饰只出现一次，长文延伸纸纹。手工纤维纸源自
-        Lokta，洒金为程序纹理。
-      </p>
-      <label class="export-font-control" for="image-orientation"
-        >图片方向
-        <select id="image-orientation">
-          <option value="landscape">横屏 · 4:3</option>
-          <option value="portrait">竖屏 · 3:4</option>
-        </select>
-      </label>
-      <p class="dialog-note">
-        横屏起始 1440 × 1080，竖屏起始 1080 ×
-        1440。长内容等比例扩大画布，不缩小字号。
-      </p>
-      <label class="export-font-control" for="image-layout"
-        >排列方式
-        <select id="image-layout">
-          <option value="source-left">原左新右</option>
-          <option value="source-right">原右新左</option>
-          <option value="source-top">原上新下</option>
-          <option value="source-bottom">原下新上</option>
-          <option value="poem-only">仅集句</option>
-          <option value="source-only">仅原文</option>
-        </select>
-      </label>
-      <div class="image-spacing-row">
-        <label for="image-padding">模块内留白</label
-        ><input
-          id="image-padding"
-          type="range"
-          min="0"
-          max="120"
-          value="40"
-        /><input
-          id="image-padding-value"
-          aria-label="模块内留白数值"
-          type="number"
-          min="0"
-          max="120"
-          value="40"
-        />
-      </div>
-      <div id="image-panel-gap-row" class="image-spacing-row">
-        <label for="image-panel-gap">模块间隔</label
-        ><input
-          id="image-panel-gap"
-          type="range"
-          min="0"
-          max="160"
-          value="40"
-        /><input
-          id="image-panel-gap-value"
-          aria-label="模块间隔数值"
-          type="number"
-          min="0"
-          max="160"
-          value="40"
-        />
-      </div>
-      <p class="dialog-note">单位为导出像素。模块按内容高度排版。</p>
-      <label class="export-font-control" for="export-font"
-        >图片字体<select id="export-font">
-          <option value="songti">宋体</option>
-          <option value="wenkai">霞鹜文楷</option>
-          <option value="kangxi">康熙字典体</option>
-          <option value="huiwen">汇文明朝体</option>
-          <option value="chenyu">拾句细手写</option>
-          <option value="bakudai">莫大毛笔字体</option>
-        </select></label
-      >
-      <p id="font-note" class="dialog-note" hidden>
-        康熙字典体采用繁体、旧字形，部分简体字符也会显示为繁体字形。如需保持简体字形，请选择宋体。
-      </p>
-      <div id="font-traditional-hint" hidden>
-        <p class="dialog-note">
-          这款字体缺少“渔、间”等简体字。建议转为繁体，以保持字形一致。
-        </p>
-        <button id="font-to-traditional" type="button">转为繁体</button>
-      </div>
-      <div class="image-size-controls">
-        <label for="image-size">图片字号</label
-        ><input
-          id="image-size-range"
-          type="range"
-          min="5"
-          max="25"
-          value="23"
-          aria-label="图片字号滑块"
-        />
-        <div class="source-size-stepper">
-          <button id="image-size-minus" aria-label="减小图片字号">−</button
-          ><input
-            id="image-size"
-            type="number"
-            min="5"
-            max="25"
-            value="23"
-            aria-label="图片字号"
-          /><button id="image-size-plus" aria-label="增大图片字号">+</button>
-        </div>
-      </div>
-      <p class="dialog-note">与编辑页字号同步，同时调整原文和集句。</p>
-      <button
-        id="font-preview-status"
-        class="text-button"
-        aria-live="polite"
-      ></button
-      ><canvas
-        id="image-preview"
-        width="500"
-        height="360"
-        aria-label="当前集句与挖空原文预览，各最多两行"
-      ></canvas>
-      <div
-        id="background-presets"
-        class="color-presets"
-        role="group"
-        aria-label="常用配色"
-      >
-        <button type="button" data-preset="cream" aria-pressed="false">
-          <span
-            class="preset-swatch"
-            style="background: #f5f0e6; color: #453e34"
-            aria-hidden="true"
-            >字</span
-          >米白</button
-        ><button type="button" data-preset="green" aria-pressed="false">
-          <span
-            class="preset-swatch"
-            style="background: #e8efe5; color: #344535"
-            aria-hidden="true"
-            >字</span
-          >浅绿</button
-        ><button type="button" data-preset="gray" aria-pressed="false">
-          <span
-            class="preset-swatch"
-            style="background: #25282b; color: #d9d7d0"
-            aria-hidden="true"
-            >字</span
-          >深灰
-        </button>
-      </div>
-      <div id="source-background-row" class="color-row">
-        <label for="background-color">原文背景色</label
-        ><input type="color" id="background-color" /><input
-          id="background-hex"
-          aria-label="背景色代码"
-          maxlength="7"
-          pattern="#[0-9a-fA-F]{6}"
-          spellcheck="false"
-        />
-      </div>
-      <div class="color-row">
-        <label for="text-color">文字颜色</label
-        ><input type="color" id="text-color" /><input
-          id="text-hex"
-          aria-label="文字颜色代码"
-          maxlength="7"
-          pattern="#[0-9a-fA-F]{6}"
-          spellcheck="false"
-        />
-      </div>
-      <p class="dialog-note">可选择颜色，或输入 #RRGGBB 格式的色值。</p>
-      <label class="export-collage-option"
-        ><input type="checkbox" id="export-collage" /> 拼贴字块</label
-      >
-      <p class="dialog-note">
-        原文中相邻的字按原顺序连排时，共用一块纸片。拼贴与毛边效果同步显示在编辑页。
-      </p>
-      <div id="collage-background-controls" hidden>
-        <label class="export-collage-option"
-          ><input type="checkbox" id="export-handmade" /> 手工拼贴</label
-        >
-        <p class="dialog-note">
-          纸片轻微倾斜、上下错落，连字保持整块。同步到编辑页，原文空缺保持原位。
-        </p>
-        <div id="handmade-controls" hidden>
-          <div class="color-row handmade-row">
-            <label for="handmade-tilt">倾斜程度</label
+      <details class="settings-group" id="settings-layout" open="">
+        <summary>
+          <span>排版</span
+          ><span class="settings-summary" id="summary-layout"></span>
+        </summary>
+        <div class="settings-content">
+          <label class="export-font-control" for="image-orientation"
+            >图片方向
+            <select id="image-orientation">
+              <option value="landscape">横屏 · 4:3</option>
+              <option value="portrait">竖屏 · 3:4</option>
+            </select>
+          </label>
+          <p class="dialog-note">
+            横屏起始 1440 × 1080，竖屏起始 1080 ×
+            1440。长内容等比例扩大画布，不缩小字号。
+          </p>
+          <label class="export-font-control" for="image-layout"
+            >排列方式
+            <select id="image-layout">
+              <option value="source-left">原左新右</option>
+              <option value="source-right">原右新左</option>
+              <option value="source-top">原上新下</option>
+              <option value="source-bottom">原下新上</option>
+              <option value="poem-only">仅集句</option>
+              <option value="source-only">仅原文</option>
+            </select>
+          </label>
+          <div class="image-spacing-row">
+            <label for="image-padding">模块内留白</label
             ><input
-              id="handmade-tilt"
+              id="image-padding"
               type="range"
               min="0"
-              max="100"
-              step="1"
-              value="50"
+              max="120"
+              value="40"
             /><input
-              id="handmade-tilt-value"
-              aria-label="倾斜程度最大强度"
+              id="image-padding-value"
+              aria-label="模块内留白数值"
               type="number"
               min="0"
-              max="100"
-              step="1"
-              value="50"
+              max="120"
+              value="40"
             />
           </div>
-          <div class="color-row handmade-row">
-            <label for="handmade-drift">上下起伏</label
+          <div id="image-panel-gap-row" class="image-spacing-row">
+            <label for="image-panel-gap">模块间隔</label
             ><input
-              id="handmade-drift"
+              id="image-panel-gap"
               type="range"
               min="0"
-              max="100"
-              step="1"
-              value="50"
+              max="160"
+              value="40"
             /><input
-              id="handmade-drift-value"
-              aria-label="上下起伏最大强度"
+              id="image-panel-gap-value"
+              aria-label="模块间隔数值"
               type="number"
               min="0"
-              max="100"
-              step="1"
-              value="50"
+              max="160"
+              value="40"
             />
           </div>
+          <p class="dialog-note">单位为导出像素。模块按内容高度排版。</p>
+        </div>
+      </details>
+      <details class="settings-group" id="settings-text">
+        <summary>
+          <span>文字</span
+          ><span class="settings-summary" id="summary-text"></span>
+        </summary>
+        <div class="settings-content">
+          <label class="export-font-control" for="export-font"
+            >图片字体<select id="export-font">
+              <option value="songti">宋体</option>
+              <option value="wenkai">霞鹜文楷</option>
+              <option value="kangxi">康熙字典体</option>
+              <option value="huiwen">汇文明朝体</option>
+              <option value="chenyu">拾句细手写</option>
+              <option value="bakudai">莫大毛笔字体</option>
+            </select></label
+          >
+          <p id="font-note" class="dialog-note" hidden="">
+            康熙字典体采用繁体、旧字形，部分简体字符也会显示为繁体字形。如需保持简体字形，请选择宋体。
+          </p>
+          <div id="font-traditional-hint" hidden="">
+            <p class="dialog-note">
+              这款字体缺少“渔、间”等简体字。建议转为繁体，以保持字形一致。
+            </p>
+            <button id="font-to-traditional" type="button">转为繁体</button>
+          </div>
+          <div class="image-size-controls">
+            <label for="image-size">图片字号</label
+            ><input
+              id="image-size-range"
+              type="range"
+              min="5"
+              max="25"
+              value="23"
+              aria-label="图片字号滑块"
+            />
+            <div class="source-size-stepper">
+              <button id="image-size-minus" aria-label="减小图片字号">−</button
+              ><input
+                id="image-size"
+                type="number"
+                min="5"
+                max="25"
+                value="23"
+                aria-label="图片字号"
+              /><button id="image-size-plus" aria-label="增大图片字号">
+                +
+              </button>
+            </div>
+          </div>
+          <p class="dialog-note">与编辑页字号同步，同时调整原文和集句。</p>
+          <div class="color-row">
+            <label for="text-color">文字颜色</label
+            ><input type="color" id="text-color" /><input
+              id="text-hex"
+              aria-label="文字颜色代码"
+              maxlength="7"
+              pattern="#[0-9a-fA-F]{6}"
+              spellcheck="false"
+            />
+          </div>
+          <p class="dialog-note">可选择颜色，或输入 #RRGGBB 格式的色值。</p>
+        </div>
+      </details>
+      <details class="settings-group" id="settings-paper">
+        <summary>
+          <span>纸张</span
+          ><span class="settings-summary" id="summary-paper"></span>
+        </summary>
+        <div class="settings-content">
+          <p class="dialog-note" id="colors-mode"></p>
+          <div class="color-row">
+            <label for="source-paper">原文纸张</label
+            ><select id="source-paper">
+              <option value="none">纯色</option>
+              <option value="ten-bamboo">十竹斋笺纸</option>
+              <option value="lokta">手工纤维纸</option>
+              <option value="gold">仿洒金纸</option>
+              <option value="cloud">云纹压花纸</option>
+              <option value="newsprint">旧新闻纸</option>
+              <option value="kraft">微皱牛皮纸</option>
+            </select>
+          </div>
+          <div id="source-background-row" class="color-row">
+            <label for="background-color">原文背景色</label
+            ><input type="color" id="background-color" /><input
+              id="background-hex"
+              aria-label="背景色代码"
+              maxlength="7"
+              pattern="#[0-9a-fA-F]{6}"
+              spellcheck="false"
+            />
+          </div>
+          <div class="color-row">
+            <label for="poem-paper">集句纸张</label
+            ><select id="poem-paper">
+              <option value="none">纯色</option>
+              <option value="ten-bamboo">十竹斋笺纸</option>
+              <option value="lokta">手工纤维纸</option>
+              <option value="gold">仿洒金纸</option>
+              <option value="cloud">云纹压花纸</option>
+              <option value="newsprint">旧新闻纸</option>
+              <option value="kraft">微皱牛皮纸</option>
+            </select>
+          </div>
+          <div id="poem-background-row" class="color-row">
+            <label for="collage-background-color">集句背景色</label
+            ><input
+              type="color"
+              id="collage-background-color"
+              value="#ffffff"
+            /><input
+              id="collage-background-hex"
+              aria-label="集句背景色代码"
+              value="#ffffff"
+              maxlength="7"
+              pattern="#[0-9a-fA-F]{6}"
+              spellcheck="false"
+            />
+          </div>
+          <div
+            id="background-presets"
+            class="color-presets"
+            role="group"
+            aria-label="常用配色"
+          >
+            <button type="button" data-preset="cream" aria-pressed="false">
+              <span
+                class="preset-swatch"
+                style="background: #f5f0e6; color: #453e34"
+                aria-hidden="true"
+                >字</span
+              >米白</button
+            ><button type="button" data-preset="green" aria-pressed="false">
+              <span
+                class="preset-swatch"
+                style="background: #e8efe5; color: #344535"
+                aria-hidden="true"
+                >字</span
+              >浅绿</button
+            ><button type="button" data-preset="gray" aria-pressed="false">
+              <span
+                class="preset-swatch"
+                style="background: #25282b; color: #d9d7d0"
+                aria-hidden="true"
+                >字</span
+              >深灰
+            </button>
+          </div>
           <p class="dialog-note">
-            0–100 控制最大幅度，各纸片在正负范围内均匀取值，位置固定。0
-            为关闭该项；长纸片的倾角会适当限制。
+            拼贴字块保留原文对应位置的纸纹和图案。十竹斋装饰只出现一次，长文延伸纸纹。手工纤维纸源自
+            Lokta，洒金为程序纹理。
           </p>
         </div>
-        <div class="color-row">
-          <label for="collage-gap">拼贴间隔</label
-          ><input
-            id="collage-gap"
-            type="range"
-            min="0"
-            max="24"
-            step="1"
-            value="0"
-          /><input
-            id="collage-gap-value"
-            type="number"
-            min="0"
-            max="24"
-            step="1"
-            value="0"
-            aria-label="拼贴额外间隔"
-          />
-        </div>
-        <p class="dialog-note">
-          额外增加 0–24 像素间隔，仅用于图片中的独立纸片；连在一起的字不拆开。
-        </p>
-        <label class="export-collage-option"
-          ><input type="checkbox" id="export-rough" /> 毛边效果</label
-        >
-        <p class="dialog-note">字块与原文空缺使用对应的细碎边缘。</p>
-        <div id="rough-strength-controls" hidden>
-          <label for="rough-strength">毛边强度</label
-          ><input
-            id="rough-strength"
-            type="range"
-            min="1"
-            max="100"
-            step="1"
-            value="35"
-          /><output id="rough-strength-value" for="rough-strength">35%</output>
+      </details>
+      <details class="settings-group" id="settings-collage">
+        <summary>
+          <span>拼贴</span
+          ><span class="settings-summary" id="summary-collage"></span>
+        </summary>
+        <div class="settings-content">
+          <label class="export-collage-option"
+            ><input type="checkbox" id="export-collage" /> 拼贴字块</label
+          >
           <p class="dialog-note">
-            轻微 → 明显。强度越高，纸边起伏和纤维越突出。
+            原文中相邻的字按原顺序连排时，共用一块纸片。拼贴与毛边效果同步显示在编辑页。
           </p>
+          <div id="collage-background-controls" hidden="">
+            <label class="export-collage-option"
+              ><input type="checkbox" id="export-handmade" /> 手工拼贴</label
+            >
+            <p class="dialog-note">
+              纸片轻微倾斜、上下错落，连字保持整块。同步到编辑页，原文空缺保持原位。
+            </p>
+            <div id="handmade-controls" hidden="">
+              <div class="color-row handmade-row">
+                <label for="handmade-tilt">倾斜程度</label
+                ><input
+                  id="handmade-tilt"
+                  type="range"
+                  min="0"
+                  max="100"
+                  step="1"
+                  value="50"
+                /><input
+                  id="handmade-tilt-value"
+                  aria-label="倾斜程度最大强度"
+                  type="number"
+                  min="0"
+                  max="100"
+                  step="1"
+                  value="50"
+                />
+              </div>
+              <div class="color-row handmade-row">
+                <label for="handmade-drift">上下起伏</label
+                ><input
+                  id="handmade-drift"
+                  type="range"
+                  min="0"
+                  max="100"
+                  step="1"
+                  value="50"
+                /><input
+                  id="handmade-drift-value"
+                  aria-label="上下起伏最大强度"
+                  type="number"
+                  min="0"
+                  max="100"
+                  step="1"
+                  value="50"
+                />
+              </div>
+              <p class="dialog-note">
+                0–100 控制最大幅度，各纸片在正负范围内均匀取值，位置固定。0
+                为关闭该项；长纸片的倾角会适当限制。
+              </p>
+            </div>
+            <div class="color-row">
+              <label for="collage-gap">拼贴间隔</label
+              ><input
+                id="collage-gap"
+                type="range"
+                min="0"
+                max="24"
+                step="1"
+                value="0"
+              /><input
+                id="collage-gap-value"
+                type="number"
+                min="0"
+                max="24"
+                step="1"
+                value="0"
+                aria-label="拼贴额外间隔"
+              />
+            </div>
+            <p class="dialog-note">
+              额外增加 0–24
+              像素间隔，仅用于图片中的独立纸片；连在一起的字不拆开。
+            </p>
+            <label class="export-collage-option"
+              ><input type="checkbox" id="export-rough" /> 毛边效果</label
+            >
+            <p class="dialog-note">字块与原文空缺使用对应的细碎边缘。</p>
+            <div id="rough-strength-controls" hidden="">
+              <label for="rough-strength">毛边强度</label
+              ><input
+                id="rough-strength"
+                type="range"
+                min="1"
+                max="100"
+                step="1"
+                value="35"
+              /><output id="rough-strength-value" for="rough-strength"
+                >35%</output
+              >
+              <p class="dialog-note">
+                轻微 → 明显。强度越高，纸边起伏和纤维越突出。
+              </p>
+            </div>
+          </div>
+          <div id="export-color-sample" aria-label="图片配色预览">
+            <span>集句</span>
+            <p>
+              <span>明</span><span>月</span><span>松</span><span>间</span
+              ><span>照</span><br /><span>清</span><span>泉</span><span>石</span
+              ><span>上</span><span>流</span>
+            </p>
+          </div>
+          <div id="rough-hole-preview" hidden="">
+            <span>原文空缺</span>
+            <div aria-label="毛边空缺预览">
+              <i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </div>
         </div>
-        <div id="poem-background-row" class="color-row">
-          <label for="collage-background-color">集句背景色</label
-          ><input
-            type="color"
-            id="collage-background-color"
-            value="#ffffff"
-          /><input
-            id="collage-background-hex"
-            aria-label="集句背景色代码"
-            value="#ffffff"
-            maxlength="7"
-            pattern="#[0-9a-fA-F]{6}"
-            spellcheck="false"
-          />
-        </div>
-      </div>
-      <div id="export-color-sample" aria-label="图片配色预览">
-        <span>集句</span>
-        <p>
-          <span>明</span><span>月</span><span>松</span><span>间</span
-          ><span>照</span><br /><span>清</span><span>泉</span><span>石</span
-          ><span>上</span><span>流</span>
-        </p>
-      </div>
-      <div id="rough-hole-preview" hidden>
-        <span>原文空缺</span>
-        <div aria-label="毛边空缺预览"><i></i><i></i><i></i><i></i><i></i></div>
-      </div>
+      </details>
       <div class="color-actions">
         <button id="colors-reset" class="secondary">恢复默认</button
         ><button id="colors-done" class="secondary">完成</button>
@@ -676,12 +717,12 @@
       <p class="dialog-note">作品保存在当前浏览器中，建议导出图片留存。</p>
       <div id="saved-list"></div>
     </dialog>
-    <div id="selection-tools" hidden>
+    <div id="selection-tools" hidden="">
       <button id="move-left" aria-label="向前移动">←</button
       ><button id="return-char">归还</button
       ><button id="move-right" aria-label="向后移动">→</button>
     </div>
     <div id="toast" role="status"></div>
-    <script type="module" src="app.js?v=20261027sourcesizes1"></script>
+    <script type="module" src="app.js?v=20261027groups1"></script>
   </body>
 </html>

@@ -1061,3 +1061,48 @@ test("cut title, author and body keep source font and paper dimensions at every 
   }
   x.close();
 });
+
+test("settings groups default to layout and summarize changes while exposing only active effect controls", async () => {
+  const x = setup();
+  x.$("#colors-open").click();
+  assert.deepEqual(
+    [...x.w.document.querySelectorAll(".settings-group")].map((g) => [
+      g.id,
+      g.open,
+    ]),
+    [
+      ["settings-layout", true],
+      ["settings-text", false],
+      ["settings-paper", false],
+      ["settings-collage", false],
+    ],
+  );
+  assert(x.$("#settings-text #export-font"));
+  assert(x.$("#settings-paper #poem-background-row"));
+  assert(x.$("#collage-background-controls").hidden);
+  assert.equal(x.$("#summary-collage").textContent, "未开启");
+  x.input("#image-size", 17);
+  assert.match(x.$("#summary-text").textContent, /宋体 · 17/);
+  x.input("#image-layout", "poem-only", "change");
+  assert.match(x.$("#summary-layout").textContent, /仅集句/);
+  x.input("#export-collage", true, "change");
+  assert.equal(x.$("#collage-background-controls").hidden, false);
+  x.input("#export-handmade", true, "change");
+  assert.equal(x.$("#handmade-controls").hidden, false);
+  x.input("#export-rough", true, "change");
+  x.input("#rough-strength", 70);
+  assert.match(x.$("#summary-collage").textContent, /毛边 70% · 手工拼贴/);
+  x.input("#export-collage", false, "change");
+  assert(x.$("#collage-background-controls").hidden);
+  assert(x.$("#handmade-controls").hidden);
+  assert(x.$("#rough-strength-controls").hidden);
+  x.input("#export-collage", true, "change");
+  assert.equal(x.$("#rough-strength").value, "70");
+  x.w.HTMLCanvasElement.prototype.toDataURL = () =>
+    "data:image/png;base64,test";
+  x.$("#source-paper").value = "gold";
+  await x.$("#source-paper").onchange({ target: x.$("#source-paper") });
+  assert.match(x.$("#summary-paper").textContent, /原文：仿洒金纸/);
+  assert(x.$("#source-background-row").hidden);
+  x.close();
+});

@@ -1,3 +1,4 @@
+import { syncSettingsGroups } from "./settings-groups.js";
 import {
   sourceParts,
   partCells,
@@ -56,6 +57,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
   };
   let fontPreviewVersion = 0;
   async function updateFontPreview() {
+    syncSettingsGroups();
     syncFontNote();
     const version = ++fontPreviewVersion,
       key = $("#export-font").value,
@@ -174,6 +176,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
     input.onblur = () => set(input.value || range.value);
   }
   function drawImagePreview() {
+    syncSettingsGroups();
     const c = $("#image-preview"),
       ctx = c.getContext("2d"),
       colors = getExportColors(),
