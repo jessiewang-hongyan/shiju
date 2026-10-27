@@ -11,6 +11,7 @@
 | `modules/poems.js`          | 首屏内置精选诗词，无需请求                                                       |
 | `modules/storage.js`        | `createStore`；读取旧草稿与诗集、保存、历史快照                                  |
 | `modules/editor.js`         | `createEditor`；唯一的集句编辑入口、选字、归还、撤销、调序、更换原文             |
+| `modules/editor-paper.js` | 编辑页拼贴覆盖层；复用毛边绘图，按原文字位和实际换行合并纸片，不拦截编辑操作 |
 | `modules/collection.js`     | 诗集列表、保存、恢复、删除；恢复通过 editor 命令完成                             |
 | `modules/library-loader.js` | 与 DOM 无关的加载服务；请求队列、分批校验、缓存、重试；可注入 fetch 和计时器测试 |
 | `modules/library.js`        | 文集选择、全文搜索、预览、片段校验、自定义原文                                   |
@@ -72,3 +73,5 @@
 ### 图片布局
 
 `image-layout` 支持 source-left/source-right/source-top/source-bottom，默认原左新右，保存至 `shiju-image-layout`。预览按布局排列两个最多两行的模块；导出先按模块宽度换行、测量标题，再计算模块高度与位置。上下布局使用全宽，署名始终属于集句模块。长文超过 24000 像素时沿用长度保护。
+
+编辑页纸片通过 `data-source-id` 对应原文字位；监听编辑重绘、尺寸、主题变化，图片设置通过 `onPaperChange` 通知刷新。只同步拼贴、毛边与强度，颜色沿用页面日间／夜览主题；每段纸片使用独立小画布，避免长文生成超大覆盖层。

@@ -19,6 +19,7 @@ export function createAppearance({
   drawImagePreview,
   updateFontPreview,
   onSourceSizeChange = () => {},
+  onPaperChange = () => {},
 }) {
   function setSourceSize(value, save = false) {
     const size = Number(value);
@@ -189,6 +190,7 @@ export function createAppearance({
     }
   }
   function syncColorControls() {
+    onPaperChange();
     const p = exportPalette || { bg: "#f7f5ef", fg: "#343b31" };
     document.querySelectorAll("[data-preset]").forEach((b) => {
       const preset = colorPresets[b.dataset.preset];
@@ -203,7 +205,8 @@ export function createAppearance({
     $("#background-hex").value = p.bg;
     $("#text-color").value = p.fg;
     $("#text-hex").value = p.fg;
-    $("#colors-mode").textContent = "配色仅用于导出图片，不改变页面或夜览配色。";
+    $("#colors-mode").textContent =
+      "配色仅用于导出图片，不改变页面或夜览配色。";
     $("#background-hex").setCustomValidity("");
     $("#text-hex").setCustomValidity("");
     const sample = $("#export-color-sample"),

@@ -2113,3 +2113,26 @@ html[data-theme="dark"] #font-to-traditional:hover:not(:disabled) {
   background: color-mix(in srgb, var(--ink) 25%, var(--paper));
   color: var(--ink);
 }
+
+/* Decorative paper is separate from the interactive characters. */
+#source-poem,
+#new-poem {
+  position: relative;
+  isolation: isolate;
+}
+.editor-paper-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+#source-poem.editor-collage .char.picked:after {
+  display: none;
+}
+#new-poem.editor-collage .poem-token[data-source-id] {
+  border-radius: 0;
+}
+#new-poem.editor-collage .poem-token.selected {
+  outline: 1px solid var(--ink);
+  outline-offset: 2px;
+}

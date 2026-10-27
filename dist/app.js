@@ -1,12 +1,13 @@
+import { initEditorPaper } from "./modules/editor-paper.js";
 import { initUI } from "./modules/ui.js";
 import { poems } from "./modules/poems.js";
 import { createStore } from "./modules/storage.js";
-import { createEditor } from "./modules/editor.js";
+import { createEditor } from "./modules/editor.js?v=20261027u";
 import { initCollection } from "./modules/collection.js";
 import { initLibrary } from "./modules/library.js";
 import { createTypography, initTypography } from "./modules/typography.js";
 import { createFontLoader } from "./modules/fonts.js?v=20261027n";
-import { createAppearance } from "./modules/appearance.js?v=20261027n";
+import { createAppearance } from "./modules/appearance.js?v=20261027u";
 import { createImage } from "./modules/image.js?v=20261027t";
 
 // Initialize services, then controllers; callbacks connect sibling modules.
@@ -17,13 +18,15 @@ const editor = createEditor({ store, typography });
 const library = initLibrary({ editor, typography });
 initCollection({ editor, store, typography });
 const fonts = createFontLoader({ getState: () => editor.state, typography });
-let image;
+let image, editorPaper;
 const appearance = createAppearance({
   drawImagePreview: () => image?.drawImagePreview(),
   updateFontPreview: () => image?.updateFontPreview(),
+  onPaperChange: () => editorPaper?.refresh(),
   onSourceSizeChange: (size) => image?.setImageSize(size),
 });
 image = createImage({ editor, typography, fonts, appearance });
+editorPaper = initEditorPaper({ appearance });
 initTypography({
   typography,
   onChange: () => {

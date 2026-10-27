@@ -60,6 +60,7 @@ export function createEditor({ store, typography }) {
       const b = document.createElement("button");
       b.className = "char" + (used.has(id) ? " picked" : "");
       b.textContent = c;
+      b.dataset.sourceId = String(id);
       b.setAttribute("aria-label", used.has(id) ? "归还：" + c : "摘取：" + c);
       b.title = used.has(id) ? "点击归还“" + c + "”" : "点击摘取“" + c + "”";
       b.onclick = () => {
@@ -91,6 +92,7 @@ export function createEditor({ store, typography }) {
         (t.c === "\n" ? " break-token" : "") +
         (selected === i ? " selected" : "");
       el.textContent = t.c === "\n" ? "↵" : t.c === " " ? "\u00a0" : t.c;
+      if (Number.isInteger(t.id)) el.dataset.sourceId = String(t.id);
       el.tabIndex = 0;
       el.draggable = true;
       el.setAttribute("role", "button");
