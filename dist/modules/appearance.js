@@ -288,12 +288,22 @@ export function createAppearance({
         ),
       );
     });
+    $("#source-background-row").hidden = sourcePaper !== "none";
+    $("#poem-background-row").hidden = poemPaper !== "none";
+    $("#background-presets").hidden = sourcePaper !== "none";
+    for (const [kind, textured] of [
+      ["background", sourcePaper !== "none"],
+      ["collage-background", poemPaper !== "none"],
+    ]) {
+      $("#" + kind + "-color").disabled = textured;
+      $("#" + kind + "-hex").disabled = textured;
+    }
     $("#background-color").value = p.bg;
     $("#background-hex").value = p.bg;
     $("#text-color").value = p.fg;
     $("#text-hex").value = p.fg;
     $("#colors-mode").textContent =
-      "纸张同步到编辑页和图片；选用纸张时，正文区域使用图片配色。";
+      "纹理纸张自带底色；选择纯色纸张后可调整背景色。文字颜色可单独设置。";
     $("#background-hex").setCustomValidity("");
     $("#text-hex").setCustomValidity("");
     const sample = $("#export-color-sample"),

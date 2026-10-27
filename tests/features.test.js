@@ -677,16 +677,29 @@ test("paper choices are independent, persisted and reset without changing poem c
     x.$("#source-paper").value = "gold";
     await x.$("#source-paper").onchange({ target: x.$("#source-paper") });
     assert.equal(x.appearance.sourcePaper, "gold");
+    assert.equal(x.$("#source-background-row").hidden, true);
+    assert.equal(x.$("#background-hex").disabled, true);
+    assert.equal(x.$("#background-presets").hidden, true);
+    assert.equal(x.$("#poem-background-row").hidden, false);
     assert.equal(x.appearance.poemPaper, "none");
     assert.equal(x.w.localStorage.getItem("shiju-paper-source"), "gold");
     x.$("#poem-paper").value = "gold";
     await x.$("#poem-paper").onchange({ target: x.$("#poem-paper") });
     assert.equal(x.appearance.poemPaper, "gold");
+    assert.equal(x.$("#poem-background-row").hidden, true);
+    assert.equal(x.$("#collage-background-hex").disabled, true);
+    x.$("#source-paper").value = "none";
+    await x.$("#source-paper").onchange({ target: x.$("#source-paper") });
+    assert.equal(x.$("#source-background-row").hidden, false);
+    assert.equal(x.$("#background-hex").disabled, false);
+    assert.equal(x.$("#poem-background-row").hidden, true);
     assert.equal(JSON.stringify(x.editor.state), before);
     x.$("#colors-reset").click();
     assert.equal(x.appearance.sourcePaper, "none");
     assert.equal(x.appearance.poemPaper, "none");
     assert.equal(x.w.localStorage.getItem("shiju-paper-source"), "none");
+    assert.equal(x.$("#poem-background-row").hidden, false);
+    assert.equal(x.$("#collage-background-hex").disabled, false);
   } finally {
     x.close();
   }

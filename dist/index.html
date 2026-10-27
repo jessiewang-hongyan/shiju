@@ -15,7 +15,7 @@
           document.documentElement.dataset.theme = "dark";
       } catch {}
     </script>
-    <link rel="stylesheet" href="style.css?v=20261027spacing1" />
+    <link rel="stylesheet" href="style.css?v=20261027papercolors1" />
   </head>
   <body>
     <header>
@@ -458,7 +458,12 @@
         height="360"
         aria-label="当前集句与挖空原文预览，各最多两行"
       ></canvas>
-      <div class="color-presets" role="group" aria-label="常用配色">
+      <div
+        id="background-presets"
+        class="color-presets"
+        role="group"
+        aria-label="常用配色"
+      >
         <button type="button" data-preset="cream" aria-pressed="false">
           <span
             class="preset-swatch"
@@ -482,8 +487,8 @@
           >深灰
         </button>
       </div>
-      <div class="color-row">
-        <label for="background-color">背景色</label
+      <div id="source-background-row" class="color-row">
+        <label for="background-color">原文背景色</label
         ><input type="color" id="background-color" /><input
           id="background-hex"
           aria-label="背景色代码"
@@ -600,7 +605,7 @@
             轻微 → 明显。强度越高，纸边起伏和纤维越突出。
           </p>
         </div>
-        <div class="color-row">
+        <div id="poem-background-row" class="color-row">
           <label for="collage-background-color">集句背景色</label
           ><input
             type="color"
@@ -675,6 +680,6 @@
       ><button id="move-right" aria-label="向后移动">→</button>
     </div>
     <div id="toast" role="status"></div>
-    <script type="module" src="app.js?v=20261027spacing1"></script>
+    <script type="module" src="app.js?v=20261027papercolors1"></script>
   </body>
 </html>

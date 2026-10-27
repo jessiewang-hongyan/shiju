@@ -2204,3 +2204,9 @@ html[data-night-colors] #new-poem.editor-textured .poem-token {
 .image-spacing-row input[type="range"] {
   accent-color: var(--ink);
 }
+
+#source-background-row[hidden],
+#poem-background-row[hidden],
+#background-presets[hidden] {
+  display: none;
+}
