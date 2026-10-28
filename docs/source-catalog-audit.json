@@ -1,0 +1,3419 @@
+{
+  "method": "NFC + strip whitespace/punctuation; no script conversion; counts are records/sections, not necessarily poems. Missing metadata != damaged body. No legal clearance or scholarly collation.",
+  "existing_files": [
+    {
+      "file": "chuci.json",
+      "sha256": "901bcf022c3001b04106e7508938732600b2546728c2a1225db283fb9f24c4b7"
+    },
+    {
+      "file": "han-yuefu.json",
+      "sha256": "a99c6127670e3b579b91b308188f731280df7dc4410c6c1f0d54de04499f2345"
+    },
+    {
+      "file": "han.json",
+      "sha256": "520aa76aa041bb625a15d03eaba6850cb97e2e380280839ee6a58af90d45558a"
+    },
+    {
+      "file": "shijing.json",
+      "sha256": "5a443f39bcd34fa5362033a96d746236c7ff2cadebcebf1193f89d3f7c9649d4"
+    },
+    {
+      "file": "song-ci.json",
+      "sha256": "f9ec2371e9c3520ff7d113719b0b4466f464ac90f8cb6e7ba202ec14ada6b01c"
+    },
+    {
+      "file": "tang.json",
+      "sha256": "c4073a0c040380daad0ff094ba5176ac2b6283ed4f20e2d1ae447303762631d9"
+    },
+    {
+      "file": "weijin.json",
+      "sha256": "737f0a2623dba72fa62c41f780ffc45cacd0f593423da0e6ba8d736a64121d82"
+    },
+    {
+      "file": "yuan.json",
+      "sha256": "8287d5157f1f0f987a20950e81d13f1201ff4b34f53c507b396e93b8faa5c216"
+    }
+  ],
+  "collections": {
+    "Werneror/元": {
+      "records": 37375,
+      "characters": 2876428,
+      "paragraphs": 37375,
+      "max_characters": 3232,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 960,
+      "non_question_marker_records": 666,
+      "question_mark_only_records": 294,
+      "body_parenthesis_candidates": 1,
+      "files": 1,
+      "author_strings": 1209,
+      "existing_overlap_records": 32,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 3232,
+          "reference": {
+            "file": "元.csv",
+            "index": 36889,
+            "title": "百香诗 琴",
+            "author": "郭居敬",
+            "hierarchy": [
+              "元"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 3204,
+          "reference": {
+            "file": "元.csv",
+            "index": 35928,
+            "title": "滦京杂咏一百首",
+            "author": "杨允孚",
+            "hierarchy": [
+              "元"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 2520,
+          "reference": {
+            "file": "元.csv",
+            "index": 36494,
+            "title": "和张敏之诗七十韵三首",
+            "author": "耶律楚材",
+            "hierarchy": [
+              "元"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 8
+    },
+    "Werneror/元末明初": {
+      "records": 15736,
+      "characters": 1305549,
+      "paragraphs": 15736,
+      "max_characters": 3408,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 341,
+      "non_question_marker_records": 149,
+      "question_mark_only_records": 192,
+      "files": 1,
+      "author_strings": 79,
+      "existing_overlap_records": 1,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 3408,
+          "reference": {
+            "file": "元末明初.csv",
+            "index": 15380,
+            "title": "旅兴",
+            "author": "刘基",
+            "hierarchy": [
+              "元末明初"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 3264,
+          "reference": {
+            "file": "元末明初.csv",
+            "index": 14741,
+            "title": "辇下曲一百二首，有序 其一",
+            "author": "张昱",
+            "hierarchy": [
+              "元末明初"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 2640,
+          "reference": {
+            "file": "元末明初.csv",
+            "index": 15367,
+            "title": "杂诗四十首",
+            "author": "刘基",
+            "hierarchy": [
+              "元末明初"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "Werneror/先秦": {
+      "records": 570,
+      "characters": 71858,
+      "paragraphs": 570,
+      "max_characters": 4757,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 27,
+      "non_question_marker_records": 15,
+      "question_mark_only_records": 12,
+      "files": 1,
+      "author_strings": 8,
+      "existing_overlap_records": 157,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 4757,
+          "reference": {
+            "file": "先秦.csv",
+            "index": 570,
+            "title": "九章 惜诵",
+            "author": "屈原",
+            "hierarchy": [
+              "先秦"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 2880,
+          "reference": {
+            "file": "先秦.csv",
+            "index": 433,
+            "title": "离骚",
+            "author": "屈原",
+            "hierarchy": [
+              "先秦"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 2004,
+          "reference": {
+            "file": "先秦.csv",
+            "index": 410,
+            "title": "九辩",
+            "author": "宋玉",
+            "hierarchy": [
+              "先秦"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 2
+    },
+    "Werneror/南北朝": {
+      "records": 4586,
+      "characters": 342704,
+      "paragraphs": 4586,
+      "max_characters": 3396,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 94,
+      "non_question_marker_records": 36,
+      "question_mark_only_records": 58,
+      "files": 1,
+      "author_strings": 434,
+      "existing_overlap_records": 2,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 3396,
+          "reference": {
+            "file": "南北朝.csv",
+            "index": 4346,
+            "title": "杂体诗三十首 古离别",
+            "author": "江淹",
+            "hierarchy": [
+              "南北朝"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 2146,
+          "reference": {
+            "file": "南北朝.csv",
+            "index": 4396,
+            "title": "八咏诗 登台望秋月",
+            "author": "沈约",
+            "hierarchy": [
+              "南北朝"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 1644,
+          "reference": {
+            "file": "南北朝.csv",
+            "index": 4460,
+            "title": "拟咏怀诗二十七首",
+            "author": "庾信",
+            "hierarchy": [
+              "南北朝"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "Werneror/唐": {
+      "records": 49195,
+      "characters": 3341860,
+      "paragraphs": 49195,
+      "max_characters": 15797,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 619,
+      "non_question_marker_records": 265,
+      "question_mark_only_records": 354,
+      "over_10000_characters": 2,
+      "files": 1,
+      "author_strings": 2736,
+      "existing_overlap_records": 49195,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 15797,
+          "reference": {
+            "file": "唐.csv",
+            "index": 49013,
+            "title": "诗三百三首",
+            "author": "寒山",
+            "hierarchy": [
+              "唐"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 10475,
+          "reference": {
+            "file": "唐.csv",
+            "index": 48562,
+            "title": "诗偈",
+            "author": "庞蕴",
+            "hierarchy": [
+              "唐"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 6784,
+          "reference": {
+            "file": "唐.csv",
+            "index": 47748,
+            "title": "七言",
+            "author": "吕岩",
+            "hierarchy": [
+              "唐"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 4
+    },
+    "Werneror/唐末宋初": {
+      "records": 1118,
+      "characters": 67678,
+      "paragraphs": 1118,
+      "max_characters": 916,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 10,
+      "non_question_marker_records": 3,
+      "question_mark_only_records": 7,
+      "files": 1,
+      "author_strings": 44,
+      "existing_overlap_records": 2,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 916,
+          "reference": {
+            "file": "唐末宋初.csv",
+            "index": 1055,
+            "title": "浣溪沙",
+            "author": "孙光宪",
+            "hierarchy": [
+              "唐末宋初"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 752,
+          "reference": {
+            "file": "唐末宋初.csv",
+            "index": 533,
+            "title": "亚元舍人不替深知猥贻佳作三篇清绝不敢轻酬因为长歌聊以为报未竟复得子乔校书示问故兼寄陈君庶资一笑耳",
+            "author": "徐铉",
+            "hierarchy": [
+              "唐末宋初"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 640,
+          "reference": {
+            "file": "唐末宋初.csv",
+            "index": 540,
+            "title": "奉和宫傅相公怀旧见寄四十韵",
+            "author": "徐铉",
+            "hierarchy": [
+              "唐末宋初"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 3,
+      "body_duplicate_extra": 16
+    },
+    "Werneror/宋": {
+      "records": 287114,
+      "characters": 20614185,
+      "paragraphs": 287114,
+      "max_characters": 21848,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 4609,
+      "non_question_marker_records": 2735,
+      "question_mark_only_records": 1874,
+      "body_parenthesis_candidates": 1,
+      "over_10000_characters": 2,
+      "files": 4,
+      "author_strings": 9446,
+      "existing_overlap_records": 14220,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 21848,
+          "reference": {
+            "file": "宋_4.csv",
+            "index": 61722,
+            "title": "禅人并化主写真求赞",
+            "author": "释正觉",
+            "hierarchy": [
+              "宋"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 10712,
+          "reference": {
+            "file": "宋_4.csv",
+            "index": 61712,
+            "title": "偈颂二百零五首",
+            "author": "释正觉",
+            "hierarchy": [
+              "宋"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 8640,
+          "reference": {
+            "file": "宋_4.csv",
+            "index": 49975,
+            "title": "首尾吟",
+            "author": "邵雍",
+            "hierarchy": [
+              "宋"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 16,
+      "body_duplicate_extra": 145
+    },
+    "Werneror/宋末元初": {
+      "records": 12058,
+      "characters": 949997,
+      "paragraphs": 12058,
+      "max_characters": 3136,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 467,
+      "non_question_marker_records": 401,
+      "question_mark_only_records": 66,
+      "files": 1,
+      "author_strings": 41,
+      "existing_overlap_records": 481,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 3136,
+          "reference": {
+            "file": "宋末元初.csv",
+            "index": 11657,
+            "title": "湖州歌九十八首",
+            "author": "汪元量",
+            "hierarchy": [
+              "宋末元初"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 2880,
+          "reference": {
+            "file": "宋末元初.csv",
+            "index": 11367,
+            "title": "秋晚杂书三十首",
+            "author": "方回",
+            "hierarchy": [
+              "宋末元初"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 2664,
+          "reference": {
+            "file": "宋末元初.csv",
+            "index": 11059,
+            "title": "感兴二十七首",
+            "author": "方一夔",
+            "hierarchy": [
+              "宋末元初"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 3,
+      "body_duplicate_extra": 4
+    },
+    "Werneror/宋末金初": {
+      "records": 234,
+      "characters": 12588,
+      "paragraphs": 234,
+      "max_characters": 240,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 1,
+      "non_question_marker_records": 0,
+      "question_mark_only_records": 1,
+      "files": 1,
+      "author_strings": 9,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 240,
+          "reference": {
+            "file": "宋末金初.csv",
+            "index": 101,
+            "title": "登苏门山百泉",
+            "author": "刘豫",
+            "hierarchy": [
+              "宋末金初"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 208,
+          "reference": {
+            "file": "宋末金初.csv",
+            "index": 92,
+            "title": "无馀居士斋壁有沈传师游道山岳麓诗石刻穆仲等和之因亦次韵",
+            "author": "司马朴",
+            "hierarchy": [
+              "宋末金初"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 192,
+          "reference": {
+            "file": "宋末金初.csv",
+            "index": 172,
+            "title": "鸡林书事",
+            "author": "吴激",
+            "hierarchy": [
+              "宋末金初"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "Werneror/当代": {
+      "records": 28219,
+      "characters": 2092549,
+      "paragraphs": 28219,
+      "max_characters": 4544,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 19,
+      "non_question_marker_records": 10,
+      "question_mark_only_records": 9,
+      "files": 1,
+      "author_strings": 177,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 4544,
+          "reference": {
+            "file": "当代.csv",
+            "index": 26973,
+            "title": "鹧鸪天  前游仙词七十一首",
+            "author": "杨启宇",
+            "hierarchy": [
+              "当代"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 3488,
+          "reference": {
+            "file": "当代.csv",
+            "index": 26662,
+            "title": "莪默绝句集译笺乙集",
+            "author": "伯昏子",
+            "hierarchy": [
+              "当代"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 3262,
+          "reference": {
+            "file": "当代.csv",
+            "index": 27657,
+            "title": "波斯短歌行译笺",
+            "author": "钟锦",
+            "hierarchy": [
+              "当代"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": true,
+      "exact_duplicate_extra": 1,
+      "body_duplicate_extra": 11
+    },
+    "Werneror/明": {
+      "records": 236957,
+      "characters": 17833980,
+      "paragraphs": 236957,
+      "max_characters": 9144,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 4187,
+      "non_question_marker_records": 2140,
+      "question_mark_only_records": 2047,
+      "files": 4,
+      "author_strings": 4439,
+      "existing_overlap_records": 6,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 9144,
+          "reference": {
+            "file": "明_4.csv",
+            "index": 42099,
+            "title": "感寓",
+            "author": "朱诚泳",
+            "hierarchy": [
+              "明"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 8964,
+          "reference": {
+            "file": "明_4.csv",
+            "index": 37835,
+            "title": "拟古七十首 李都尉陵从军",
+            "author": "王世贞",
+            "hierarchy": [
+              "明"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 8284,
+          "reference": {
+            "file": "明_4.csv",
+            "index": 41434,
+            "title": "古像赞二百零五首 盘古",
+            "author": "孙承恩",
+            "hierarchy": [
+              "明"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 1,
+      "body_duplicate_extra": 15
+    },
+    "Werneror/明末清初": {
+      "records": 17700,
+      "characters": 1449151,
+      "paragraphs": 17700,
+      "max_characters": 4864,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 237,
+      "non_question_marker_records": 99,
+      "question_mark_only_records": 138,
+      "files": 1,
+      "author_strings": 176,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 4864,
+          "reference": {
+            "file": "明末清初.csv",
+            "index": 15874,
+            "title": "读甘蔗生遣兴诗次韵而和之七十六首",
+            "author": "王夫之",
+            "hierarchy": [
+              "明末清初"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 3651,
+          "reference": {
+            "file": "明末清初.csv",
+            "index": 15875,
+            "title": "广遣兴五十八首 其二",
+            "author": "王夫之",
+            "hierarchy": [
+              "明末清初"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 3200,
+          "reference": {
+            "file": "明末清初.csv",
+            "index": 15909,
+            "title": "和梅花百咏诗 古梅",
+            "author": "王夫之",
+            "hierarchy": [
+              "明末清初"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "Werneror/民国末当代初": {
+      "records": 1948,
+      "characters": 149915,
+      "paragraphs": 1948,
+      "max_characters": 558,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 3,
+      "non_question_marker_records": 1,
+      "question_mark_only_records": 2,
+      "files": 1,
+      "author_strings": 9,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 558,
+          "reference": {
+            "file": "民国末当代初.csv",
+            "index": 1820,
+            "title": "贺新郎  次韵丛碧翁八十自寿四首  七七年丁巳正月",
+            "author": "吴未淳",
+            "hierarchy": [
+              "民国末当代初"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 512,
+          "reference": {
+            "file": "民国末当代初.csv",
+            "index": 1906,
+            "title": "无题柴韵八首",
+            "author": "聂绀弩",
+            "hierarchy": [
+              "民国末当代初"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 512,
+          "reference": {
+            "file": "民国末当代初.csv",
+            "index": 1943,
+            "title": "丙戍秋兴八首次少陵韵",
+            "author": "钱仲联",
+            "hierarchy": [
+              "民国末当代初"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": true,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "Werneror/汉": {
+      "records": 363,
+      "characters": 53092,
+      "paragraphs": 363,
+      "max_characters": 4378,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 32,
+      "non_question_marker_records": 11,
+      "question_mark_only_records": 21,
+      "files": 1,
+      "author_strings": 83,
+      "existing_overlap_records": 363,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 4378,
+          "reference": {
+            "file": "汉.csv",
+            "index": 355,
+            "title": "九叹 逢纷",
+            "author": "刘向",
+            "hierarchy": [
+              "汉"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 3047,
+          "reference": {
+            "file": "汉.csv",
+            "index": 351,
+            "title": "七谏 初放",
+            "author": "东方朔",
+            "hierarchy": [
+              "汉"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 2470,
+          "reference": {
+            "file": "汉.csv",
+            "index": 349,
+            "title": "九思 逢尤",
+            "author": "王逸",
+            "hierarchy": [
+              "汉"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "Werneror/清": {
+      "records": 90089,
+      "characters": 8065865,
+      "paragraphs": 90089,
+      "max_characters": 10080,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 1172,
+      "non_question_marker_records": 343,
+      "question_mark_only_records": 829,
+      "over_10000_characters": 1,
+      "files": 2,
+      "author_strings": 8872,
+      "existing_overlap_records": 2,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 10080,
+          "reference": {
+            "file": "清_2.csv",
+            "index": 43933,
+            "title": "己亥杂诗",
+            "author": "龚自珍",
+            "hierarchy": [
+              "清"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 8177,
+          "reference": {
+            "file": "清_2.csv",
+            "index": 44307,
+            "title": "贺新郎五十八首",
+            "author": "蒋士铨",
+            "hierarchy": [
+              "清"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 7622,
+          "reference": {
+            "file": "清_2.csv",
+            "index": 43821,
+            "title": "咏史三十一首",
+            "author": "黄毓祺",
+            "hierarchy": [
+              "清"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 3,
+      "body_duplicate_extra": 21
+    },
+    "Werneror/清末民国初": {
+      "records": 15367,
+      "characters": 1395475,
+      "paragraphs": 15367,
+      "max_characters": 3200,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 178,
+      "non_question_marker_records": 39,
+      "question_mark_only_records": 139,
+      "files": 1,
+      "author_strings": 99,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 3200,
+          "reference": {
+            "file": "清末民国初.csv",
+            "index": 7874,
+            "title": "东宁百咏",
+            "author": "苏镜潭",
+            "hierarchy": [
+              "清末民国初"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 1882,
+          "reference": {
+            "file": "清末民国初.csv",
+            "index": 14533,
+            "title": "菩萨鬘 集李长吉诗",
+            "author": "冒广生",
+            "hierarchy": [
+              "清末民国初"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 1766,
+          "reference": {
+            "file": "清末民国初.csv",
+            "index": 96,
+            "title": "二十世纪太平洋歌",
+            "author": "梁启超",
+            "hierarchy": [
+              "清末民国初"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": true,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "Werneror/清末近现代初": {
+      "records": 12464,
+      "characters": 1080110,
+      "paragraphs": 12464,
+      "max_characters": 3285,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 88,
+      "non_question_marker_records": 21,
+      "question_mark_only_records": 67,
+      "files": 1,
+      "author_strings": 48,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 3285,
+          "reference": {
+            "file": "清末近现代初.csv",
+            "index": 12197,
+            "title": "海藏楼杂诗",
+            "author": "郑孝胥",
+            "hierarchy": [
+              "清末近现代初"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 3200,
+          "reference": {
+            "file": "清末近现代初.csv",
+            "index": 11646,
+            "title": "蛾眉七绝百首",
+            "author": "吴妍因",
+            "hierarchy": [
+              "清末近现代初"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 2544,
+          "reference": {
+            "file": "清末近现代初.csv",
+            "index": 10178,
+            "title": "流离篇",
+            "author": "吴妍因",
+            "hierarchy": [
+              "清末近现代初"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": true,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "Werneror/秦": {
+      "records": 2,
+      "characters": 80,
+      "paragraphs": 2,
+      "max_characters": 40,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "files": 1,
+      "author_strings": 2,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 40,
+          "reference": {
+            "file": "秦.csv",
+            "index": 1,
+            "title": "三秦民谣",
+            "author": "无名氏",
+            "hierarchy": [
+              "秦"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 40,
+          "reference": {
+            "file": "秦.csv",
+            "index": 2,
+            "title": "巴谣歌",
+            "author": "阙名",
+            "hierarchy": [
+              "秦"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "Werneror/辽": {
+      "records": 22,
+      "characters": 830,
+      "paragraphs": 22,
+      "max_characters": 72,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "files": 1,
+      "author_strings": 7,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 72,
+          "reference": {
+            "file": "辽.csv",
+            "index": 17,
+            "title": "咏史",
+            "author": "萧瑟瑟",
+            "hierarchy": [
+              "辽"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 64,
+          "reference": {
+            "file": "辽.csv",
+            "index": 22,
+            "title": "和《以司空大师不肯赋诗以诗挑之》诗二首",
+            "author": "沙门郎思孝",
+            "hierarchy": [
+              "辽"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 60,
+          "reference": {
+            "file": "辽.csv",
+            "index": 16,
+            "title": "讽谏歌",
+            "author": "萧瑟瑟",
+            "hierarchy": [
+              "辽"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "Werneror/近现代": {
+      "records": 28419,
+      "characters": 2218909,
+      "paragraphs": 28419,
+      "max_characters": 3264,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 128,
+      "non_question_marker_records": 44,
+      "question_mark_only_records": 84,
+      "files": 1,
+      "author_strings": 790,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 3264,
+          "reference": {
+            "file": "近现代.csv",
+            "index": 26582,
+            "title": "茂林居士忆琴百二绝句",
+            "author": "吴玉如",
+            "hierarchy": [
+              "近现代"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 3120,
+          "reference": {
+            "file": "近现代.csv",
+            "index": 27120,
+            "title": "咏史一百三十首 卢梭",
+            "author": "连横",
+            "hierarchy": [
+              "近现代"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 2994,
+          "reference": {
+            "file": "近现代.csv",
+            "index": 12562,
+            "title": "芳华曲 为梅兰芳大师作",
+            "author": "孔凡章",
+            "hierarchy": [
+              "近现代"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": true,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 3
+    },
+    "Werneror/近现代末当代初": {
+      "records": 3426,
+      "characters": 299719,
+      "paragraphs": 3426,
+      "max_characters": 1690,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 20,
+      "non_question_marker_records": 1,
+      "question_mark_only_records": 19,
+      "files": 1,
+      "author_strings": 23,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 1690,
+          "reference": {
+            "file": "近现代末当代初.csv",
+            "index": 3196,
+            "title": "洞庭碧血",
+            "author": "田翠竹",
+            "hierarchy": [
+              "近现代末当代初"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 1546,
+          "reference": {
+            "file": "近现代末当代初.csv",
+            "index": 3301,
+            "title": "蝶恋花 和六一词",
+            "author": "赵尊岳",
+            "hierarchy": [
+              "近现代末当代初"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 1352,
+          "reference": {
+            "file": "近现代末当代初.csv",
+            "index": 3335,
+            "title": "采桑子",
+            "author": "赵尊岳",
+            "hierarchy": [
+              "近现代末当代初"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": true,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "Werneror/金": {
+      "records": 2741,
+      "characters": 195526,
+      "paragraphs": 2741,
+      "max_characters": 1920,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 38,
+      "non_question_marker_records": 7,
+      "question_mark_only_records": 31,
+      "files": 1,
+      "author_strings": 253,
+      "existing_overlap_records": 1,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 1920,
+          "reference": {
+            "file": "金.csv",
+            "index": 2632,
+            "title": "明惠皇后挽歌词四十首",
+            "author": "赵秉文",
+            "hierarchy": [
+              "金"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 1320,
+          "reference": {
+            "file": "金.csv",
+            "index": 2697,
+            "title": "和渊明饮酒二十首",
+            "author": "赵秉文",
+            "hierarchy": [
+              "金"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 844,
+          "reference": {
+            "file": "金.csv",
+            "index": 2698,
+            "title": "和韦苏州二十首 西涧",
+            "author": "赵秉文",
+            "hierarchy": [
+              "金"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "Werneror/金末元初": {
+      "records": 3019,
+      "characters": 216204,
+      "paragraphs": 3019,
+      "max_characters": 2400,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 121,
+      "non_question_marker_records": 101,
+      "question_mark_only_records": 20,
+      "files": 1,
+      "author_strings": 17,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 2400,
+          "reference": {
+            "file": "金末元初.csv",
+            "index": 2816,
+            "title": "一字百题示商君祥 风",
+            "author": "李俊民",
+            "hierarchy": [
+              "金末元初"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 1504,
+          "reference": {
+            "file": "金末元初.csv",
+            "index": 2856,
+            "title": "襄阳咏史 古堤",
+            "author": "李俊民",
+            "hierarchy": [
+              "金末元初"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 972,
+          "reference": {
+            "file": "金末元初.csv",
+            "index": 3004,
+            "title": "学东坡移居八首",
+            "author": "元好问",
+            "hierarchy": [
+              "金末元初"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "Werneror/隋": {
+      "records": 1170,
+      "characters": 76040,
+      "paragraphs": 1170,
+      "max_characters": 2023,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 17,
+      "non_question_marker_records": 4,
+      "question_mark_only_records": 13,
+      "files": 1,
+      "author_strings": 84,
+      "existing_overlap_records": 3,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 2023,
+          "reference": {
+            "file": "隋.csv",
+            "index": 1075,
+            "title": "读曲歌八十九首",
+            "author": "无名氏",
+            "hierarchy": [
+              "隋"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 1833,
+          "reference": {
+            "file": "隋.csv",
+            "index": 1101,
+            "title": "老君十六变词",
+            "author": "无名氏",
+            "hierarchy": [
+              "隋"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 1180,
+          "reference": {
+            "file": "隋.csv",
+            "index": 1109,
+            "title": "享庙乐辞十八首 肆夏乐",
+            "author": "无名氏",
+            "hierarchy": [
+              "隋"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 3
+    },
+    "Werneror/隋末唐初": {
+      "records": 472,
+      "characters": 31507,
+      "paragraphs": 472,
+      "max_characters": 612,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 8,
+      "non_question_marker_records": 7,
+      "question_mark_only_records": 1,
+      "files": 1,
+      "author_strings": 40,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 612,
+          "reference": {
+            "file": "隋末唐初.csv",
+            "index": 460,
+            "title": "古意六首",
+            "author": "王绩",
+            "hierarchy": [
+              "隋末唐初"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 432,
+          "reference": {
+            "file": "隋末唐初.csv",
+            "index": 468,
+            "title": "帝京篇十首",
+            "author": "李世民",
+            "hierarchy": [
+              "隋末唐初"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 288,
+          "reference": {
+            "file": "隋末唐初.csv",
+            "index": 172,
+            "title": "过汉故城",
+            "author": "王绩",
+            "hierarchy": [
+              "隋末唐初"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "Werneror/魏晋": {
+      "records": 3020,
+      "characters": 255143,
+      "paragraphs": 3020,
+      "max_characters": 5632,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 64,
+      "non_question_marker_records": 34,
+      "question_mark_only_records": 30,
+      "files": 1,
+      "author_strings": 251,
+      "existing_overlap_records": 3020,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 5632,
+          "reference": {
+            "file": "魏晋.csv",
+            "index": 2905,
+            "title": "咏怀",
+            "author": "阮籍",
+            "hierarchy": [
+              "魏晋"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 2162,
+          "reference": {
+            "file": "魏晋.csv",
+            "index": 2999,
+            "title": "晋鼓吹曲二十二首 灵之祥",
+            "author": "傅玄",
+            "hierarchy": [
+              "魏晋"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 1884,
+          "reference": {
+            "file": "魏晋.csv",
+            "index": 2877,
+            "title": "诗二十五首 右英吟",
+            "author": "云林右英夫人",
+            "hierarchy": [
+              "魏晋"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 1,
+      "body_duplicate_extra": 2
+    },
+    "Werneror/魏晋末南北朝初": {
+      "records": 1,
+      "characters": 870,
+      "paragraphs": 1,
+      "max_characters": 870,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "files": 1,
+      "author_strings": 1,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 870,
+          "reference": {
+            "file": "魏晋末南北朝初.csv",
+            "index": 1,
+            "title": "璇玑图诗",
+            "author": "苏蕙",
+            "hierarchy": [
+              "魏晋末南北朝初"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/三字经·传统版": {
+      "records": 1,
+      "characters": 1615,
+      "paragraphs": 96,
+      "max_characters": 1615,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "files": 1,
+      "author_strings": 1,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {
+        "tags": 1
+      },
+      "longest": [
+        {
+          "characters": 1615,
+          "reference": {
+            "file": "蒙学/sanzijing-traditional.json",
+            "index": "$",
+            "title": "三字經",
+            "author": "王應麟",
+            "hierarchy": [
+              "三字經"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/三字经·新版": {
+      "records": 1,
+      "characters": 2226,
+      "paragraphs": 131,
+      "max_characters": 2226,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "files": 1,
+      "author_strings": 1,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {
+        "tags": 1
+      },
+      "longest": [
+        {
+          "characters": 2226,
+          "reference": {
+            "file": "蒙学/sanzijing-new.json",
+            "index": "$",
+            "title": "三字經",
+            "author": "王應麟",
+            "hierarchy": [
+              "三字經"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": true,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/中庸": {
+      "records": 1,
+      "characters": 4494,
+      "paragraphs": 39,
+      "max_characters": 4494,
+      "missing_title": 0,
+      "missing_author": 1,
+      "missing_text": 0,
+      "files": 1,
+      "author_strings": 1,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 4494,
+          "reference": {
+            "file": "四书五经/zhongyong.json",
+            "index": "$",
+            "title": "中庸",
+            "author": "",
+            "hierarchy": [
+              "中庸"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/元曲": {
+      "records": 11057,
+      "characters": 999091,
+      "paragraphs": 45509,
+      "max_characters": 1486,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 143,
+      "body_parenthesis_candidates": 4296,
+      "marker_records": 48,
+      "non_question_marker_records": 43,
+      "question_mark_only_records": 5,
+      "files": 1,
+      "author_strings": 233,
+      "existing_overlap_records": 10914,
+      "metadata_fields_outside_body": {
+        "dynasty": 11057
+      },
+      "longest": [
+        {
+          "characters": 1486,
+          "reference": {
+            "file": "元曲/yuanqu.json",
+            "index": "$[5664]",
+            "title": "中吕・山坡羊",
+            "author": "陈草庵",
+            "hierarchy": [
+              "中吕・山坡羊"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 1470,
+          "reference": {
+            "file": "元曲/yuanqu.json",
+            "index": "$[10059]",
+            "title": "中吕・朝天子归隐",
+            "author": "汪元亨",
+            "hierarchy": [
+              "中吕・朝天子归隐"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 1401,
+          "reference": {
+            "file": "元曲/yuanqu.json",
+            "index": "$[10503]",
+            "title": "十二月・正月",
+            "author": "无名氏",
+            "hierarchy": [
+              "十二月・正月"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 8,
+      "body_duplicate_extra": 24
+    },
+    "chinese-poetry/千字文": {
+      "records": 1,
+      "characters": 1249,
+      "paragraphs": 250,
+      "max_characters": 1249,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "files": 1,
+      "author_strings": 1,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {
+        "spells": 1,
+        "tags": 1
+      },
+      "longest": [
+        {
+          "characters": 1249,
+          "reference": {
+            "file": "蒙学/qianziwen.json",
+            "index": "$",
+            "title": "千字文",
+            "author": "周興嗣",
+            "hierarchy": [
+              "千字文"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/千家诗": {
+      "records": 226,
+      "characters": 9588,
+      "paragraphs": 638,
+      "max_characters": 67,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "files": 1,
+      "author_strings": 125,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {
+        "subchapter": 12
+      },
+      "longest": [
+        {
+          "characters": 67,
+          "reference": {
+            "file": "蒙学/qianjiashi.json",
+            "index": "$.content[3].content[0]",
+            "title": "早朝大明宮",
+            "author": "（唐）賈至",
+            "hierarchy": [
+              "千家詩",
+              "七言律詩",
+              "早朝大明宮"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 67,
+          "reference": {
+            "file": "蒙学/qianjiashi.json",
+            "index": "$.content[3].content[1]",
+            "title": "和賈舍人早朝",
+            "author": "（唐）杜甫",
+            "hierarchy": [
+              "千家詩",
+              "七言律詩",
+              "和賈舍人早朝"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 67,
+          "reference": {
+            "file": "蒙学/qianjiashi.json",
+            "index": "$.content[3].content[2]",
+            "title": "和賈舍人早朝",
+            "author": "（唐）王維",
+            "hierarchy": [
+              "千家詩",
+              "七言律詩",
+              "和賈舍人早朝"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/南唐二主词": {
+      "records": 45,
+      "characters": 2529,
+      "paragraphs": 185,
+      "max_characters": 75,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 1,
+      "non_question_marker_records": 1,
+      "question_mark_only_records": 0,
+      "files": 1,
+      "author_strings": 2,
+      "existing_overlap_records": 6,
+      "metadata_fields_outside_body": {
+        "notes": 45
+      },
+      "longest": [
+        {
+          "characters": 75,
+          "reference": {
+            "file": "五代诗词/nantang/poetrys.json",
+            "index": "$[14]",
+            "title": "蝶恋花·遥夜亭皋闲信步",
+            "author": "李煜",
+            "hierarchy": [
+              "蝶恋花·遥夜亭皋闲信步"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 75,
+          "reference": {
+            "file": "五代诗词/nantang/poetrys.json",
+            "index": "$[35]",
+            "title": "破阵子·四十年来家国",
+            "author": "李煜",
+            "hierarchy": [
+              "破阵子·四十年来家国"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 73,
+          "reference": {
+            "file": "五代诗词/nantang/poetrys.json",
+            "index": "$[8]",
+            "title": "临江仙·樱桃落尽春归去",
+            "author": "李煜",
+            "hierarchy": [
+              "临江仙·樱桃落尽春归去"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/古文观止": {
+      "records": 222,
+      "characters": 140705,
+      "paragraphs": 1016,
+      "max_characters": 6908,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "body_parenthesis_candidates": 23,
+      "marker_records": 19,
+      "non_question_marker_records": 0,
+      "question_mark_only_records": 19,
+      "files": 1,
+      "author_strings": 62,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {
+        "source": 222
+      },
+      "longest": [
+        {
+          "characters": 6908,
+          "reference": {
+            "file": "蒙学/guwenguanzhi.json",
+            "index": "$.content[5].content[5]",
+            "title": "治安策",
+            "author": "兩漢：賈誼 ",
+            "hierarchy": [
+              "古文觀止",
+              "卷六・漢文",
+              "治安策"
+            ],
+            "source": "(賈誼)"
+          }
+        },
+        {
+          "characters": 2878,
+          "reference": {
+            "file": "蒙学/guwenguanzhi.json",
+            "index": "$.content[4].content[14]",
+            "title": "報任安書",
+            "author": "兩漢：司馬遷 ",
+            "hierarchy": [
+              "古文觀止",
+              "卷五・漢文",
+              "報任安書"
+            ],
+            "source": "(司馬遷)"
+          }
+        },
+        {
+          "characters": 2757,
+          "reference": {
+            "file": "蒙学/guwenguanzhi.json",
+            "index": "$.content[5].content[4]",
+            "title": "過秦論",
+            "author": "兩漢：賈誼 ",
+            "hierarchy": [
+              "古文觀止",
+              "卷六・漢文",
+              "過秦論"
+            ],
+            "source": "(賈誼)"
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/唐诗": {
+      "records": 57607,
+      "characters": 3878762,
+      "paragraphs": 268283,
+      "max_characters": 3277,
+      "missing_title": 168,
+      "missing_author": 0,
+      "missing_text": 4,
+      "marker_records": 467,
+      "non_question_marker_records": 467,
+      "question_mark_only_records": 0,
+      "body_parenthesis_candidates": 3245,
+      "files": 58,
+      "author_strings": 3663,
+      "existing_overlap_records": 205,
+      "metadata_fields_outside_body": {
+        "id": 57607,
+        "tags": 4132,
+        "notes": 21
+      },
+      "longest": [
+        {
+          "characters": 3277,
+          "reference": {
+            "file": "全唐诗/poet.tang.48000.json",
+            "index": "$[754]",
+            "title": "蒙求",
+            "author": "李瀚",
+            "hierarchy": [
+              "蒙求"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 3133,
+          "reference": {
+            "file": "全唐诗/poet.tang.50000.json",
+            "index": "$[183]",
+            "title": "秦婦吟[一]",
+            "author": "韋莊",
+            "hierarchy": [
+              "秦婦吟[一]"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 2415,
+          "reference": {
+            "file": "全唐诗/poet.tang.51000.json",
+            "index": "$[334]",
+            "title": "一鉢歌",
+            "author": "一鉢和尚",
+            "hierarchy": [
+              "一鉢歌"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 4,
+      "body_duplicate_extra": 997
+    },
+    "chinese-poetry/唐诗三百首": {
+      "records": 366,
+      "characters": 26624,
+      "paragraphs": 1751,
+      "max_characters": 1019,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "files": 1,
+      "author_strings": 86,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {
+        "id": 366,
+        "tags": 366
+      },
+      "longest": [
+        {
+          "characters": 1019,
+          "reference": {
+            "file": "全唐诗/唐诗三百首.json",
+            "index": "$[177]",
+            "title": "長恨歌",
+            "author": "白居易",
+            "hierarchy": [
+              "長恨歌"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 747,
+          "reference": {
+            "file": "全唐诗/唐诗三百首.json",
+            "index": "$[178]",
+            "title": "琵琶引",
+            "author": "白居易",
+            "hierarchy": [
+              "琵琶引"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 560,
+          "reference": {
+            "file": "全唐诗/唐诗三百首.json",
+            "index": "$[198]",
+            "title": "石鼓歌",
+            "author": "韓愈",
+            "hierarchy": [
+              "石鼓歌"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 1,
+      "body_duplicate_extra": 14
+    },
+    "chinese-poetry/唐诗三百首·蒙学": {
+      "records": 320,
+      "characters": 24668,
+      "paragraphs": 1531,
+      "max_characters": 1026,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "body_parenthesis_candidates": 50,
+      "marker_records": 1,
+      "non_question_marker_records": 0,
+      "question_mark_only_records": 1,
+      "files": 1,
+      "author_strings": 75,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {
+        "subchapter": 320
+      },
+      "longest": [
+        {
+          "characters": 1026,
+          "reference": {
+            "file": "蒙学/tangshisanbaishou.json",
+            "index": "$.content[5].content[1]",
+            "title": "長恨歌",
+            "author": "白居易",
+            "hierarchy": [
+              "唐詩三百首",
+              "七言古詩",
+              "長恨歌"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 792,
+          "reference": {
+            "file": "蒙学/tangshisanbaishou.json",
+            "index": "$.content[5].content[2]",
+            "title": "琵琶行",
+            "author": "白居易",
+            "hierarchy": [
+              "唐詩三百首",
+              "七言古詩",
+              "琵琶行"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 560,
+          "reference": {
+            "file": "蒙学/tangshisanbaishou.json",
+            "index": "$.content[5].content[24]",
+            "title": "石鼓歌",
+            "author": "韓愈",
+            "hierarchy": [
+              "唐詩三百首",
+              "七言古詩",
+              "石鼓歌"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/唐诗补录": {
+      "records": 1,
+      "characters": 23,
+      "paragraphs": 2,
+      "max_characters": 23,
+      "missing_title": 1,
+      "missing_author": 0,
+      "missing_text": 0,
+      "files": 1,
+      "author_strings": 1,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {
+        "id": 1,
+        "notes": 1
+      },
+      "longest": [
+        {
+          "characters": 23,
+          "reference": {
+            "file": "全唐诗/唐诗补录.json",
+            "index": "$[0]",
+            "title": "",
+            "author": "佚名",
+            "hierarchy": [],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/增广贤文": {
+      "records": 2,
+      "characters": 10710,
+      "paragraphs": 752,
+      "max_characters": 6218,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "files": 1,
+      "author_strings": 1,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 6218,
+          "reference": {
+            "file": "蒙学/zengguangxianwen.json",
+            "index": "$.content[0]",
+            "title": "上集",
+            "author": "佚名",
+            "hierarchy": [
+              "增廣賢文",
+              "上集"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 4492,
+          "reference": {
+            "file": "蒙学/zengguangxianwen.json",
+            "index": "$.content[1]",
+            "title": "下集",
+            "author": "佚名",
+            "hierarchy": [
+              "增廣賢文",
+              "下集"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/声律启蒙": {
+      "records": 30,
+      "characters": 8438,
+      "paragraphs": 90,
+      "max_characters": 284,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "files": 1,
+      "author_strings": 1,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 284,
+          "reference": {
+            "file": "蒙学/shenglvqimeng.json",
+            "index": "$.content[0].content[7]",
+            "title": "八 齊",
+            "author": "車萬育",
+            "hierarchy": [
+              "聲律啓蒙",
+              "上卷",
+              "八 齊"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 284,
+          "reference": {
+            "file": "蒙学/shenglvqimeng.json",
+            "index": "$.content[1].content[1]",
+            "title": "二 蕭",
+            "author": "車萬育",
+            "hierarchy": [
+              "聲律啓蒙",
+              "下卷",
+              "二 蕭"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 284,
+          "reference": {
+            "file": "蒙学/shenglvqimeng.json",
+            "index": "$.content[1].content[11]",
+            "title": "十二 侵",
+            "author": "車萬育",
+            "hierarchy": [
+              "聲律啓蒙",
+              "下卷",
+              "十二 侵"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/大学": {
+      "records": 1,
+      "characters": 2224,
+      "paragraphs": 16,
+      "max_characters": 2224,
+      "missing_title": 0,
+      "missing_author": 1,
+      "missing_text": 0,
+      "files": 1,
+      "author_strings": 1,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 2224,
+          "reference": {
+            "file": "四书五经/daxue.json",
+            "index": "$",
+            "title": "大學",
+            "author": "",
+            "hierarchy": [
+              "大學"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/孟子": {
+      "records": 14,
+      "characters": 45545,
+      "paragraphs": 690,
+      "max_characters": 3808,
+      "missing_title": 0,
+      "missing_author": 14,
+      "missing_text": 0,
+      "files": 1,
+      "author_strings": 1,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 3808,
+          "reference": {
+            "file": "四书五经/mengzi.json",
+            "index": "$[1]",
+            "title": "梁惠王下",
+            "author": "",
+            "hierarchy": [
+              "梁惠王下"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 3444,
+          "reference": {
+            "file": "四书五经/mengzi.json",
+            "index": "$[2]",
+            "title": "公孫丑上",
+            "author": "",
+            "hierarchy": [
+              "公孫丑上"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 3415,
+          "reference": {
+            "file": "四书五经/mengzi.json",
+            "index": "$[8]",
+            "title": "萬章上",
+            "author": "",
+            "hierarchy": [
+              "萬章上"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/宋词": {
+      "records": 21053,
+      "characters": 1845622,
+      "paragraphs": 159058,
+      "max_characters": 672,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 930,
+      "non_question_marker_records": 930,
+      "question_mark_only_records": 0,
+      "body_parenthesis_candidates": 18,
+      "files": 23,
+      "author_strings": 1490,
+      "existing_overlap_records": 21050,
+      "metadata_fields_outside_body": {
+        "tags": 931,
+        "prologue": 6
+      },
+      "longest": [
+        {
+          "characters": 672,
+          "reference": {
+            "file": "宋词/ci.song.10000.json",
+            "index": "$[210]",
+            "title": "野庵曲",
+            "author": "沈瀛",
+            "hierarchy": [
+              "野庵曲"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 525,
+          "reference": {
+            "file": "宋词/ci.song.10000.json",
+            "index": "$[214]",
+            "title": "归去来兮引・归去来兮",
+            "author": "杨万里",
+            "hierarchy": [
+              "归去来兮引・归去来兮"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 471,
+          "reference": {
+            "file": "宋词/ci.song.2019y.json",
+            "index": "$[1]",
+            "title": "九张机",
+            "author": "无名氏",
+            "hierarchy": [
+              "九张机"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 4,
+      "body_duplicate_extra": 32
+    },
+    "chinese-poetry/宋词三百首": {
+      "records": 280,
+      "characters": 31458,
+      "paragraphs": 2562,
+      "max_characters": 309,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "files": 1,
+      "author_strings": 83,
+      "existing_overlap_records": 188,
+      "metadata_fields_outside_body": {
+        "tags": 280
+      },
+      "longest": [
+        {
+          "characters": 309,
+          "reference": {
+            "file": "宋词/宋词三百首.json",
+            "index": "$[8]",
+            "title": "莺啼序",
+            "author": "吴文英",
+            "hierarchy": [
+              "莺啼序"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 281,
+          "reference": {
+            "file": "宋词/宋词三百首.json",
+            "index": "$[148]",
+            "title": "戚氏",
+            "author": "柳永",
+            "hierarchy": [
+              "戚氏"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 227,
+          "reference": {
+            "file": "宋词/宋词三百首.json",
+            "index": "$[268]",
+            "title": "三台",
+            "author": "万俟咏",
+            "hierarchy": [
+              "三台"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/宋诗": {
+      "records": 254248,
+      "characters": 16209143,
+      "paragraphs": 1099146,
+      "max_characters": 2599,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 23,
+      "body_parenthesis_candidates": 21,
+      "marker_records": 1754,
+      "non_question_marker_records": 1754,
+      "question_mark_only_records": 0,
+      "files": 255,
+      "author_strings": 8934,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {
+        "id": 254248,
+        "tags": 6905
+      },
+      "longest": [
+        {
+          "characters": 2599,
+          "reference": {
+            "file": "全唐诗/poet.song.5000.json",
+            "index": "$[5]",
+            "title": "誡酒肉慈慧法門",
+            "author": "釋遵式",
+            "hierarchy": [
+              "誡酒肉慈慧法門"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 2547,
+          "reference": {
+            "file": "全唐诗/poet.song.37000.json",
+            "index": "$[90]",
+            "title": "大河上天章公顧子敦",
+            "author": "徐積",
+            "hierarchy": [
+              "大河上天章公顧子敦"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 2339,
+          "reference": {
+            "file": "全唐诗/poet.song.20000.json",
+            "index": "$[921]",
+            "title": "觀棋大吟",
+            "author": "邵雍",
+            "hierarchy": [
+              "觀棋大吟"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 30,
+      "body_duplicate_extra": 659
+    },
+    "chinese-poetry/幼学琼林": {
+      "records": 33,
+      "characters": 21442,
+      "paragraphs": 191,
+      "max_characters": 2451,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "files": 1,
+      "author_strings": 1,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 2451,
+          "reference": {
+            "file": "蒙学/youxueqionglin.json",
+            "index": "$.content[2].content[0]",
+            "title": "人事",
+            "author": "程登吉",
+            "hierarchy": [
+              "幼學瓊林",
+              "卷三",
+              "人事"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 1640,
+          "reference": {
+            "file": "蒙学/youxueqionglin.json",
+            "index": "$.content[3].content[6]",
+            "title": "鳥獸",
+            "author": "程登吉",
+            "hierarchy": [
+              "幼學瓊林",
+              "卷四",
+              "鳥獸"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 1232,
+          "reference": {
+            "file": "蒙学/youxueqionglin.json",
+            "index": "$.content[1].content[10]",
+            "title": "身體",
+            "author": "程登吉",
+            "hierarchy": [
+              "幼學瓊林",
+              "卷二",
+              "身體"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/幽梦影": {
+      "records": 219,
+      "characters": 10750,
+      "paragraphs": 219,
+      "max_characters": 678,
+      "missing_title": 219,
+      "missing_author": 219,
+      "missing_text": 0,
+      "body_parenthesis_candidates": 12,
+      "files": 1,
+      "author_strings": 1,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {
+        "comment": 219
+      },
+      "longest": [
+        {
+          "characters": 678,
+          "reference": {
+            "file": "幽梦影/youmengying.json",
+            "index": "$[97]",
+            "title": "",
+            "author": "",
+            "hierarchy": [],
+            "source": ""
+          }
+        },
+        {
+          "characters": 293,
+          "reference": {
+            "file": "幽梦影/youmengying.json",
+            "index": "$[75]",
+            "title": "",
+            "author": "",
+            "hierarchy": [],
+            "source": ""
+          }
+        },
+        {
+          "characters": 202,
+          "reference": {
+            "file": "幽梦影/youmengying.json",
+            "index": "$[3]",
+            "title": "",
+            "author": "",
+            "hierarchy": [],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/弟子规": {
+      "records": 8,
+      "characters": 1432,
+      "paragraphs": 90,
+      "max_characters": 271,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "files": 1,
+      "author_strings": 1,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 271,
+          "reference": {
+            "file": "蒙学/dizigui.json",
+            "index": "$.content[3]",
+            "title": "謹",
+            "author": "李毓秀",
+            "hierarchy": [
+              "弟子規",
+              "謹"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 239,
+          "reference": {
+            "file": "蒙学/dizigui.json",
+            "index": "$.content[4]",
+            "title": "信",
+            "author": "李毓秀",
+            "hierarchy": [
+              "弟子規",
+              "信"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 239,
+          "reference": {
+            "file": "蒙学/dizigui.json",
+            "index": "$.content[5]",
+            "title": "泛愛眾",
+            "author": "李毓秀",
+            "hierarchy": [
+              "弟子規",
+              "泛愛眾"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/御定全唐詩": {
+      "records": 43103,
+      "characters": 2795947,
+      "paragraphs": 125511,
+      "max_characters": 16177,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 184,
+      "non_question_marker_records": 184,
+      "question_mark_only_records": 0,
+      "over_10000_characters": 1,
+      "files": 900,
+      "author_strings": 2634,
+      "existing_overlap_records": 27,
+      "metadata_fields_outside_body": {
+        "biography": 43103,
+        "no#": 43103,
+        "notes": 43103,
+        "volume": 43103
+      },
+      "longest": [
+        {
+          "characters": 16177,
+          "reference": {
+            "file": "御定全唐詩/json/806.json",
+            "index": "$[0]",
+            "title": "詩三百三首",
+            "author": "寒山",
+            "hierarchy": [
+              "卷八百零六",
+              "詩三百三首"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 5336,
+          "reference": {
+            "file": "御定全唐詩/json/798.json",
+            "index": "$[0]",
+            "title": "宮詞",
+            "author": "花蕊夫人",
+            "hierarchy": [
+              "卷七百九十八",
+              "宮詞"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 4703,
+          "reference": {
+            "file": "御定全唐詩/json/161.json",
+            "index": "$[0]",
+            "title": "古風",
+            "author": "李白",
+            "hierarchy": [
+              "卷一百六十一",
+              "古風"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 4,
+      "body_duplicate_extra": 705
+    },
+    "chinese-poetry/文字蒙求": {
+      "records": 4,
+      "characters": 44085,
+      "paragraphs": 4131,
+      "max_characters": 25468,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "long_author_records": 4,
+      "body_parenthesis_candidates": 1,
+      "over_10000_characters": 1,
+      "marker_records": 1,
+      "non_question_marker_records": 1,
+      "question_mark_only_records": 0,
+      "files": 1,
+      "author_strings": 1,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 25468,
+          "reference": {
+            "file": "蒙学/wenzimengqiu.json",
+            "index": "$.content[2]",
+            "title": "卷三",
+            "author": "王筠（1784-1854），字貫山，號菉友。清山東安丘人，道光元年（1821）舉人，曾任陝西鄉寧知縣。他的著作有《說文釋例》《說文解字句讀》《文字蒙求》等。",
+            "hierarchy": [
+              "文字蒙求",
+              "卷三"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 7176,
+          "reference": {
+            "file": "蒙学/wenzimengqiu.json",
+            "index": "$.content[3]",
+            "title": "卷四",
+            "author": "王筠（1784-1854），字貫山，號菉友。清山東安丘人，道光元年（1821）舉人，曾任陝西鄉寧知縣。他的著作有《說文釋例》《說文解字句讀》《文字蒙求》等。",
+            "hierarchy": [
+              "文字蒙求",
+              "卷四"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 7099,
+          "reference": {
+            "file": "蒙学/wenzimengqiu.json",
+            "index": "$.content[0]",
+            "title": "卷一",
+            "author": "王筠（1784-1854），字貫山，號菉友。清山東安丘人，道光元年（1821）舉人，曾任陝西鄉寧知縣。他的著作有《說文釋例》《說文解字句讀》《文字蒙求》等。",
+            "hierarchy": [
+              "文字蒙求",
+              "卷一"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/曹操诗集": {
+      "records": 26,
+      "characters": 3646,
+      "paragraphs": 293,
+      "max_characters": 355,
+      "missing_title": 0,
+      "missing_author": 26,
+      "missing_text": 0,
+      "body_parenthesis_candidates": 2,
+      "files": 1,
+      "author_strings": 1,
+      "existing_overlap_records": 6,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 355,
+          "reference": {
+            "file": "曹操诗集/caocao.json",
+            "index": "$[17]",
+            "title": "秋胡行 其二",
+            "author": "",
+            "hierarchy": [
+              "秋胡行 其二"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 290,
+          "reference": {
+            "file": "曹操诗集/caocao.json",
+            "index": "$[16]",
+            "title": "秋胡行 其一",
+            "author": "",
+            "hierarchy": [
+              "秋胡行 其一"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 251,
+          "reference": {
+            "file": "曹操诗集/caocao.json",
+            "index": "$[10]",
+            "title": "气出唱 其二",
+            "author": "",
+            "hierarchy": [
+              "气出唱 其二"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/朱子家训": {
+      "records": 1,
+      "characters": 680,
+      "paragraphs": 51,
+      "max_characters": 680,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "files": 1,
+      "author_strings": 1,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 680,
+          "reference": {
+            "file": "蒙学/zhuzijiaxun.json",
+            "index": "$",
+            "title": "朱子家訓",
+            "author": "朱柏廬",
+            "hierarchy": [
+              "朱子家訓"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/楚辞": {
+      "records": 65,
+      "characters": 33692,
+      "paragraphs": 2273,
+      "max_characters": 3072,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "marker_records": 2,
+      "non_question_marker_records": 0,
+      "question_mark_only_records": 2,
+      "files": 1,
+      "author_strings": 10,
+      "existing_overlap_records": 65,
+      "metadata_fields_outside_body": {
+        "section": 65
+      },
+      "longest": [
+        {
+          "characters": 3072,
+          "reference": {
+            "file": "楚辞/chuci.json",
+            "index": "$[0]",
+            "title": "离骚",
+            "author": "屈原",
+            "hierarchy": [
+              "离骚"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 2148,
+          "reference": {
+            "file": "楚辞/chuci.json",
+            "index": "$[12]",
+            "title": "天问",
+            "author": "屈原",
+            "hierarchy": [
+              "天问"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 2132,
+          "reference": {
+            "file": "楚辞/chuci.json",
+            "index": "$[25]",
+            "title": "九辩",
+            "author": "宋玉",
+            "hierarchy": [
+              "九辩"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/水墨唐诗": {
+      "records": 176,
+      "characters": 7157,
+      "paragraphs": 493,
+      "max_characters": 165,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "files": 1,
+      "author_strings": 55,
+      "existing_overlap_records": 73,
+      "metadata_fields_outside_body": {
+        "prologue": 176
+      },
+      "longest": [
+        {
+          "characters": 165,
+          "reference": {
+            "file": "水墨唐诗/shuimotangshi.json",
+            "index": "$[129]",
+            "title": "卖炭翁",
+            "author": "白居易",
+            "hierarchy": [
+              "卖炭翁"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 152,
+          "reference": {
+            "file": "水墨唐诗/shuimotangshi.json",
+            "index": "$[52]",
+            "title": "白雪歌送武判官归京",
+            "author": "岑参",
+            "hierarchy": [
+              "白雪歌送武判官归京"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 102,
+          "reference": {
+            "file": "水墨唐诗/shuimotangshi.json",
+            "index": "$[70]",
+            "title": "绝句三首",
+            "author": "杜甫",
+            "hierarchy": [
+              "绝句三首"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/百家姓": {
+      "records": 1,
+      "characters": 780,
+      "paragraphs": 71,
+      "max_characters": 780,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "files": 1,
+      "author_strings": 1,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {
+        "origin": 1,
+        "tags": 1
+      },
+      "longest": [
+        {
+          "characters": 780,
+          "reference": {
+            "file": "蒙学/baijiaxing.json",
+            "index": "$",
+            "title": "百家姓",
+            "author": "佚名",
+            "hierarchy": [
+              "百家姓"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/纳兰性德": {
+      "records": 258,
+      "characters": 14817,
+      "paragraphs": 1185,
+      "max_characters": 220,
+      "missing_title": 1,
+      "missing_author": 0,
+      "missing_text": 0,
+      "body_parenthesis_candidates": 1,
+      "marker_records": 1,
+      "non_question_marker_records": 0,
+      "question_mark_only_records": 1,
+      "files": 1,
+      "author_strings": 1,
+      "existing_overlap_records": 1,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 220,
+          "reference": {
+            "file": "纳兰性德/纳兰性德诗集.json",
+            "index": "$[96]",
+            "title": "沁园春·瞬息浮生",
+            "author": "纳兰性德",
+            "hierarchy": [
+              "沁园春·瞬息浮生"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 215,
+          "reference": {
+            "file": "纳兰性德/纳兰性德诗集.json",
+            "index": "$[217]",
+            "title": "茅斋",
+            "author": "纳兰性德",
+            "hierarchy": [
+              "茅斋"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 142,
+          "reference": {
+            "file": "纳兰性德/纳兰性德诗集.json",
+            "index": "$[128]",
+            "title": "金缕曲·姜西溟言别赋此赠之",
+            "author": "纳兰性德",
+            "hierarchy": [
+              "金缕曲·姜西溟言别赋此赠之"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 1
+    },
+    "chinese-poetry/花间集": {
+      "records": 497,
+      "characters": 26650,
+      "paragraphs": 1711,
+      "max_characters": 114,
+      "missing_title": 0,
+      "missing_author": 0,
+      "missing_text": 0,
+      "body_parenthesis_candidates": 4,
+      "files": 10,
+      "author_strings": 18,
+      "existing_overlap_records": 132,
+      "metadata_fields_outside_body": {
+        "notes": 497
+      },
+      "longest": [
+        {
+          "characters": 114,
+          "reference": {
+            "file": "五代诗词/huajianji/huajianji-3-juan.json",
+            "index": "$[39]",
+            "title": "离别难·宝马晓鞲雕鞍",
+            "author": "薛昭蕴",
+            "hierarchy": [
+              "离别难·宝马晓鞲雕鞍"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 103,
+          "reference": {
+            "file": "五代诗词/huajianji/huajianji-5-juan.json",
+            "index": "$[9]",
+            "title": "西溪子·昨日西溪游赏",
+            "author": "毛文锡",
+            "hierarchy": [
+              "西溪子·昨日西溪游赏"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 99,
+          "reference": {
+            "file": "五代诗词/huajianji/huajianji-6-juan.json",
+            "index": "$[12]",
+            "title": "凤楼春·凤髻绿云丛",
+            "author": "欧陽炯",
+            "hierarchy": [
+              "凤楼春·凤髻绿云丛"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/论语": {
+      "records": 20,
+      "characters": 21972,
+      "paragraphs": 512,
+      "max_characters": 1868,
+      "missing_title": 0,
+      "missing_author": 20,
+      "missing_text": 0,
+      "marker_records": 1,
+      "non_question_marker_records": 0,
+      "question_mark_only_records": 1,
+      "files": 1,
+      "author_strings": 1,
+      "existing_overlap_records": 0,
+      "metadata_fields_outside_body": {},
+      "longest": [
+        {
+          "characters": 1868,
+          "reference": {
+            "file": "论语/lunyu.json",
+            "index": "$[13]",
+            "title": "宪问篇",
+            "author": "",
+            "hierarchy": [
+              "宪问篇"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 1474,
+          "reference": {
+            "file": "论语/lunyu.json",
+            "index": "$[10]",
+            "title": "先进篇",
+            "author": "",
+            "hierarchy": [
+              "先进篇"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 1463,
+          "reference": {
+            "file": "论语/lunyu.json",
+            "index": "$[12]",
+            "title": "子路篇",
+            "author": "",
+            "hierarchy": [
+              "子路篇"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    },
+    "chinese-poetry/诗经": {
+      "records": 305,
+      "characters": 37955,
+      "paragraphs": 1319,
+      "max_characters": 630,
+      "missing_title": 0,
+      "missing_author": 305,
+      "missing_text": 0,
+      "files": 1,
+      "author_strings": 1,
+      "existing_overlap_records": 305,
+      "metadata_fields_outside_body": {
+        "section": 305
+      },
+      "longest": [
+        {
+          "characters": 630,
+          "reference": {
+            "file": "诗经/shijing.json",
+            "index": "$[299]",
+            "title": "閟宫",
+            "author": "",
+            "hierarchy": [
+              "鲁颂",
+              "駉之什",
+              "閟宫"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 601,
+          "reference": {
+            "file": "诗经/shijing.json",
+            "index": "$[255]",
+            "title": "抑",
+            "author": "",
+            "hierarchy": [
+              "大雅",
+              "荡之什",
+              "抑"
+            ],
+            "source": ""
+          }
+        },
+        {
+          "characters": 577,
+          "reference": {
+            "file": "诗经/shijing.json",
+            "index": "$[256]",
+            "title": "桑柔",
+            "author": "",
+            "hierarchy": [
+              "大雅",
+              "荡之什",
+              "桑柔"
+            ],
+            "source": ""
+          }
+        }
+      ],
+      "rights_review_required": false,
+      "exact_duplicate_extra": 0,
+      "body_duplicate_extra": 0
+    }
+  },
+  "cross_group_body_matches": 25860
+}

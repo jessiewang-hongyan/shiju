@@ -74,3 +74,4 @@ npm run format
 - [纸张素材与加工记录](docs/paper-materials.md)
 
 - [下一批文集接入清单（审计候选，未上线）](docs/next-collections.md)
+- [全部数据源接入总表与古典文本审计（未上线）](docs/source-catalog.md)
