@@ -2,21 +2,15 @@ import { $, toast } from "./ui.js";
 import { createLibrarySearch } from "./library-search.js";
 import { poems } from "./poems.js";
 import { isLetter } from "./editor.js?v=20261028batch1";
-import {
-  createLibraryLoader,
-  libraryCatalog,
-} from "./library-loader.js?v=20261028search1";
+import { libraryCatalog } from "./library-loader.js?v=20261028search1";
+import { createIndexedLibrary } from "./library-index.js";
 export function initLibrary({ editor, typography }) {
   const { displayText } = typography;
   const searchLibrary = createLibrarySearch();
   let libraryLimit = 40,
     previewPoem = null;
-  const loader = createLibraryLoader({ onChange: renderLibrary });
-  const {
-    cache: libraryCache,
-    pending: libraryPending,
-    errors: libraryErrors,
-  } = loader;
+  const index = createIndexedLibrary();
+  let revision = 0;
   function scopeKeys() {
     const scope = $("#library-scope").value;
     return scope === "selected"
@@ -25,19 +19,14 @@ export function initLibrary({ editor, typography }) {
         ? Object.keys(libraryCatalog)
         : [scope];
   }
-  function loadLibrary() {
-    return loader.load(scopeKeys());
-  }
   $("#choose").onclick = () => {
     $("#picker").showModal();
     renderLibrary();
-    loadLibrary();
   };
-  $("#library-retry").onclick = loadLibrary;
+  $("#library-retry").onclick = renderLibrary;
   $("#library-scope").onchange = () => {
     libraryLimit = 40;
     renderLibrary();
-    loadLibrary();
   };
   $("#library-more").onclick = () => {
     libraryLimit += 40;
@@ -180,32 +169,59 @@ export function initLibrary({ editor, typography }) {
       $("#source-title").scrollIntoView({ block: "start" });
     }
   };
-  function renderLibrary() {
+  async function renderLibrary() {
+    const ticket = ++revision;
     const query = $("#search").value,
       scope = $("#library-scope").value;
-    const keys = scopeKeys(),
-      loading = keys.some((k) => libraryPending.has(k)),
-      failed = keys.filter((k) => libraryErrors.has(k));
-    const matches = [
-      ...(scope === "selected" || scope === "all"
-        ? searchLibrary("selected", poems, query)
-        : []),
-      ...keys.flatMap((k) =>
-        searchLibrary(k, libraryCache.get(k) || [], query),
-      ),
-    ];
+    const keys = scopeKeys();
     const list = $("#poem-list");
     list.replaceChildren();
-    const loaded = keys.reduce(
-      (n, k) => n + (libraryCache.get(k)?.length || 0),
-      0,
-    );
-    $("#library-status").textContent = loading
-      ? `正在加载文集…已载入 ${loaded.toLocaleString()} 篇，可先选用`
-      : failed.length
-        ? `${failed.map((k) => libraryCatalog[k].name).join("、")}未加载完整，已载入内容仍可选用`
-        : `${matches.length.toLocaleString()} 篇`;
-    $("#library-retry").disabled = loading;
+    $("#library-more").hidden = true;
+    $("#library-retry").hidden = true;
+    let matches =
+      scope === "selected" || scope === "all"
+        ? searchLibrary("selected", poems, query)
+        : [];
+    let total = matches.length;
+    const failed = [];
+    if (keys.length) {
+      $("#library-status").textContent = "正在搜索…";
+      const groups = await Promise.all(
+        keys.map(async (key) => {
+          try {
+            return { key, ids: await index.search(key, query) };
+          } catch {
+            failed.push(key);
+            return { key, ids: [] };
+          }
+        }),
+      );
+      if (ticket !== revision) return;
+      total += groups.reduce((n, g) => n + g.ids.length, 0);
+      let remaining = Math.max(0, libraryLimit - matches.length);
+      const pages = groups.map((g) => {
+        const ids = g.ids.slice(0, remaining);
+        remaining -= ids.length;
+        return { ...g, ids };
+      });
+      const rows = await Promise.all(
+        pages.map(async (g) => {
+          if (!g.ids.length) return [];
+          try {
+            return await index.records(g.key, g.ids);
+          } catch {
+            failed.push(g.key);
+            return [];
+          }
+        }),
+      );
+      if (ticket !== revision) return;
+      matches = [...matches, ...rows.flat()];
+    }
+    $("#library-status").textContent = failed.length
+      ? `${[...new Set(failed)].map((k) => libraryCatalog[k].name).join("、")}加载失败，请重试；其他结果仍可选用`
+      : `${total.toLocaleString()} 篇`;
+    $("#library-retry").disabled = false;
     $("#library-retry").hidden = !failed.length;
     matches.slice(0, libraryLimit).forEach((p) => {
       const b = document.createElement("button");
@@ -222,12 +238,13 @@ export function initLibrary({ editor, typography }) {
       b.onclick = () => openPoemPreview(p);
       list.append(b);
     });
-    $("#library-more").hidden = matches.length <= libraryLimit;
-    if (!matches.length && !loading && !failed.length)
+    $("#library-more").hidden = total <= libraryLimit;
+    if (!matches.length && !failed.length)
       list.textContent = "没有找到匹配的原文，可以换个关键词或粘贴原文。";
   }
   let searchTimer;
   $("#search").oninput = () => {
+    revision++; // Invalidate older requests immediately, including during debounce.
     clearTimeout(searchTimer);
     searchTimer = setTimeout(() => {
       libraryLimit = 40;

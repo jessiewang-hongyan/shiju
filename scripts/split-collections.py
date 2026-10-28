@@ -26,3 +26,8 @@ for source in sorted(ROOT.glob('*.json')):
     assert [p for b in batches for p in b] == poems
     (folder / 'manifest.json').write_text(json.dumps(manifest, separators=(',', ':')))
     print(source.stem, len(poems), 'poems;', len(batches), 'batches')
+
+# Search manifests must reference the exact freshly generated source shards.
+import subprocess
+import sys
+subprocess.run([sys.executable, str(Path(__file__).with_name("build-search-index.py"))], check=True)

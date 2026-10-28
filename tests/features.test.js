@@ -1419,3 +1419,46 @@ test("long prose excerpt retains original author and provenance without adding n
     x.close();
   }
 });
+
+test("indexed search ignores stale scope responses and retries a failed search", async () => {
+  const originalFetch = globalThis.fetch;
+  let release;
+  let broken = true;
+  const delayed = new Promise((resolve) => {
+    release = resolve;
+  });
+  globalThis.fetch = async (url) => {
+    if (url.includes("/search/tang/")) await delayed;
+    if (broken && url.includes("/search/nantang/")) throw Error("offline");
+    return {
+      ok: true,
+      json: async () => JSON.parse(readFileSync("dist/" + url, "utf8")),
+    };
+  };
+  const x = setup();
+  try {
+    x.$("#choose").click();
+    x.input("#library-scope", "tang", "change");
+    x.input("#library-scope", "selected", "change");
+    assert.equal(x.$("#library-status").textContent, "8 篇");
+    release();
+    await new Promise((r) => setTimeout(r, 60));
+    assert.equal(x.$("#library-status").textContent, "8 篇");
+    x.input("#library-scope", "nantang", "change");
+    await new Promise((r) => setTimeout(r, 30));
+    assert.match(x.$("#library-status").textContent, /加载失败/);
+    assert.equal(x.$("#library-retry").hidden, false);
+    broken = false;
+    x.$("#library-retry").click();
+    await new Promise((r) => setTimeout(r, 60));
+    assert.equal(x.$("#library-status").textContent, "45 篇");
+    x.$(".poem-choice").click();
+    assert(x.$("#poem-preview").open);
+    x.$("#preview-use").click();
+    assert(x.editor.state.source.provenance);
+  } finally {
+    release();
+    globalThis.fetch = originalFetch;
+    x.close();
+  }
+});
