@@ -5,6 +5,11 @@ import { libraryCatalog } from "./library-loader.js?v=20261028search1";
 export function createIndexedLibrary({ fetch = globalThis.fetch } = {}) {
   const cache = new Map();
   const searches = new Map();
+  const decoded = new WeakSet();
+  function expand(values) {
+    let sum = 0;
+    return values.map((value) => (sum += value));
+  }
   const queue = [];
   let active = 0;
   function request(url) {
@@ -14,7 +19,7 @@ export function createIndexedLibrary({ fetch = globalThis.fetch } = {}) {
         try {
           for (let attempt = 0; ; attempt++) {
             const controller = new AbortController();
-            const timer = setTimeout(() => controller.abort(), 15000);
+            const timer = setTimeout(() => controller.abort(), 30000);
             try {
               const response = await fetch(url, { signal: controller.signal });
               if (!response.ok) throw Error("load");
@@ -49,11 +54,15 @@ export function createIndexedLibrary({ fetch = globalThis.fetch } = {}) {
     return libraryCatalog[key].file.replace(".json", "");
   }
   async function manifest(key) {
-    const url = `data/search/${stem(key)}/manifest.json`;
+    const url = `data/search/${stem(key)}/manifest-v2.json`;
     const m = await request(url);
+    if (m?.version === 2 && Array.isArray(m.offsets) && !decoded.has(m)) {
+      m.offsets = expand(m.offsets);
+      decoded.add(m);
+    }
     if (
       !m ||
-      m.version !== 1 ||
+      m.version !== 2 ||
       !Array.isArray(m.offsets) ||
       m.offsets.length !== m.count ||
       !m.offsets.every(
@@ -61,7 +70,7 @@ export function createIndexedLibrary({ fetch = globalThis.fetch } = {}) {
           Number.isSafeInteger(p) && p >= 0 && (!i || p > m.offsets[i - 1]),
       ) ||
       !Array.isArray(m.buckets) ||
-      m.buckets.length !== 64 ||
+      m.buckets.length !== 128 ||
       !Array.isArray(m.parts) ||
       !m.buckets.every((p) => /^[a-f0-9]+\.json$/.test(p)) ||
       !m.parts.every(
@@ -111,12 +120,23 @@ export function createIndexedLibrary({ fetch = globalThis.fetch } = {}) {
     const units = [
       ...new Set(words.flatMap((w) => w.split("").map((c) => c.charCodeAt(0)))),
     ];
-    const bucketIds = [...new Set(units.map((c) => c % 64))];
+    const bucketIds = [...new Set(units.map((c) => c % 128))];
     const buckets = new Map(
       await Promise.all(
         bucketIds.map(async (id) => {
           const url = `data/search/${stem(key)}/${m.buckets[id]}`;
           const bucket = await request(url);
+          if (
+            bucket &&
+            typeof bucket === "object" &&
+            !Array.isArray(bucket) &&
+            !decoded.has(bucket)
+          ) {
+            for (const [unit, values] of Object.entries(bucket)) {
+              if (Array.isArray(values)) bucket[unit] = expand(values);
+            }
+            decoded.add(bucket);
+          }
           if (
             !bucket ||
             Array.isArray(bucket) ||
@@ -139,7 +159,7 @@ export function createIndexedLibrary({ fetch = globalThis.fetch } = {}) {
         }),
       ),
     );
-    const postings = (unit) => buckets.get(unit % 64)[unit] || [];
+    const postings = (unit) => buckets.get(unit % 128)[unit] || [];
     let matches;
     for (const word of words) {
       const chars = word.split("").map((c) => c.charCodeAt(0));

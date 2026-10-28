@@ -3,7 +3,7 @@ import { createLibrarySearch } from "./library-search.js";
 import { poems } from "./poems.js";
 import { isLetter } from "./editor.js?v=20261028batch1";
 import { libraryCatalog } from "./library-loader.js?v=20261028search1";
-import { createIndexedLibrary } from "./library-index.js";
+import { createIndexedLibrary } from "./library-index.js?v=20261028index2";
 export function initLibrary({ editor, typography }) {
   const { displayText } = typography;
   const searchLibrary = createLibrarySearch();

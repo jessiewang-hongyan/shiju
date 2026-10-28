@@ -12,7 +12,7 @@ for source in sorted(ROOT.glob('*.json')):
     rows = json.loads(source.read_text())
     folder = ROOT / 'search' / source.stem
     folder.mkdir(parents=True, exist_ok=True)
-    buckets = [{} for _ in range(64)]
+    buckets = [{} for _ in range(128)]
     offsets, cursor = [], 0
     for row in rows:
         offsets.append(cursor)
@@ -21,12 +21,12 @@ for source in sorted(ROOT.glob('*.json')):
         raw = text.encode('utf-16-le', errors='surrogatepass')
         units = [raw[i] + 256 * raw[i+1] for i in range(0, len(raw), 2)]
         for position, unit in enumerate(units):
-            buckets[unit % 64].setdefault(str(unit), []).append(cursor + position)
+            buckets[unit % 128].setdefault(str(unit), []).append(cursor + position)
         cursor += len(units) + 1  # gap prevents matching across records
     manifest = {
-        'version': 1, 'count': len(rows), 'offsets': offsets,
+        'version': 2, 'count': len(rows), 'offsets': [v - (offsets[i-1] if i else 0) for i,v in enumerate(offsets)],
         'parts': json.loads((ROOT / 'parts' / source.stem / 'manifest.json').read_text()),
-        'buckets': [write(folder, bucket) for bucket in buckets],
+        'buckets': [write(folder, {k: [v - (values[i-1] if i else 0) for i,v in enumerate(values)] for k,values in bucket.items()}) for bucket in buckets],
     }
-    (folder / 'manifest.json').write_text(json.dumps(manifest,separators=(',', ':')))
+    (folder / 'manifest-v2.json').write_text(json.dumps(manifest,separators=(',', ':')))
     print(source.stem, len(rows))
