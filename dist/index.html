@@ -15,7 +15,7 @@
           document.documentElement.dataset.theme = "dark";
       } catch {}
     </script>
-    <link rel="stylesheet" href="style.css?v=20261028paperstrength2" />
+    <link rel="stylesheet" href="style.css?v=20261028fields1" />
   </head>
   <body>
     <header>
@@ -176,32 +176,47 @@
         <input
           id="search"
           class="field"
-          placeholder="搜索篇名、作者、文集或正文"
+          placeholder="搜索篇名或作者"
           aria-label="搜索原文"
         />
         <div class="library-filters">
-          <label for="library-scope">范围</label
-          ><select id="library-scope">
-            <option value="selected">精选诗词</option>
-            <option value="shijing">诗经</option>
-            <option value="chuci">楚辞</option>
-            <option value="han-yuefu">汉乐府</option>
-            <option value="han">汉诗</option>
-            <option value="weijin">魏晋诗</option>
-            <option value="tang">唐诗</option>
-            <option value="song">宋词</option>
-            <option value="yuan">元曲</option>
-            <optgroup label="本批新增">
-              <option value="guwen">古文观止</option>
-              <option value="youmengying">幽梦影</option>
-              <option value="shenglv">声律启蒙</option>
-              <option value="nantang">南唐二主词</option>
-            </optgroup>
-            <option value="all">全部文集</option></select
-          ><span id="library-status" role="status"></span
+          <div class="library-filter">
+            <label for="search-field">搜索范围</label>
+            <select id="search-field">
+              <option value="title-author" selected>篇名与作者</option>
+              <option value="title">仅篇名</option>
+              <option value="author">仅作者</option>
+              <option value="full">全文</option>
+            </select>
+          </div>
+          <div class="library-filter">
+            <label for="library-scope">文集范围</label
+            ><select id="library-scope">
+              <option value="selected">精选诗词</option>
+              <option value="shijing">诗经</option>
+              <option value="chuci">楚辞</option>
+              <option value="han-yuefu">汉乐府</option>
+              <option value="han">汉诗</option>
+              <option value="weijin">魏晋诗</option>
+              <option value="tang">唐诗</option>
+              <option value="song">宋词</option>
+              <option value="yuan">元曲</option>
+              <optgroup label="本批新增">
+                <option value="guwen">古文观止</option>
+                <option value="youmengying">幽梦影</option>
+                <option value="shenglv">声律启蒙</option>
+                <option value="nantang">南唐二主词</option>
+              </optgroup>
+              <option value="all">全部文集</option>
+            </select>
+          </div>
+          <span id="library-status" role="status"></span
           ><button id="library-retry" hidden="">重试加载</button>
         </div>
         <div id="poem-list"></div>
+        <button id="search-full-hint" class="secondary" hidden>
+          试试全文搜索
+        </button>
         <button id="library-more" class="secondary" hidden="">显示更多</button>
         <p class="dialog-note">
           数据来自
@@ -773,6 +788,6 @@
       ><button id="move-right" aria-label="向后移动">→</button>
     </div>
     <div id="toast" role="status"></div>
-    <script type="module" src="app.js?v=20261028index2"></script>
+    <script type="module" src="app.js?v=20261028fields1"></script>
   </body>
 </html>

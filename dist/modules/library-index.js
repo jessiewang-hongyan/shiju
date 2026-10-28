@@ -53,8 +53,8 @@ export function createIndexedLibrary({ fetch = globalThis.fetch } = {}) {
   function stem(key) {
     return libraryCatalog[key].file.replace(".json", "");
   }
-  async function manifest(key) {
-    const url = `data/search/${stem(key)}/manifest-v2.json`;
+  async function manifest(key, field = "full") {
+    const url = `data/search/${stem(key)}/${field === "full" ? "" : "metadata/"}manifest-v2.json`;
     const m = await request(url);
     if (m?.version === 2 && Array.isArray(m.offsets) && !decoded.has(m)) {
       m.offsets = expand(m.offsets);
@@ -65,6 +65,10 @@ export function createIndexedLibrary({ fetch = globalThis.fetch } = {}) {
       m.version !== 2 ||
       !Array.isArray(m.offsets) ||
       m.offsets.length !== m.count ||
+      (field !== "full" &&
+        (!Array.isArray(m.titleLengths) ||
+          m.titleLengths.length !== m.count ||
+          !m.titleLengths.every((n) => Number.isInteger(n) && n >= 0))) ||
       !m.offsets.every(
         (p, i) =>
           Number.isSafeInteger(p) && p >= 0 && (!i || p > m.offsets[i - 1]),
@@ -97,24 +101,27 @@ export function createIndexedLibrary({ fetch = globalThis.fetch } = {}) {
     }
     return lo - 1;
   }
-  function search(key, query) {
+  function search(key, query, field = "full") {
     const signature = query
       .trim()
       .toLocaleLowerCase()
       .split(/\s+/)
       .filter(Boolean)
       .join(" ");
-    const previous = searches.get(key);
+    if (!["full", "title-author", "title", "author"].includes(field))
+      throw Error("search field");
+    const cacheKey = key + ":" + field;
+    const previous = searches.get(cacheKey);
     if (previous?.signature === signature) return previous.task;
-    const task = find(key, signature).catch((error) => {
-      if (searches.get(key)?.task === task) searches.delete(key);
+    const task = find(key, signature, field).catch((error) => {
+      if (searches.get(cacheKey)?.task === task) searches.delete(cacheKey);
       throw error;
     });
-    searches.set(key, { signature, task });
+    searches.set(cacheKey, { signature, task });
     return task;
   }
-  async function find(key, query) {
-    const m = await manifest(key);
+  async function find(key, query, field) {
+    const m = await manifest(key, field);
     const words = query.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
     if (!words.length) return Array.from({ length: m.count }, (_, i) => i);
     const units = [
@@ -124,7 +131,7 @@ export function createIndexedLibrary({ fetch = globalThis.fetch } = {}) {
     const buckets = new Map(
       await Promise.all(
         bucketIds.map(async (id) => {
-          const url = `data/search/${stem(key)}/${m.buckets[id]}`;
+          const url = `data/search/${stem(key)}/${field === "full" ? "" : "metadata/"}${m.buckets[id]}`;
           const bucket = await request(url);
           if (
             bucket &&
@@ -180,8 +187,15 @@ export function createIndexedLibrary({ fetch = globalThis.fetch } = {}) {
       const found = new Set();
       for (const p of lists[anchor]) {
         const start = p - anchor;
-        if (lists.every((list, i) => i === anchor || contains(list, start + i)))
-          found.add(recordAt(m.offsets, start));
+        if (
+          lists.every((list, i) => i === anchor || contains(list, start + i))
+        ) {
+          const record = recordAt(m.offsets, start);
+          const titleEnd = m.offsets[record] + (m.titleLengths?.[record] || 0);
+          if (field === "title" && start + word.length > titleEnd) continue;
+          if (field === "author" && start <= titleEnd) continue;
+          found.add(record);
+        }
       }
       matches = matches
         ? new Set([...matches].filter((id) => found.has(id)))
@@ -190,8 +204,8 @@ export function createIndexedLibrary({ fetch = globalThis.fetch } = {}) {
     }
     return [...matches].sort((a, b) => a - b);
   }
-  async function records(key, ids) {
-    const m = await manifest(key);
+  async function records(key, ids, field = "full") {
+    const m = await manifest(key, field);
     let start = 0;
     const ranges = m.parts.map((p) => {
       const r = { ...p, start };

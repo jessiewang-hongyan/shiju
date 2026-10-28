@@ -1,9 +1,9 @@
 import { $, toast } from "./ui.js";
-import { createLibrarySearch } from "./library-search.js";
+import { createLibrarySearch } from "./library-search.js?v=20261028fields1";
 import { poems } from "./poems.js";
 import { isLetter } from "./editor.js?v=20261028batch1";
 import { libraryCatalog } from "./library-loader.js?v=20261028search1";
-import { createIndexedLibrary } from "./library-index.js?v=20261028index2";
+import { createIndexedLibrary } from "./library-index.js?v=20261028fields1";
 export function initLibrary({ editor, typography }) {
   const { displayText } = typography;
   const searchLibrary = createLibrarySearch();
@@ -26,6 +26,16 @@ export function initLibrary({ editor, typography }) {
   $("#library-retry").onclick = renderLibrary;
   $("#library-scope").onchange = () => {
     libraryLimit = 40;
+    renderLibrary();
+  };
+  $("#search-field").onchange = () => {
+    libraryLimit = 40;
+    $("#search").placeholder = {
+      "title-author": "搜索篇名或作者",
+      title: "搜索篇名",
+      author: "搜索作者",
+      full: "搜索篇名、作者、文集或正文",
+    }[$("#search-field").value];
     renderLibrary();
   };
   $("#library-more").onclick = () => {
@@ -172,15 +182,17 @@ export function initLibrary({ editor, typography }) {
   async function renderLibrary() {
     const ticket = ++revision;
     const query = $("#search").value,
-      scope = $("#library-scope").value;
+      scope = $("#library-scope").value,
+      field = $("#search-field").value;
     const keys = scopeKeys();
     const list = $("#poem-list");
     list.replaceChildren();
     $("#library-more").hidden = true;
+    $("#search-full-hint").hidden = true;
     $("#library-retry").hidden = true;
     let matches =
       scope === "selected" || scope === "all"
-        ? searchLibrary("selected", poems, query)
+        ? searchLibrary("selected", poems, query, field)
         : [];
     let total = matches.length;
     const failed = [];
@@ -189,7 +201,7 @@ export function initLibrary({ editor, typography }) {
       const groups = await Promise.all(
         keys.map(async (key) => {
           try {
-            return { key, ids: await index.search(key, query) };
+            return { key, ids: await index.search(key, query, field) };
           } catch {
             failed.push(key);
             return { key, ids: [] };
@@ -208,7 +220,7 @@ export function initLibrary({ editor, typography }) {
         pages.map(async (g) => {
           if (!g.ids.length) return [];
           try {
-            return await index.records(g.key, g.ids);
+            return await index.records(g.key, g.ids, field);
           } catch {
             failed.push(g.key);
             return [];
@@ -239,9 +251,15 @@ export function initLibrary({ editor, typography }) {
       list.append(b);
     });
     $("#library-more").hidden = total <= libraryLimit;
-    if (!matches.length && !failed.length)
+    if (!matches.length && !failed.length) {
       list.textContent = "没有找到匹配的原文，可以换个关键词或粘贴原文。";
+      $("#search-full-hint").hidden = !query.trim() || field === "full";
+    }
   }
+  $("#search-full-hint").onclick = () => {
+    $("#search-field").value = "full";
+    $("#search-field").onchange();
+  };
   let searchTimer;
   $("#search").oninput = () => {
     revision++; // Invalidate older requests immediately, including during debounce.

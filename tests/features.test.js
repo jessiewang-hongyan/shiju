@@ -1322,6 +1322,7 @@ test("batch one: real shards, chapter search, preview, confirmation and metadata
     }
     x.$("#choose").click();
     x.input("#library-scope", "shenglv", "change");
+    x.input("#search-field", "full", "change");
     x.input("#search", "下卷");
     await new Promise((r) => setTimeout(r, 180));
     assert.equal(x.$("#library-status").textContent, "15 篇");
@@ -1459,6 +1460,41 @@ test("indexed search ignores stale scope responses and retries a failed search",
   } finally {
     release();
     globalThis.fetch = originalFetch;
+    x.close();
+  }
+});
+
+test("search field defaults, explicit full-text hint and collection scope work together", async () => {
+  const original = globalThis.fetch;
+  globalThis.fetch = async (url) => ({
+    ok: true,
+    json: async () => JSON.parse(readFileSync("dist/" + url, "utf8")),
+  });
+  const x = setup();
+  try {
+    assert.equal(x.$("#search-field").value, "title-author");
+    x.$("#choose").click();
+    x.input("#search", "清泉");
+    await new Promise((r) => setTimeout(r, 180));
+    assert.equal(x.$("#library-status").textContent, "0 篇");
+    assert.equal(x.$("#search-full-hint").hidden, false);
+    x.$("#search-full-hint").click();
+    assert.equal(x.$("#search-field").value, "full");
+    assert.equal(x.$("#library-status").textContent, "1 篇");
+    x.input("#search", "王维");
+    x.input("#search-field", "author", "change");
+    x.input("#library-scope", "tang", "change");
+    await new Promise((r) => setTimeout(r, 250));
+    const tang = JSON.parse(readFileSync("dist/data/tang.json", "utf8"));
+    const expected = tang.filter((p) => p.author.includes("王维"));
+    assert.equal(x.$("#library-status").textContent, `${expected.length} 篇`);
+    assert.equal(x.$("#search-field").value, "author");
+    x.input("#library-scope", "nantang", "change");
+    await new Promise((r) => setTimeout(r, 60));
+    assert.equal(x.$("#library-status").textContent, "0 篇");
+    assert.equal(x.$("#search-field").value, "author");
+  } finally {
+    globalThis.fetch = original;
     x.close();
   }
 });

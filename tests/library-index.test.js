@@ -103,3 +103,83 @@ test("failed index requests recover and malformed source never becomes selectabl
   });
   await assert.rejects(bad.records("nantang", [0]), /source format/);
 });
+
+test("three metadata modes match independent field scans across every collection", async () => {
+  const urls = [];
+  const index = createIndexedLibrary({
+    fetch: async (url) => {
+      urls.push(url);
+      return localFetch(url);
+    },
+  });
+  for (const [key, { file }] of Object.entries(libraryCatalog)) {
+    const rows = read("data/" + file);
+    for (const field of ["title-author", "title", "author"]) {
+      for (const q of [
+        "",
+        "月",
+        "王维",
+        "王维 明月",
+        "第 1",
+        "下卷",
+        "□□",
+        "不存在xyz",
+      ]) {
+        const words = q.toLocaleLowerCase().split(/\s+/).filter(Boolean);
+        const expected = rows.flatMap((p, i) => {
+          const title = p.title || p.label || "";
+          const text = (
+            field === "title"
+              ? title
+              : field === "author"
+                ? p.author
+                : title + " " + p.author
+          ).toLocaleLowerCase();
+          return words.every((w) => text.includes(w)) ? [i] : [];
+        });
+        assert.deepEqual(
+          await index.search(key, q, field),
+          expected,
+          `${key} ${field} ${q}`,
+        );
+      }
+    }
+    assert.deepEqual(await index.records(key, [0], "title-author"), [rows[0]]);
+  }
+  assert(
+    urls.every((u) => u.includes("/metadata/") || u.startsWith("data/parts/")),
+    "no full-text index requests",
+  );
+});
+test("cold title/author search transfers less index data and mode changes do not reuse wrong results", async () => {
+  const bytes = async (field) => {
+    const urls = [];
+    const index = createIndexedLibrary({
+      fetch: async (url) => {
+        urls.push(url);
+        return localFetch(url);
+      },
+    });
+    const ids = await index.search("tang", "王维", field);
+    const size = urls.reduce(
+      (n, u) => n + gzipSync(readFileSync("dist/" + u)).length,
+      0,
+    );
+    return { size, ids };
+  };
+  const metadata = await bytes("title-author"),
+    full = await bytes("full");
+  assert(metadata.size < full.size * 0.6);
+  console.log(
+    JSON.stringify({
+      keyword: "王维",
+      metadataIndexGzip: metadata.size,
+      fullIndexGzip: full.size,
+    }),
+  );
+  const index = createIndexedLibrary({ fetch: localFetch });
+  const author = await index.search("tang", "王维", "author");
+  const title = await index.search("tang", "王维", "title");
+  assert.notDeepEqual(author, title);
+  assert.deepEqual(await index.search("tang", "王维", "author"), author);
+});

@@ -1273,6 +1273,12 @@ dialog {
   color: #777;
   flex-wrap: wrap;
 }
+.library-filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.library-filter label { white-space: nowrap; }
 .library-filters select {
   font: inherit;
   padding: 6px;
