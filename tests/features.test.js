@@ -1218,3 +1218,61 @@ test("paper strength is independent, persistent, bounded and shared by fields an
   assert.equal(localStorage.getItem("shiju-paper-strength-poem"), "100");
   x.close();
 });
+
+test("preview and export load author, source title and poem title without requiring them in the body", async () => {
+  const originalFetch = globalThis.fetch,
+    originalFace = globalThis.FontFace;
+  const x = setup({
+    source: { title: "峰", author: "顧", text: "月" },
+    title: "嵐",
+    signature: "",
+    tokens: [{ c: "月", id: 0 }],
+  });
+  const loaded = [],
+    texts = [];
+  document.fonts = {
+    add: (f) => loaded.push(f.url),
+    load: async (_, text) => texts.push(text),
+  };
+  globalThis.fetch = async () => ({
+    ok: true,
+    json: async () =>
+      [..."峰顧嵐龘"].map((c) => ({
+        file: `metadata/${c}.woff2`,
+        codes: [c.codePointAt(0)],
+      })),
+  });
+  globalThis.FontFace = class {
+    constructor(_, url) {
+      this.url = url;
+    }
+    async load() {
+      return this;
+    }
+  };
+  try {
+    x.$("#export-font").value = "wenkai";
+    await x.image.updateFontPreview();
+    assert.equal(loaded.length, 3);
+    for (const c of "峰顧嵐")
+      assert(loaded.some((url) => url.includes(c + ".woff2")));
+    await x.$("#export").onclick();
+    assert.equal(loaded.length, 3, "export reuses shards loaded for preview");
+    assert(texts.length >= 2);
+    const calls = x.records.find((r) => r.canvas === x.downloads.at(-1)).calls;
+    for (const c of "峰顧嵐")
+      assert(
+        calls.some(
+          (row) =>
+            row[0] === "fillText" &&
+            row[1].includes(c) &&
+            row.at(-1).includes("LXGWWenKai"),
+        ),
+        `export draws ${c} with selected family`,
+      );
+  } finally {
+    globalThis.fetch = originalFetch;
+    globalThis.FontFace = originalFace;
+    x.close();
+  }
+});

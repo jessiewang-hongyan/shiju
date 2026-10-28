@@ -10,7 +10,7 @@ import {
   paintPaperCrop,
 } from "./paper-materials.js?v=20261028paperstrength2";
 import { $, toast } from "./ui.js";
-import { exportFonts, songtiFamily } from "./fonts.js?v=20261027release3";
+import { exportFonts, songtiFamily } from "./fonts.js?v=20261028author1";
 import {
   wrapCells,
   paintCollageLine,

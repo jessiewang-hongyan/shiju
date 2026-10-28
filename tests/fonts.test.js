@@ -51,3 +51,60 @@ test("font shards: select needed characters, retry failure, reuse cache and load
   assert(added[0].options.unicodeRange.startsWith("U+"));
   assert(!attempts.some((x) => x.includes("c.woff2")));
 });
+
+test("author and both titles request their own shards after script conversion", async () => {
+  let author = "顾";
+  const loaded = [],
+    checkedTexts = [];
+  globalThis.document = {
+    fonts: {
+      add: (f) => loaded.push(f.url),
+      load: async (_, text) => checkedTexts.push(text),
+    },
+  };
+  globalThis.fetch = async () => ({
+    ok: true,
+    json: async () =>
+      [..."顧峰嵐趙龘"].map((c) => ({
+        file: `${c}.woff2`,
+        codes: [c.codePointAt(0)],
+      })),
+  });
+  globalThis.FontFace = class {
+    constructor(_, url) {
+      this.url = url;
+    }
+    async load() {
+      return this;
+    }
+  };
+  const loader = createFontLoader({
+    getState: () => ({
+      source: { text: "月", title: "峰", author },
+      title: "岚",
+      signature: "",
+      tokens: [],
+    }),
+    typography: {
+      displayText: (text) =>
+        text
+          .replaceAll("顾", "顧")
+          .replaceAll("岚", "嵐")
+          .replaceAll("赵", "趙"),
+      displayTokens: (t) => t,
+    },
+  });
+  await loader.loadExportFont("wenkai");
+  for (const c of "顧峰嵐")
+    assert(loaded.some((url) => url.includes(c + ".woff2")));
+  assert.equal(loaded.length, 3);
+  assert(checkedTexts[0].includes("顧"));
+  author = "赵";
+  await loader.loadExportFont("wenkai");
+  assert.equal(loaded.length, 4);
+  assert(loaded.at(-1).includes("趙.woff2"));
+  author = undefined;
+  await loader.loadExportFont("wenkai");
+  assert(!checkedTexts.at(-1).includes("undefined"));
+  assert.equal(loaded.length, 4);
+});

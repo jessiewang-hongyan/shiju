@@ -6,9 +6,9 @@ import { createEditor } from "./modules/editor.js?v=20261028paperstrength2";
 import { initCollection } from "./modules/collection.js";
 import { initLibrary } from "./modules/library.js";
 import { createTypography, initTypography } from "./modules/typography.js";
-import { createFontLoader } from "./modules/fonts.js?v=20261028paperstrength2";
+import { createFontLoader } from "./modules/fonts.js?v=20261028author1";
 import { createAppearance } from "./modules/appearance.js?v=20261028paperstrength2";
-import { createImage } from "./modules/image.js?v=20261028paperstrength2";
+import { createImage } from "./modules/image.js?v=20261028author1";
 
 // Initialize services, then controllers; callbacks connect sibling modules.
 initUI();

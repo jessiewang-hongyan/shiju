@@ -27,6 +27,8 @@ export function createFontLoader({ getState, typography }) {
           " " +
           state.source.title +
           " " +
+          (state.source.author || "") +
+          " " +
           state.title +
           " " +
           state.signature,
