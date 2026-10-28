@@ -52,7 +52,7 @@ test("partial results, retries, deduplication, resumable loading and global conc
   assert.equal(requests.filter((u) => u.endsWith("/b.json")).length, 4);
   await loader.load(Object.keys(libraryCatalog));
   assert.equal(peak, 2);
-  assert.equal(loader.complete.size, 8);
+  assert.equal(loader.complete.size, Object.keys(libraryCatalog).length);
   assert.equal(loader.errors.size, 0);
 });
 test("HTTP error, malformed data and timeout do not become cached successes", async () => {

@@ -138,17 +138,18 @@
           </div>
           <div id="source-sheet">
             <div class="source-heading">
+              <p id="source-reference" class="dialog-note"></p>
               <h2 id="source-title"></h2>
               <p id="source-author"></p>
             </div>
             <div
               id="source-poem"
               class="source-poem"
-              aria-label="点击原诗中的字以摘取"
+              aria-label="点击原文中的字或缺文标记以摘取"
             ></div>
           </div>
           <div class="source-foot">
-            <span>标题、作者、正文均可选字，点击空缺归还</span
+            <span>标题、作者、正文均可选字，点击摘走后的空位归还</span
             ><span id="source-count"></span>
           </div>
         </article>
@@ -168,15 +169,15 @@
         <button class="close" aria-label="关闭">×</button>
       </div>
       <div class="tabs">
-        <button class="active" data-tab="library">诗词库</button
+        <button class="active" data-tab="library">文集</button
         ><button data-tab="custom">自定义原文</button>
       </div>
       <div id="library-tab">
         <input
           id="search"
           class="field"
-          placeholder="搜索诗名、作者或诗句"
-          aria-label="搜索诗词"
+          placeholder="搜索篇名、作者、文集或正文"
+          aria-label="搜索原文"
         />
         <div class="library-filters">
           <label for="library-scope">范围</label
@@ -190,6 +191,12 @@
             <option value="tang">唐诗</option>
             <option value="song">宋词</option>
             <option value="yuan">元曲</option>
+            <optgroup label="本批新增">
+              <option value="guwen">古文观止</option>
+              <option value="youmengying">幽梦影</option>
+              <option value="shenglv">声律启蒙</option>
+              <option value="nantang">南唐二主词</option>
+            </optgroup>
             <option value="all">全部文集</option></select
           ><span id="library-status" role="status"></span
           ><button id="library-retry" hidden="">继续加载</button>
@@ -766,6 +773,6 @@
       ><button id="move-right" aria-label="向后移动">→</button>
     </div>
     <div id="toast" role="status"></div>
-    <script type="module" src="app.js?v=20261028author1"></script>
+    <script type="module" src="app.js?v=20261028batch1"></script>
   </body>
 </html>

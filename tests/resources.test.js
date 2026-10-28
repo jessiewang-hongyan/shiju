@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, existsSync } from "node:fs";
 import { libraryCatalog } from "../dist/modules/library-loader.js";
-test("all eight bundled collections preserve every poem, order and metadata across batches", () => {
+test("all bundled collections preserve every poem, order and metadata across batches", () => {
   for (const entry of Object.values(libraryCatalog)) {
     const base = "dist/data/parts/" + entry.file.replace(".json", "") + "/";
     const manifest = JSON.parse(readFileSync(base + "manifest.json"));
@@ -45,4 +45,35 @@ test("all font manifests reference present WOFF2 shards and unique code points",
       }[key],
     );
   }
+});
+
+test("batch one keeps source references and lacunae while separating reviewed inline notes", () => {
+  const load = (name) => JSON.parse(readFileSync(`dist/data/${name}.json`));
+  const guwen = load("guwen");
+  assert.equal(guwen.length, 222);
+  assert.equal(
+    guwen.reduce((n, p) => n + p.provenance.separatedNotes.length, 0),
+    33,
+  );
+  assert(!guwen.find((p) => p.title === "前赤壁賦").text.includes("一作"));
+  assert(guwen.find((p) => p.title === "莊辛論倖臣").text.includes("(魚卷)"));
+  for (const [key, count] of [
+    ["youmengying", 219],
+    ["shenglv", 30],
+    ["nantang", 45],
+  ])
+    assert.equal(load(key).length, count);
+  assert(
+    load("youmengying").every(
+      (p) =>
+        p.title === "" && p.author === "" && p.label && p.provenance.pointer,
+    ),
+  );
+  assert.equal(
+    load("nantang").reduce(
+      (n, p) => n + [...p.text].filter((c) => c === "□").length,
+      0,
+    ),
+    12,
+  );
 });

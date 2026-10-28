@@ -1,7 +1,10 @@
 import { $, toast } from "./ui.js";
 import { poems } from "./poems.js";
-import { isLetter } from "./editor.js";
-import { createLibraryLoader, libraryCatalog } from "./library-loader.js";
+import { isLetter } from "./editor.js?v=20261028batch1";
+import {
+  createLibraryLoader,
+  libraryCatalog,
+} from "./library-loader.js?v=20261028batch1";
 export function initLibrary({ editor, typography }) {
   const { displayText } = typography;
   let libraryLimit = 40,
@@ -91,9 +94,11 @@ export function initLibrary({ editor, typography }) {
   }
   function openPoemPreview(p) {
     previewPoem = p;
-    $("#preview-title").textContent = displayText(p.title);
+    $("#preview-title").textContent = displayText(p.title || p.label || "无题");
     $("#preview-author").textContent = displayText(
-      [p.author, p.collection].filter(Boolean).join(" · "),
+      [p.author, p.collection, p.sourceWork, p.notice]
+        .filter(Boolean)
+        .join(" · "),
     );
     const lines = previewLines(),
       root = $("#preview-text");
@@ -110,7 +115,8 @@ export function initLibrary({ editor, typography }) {
       el.append(num, text);
       root.append(el);
     });
-    $("#excerpt-enabled").checked = false;
+    $("#excerpt-enabled").checked =
+      Array.from(p.text).length > 2000 && lines.length > 8;
     $("#excerpt-start").value = 1;
     $("#excerpt-end").value = Math.min(8, lines.length);
     $("#excerpt-start").max = lines.length;
@@ -144,8 +150,14 @@ export function initLibrary({ editor, typography }) {
     const source = partial
       ? {
           ...previewPoem,
-          title: previewPoem.title + "（节选）",
-          author: previewPoem.author + ` · 第 ${range.start}–${range.end} 段`,
+          title: previewPoem.title,
+          label: (previewPoem.label || previewPoem.title) + "（节选）",
+          collection: [
+            previewPoem.collection,
+            `第 ${range.start}–${range.end} 段`,
+          ]
+            .filter(Boolean)
+            .join(" · "),
           text: lines.slice(range.start - 1, range.end).join("\n"),
           excerpt: {
             originalTitle: previewPoem.title,
@@ -162,7 +174,7 @@ export function initLibrary({ editor, typography }) {
     }
     if (editor.changeSource(source, true)) {
       $("#poem-preview").close();
-      toast("已选择《" + source.title + "》");
+      toast("已选择《" + (source.title || source.label || "无题") + "》");
       $("#source-title").scrollIntoView({ block: "start" });
     }
   };
@@ -182,7 +194,9 @@ export function initLibrary({ editor, typography }) {
     ];
     const matches = items.filter((p) => {
       const text = (
-        p.title +
+        [p.title, p.label, p.collection, p.sourceWork]
+          .filter(Boolean)
+          .join(" ") +
         " " +
         p.author +
         " " +
@@ -207,9 +221,11 @@ export function initLibrary({ editor, typography }) {
       const b = document.createElement("button");
       b.className = "poem-choice";
       const title = document.createElement("b");
-      title.textContent = displayText(p.title);
+      title.textContent = displayText(p.title || p.label || "无题");
       const author = document.createElement("small");
-      author.textContent = displayText(p.author);
+      author.textContent = displayText(
+        [p.author, p.collection, p.notice].filter(Boolean).join(" · "),
+      );
       const preview = document.createElement("p");
       preview.textContent = displayText(p.text.split("\n")[0]);
       b.append(title, author, preview);

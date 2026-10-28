@@ -1,4 +1,8 @@
 export const libraryCatalog = {
+  guwen: { name: "古文观止", file: "guwen.json" },
+  youmengying: { name: "幽梦影", file: "youmengying.json" },
+  shenglv: { name: "声律启蒙", file: "shenglv.json" },
+  nantang: { name: "南唐二主词", file: "nantang.json" },
   shijing: { name: "诗经", file: "shijing.json" },
   chuci: { name: "楚辞", file: "chuci.json" },
   "han-yuefu": { name: "汉乐府", file: "han-yuefu.json" },

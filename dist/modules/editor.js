@@ -1,6 +1,7 @@
 import { sourceParts } from "./source-parts.js?v=20261027sourcesizes1";
 import { $, toast } from "./ui.js";
-export const isLetter = (c) => /[\p{L}\p{N}]/u.test(c);
+// Source lacuna markers keep occurrence IDs, just like ordinary characters.
+export const isLetter = (c) => /[\p{L}\p{N}□〓�]/u.test(c);
 export function createEditor({ store, typography }) {
   const { model } = store;
   const { displayText, displayTokens } = typography;
@@ -32,6 +33,15 @@ export function createEditor({ store, typography }) {
     return model.state.tokens.filter((t) => t.id !== null).length;
   }
   function render() {
+    $("#source-reference").textContent = displayText(
+      [
+        model.state.source.collection,
+        model.state.source.sourceWork,
+        model.state.source.notice,
+      ]
+        .filter(Boolean)
+        .join(" · "),
+    );
     $("#poem-title").value = displayText(model.state.title);
     $("#signature").value = displayText(model.state.signature);
     const used = new Set(

@@ -245,7 +245,8 @@ test("custom source and excerpt validation/confirmation preserve exact consecuti
   $("#preview-use").click();
   assert.equal(editor.state.source.text, "第二段\n第三段");
   assert.equal(editor.state.source.excerpt.start, 2);
-  assert.equal(editor.state.source.title, "自选（节选）");
+  assert.equal(editor.state.source.title, "自选");
+  assert.equal(editor.state.source.label, "自选（节选）");
   x.close();
 });
 test("appearance: separate night/export colors, size bounds, collage, roughness and current two-line preview", () => {
@@ -1273,6 +1274,148 @@ test("preview and export load author, source title and poem title without requir
   } finally {
     globalThis.fetch = originalFetch;
     globalThis.FontFace = originalFace;
+    x.close();
+  }
+});
+
+test("batch one: real shards, chapter search, preview, confirmation and metadata survive selection", async () => {
+  const previousFetch = globalThis.fetch;
+  globalThis.fetch = async (url) => ({
+    ok: true,
+    json: async () => JSON.parse(readFileSync("dist/" + url, "utf8")),
+  });
+  const x = setup();
+  try {
+    for (const [key, count] of [
+      ["guwen", 222],
+      ["youmengying", 219],
+      ["shenglv", 30],
+      ["nantang", 45],
+    ]) {
+      x.$("#choose").click();
+      x.input("#library-scope", key, "change");
+      for (
+        let i = 0;
+        i < 100 && x.$("#library-status").textContent !== `${count} 篇`;
+        i++
+      )
+        await new Promise((r) => setTimeout(r, 5));
+      assert.equal(x.$("#library-status").textContent, `${count} 篇`);
+      x.$(".poem-choice").click();
+      assert(x.$("#poem-preview").open);
+      x.$("#preview-use").click();
+      assert.equal(
+        x.editor.state.source.provenance.commit,
+        "b8594f81a89752241442f2ce267d6f66f96704ee",
+      );
+      assert(
+        x
+          .$("#source-reference")
+          .textContent.includes(x.editor.state.source.collection),
+      );
+      if (key === "youmengying") {
+        assert.equal(x.editor.state.source.title, "");
+        assert.equal(x.editor.state.source.author, "");
+        assert.equal(x.editor.state.source.label, "第 1 则");
+        assert.equal(x.$("#source-title").textContent, "");
+      }
+    }
+    x.$("#choose").click();
+    x.input("#library-scope", "shenglv", "change");
+    x.input("#search", "下卷");
+    await new Promise((r) => setTimeout(r, 180));
+    assert.equal(x.$("#library-status").textContent, "15 篇");
+  } finally {
+    globalThis.fetch = previousFetch;
+    x.close();
+  }
+});
+
+test("lacunae: real residual poem keeps occurrence IDs, contiguous runs, return, draft and PNG glyphs", async () => {
+  const source = JSON.parse(
+    readFileSync("dist/data/nantang.json", "utf8"),
+  ).find((p) => p.text.includes("□□"));
+  assert(source);
+  const x = setup({ source, tokens: [], title: "", signature: "" });
+  try {
+    const holes = () =>
+      [...x.w.document.querySelectorAll("#source-poem button")].filter(
+        (b) => b.textContent === "□",
+      );
+    assert.equal(holes().length, 12);
+    const ids = holes()
+      .slice(0, 3)
+      .map((b) => Number(b.dataset.sourceId));
+    ids.forEach((id) => x.$(`#source-poem [data-source-id="${id}"]`).click());
+    assert.equal(x.editor.textOf(), "□□□");
+    assert.equal(paperRuns(x.editor.state.tokens, () => true).length, 1);
+    x.$(`#source-poem [data-source-id="${ids[1]}"]`).click();
+    assert.deepEqual(
+      x.editor.state.tokens.map((t) => t.id),
+      [ids[0], ids[2]],
+    );
+    assert.equal(paperRuns(x.editor.state.tokens, () => true).length, 2);
+    x.$("#undo").click();
+    assert.equal(x.editor.textOf(), "□□□");
+    const restored = createStore(poems[0], x.w.localStorage);
+    assert.deepEqual(restored.model.state.tokens, x.editor.state.tokens);
+    assert.equal(
+      restored.model.state.source.provenance.pointer,
+      source.provenance.pointer,
+    );
+    x.input("#export-collage", true, "change");
+    x.input("#export-rough", true, "change");
+    await x.$("#export").onclick();
+    const calls = x.records.find((r) => r.canvas === x.downloads.at(-1)).calls;
+    assert.equal(
+      calls.filter((c) => c[0] === "fillText" && c[1] === "□").length,
+      12,
+    );
+    assert.equal(x.editor.state.source.text, source.text);
+  } finally {
+    x.close();
+  }
+});
+
+test("long prose excerpt retains original author and provenance without adding navigation text to selectable author", async () => {
+  const previousFetch = globalThis.fetch;
+  globalThis.fetch = async (url) => ({
+    ok: true,
+    json: async () => JSON.parse(readFileSync("dist/" + url, "utf8")),
+  });
+  const source = JSON.parse(readFileSync("dist/data/guwen.json", "utf8")).find(
+    (p) => Array.from(p.text).length > 2000 && p.text.split("\n").length > 8,
+  );
+  assert(source);
+  const x = setup();
+  try {
+    x.$("#choose").click();
+    x.input("#library-scope", "guwen", "change");
+    x.input("#search", source.title);
+    await new Promise((r) => setTimeout(r, 180));
+    for (
+      let i = 0;
+      i < 100 && !x.$(".poem-choice")?.textContent.includes(source.title);
+      i++
+    )
+      await new Promise((r) => setTimeout(r, 10));
+    x.$(".poem-choice").click();
+    assert(x.$("#excerpt-enabled").checked);
+    x.input("#excerpt-start", "2");
+    x.input("#excerpt-end", "3");
+    x.$("#preview-use").click();
+    assert.equal(
+      x.editor.state.source.text,
+      source.text.split("\n").slice(1, 3).join("\n"),
+    );
+    assert.equal(x.editor.state.source.author, source.author);
+    assert.equal(
+      x.editor.state.source.provenance.sha256,
+      source.provenance.sha256,
+    );
+    assert(x.$("#source-reference").textContent.includes("第 2–3 段"));
+  } finally {
+    globalThis.fetch = previousFetch;
     x.close();
   }
 });
