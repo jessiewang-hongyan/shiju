@@ -72,3 +72,5 @@ npm run format
 - [诗词与字体资源维护](docs/resources.md)
 - [功能验收与检查记录](docs/acceptance.md)
 - [纸张素材与加工记录](docs/paper-materials.md)
+
+- [下一批文集接入清单（审计候选，未上线）](docs/next-collections.md)

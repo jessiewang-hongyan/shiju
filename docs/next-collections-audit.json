@@ -1,0 +1,3801 @@
+{
+  "method": {
+    "normalization": "NFC; strip whitespace and Unicode punctuation; no simplified/traditional conversion; body-only matches are review candidates, not automatic deletions",
+    "markers": "ASCII ?, U+FFFD, □, 〓 in title, author, body; flags require review",
+    "existing_scope": "dist/data/*.json full collections; excludes built-in selections in modules/poems.js"
+  },
+  "sources": [
+    {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "南北朝.csv",
+      "sha256": "37613cc6957a48f2e0ce4d6f8a44923f08a7b7f0f8d6b923e2415edddd59b839",
+      "bytes": 1254175
+    },
+    {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "隋.csv",
+      "sha256": "a19e4ce64d0cefae1dcc721221eaa79f86c11e11ded7d343347a23cf7fbf4c7b",
+      "bytes": 285717
+    },
+    {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "LICENSE",
+      "sha256": "3c2630eb84efab60868d5195aa656b954f77d3cc1127dc886601e21cfd9fb63b",
+      "bytes": 1063
+    },
+    {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "README.md",
+      "sha256": "3782e8e3c2da473c8717a246f51a72177d096769686650af26df92a0154a1755",
+      "bytes": 3558
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "LICENSE",
+      "sha256": "c195319aeaa3ffcbe16aa5d26eec19eae5a42f84337dd2b3dc3c9d5ccbbd6507",
+      "bytes": 1076
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/huajianji/README.md",
+      "sha256": "d127b74542153d72a73be1e35323641289da86e5150f63af4181a1c1caf6304a",
+      "bytes": 1499
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/huajianji/huajianji-0-preface.json",
+      "sha256": "91452492223b39c4cfc3ff754d29da5222a6ce780af01cb750bb0a993b87b669",
+      "bytes": 3723
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/huajianji/huajianji-1-juan.json",
+      "sha256": "d8e29efa6cfa1fc7db9972bec2c645eb0a7788d724c7b6fe5eac6021de5bc694",
+      "bytes": 28137
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/huajianji/huajianji-2-juan.json",
+      "sha256": "14e26a139a59b47a9a997859e79831b4e759b5386a96b042b24f31690204925d",
+      "bytes": 22574
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/huajianji/huajianji-3-juan.json",
+      "sha256": "bca0f20f1ca510505f438a67527b4928b615aac5e13b9c5ca5622aaa83384e31",
+      "bytes": 24848
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/huajianji/huajianji-4-juan.json",
+      "sha256": "22c5c6ad952d13be7c0cb61967798a6cce9a1d4663cd3c3870136d6f0b0ca1d5",
+      "bytes": 22678
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/huajianji/huajianji-5-juan.json",
+      "sha256": "f4b8cbe33b40d2fe6f603ef004c2f9621eb7e781ef25673951688f5dbd27ecb9",
+      "bytes": 26902
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/huajianji/huajianji-6-juan.json",
+      "sha256": "af03c291db648b7dd86fd1c170a15a27f570bff41aa7f290d371535a7bea4b3b",
+      "bytes": 24327
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/huajianji/huajianji-7-juan.json",
+      "sha256": "4d8757138a535b85a321ec1aa1e558e069b84453aaee77603605c931b4f3ccc4",
+      "bytes": 21678
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/huajianji/huajianji-8-juan.json",
+      "sha256": "5a41780f5eac4611d9ad40acf1691f4bea034296e1b68a854f8c6ae5cb20ef59",
+      "bytes": 24476
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/huajianji/huajianji-9-juan.json",
+      "sha256": "0d81d1218e79e2853ef9c946899b258bbaef5af1f926ece8bc99f9a5c4f27547",
+      "bytes": 23790
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/huajianji/huajianji-x-juan.json",
+      "sha256": "47eefa4b7802647fa909293a718b93da5038bab8d2cf48ab98d6f58f869126fa",
+      "bytes": 21955
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/nantang/README.md",
+      "sha256": "cd4074a8066d793311e10f41048a54a7f94aeadb97b57ee9408c4c30d70b742e",
+      "bytes": 4502
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/nantang/authors.json",
+      "sha256": "12b12abb232dfd7b333acd59873083056493863ad3c669617b57bd4b839eca54",
+      "bytes": 2251
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/nantang/intro.json",
+      "sha256": "12a72747a0e8ef6ceb27d0e3e0f33c2b0f3289672e8514d5e2a1c1df8588f251",
+      "bytes": 595
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/nantang/poetrys.json",
+      "sha256": "278cb8b6f768cff315a00a8cb71d16400cc00bb442ad8e5c9eb3b832515eb079",
+      "bytes": 71500
+    }
+  ],
+  "existing_files": [
+    {
+      "file": "dist/data/chuci.json",
+      "sha256": "901bcf022c3001b04106e7508938732600b2546728c2a1225db283fb9f24c4b7"
+    },
+    {
+      "file": "dist/data/weijin.json",
+      "sha256": "737f0a2623dba72fa62c41f780ffc45cacd0f593423da0e6ba8d736a64121d82"
+    },
+    {
+      "file": "dist/data/song-ci.json",
+      "sha256": "f9ec2371e9c3520ff7d113719b0b4466f464ac90f8cb6e7ba202ec14ada6b01c"
+    },
+    {
+      "file": "dist/data/han.json",
+      "sha256": "520aa76aa041bb625a15d03eaba6850cb97e2e380280839ee6a58af90d45558a"
+    },
+    {
+      "file": "dist/data/han-yuefu.json",
+      "sha256": "a99c6127670e3b579b91b308188f731280df7dc4410c6c1f0d54de04499f2345"
+    },
+    {
+      "file": "dist/data/tang.json",
+      "sha256": "c4073a0c040380daad0ff094ba5176ac2b6283ed4f20e2d1ae447303762631d9"
+    },
+    {
+      "file": "dist/data/yuan.json",
+      "sha256": "8287d5157f1f0f987a20950e81d13f1201ff4b34f53c507b396e93b8faa5c216"
+    },
+    {
+      "file": "dist/data/shijing.json",
+      "sha256": "5a443f39bcd34fa5362033a96d746236c7ff2cadebcebf1193f89d3f7c9649d4"
+    }
+  ],
+  "collections": {
+    "南北朝": {
+      "rows": 4586,
+      "authors": 434,
+      "exact_duplicate_extra": 0,
+      "exact_duplicate_groups": [],
+      "normalized_body_duplicate_extra": 0,
+      "normalized_body_duplicate_groups": [],
+      "flagged_rows": 94,
+      "flags": [
+        {
+          "file": "南北朝.csv",
+          "index": 1,
+          "title": "车遥遥",
+          "author": "车?",
+          "markers": {
+            "author": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 32,
+          "title": "刘仆射东山集学骚",
+          "author": "江淹",
+          "markers": {
+            "text": {
+              "□": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 35,
+          "title": "当春四韵同□左丞诗",
+          "author": "江淹",
+          "markers": {
+            "title": {
+              "□": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 36,
+          "title": "杂三言五首 其二 访道经",
+          "author": "江淹",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 40,
+          "title": "杂三言五首 其三 镜论语",
+          "author": "江淹",
+          "markers": {
+            "text": {
+              "□": 2
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 77,
+          "title": "应刘豫章别诗",
+          "author": "江淹",
+          "markers": {
+            "text": {
+              "□": 14
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 91,
+          "title": "诗",
+          "author": "江淹",
+          "markers": {
+            "text": {
+              "□": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 209,
+          "title": "伤徐主簿诗",
+          "author": "何逊",
+          "markers": {
+            "text": {
+              "□": 2
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 225,
+          "title": "和刘咨议守风诗",
+          "author": "何逊",
+          "markers": {
+            "text": {
+              "□": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 259,
+          "title": "送司马□入五城联句诗",
+          "author": "何逊",
+          "markers": {
+            "title": {
+              "□": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 269,
+          "title": "望廨前水竹诗",
+          "author": "顾?",
+          "markers": {
+            "author": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 278,
+          "title": "答丘长史诗",
+          "author": "何逊",
+          "markers": {
+            "text": {
+              "□": 2
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 318,
+          "title": "八咏诗 其一 登台望秋月",
+          "author": "沈约",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 372,
+          "title": "江蓠生幽渚",
+          "author": "沈约",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 486,
+          "title": "梁三朝雅乐歌十九首 其十六",
+          "author": "沈约",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 526,
+          "title": "梁鼓吹曲十二首 其三 桐柏山",
+          "author": "沈约",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 648,
+          "title": "骢马驱",
+          "author": "徐陵",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 844,
+          "title": "咏画屏风诗二十五首 其八",
+          "author": "庾信",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 876,
+          "title": "奉和永丰殿下言志诗十首 其五",
+          "author": "庾信",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 885,
+          "title": "奉和法筵应诏诗",
+          "author": "庾信",
+          "markers": {
+            "text": {
+              "□": 2
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 976,
+          "title": "十喻诗五首 其二 如炎诗",
+          "author": "萧衍",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 999,
+          "title": "子夜四时歌十六首 其六",
+          "author": "萧衍",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 1026,
+          "title": "江南弄七首 其六 游女曲",
+          "author": "萧衍",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 1049,
+          "title": "游钟山大爱敬寺诗",
+          "author": "萧衍",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 1132,
+          "title": "登石门最高顶诗",
+          "author": "谢灵运",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 1137,
+          "title": "答中书诗",
+          "author": "谢灵运",
+          "markers": {
+            "text": {
+              "□": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 1138,
+          "title": "答谢咨议诗",
+          "author": "谢灵运",
+          "markers": {
+            "text": {
+              "□": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 1145,
+          "title": "赠从弟弘元时为中军功曹住京诗",
+          "author": "谢灵运",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 1199,
+          "title": "迎神 其七",
+          "author": "谢朓",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 1486,
+          "title": "还都道中诗三首 其三",
+          "author": "鲍照",
+          "markers": {
+            "text": {
+              "□": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 1489,
+          "title": "侍宴覆舟山诗二首 其一",
+          "author": "鲍照",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 1511,
+          "title": "松柏篇",
+          "author": "鲍照",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 1713,
+          "title": "棹歌行",
+          "author": "孔宁子",
+          "markers": {
+            "text": {
+              "□": 2
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 1714,
+          "title": "前缓声歌",
+          "author": "孔宁子",
+          "markers": {
+            "text": {
+              "□": 2
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 1720,
+          "title": "悲人道",
+          "author": "谢晦",
+          "markers": {
+            "text": {
+              "□": 4
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 1746,
+          "title": "登孤山诗",
+          "author": "谢灵运",
+          "markers": {
+            "text": {
+              "□": 2
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 1749,
+          "title": "诗",
+          "author": "谢灵运",
+          "markers": {
+            "text": {
+              "□": 2
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 1770,
+          "title": "临终诗",
+          "author": "范晔",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 1848,
+          "title": "挽歌",
+          "author": "颜延之",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 1893,
+          "title": "昭君辞",
+          "author": "庾徽之",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 1922,
+          "title": "瑞雪咏",
+          "author": "谢庄",
+          "markers": {
+            "text": {
+              "□": 2
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 1923,
+          "title": "长笛弄",
+          "author": "谢庄",
+          "markers": {
+            "text": {
+              "□": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 2133,
+          "title": "皇太子释奠会诗",
+          "author": "王僧令",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 2157,
+          "title": "上湘度琵琶矶诗",
+          "author": "刘?",
+          "markers": {
+            "author": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 2252,
+          "title": "敬赠萧咨议诗",
+          "author": "虞羲",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 2446,
+          "title": "登郁洲山望海诗",
+          "author": "刘峻",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 2494,
+          "title": "释奠应令诗 其一",
+          "author": "陆倕",
+          "markers": {
+            "text": {
+              "□": 6
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 2515,
+          "title": "日出东南隅行",
+          "author": "张率",
+          "markers": {
+            "text": {
+              "□": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 2692,
+          "title": "元广州景仲座见故姬诗",
+          "author": "刘孝绰",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 2707,
+          "title": "释奠应令诗",
+          "author": "陆云公",
+          "markers": {
+            "text": {
+              "□": 2
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 2752,
+          "title": "拟古应教",
+          "author": "刘孝威",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 2869,
+          "title": "和湘东王横吹曲三首 其三 紫骝马",
+          "author": "萧纲",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 2921,
+          "title": "和赠逸民应诏诗",
+          "author": "萧纲",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 2938,
+          "title": "经琵琶峡诗",
+          "author": "萧纲",
+          "markers": {
+            "text": {
+              "□": 2
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 2963,
+          "title": "咏舞诗二首 其一",
+          "author": "萧纲",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 2984,
+          "title": "玄圃寒夕诗",
+          "author": "萧纲",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 3195,
+          "title": "八关斋夜赋四城门更作四首 其一 第一赋韵东城门病",
+          "author": "庾肩吾",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 3256,
+          "title": "诗",
+          "author": "王筠",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 3268,
+          "title": "释奠应诏为王皦作诗",
+          "author": "鲍几",
+          "markers": {
+            "text": {
+              "□": 4
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 3324,
+          "title": "将军名诗",
+          "author": "萧绎",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 3398,
+          "title": "宴清言殿作柏梁体诗",
+          "author": "萧绎",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 3436,
+          "title": "胡笳曲二首 其二",
+          "author": "江洪",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 3549,
+          "title": "陇头水",
+          "author": "车?",
+          "markers": {
+            "author": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 3550,
+          "title": "洛阳道",
+          "author": "车?",
+          "markers": {
+            "author": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 3551,
+          "title": "骢马",
+          "author": "车?",
+          "markers": {
+            "author": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 3575,
+          "title": "咏安仁得果诗",
+          "author": "谈士云",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 3656,
+          "title": "五仙诗五首 其四 洪先生授诗",
+          "author": "周子良",
+          "markers": {
+            "text": {
+              "□": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 3673,
+          "title": "于莱城东十里与诸门徒登青阳岭太基山上四面及中嵿扫石置仙坛诗",
+          "author": "郑道昭",
+          "markers": {
+            "text": {
+              "□": 2
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 3674,
+          "title": "与道俗□人出莱城东南九里登云峰山论经书诗",
+          "author": "郑道昭",
+          "markers": {
+            "title": {
+              "□": 1
+            },
+            "text": {
+              "?": 1,
+              "□": 20
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 3677,
+          "title": "刺谗诗",
+          "author": "阳固",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 3757,
+          "title": "美女篇二首 其二",
+          "author": "魏收",
+          "markers": {
+            "text": {
+              "□": 5
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 3847,
+          "title": "日出东南隅行",
+          "author": "王褒",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 3989,
+          "title": "重阳殿成金石会竟上诗",
+          "author": "张正见",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 4049,
+          "title": "飞来双白鹤",
+          "author": "陈叔宝",
+          "markers": {
+            "text": {
+              "□": 3
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 4125,
+          "title": "初伏七夕已觉微凉既引应徐且命燕赵清风朗月以望七襄之驾置酒陈乐",
+          "author": "陈叔宝",
+          "markers": {
+            "text": {
+              "□": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 4344,
+          "title": "胡笳曲二首",
+          "author": "江洪",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 4350,
+          "title": "杂三言五首 构象台",
+          "author": "江淹",
+          "markers": {
+            "text": {
+              "?": 1,
+              "□": 2
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 4396,
+          "title": "八咏诗 登台望秋月",
+          "author": "沈约",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 4402,
+          "title": "梁三朝雅乐歌十九首 其九 需雅",
+          "author": "沈约",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 4407,
+          "title": "梁鼓吹曲十二首 其二 贤首山",
+          "author": "沈约",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 4419,
+          "title": "释奠应令诗",
+          "author": "陆倕",
+          "markers": {
+            "text": {
+              "□": 6
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 4436,
+          "title": "五仙诗五首 保命府丞授诗",
+          "author": "周子良",
+          "markers": {
+            "text": {
+              "□": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 4457,
+          "title": "八关斋夜赋四城门更作四首 第一赋韵东城门病",
+          "author": "庾肩吾",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 4462,
+          "title": "奉和永丰殿下言志诗十首",
+          "author": "庾信",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 4463,
+          "title": "咏画屏风诗二十五首",
+          "author": "庾信",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 4491,
+          "title": "和湘东王横吹曲三首 折杨柳",
+          "author": "萧纲",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 4500,
+          "title": "咏舞诗二首",
+          "author": "萧纲",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 4517,
+          "title": "子夜四时歌十六首 春歌四首",
+          "author": "萧衍",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 4521,
+          "title": "十喻诗五首 幻诗",
+          "author": "萧衍",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 4524,
+          "title": "江南弄七首 江南弄",
+          "author": "萧衍",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 4543,
+          "title": "迎神",
+          "author": "谢朓",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 4567,
+          "title": "侍宴覆舟山诗二首",
+          "author": "鲍照",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 4570,
+          "title": "还都道中诗三首",
+          "author": "鲍照",
+          "markers": {
+            "text": {
+              "□": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "南北朝.csv",
+          "index": 4586,
+          "title": "美女篇二首",
+          "author": "魏收",
+          "markers": {
+            "text": {
+              "□": 5
+            }
+          },
+          "empty_fields": []
+        }
+      ],
+      "existing_overlap_rows": 2,
+      "existing_overlaps": [
+        {
+          "candidate": {
+            "file": "南北朝.csv",
+            "index": 2317,
+            "title": "胡无人行",
+            "author": "吴均"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "胡无人行",
+              "author": "唐 · 吴筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "南北朝.csv",
+            "index": 4246,
+            "title": "日出东南隅行",
+            "author": "殷谋"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "日出东南隅行",
+              "author": "唐 · 李白"
+            }
+          ]
+        }
+      ],
+      "dynasties": {
+        "南北朝": 4586
+      },
+      "max_body_length": 3396
+    },
+    "隋": {
+      "rows": 1170,
+      "authors": 84,
+      "exact_duplicate_extra": 0,
+      "exact_duplicate_groups": [],
+      "normalized_body_duplicate_extra": 3,
+      "normalized_body_duplicate_groups": [
+        [
+          {
+            "file": "隋.csv",
+            "index": 35,
+            "title": "杨叛儿 其二",
+            "author": "无名氏"
+          },
+          {
+            "file": "隋.csv",
+            "index": 703,
+            "title": "读曲歌八十九首 其七十六",
+            "author": "无名氏"
+          }
+        ],
+        [
+          {
+            "file": "隋.csv",
+            "index": 267,
+            "title": "山阴谣",
+            "author": "无名氏"
+          },
+          {
+            "file": "隋.csv",
+            "index": 338,
+            "title": "山阴民为丘仲孚谣",
+            "author": "无名氏"
+          }
+        ],
+        [
+          {
+            "file": "隋.csv",
+            "index": 439,
+            "title": "清河民为宋世良谣 其二",
+            "author": "无名氏"
+          },
+          {
+            "file": "隋.csv",
+            "index": 542,
+            "title": "清河民为宋世良谣",
+            "author": "无名氏"
+          }
+        ]
+      ],
+      "flagged_rows": 17,
+      "flags": [
+        {
+          "file": "隋.csv",
+          "index": 374,
+          "title": "企喻歌 其二",
+          "author": "无名氏",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "隋.csv",
+          "index": 375,
+          "title": "企喻歌 其三",
+          "author": "无名氏",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "隋.csv",
+          "index": 457,
+          "title": "时人为崔楷语",
+          "author": "无名氏",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "隋.csv",
+          "index": 496,
+          "title": "尹喜哀叹五首 其五",
+          "author": "无名氏",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "隋.csv",
+          "index": 515,
+          "title": "老君十六变词 其十二",
+          "author": "无名氏",
+          "markers": {
+            "text": {
+              "?": 2
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "隋.csv",
+          "index": 516,
+          "title": "老君十六变词 其十三",
+          "author": "无名氏",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "隋.csv",
+          "index": 529,
+          "title": "废帝时童谣三首 其三",
+          "author": "无名氏",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "隋.csv",
+          "index": 711,
+          "title": "升天行",
+          "author": "卢思道",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "隋.csv",
+          "index": 798,
+          "title": "赐史祥诗",
+          "author": "杨广",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "隋.csv",
+          "index": 851,
+          "title": "暮秋望月示学士各释愁应教",
+          "author": "徐仪",
+          "markers": {
+            "text": {
+              "□": 3
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "隋.csv",
+          "index": 1068,
+          "title": "隋故太原王夫人墓志铭",
+          "author": "无名氏",
+          "markers": {
+            "text": {
+              "□": 2
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "隋.csv",
+          "index": 1069,
+          "title": "前陈散骑侍郎刘府君墓铭并序",
+          "author": "无名氏",
+          "markers": {
+            "text": {
+              "□": 9
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "隋.csv",
+          "index": 1070,
+          "title": "大隋仪同三司建州刺史故徐君墓志铭",
+          "author": "无名氏",
+          "markers": {
+            "text": {
+              "□": 19
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "隋.csv",
+          "index": 1091,
+          "title": "企喻歌",
+          "author": "无名氏",
+          "markers": {
+            "text": {
+              "?": 2
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "隋.csv",
+          "index": 1099,
+          "title": "尹喜哀叹五首",
+          "author": "无名氏",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "隋.csv",
+          "index": 1101,
+          "title": "老君十六变词",
+          "author": "无名氏",
+          "markers": {
+            "text": {
+              "?": 3
+            }
+          },
+          "empty_fields": []
+        },
+        {
+          "file": "隋.csv",
+          "index": 1102,
+          "title": "废帝时童谣三首 其二",
+          "author": "无名氏",
+          "markers": {
+            "text": {
+              "?": 1
+            }
+          },
+          "empty_fields": []
+        }
+      ],
+      "existing_overlap_rows": 3,
+      "existing_overlaps": [
+        {
+          "candidate": {
+            "file": "隋.csv",
+            "index": 470,
+            "title": "郦道元引橘洲谚",
+            "author": "无名氏"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "昭潭谚",
+              "author": "唐 · 不详"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "隋.csv",
+            "index": 674,
+            "title": "时人为贺氏兄弟语",
+            "author": "无名氏"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "二贺诗",
+              "author": "唐 · 不详"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "隋.csv",
+            "index": 676,
+            "title": "舆地志引谚",
+            "author": "无名氏"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "丹徒谚",
+              "author": "唐 · 不详"
+            }
+          ]
+        }
+      ],
+      "dynasties": {
+        "隋": 1170
+      },
+      "max_body_length": 2023
+    },
+    "花间集": {
+      "rows": 497,
+      "authors": 18,
+      "exact_duplicate_extra": 0,
+      "exact_duplicate_groups": [],
+      "normalized_body_duplicate_extra": 0,
+      "normalized_body_duplicate_groups": [],
+      "flagged_rows": 0,
+      "flags": [],
+      "existing_overlap_rows": 132,
+      "existing_overlaps": [
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-1-juan.json",
+            "index": 1,
+            "title": "菩萨蛮 其一",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "菩萨蛮 其一",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-1-juan.json",
+            "index": 3,
+            "title": "菩萨蛮 其三",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "菩萨蛮 其三",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-1-juan.json",
+            "index": 5,
+            "title": "菩萨蛮 其五",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "菩萨蛮 其五",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-1-juan.json",
+            "index": 8,
+            "title": "菩萨蛮 其八",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "菩萨蛮 其八",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-1-juan.json",
+            "index": 9,
+            "title": "菩萨蛮 其九",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "菩萨蛮 其九",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-1-juan.json",
+            "index": 15,
+            "title": "更漏子 其一",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "更漏子 其一",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-1-juan.json",
+            "index": 18,
+            "title": "更漏子 其四",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "更漏子 其四",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-1-juan.json",
+            "index": 19,
+            "title": "更漏子 其五",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "更漏子 其五",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-1-juan.json",
+            "index": 23,
+            "title": "酒泉子·花映柳条",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "酒泉子 其一",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-1-juan.json",
+            "index": 28,
+            "title": "定西番·海燕欲飞调羽",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "定西番 其二",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-1-juan.json",
+            "index": 29,
+            "title": "定西番·细雨晓莺春晚",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "定西番 其三",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-1-juan.json",
+            "index": 35,
+            "title": "杨柳枝·两两黄鹂色似金",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "杨柳八首 其六",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-1-juan.json",
+            "index": 37,
+            "title": "杨柳枝·织锦机边莺语频",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "杨柳八首 其八",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-1-juan.json",
+            "index": 38,
+            "title": "南歌子·手里金鹦鹉",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "南歌子 其一",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-1-juan.json",
+            "index": 39,
+            "title": "南歌子·似带如丝柳",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "南歌子 其二",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-1-juan.json",
+            "index": 43,
+            "title": "南歌子·转盼如波眼",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "南歌子 其六",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-1-juan.json",
+            "index": 44,
+            "title": "南歌子·懒拂鸳鸯枕",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "南歌子 其七",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-1-juan.json",
+            "index": 48,
+            "title": "女冠子·含娇含笑",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "女冠子 其一",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-1-juan.json",
+            "index": 50,
+            "title": "玉蝴蝶·霞帔云发",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "玉蝴蝶",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-2-juan.json",
+            "index": 6,
+            "title": "思帝乡·花花",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "思帝乡",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-2-juan.json",
+            "index": 7,
+            "title": "梦江南·千万恨",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "忆江南 其一",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-2-juan.json",
+            "index": 12,
+            "title": "番女怨·万枝香雪开已遍",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "蕃女怨 其一",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-2-juan.json",
+            "index": 13,
+            "title": "番女怨·碛南沙上惊雁起",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "蕃女怨 其二",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-2-juan.json",
+            "index": 14,
+            "title": "荷叶杯·一点露珠凝冷",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "荷叶杯 其一",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-2-juan.json",
+            "index": 15,
+            "title": "荷叶杯·镜水夜来秋月",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "荷叶杯 其二",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-2-juan.json",
+            "index": 16,
+            "title": "荷叶杯·楚女欲归南浦",
+            "author": "温庭筠"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "荷叶杯 其三",
+              "author": "唐 · 温庭筠"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-2-juan.json",
+            "index": 18,
+            "title": "天仙子·踯躅花开红照水",
+            "author": "皇甫松"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "天仙子 其二",
+              "author": "唐 · 皇甫松"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-2-juan.json",
+            "index": 21,
+            "title": "杨柳枝·春入行宫映翠微",
+            "author": "皇甫松"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "杂曲歌辞 其二 杨柳枝",
+              "author": "唐 · 皇甫松"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-2-juan.json",
+            "index": 22,
+            "title": "杨柳枝·烂漫春归水国时",
+            "author": "皇甫松"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "杂曲歌辞 其一 杨柳枝",
+              "author": "唐 · 皇甫松"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-2-juan.json",
+            "index": 23,
+            "title": "摘得新·酌一卮",
+            "author": "皇甫松"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "摘得新 其一",
+              "author": "唐 · 皇甫松"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-2-juan.json",
+            "index": 24,
+            "title": "摘得新·摘得新",
+            "author": "皇甫松"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "摘得新 其二",
+              "author": "唐 · 皇甫松"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-2-juan.json",
+            "index": 26,
+            "title": "梦江南·楼上寝",
+            "author": "皇甫松"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "忆江南 其二",
+              "author": "唐 · 皇甫松"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-2-juan.json",
+            "index": 34,
+            "title": "菩萨蛮·红楼别夜堪惆怅",
+            "author": "韦庄"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "菩萨蛮 其一",
+              "author": "唐 · 韦庄"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-2-juan.json",
+            "index": 35,
+            "title": "菩萨蛮·人人尽说江南好",
+            "author": "韦庄"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "菩萨蛮 其二",
+              "author": "唐 · 韦庄"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-2-juan.json",
+            "index": 36,
+            "title": "菩萨蛮·如今却忆江南乐",
+            "author": "韦庄"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "菩萨蛮 其三",
+              "author": "唐 · 韦庄"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-2-juan.json",
+            "index": 39,
+            "title": "归国遥·春欲暮",
+            "author": "韦庄"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "归国遥 其一",
+              "author": "唐 · 韦庄"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-2-juan.json",
+            "index": 43,
+            "title": "应天长·别来半岁音书绝",
+            "author": "韦庄"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "应天长 其二",
+              "author": "唐 · 韦庄"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-2-juan.json",
+            "index": 44,
+            "title": "荷叶杯·绝代佳人难得",
+            "author": "韦庄"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "荷叶杯 其一",
+              "author": "唐 · 韦庄"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-2-juan.json",
+            "index": 45,
+            "title": "荷叶杯·记得那年花下",
+            "author": "韦庄"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "荷叶杯 其二",
+              "author": "唐 · 韦庄"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-2-juan.json",
+            "index": 46,
+            "title": "清平乐·春愁南陌",
+            "author": "韦庄"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "清平乐 其一",
+              "author": "唐 · 韦庄"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-2-juan.json",
+            "index": 50,
+            "title": "望远行·欲别无言倚画屏",
+            "author": "韦庄"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "望远行",
+              "author": "唐 · 韦庄"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-3-juan.json",
+            "index": 4,
+            "title": "江城子·髻鬟狼藉黛眉长",
+            "author": "韦庄"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "江城子 其二",
+              "author": "唐 · 韦庄"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-3-juan.json",
+            "index": 10,
+            "title": "天仙子·蟾彩霜华夜不分",
+            "author": "韦庄"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "天仙子 其三",
+              "author": "唐 · 韦庄"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-3-juan.json",
+            "index": 11,
+            "title": "天仙子·梦觉云屏依旧空",
+            "author": "韦庄"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "天仙子 其四",
+              "author": "唐 · 韦庄"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-3-juan.json",
+            "index": 12,
+            "title": "天仙子·金似衣裳玉似身",
+            "author": "韦庄"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "天仙子 其五",
+              "author": "唐 · 韦庄"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-3-juan.json",
+            "index": 14,
+            "title": "喜迁莺·街鼓动",
+            "author": "韦庄"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "喜迁莺 其二",
+              "author": "唐 · 韦庄"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-3-juan.json",
+            "index": 15,
+            "title": "思帝乡·云髻坠",
+            "author": "韦庄"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "思帝乡 其一",
+              "author": "唐 · 韦庄"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-3-juan.json",
+            "index": 16,
+            "title": "思帝乡·春日游",
+            "author": "韦庄"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "思帝乡 其二",
+              "author": "唐 · 韦庄"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-3-juan.json",
+            "index": 21,
+            "title": "女冠子·四月十七",
+            "author": "韦庄"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "女冠子 其一",
+              "author": "唐 · 韦庄"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-3-juan.json",
+            "index": 22,
+            "title": "女冠子·昨夜夜半",
+            "author": "韦庄"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "女冠子 其二",
+              "author": "唐 · 韦庄"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-3-juan.json",
+            "index": 23,
+            "title": "更漏子·钟鼓寒",
+            "author": "韦庄"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "更漏子",
+              "author": "唐 · 韦庄"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-3-juan.json",
+            "index": 36,
+            "title": "喜迁莺·金门晓",
+            "author": "薛昭蕴"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "喜迁莺 其二",
+              "author": "唐 · 薛昭蕴"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-3-juan.json",
+            "index": 42,
+            "title": "醉公子·慢绾青丝发",
+            "author": "薛昭蕴"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "醉公子",
+              "author": "唐 · 薛昭蕴"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-4-juan.json",
+            "index": 2,
+            "title": "女冠子·锦江烟水",
+            "author": "牛峤"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "女冠子 其二",
+              "author": "唐 · 牛峤"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-4-juan.json",
+            "index": 6,
+            "title": "梦江南·红绣被",
+            "author": "牛峤"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "忆江南 其二",
+              "author": "唐 · 牛峤"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-4-juan.json",
+            "index": 8,
+            "title": "感恩多·自从南浦别",
+            "author": "牛峤"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "感恩多 其二",
+              "author": "唐 · 牛峤"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-4-juan.json",
+            "index": 11,
+            "title": "更漏子·星渐稀",
+            "author": "牛峤"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "更漏子 其一",
+              "author": "唐 · 牛峤"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-4-juan.json",
+            "index": 17,
+            "title": "菩萨蛮·玉钗风动春幡急",
+            "author": "牛峤"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "菩萨蛮 其三",
+              "author": "唐 · 牛峤"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-4-juan.json",
+            "index": 19,
+            "title": "菩萨蛮·风帘燕舞莺啼柳",
+            "author": "牛峤"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "菩萨蛮 其五",
+              "author": "唐 · 牛峤"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-4-juan.json",
+            "index": 22,
+            "title": "酒泉子·记得去年",
+            "author": "牛峤"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "酒泉子",
+              "author": "唐 · 牛峤"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-4-juan.json",
+            "index": 23,
+            "title": "定西番·紫塞月明千里",
+            "author": "牛峤"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "定西番",
+              "author": "唐 · 牛峤"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-4-juan.json",
+            "index": 25,
+            "title": "西溪子·捍拨双盘金凤",
+            "author": "牛峤"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "西溪子",
+              "author": "唐 · 牛峤"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-4-juan.json",
+            "index": 29,
+            "title": "浣溪沙·马上凝情忆旧游",
+            "author": "张泌"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "浣溪沙 其二",
+              "author": "唐 · 张泌"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-4-juan.json",
+            "index": 30,
+            "title": "浣溪沙·独立寒阶望月华",
+            "author": "张泌"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "浣溪沙 其三",
+              "author": "唐 · 张泌"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-4-juan.json",
+            "index": 32,
+            "title": "浣溪沙·翡翠屏开绣幄红",
+            "author": "张泌"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "浣溪沙 其五",
+              "author": "唐 · 张泌"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-4-juan.json",
+            "index": 36,
+            "title": "浣溪沙·晚逐香车入凤城",
+            "author": "张泌"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "浣溪沙 其八",
+              "author": "唐 · 张泌"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-4-juan.json",
+            "index": 37,
+            "title": "浣溪沙·小市东门欲雪天",
+            "author": "张泌"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "浣溪沙 其九",
+              "author": "唐 · 张泌"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-4-juan.json",
+            "index": 38,
+            "title": "临江仙·烟收湘渚秋江静",
+            "author": "张泌"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "临江仙",
+              "author": "唐 · 张泌"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-4-juan.json",
+            "index": 49,
+            "title": "南歌子·岸柳拖烟绿",
+            "author": "张泌"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "南歌子 其二",
+              "author": "唐 · 张泌"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-5-juan.json",
+            "index": 3,
+            "title": "河渎神·古树噪寒鸦",
+            "author": "张泌"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "河渎神",
+              "author": "唐 · 张泌"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-5-juan.json",
+            "index": 16,
+            "title": "纱窗恨·新春燕子还来至",
+            "author": "毛文锡"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "纱窗恨 其一",
+              "author": "唐 · 毛文锡"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-5-juan.json",
+            "index": 19,
+            "title": "柳含烟·河桥柳",
+            "author": "毛文锡"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "柳含烟 其二",
+              "author": "唐 · 毛文锡"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-5-juan.json",
+            "index": 23,
+            "title": "醉花间·深相忆",
+            "author": "毛文锡"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "醉花间 其二",
+              "author": "唐 · 毛文锡"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-5-juan.json",
+            "index": 25,
+            "title": "浣溪沙·七夕年年信不违",
+            "author": "毛文锡"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "浣溪沙",
+              "author": "唐 · 毛文锡"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-5-juan.json",
+            "index": 29,
+            "title": "诉衷情·桃花流水漾纵横",
+            "author": "毛文锡"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "诉衷情 其一",
+              "author": "唐 · 毛文锡"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-5-juan.json",
+            "index": 30,
+            "title": "诉衷情·鸳鸯交颈绣衣轻",
+            "author": "毛文锡"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "诉衷情 其二",
+              "author": "唐 · 毛文锡"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-5-juan.json",
+            "index": 34,
+            "title": "临江仙·峭碧参差十二峰",
+            "author": "牛希济"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "临江仙 其一",
+              "author": "唐 · 牛希济"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-5-juan.json",
+            "index": 47,
+            "title": "浣溪沙·相见休言有泪珠",
+            "author": "欧陽炯"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "浣溪沙 其三",
+              "author": "唐 · 欧阳炯"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-6-juan.json",
+            "index": 2,
+            "title": "南乡子·画舸停桡",
+            "author": "欧陽炯"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "南乡子 其二",
+              "author": "唐 · 欧阳炯"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-6-juan.json",
+            "index": 3,
+            "title": "南乡子·岸远沙平",
+            "author": "欧陽炯"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "南乡子 其三",
+              "author": "唐 · 欧阳炯"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-6-juan.json",
+            "index": 4,
+            "title": "南乡子·洞口谁家",
+            "author": "欧陽炯"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "南乡子 其四",
+              "author": "唐 · 欧阳炯"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-6-juan.json",
+            "index": 7,
+            "title": "南乡子·袖敛鲛绡",
+            "author": "欧陽炯"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "南乡子 其七",
+              "author": "唐 · 欧阳炯"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-6-juan.json",
+            "index": 9,
+            "title": "献衷心·见好花颜色",
+            "author": "欧陽炯"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "献衷心",
+              "author": "唐 · 欧阳炯"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-6-juan.json",
+            "index": 12,
+            "title": "江城子·晚日金陵岸草平",
+            "author": "欧陽炯"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "江城子",
+              "author": "唐 · 欧阳炯"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-6-juan.json",
+            "index": 21,
+            "title": "河满子·正是破瓜年几",
+            "author": "和凝"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "何满子 其一",
+              "author": "唐 · 和凝"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-6-juan.json",
+            "index": 25,
+            "title": "天仙子·柳色披衫金缕凤",
+            "author": "和凝"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "天仙子 其一",
+              "author": "唐 · 和凝"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-6-juan.json",
+            "index": 43,
+            "title": "甘州子·每逢清夜与良晨",
+            "author": "顾敻"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "甘州子 其二",
+              "author": "唐 · 顾夐"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-6-juan.json",
+            "index": 44,
+            "title": "甘州子·曾如刘阮访仙踪",
+            "author": "顾敻"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "甘州子 其三",
+              "author": "唐 · 顾夐"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-6-juan.json",
+            "index": 45,
+            "title": "甘州子·露桃花里小楼深",
+            "author": "顾敻"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "甘州子 其四",
+              "author": "唐 · 顾夐"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-6-juan.json",
+            "index": 46,
+            "title": "甘州子·红炉深夜醉调笙",
+            "author": "顾敻"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "甘州子 其五",
+              "author": "唐 · 顾夐"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-6-juan.json",
+            "index": 47,
+            "title": "玉楼春·月照玉楼春漏促",
+            "author": "顾敻"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "木兰花 其一",
+              "author": "唐 · 顾夐"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-6-juan.json",
+            "index": 50,
+            "title": "玉楼春·拂水双飞来去燕",
+            "author": "顾敻"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "木兰花 其四",
+              "author": "唐 · 顾夐"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-7-juan.json",
+            "index": 2,
+            "title": "浣溪沙·红藕香寒翠渚平",
+            "author": "顾敻"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "浣溪沙 其二",
+              "author": "唐 · 顾夐"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-7-juan.json",
+            "index": 8,
+            "title": "浣溪沙·露白蟾明又到秋",
+            "author": "顾敻"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "浣溪沙 其八",
+              "author": "唐 · 顾夐"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-7-juan.json",
+            "index": 9,
+            "title": "酒泉子·杨柳舞风",
+            "author": "顾敻"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "酒泉子 其一",
+              "author": "唐 · 顾夐"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-7-juan.json",
+            "index": 12,
+            "title": "酒泉子·黛薄红深",
+            "author": "顾敻"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "酒泉子 其四",
+              "author": "唐 · 顾夐"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-9-juan.json",
+            "index": 2,
+            "title": "木兰花·小芙蓉",
+            "author": "魏承班"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "木兰花令",
+              "author": "唐 · 魏承班"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-9-juan.json",
+            "index": 3,
+            "title": "玉楼春·寂寂画堂梁上燕",
+            "author": "魏承班"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "玉楼春 其一",
+              "author": "唐 · 魏承班"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-9-juan.json",
+            "index": 5,
+            "title": "诉衷情·高歌宴罢月初盈",
+            "author": "魏承班"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "诉衷情 其一",
+              "author": "唐 · 魏承班"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-9-juan.json",
+            "index": 10,
+            "title": "生查子·烟雨晚晴天",
+            "author": "魏承班"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "生查子 其一",
+              "author": "唐 · 魏承班"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-9-juan.json",
+            "index": 11,
+            "title": "生查子·寂寞画堂空",
+            "author": "魏承班"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "生查子 其二",
+              "author": "唐 · 魏承班"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-9-juan.json",
+            "index": 12,
+            "title": "黄钟乐·池塘烟暖草萋萋",
+            "author": "魏承班"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "黄钟乐",
+              "author": "唐 · 魏承班"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-9-juan.json",
+            "index": 14,
+            "title": "临江仙·金锁重门荒苑静",
+            "author": "鹿虔扆"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "临江仙 其一",
+              "author": "唐 · 鹿虔扆"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-9-juan.json",
+            "index": 17,
+            "title": "女冠子·步虚坛上",
+            "author": "鹿虔扆"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "女冠子 其二",
+              "author": "唐 · 鹿虔扆"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-9-juan.json",
+            "index": 20,
+            "title": "虞美人·粉融红腻莲房绽",
+            "author": "阎选"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "虞美人 其一",
+              "author": "唐 · 阎选"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-9-juan.json",
+            "index": 22,
+            "title": "临江仙·雨停荷芰逗浓香",
+            "author": "阎选"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "临江仙 其一",
+              "author": "唐 · 阎选"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-9-juan.json",
+            "index": 23,
+            "title": "临江仙·十二高峰天外寒",
+            "author": "阎选"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "临江仙 其二",
+              "author": "唐 · 阎选"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-9-juan.json",
+            "index": 26,
+            "title": "八拍蛮·愁锁黛眉烟易惨",
+            "author": "阎选"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "八拍蛮 其二",
+              "author": "唐 · 阎选"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-9-juan.json",
+            "index": 27,
+            "title": "河传·秋雨",
+            "author": "阎选"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "河传",
+              "author": "唐 · 阎选"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-9-juan.json",
+            "index": 28,
+            "title": "临江仙·一番荷芰生池沼",
+            "author": "尹鹗 六首"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "临江仙 其一",
+              "author": "唐 · 尹鹗"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-9-juan.json",
+            "index": 31,
+            "title": "杏园芳·严妆嫩脸花明",
+            "author": "尹鹗 六首"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "杏园芳",
+              "author": "唐 · 尹鹗"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-9-juan.json",
+            "index": 32,
+            "title": "醉公子·暮烟笼藓砌",
+            "author": "尹鹗 六首"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "醉公子",
+              "author": "唐 · 尹鹗"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-9-juan.json",
+            "index": 33,
+            "title": "菩萨蛮·陇云暗合秋天白",
+            "author": "尹鹗 六首"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "菩萨蛮 其一",
+              "author": "唐 · 尹鹗"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-9-juan.json",
+            "index": 35,
+            "title": "浣溪沙·花榭香红烟景迷",
+            "author": "毛熙震"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "浣溪沙 其二",
+              "author": "唐 · 毛熙震"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-9-juan.json",
+            "index": 38,
+            "title": "浣溪沙·云薄罗裙绶带长",
+            "author": "毛熙震"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "浣溪沙 其五",
+              "author": "唐 · 毛熙震"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-9-juan.json",
+            "index": 39,
+            "title": "浣溪沙·碧玉冠轻袅燕钗",
+            "author": "毛熙震"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "浣溪沙 其六",
+              "author": "唐 · 毛熙震"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-9-juan.json",
+            "index": 41,
+            "title": "临江仙·南齐天子宠婵娟",
+            "author": "毛熙震"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "临江仙 其一",
+              "author": "唐 · 毛熙震"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-9-juan.json",
+            "index": 43,
+            "title": "更漏子·秋色清",
+            "author": "毛熙震"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "更漏子 其一",
+              "author": "唐 · 毛熙震"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-9-juan.json",
+            "index": 44,
+            "title": "更漏子·烟月寒",
+            "author": "毛熙震"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "更漏子 其二",
+              "author": "唐 · 毛熙震"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-9-juan.json",
+            "index": 49,
+            "title": "南歌子·惹恨还添恨",
+            "author": "毛熙震"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "南歌子 其二",
+              "author": "唐 · 毛熙震"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-x-juan.json",
+            "index": 6,
+            "title": "后庭花·莺啼燕语芳菲节",
+            "author": "毛熙震"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "后庭花 其一",
+              "author": "唐 · 毛熙震"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-x-juan.json",
+            "index": 10,
+            "title": "酒泉子·钿匣舞鸾",
+            "author": "毛熙震"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "酒泉子 其二",
+              "author": "唐 · 毛熙震"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-x-juan.json",
+            "index": 11,
+            "title": "菩萨蛮·梨花满院飘香雪",
+            "author": "毛熙震"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "菩萨蛮 其一",
+              "author": "唐 · 毛熙震"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-x-juan.json",
+            "index": 16,
+            "title": "浣溪沙·访旧伤离欲断魂",
+            "author": "李珣"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "浣溪沙 其三",
+              "author": "唐 · 李珣"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-x-juan.json",
+            "index": 23,
+            "title": "巫山一段云·古庙依青嶂",
+            "author": "李珣"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "巫山一段云 其二",
+              "author": "唐 · 李珣"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-x-juan.json",
+            "index": 26,
+            "title": "南乡子·烟漠漠",
+            "author": "李珣"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "南乡子 其一",
+              "author": "唐 · 李珣"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-x-juan.json",
+            "index": 28,
+            "title": "南乡子·归路近",
+            "author": "李珣"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "南乡子 其三",
+              "author": "唐 · 李珣"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-x-juan.json",
+            "index": 31,
+            "title": "南乡子·云带雨",
+            "author": "李珣"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "南乡子 其六",
+              "author": "唐 · 李珣"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-x-juan.json",
+            "index": 32,
+            "title": "南乡子·沙月静",
+            "author": "李珣"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "南乡子 其七",
+              "author": "唐 · 李珣"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-x-juan.json",
+            "index": 39,
+            "title": "酒泉子·雨渍花零",
+            "author": "李珣"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "酒泉子 其二",
+              "author": "唐 · 李珣"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-x-juan.json",
+            "index": 45,
+            "title": "菩萨蛮·等闲将度三春景",
+            "author": "李珣"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "菩萨蛮 其二",
+              "author": "唐 · 李珣"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/huajianji/huajianji-x-juan.json",
+            "index": 49,
+            "title": "河传·去去",
+            "author": "李珣"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "河传 其一",
+              "author": "唐 · 李珣"
+            }
+          ]
+        }
+      ],
+      "dynasties": {
+        "未提供": 497
+      },
+      "max_body_length": 114
+    },
+    "南唐二主词": {
+      "rows": 45,
+      "authors": 2,
+      "exact_duplicate_extra": 0,
+      "exact_duplicate_groups": [],
+      "normalized_body_duplicate_extra": 0,
+      "normalized_body_duplicate_groups": [],
+      "flagged_rows": 1,
+      "flags": [
+        {
+          "file": "五代诗词/nantang/poetrys.json",
+          "index": 34,
+          "title": "谢新恩·樱花落尽春将困",
+          "author": "李煜",
+          "markers": {
+            "text": {
+              "□": 12
+            }
+          },
+          "empty_fields": []
+        }
+      ],
+      "existing_overlap_rows": 6,
+      "existing_overlaps": [
+        {
+          "candidate": {
+            "file": "五代诗词/nantang/poetrys.json",
+            "index": 1,
+            "title": "应天长·一钩初月临妆镜",
+            "author": "李璟"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "应天长",
+              "author": "唐 · 李煜"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/nantang/poetrys.json",
+            "index": 11,
+            "title": "望江南·多少恨",
+            "author": "李煜"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "忆江南 其一",
+              "author": "唐 · 李煜"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/nantang/poetrys.json",
+            "index": 16,
+            "title": "相见欢·无言独上西楼",
+            "author": "李煜"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "相见欢 其二",
+              "author": "唐 · 李煜"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/nantang/poetrys.json",
+            "index": 19,
+            "title": "捣练子令·深院静",
+            "author": "李煜"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "捣练子 其一",
+              "author": "唐 · 李煜"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/nantang/poetrys.json",
+            "index": 42,
+            "title": "三台令·不寐倦长更",
+            "author": "李煜"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "杂曲歌辞 上皇三台",
+              "author": "唐 · 韦应物"
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "file": "五代诗词/nantang/poetrys.json",
+            "index": 45,
+            "title": "渔父·浪花有意千里雪",
+            "author": "李煜"
+          },
+          "existing": [
+            {
+              "file": "tang.json",
+              "title": "渔父",
+              "author": "唐 · 李煜"
+            }
+          ]
+        }
+      ],
+      "dynasties": {
+        "未提供": 45
+      },
+      "max_body_length": 75
+    }
+  },
+  "cross_collection_body_groups": []
+}
