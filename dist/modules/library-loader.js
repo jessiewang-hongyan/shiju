@@ -11,6 +11,12 @@ export const libraryCatalog = {
   tang: { name: "唐诗", file: "tang.json" },
   song: { name: "宋词", file: "song-ci.json" },
   yuan: { name: "元曲", file: "yuan.json" },
+  jin: { name: "金", file: "jin.json" },
+  "yuan-era": { name: "元", file: "yuan-era.json" },
+  "song-jin": { name: "宋末金初", file: "song-jin.json" },
+  "jin-yuan": { name: "金末元初", file: "jin-yuan.json" },
+  "song-yuan": { name: "宋末元初", file: "song-yuan.json" },
+  "yuan-ming": { name: "元末明初", file: "yuan-ming.json" },
 };
 
 export function createLibraryLoader({

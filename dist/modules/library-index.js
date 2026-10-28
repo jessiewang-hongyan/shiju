@@ -1,4 +1,4 @@
-import { libraryCatalog } from "./library-loader.js?v=20261028search1";
+import { libraryCatalog } from "./library-loader.js?v=20261028batch5a";
 
 // Exact substring search via UTF-16 positions; full source shards are only
 // fetched for visible results. Hash URLs keep indexes and source versions paired.

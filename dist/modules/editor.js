@@ -1,7 +1,7 @@
 import { sourceParts } from "./source-parts.js?v=20261027sourcesizes1";
 import { $, toast } from "./ui.js";
 // Source lacuna markers keep occurrence IDs, just like ordinary characters.
-export const isLetter = (c) => /[\p{L}\p{N}□〓�]/u.test(c);
+export const isLetter = (c) => /[\p{L}\p{N}□■〓�]/u.test(c);
 export function createEditor({ store, typography }) {
   const { model } = store;
   const { displayText, displayTokens } = typography;

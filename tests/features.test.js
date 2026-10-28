@@ -1498,3 +1498,136 @@ test("search field defaults, explicit full-text hint and collection scope work t
     x.close();
   }
 });
+
+test("batch 5A: all six real collections load, preview and confirm with provenance", async () => {
+  const previousFetch = globalThis.fetch;
+  globalThis.fetch = async (url) => ({
+    ok: true,
+    json: async () => JSON.parse(readFileSync("dist/" + url, "utf8")),
+  });
+  const x = setup();
+  try {
+    for (const [key, count] of [
+      ["jin", 2741],
+      ["yuan-era", 37375],
+      ["song-jin", 234],
+      ["jin-yuan", 3019],
+      ["song-yuan", 12058],
+      ["yuan-ming", 15736],
+    ]) {
+      x.$("#choose").click();
+      x.input("#library-scope", key, "change");
+      for (
+        let i = 0;
+        i < 100 &&
+        x.$("#library-status").textContent !== `${count.toLocaleString()} 篇`;
+        i++
+      )
+        await new Promise((r) => setTimeout(r, 5));
+      assert.equal(
+        x.$("#library-status").textContent,
+        `${count.toLocaleString()} 篇`,
+      );
+      x.$(".poem-choice").click();
+      assert(x.$("#poem-preview").open);
+      x.$("#preview-use").click();
+      assert.equal(
+        x.editor.state.source.provenance.commit,
+        "4cfe49c06858e00d15f84d192fe5294295f79689",
+      );
+      assert(
+        x
+          .$("#source-reference")
+          .textContent.includes(x.editor.state.source.collection),
+      );
+      if (key === "youmengying") {
+        assert.equal(x.editor.state.source.title, "");
+        assert.equal(x.editor.state.source.author, "");
+        assert.equal(x.editor.state.source.label, "第 1 则");
+        assert.equal(x.$("#source-title").textContent, "");
+      }
+    }
+    x.$("#choose").click();
+    x.input("#library-scope", "shenglv", "change");
+    x.input("#search-field", "full", "change");
+    x.input("#search", "下卷");
+    await new Promise((r) => setTimeout(r, 180));
+    assert.equal(x.$("#library-status").textContent, "15 篇");
+  } finally {
+    globalThis.fetch = previousFetch;
+    x.close();
+  }
+});
+
+test("5A long poem excerpt retains original author and provenance without adding navigation text to selectable author", async () => {
+  const previousFetch = globalThis.fetch;
+  globalThis.fetch = async (url) => ({
+    ok: true,
+    json: async () => JSON.parse(readFileSync("dist/" + url, "utf8")),
+  });
+  const source = JSON.parse(
+    readFileSync("dist/data/yuan-era.json", "utf8"),
+  ).find((p) => p.title === "北山别业三十八咏 太霞洞");
+  assert(source);
+  const x = setup();
+  try {
+    x.$("#choose").click();
+    x.input("#library-scope", "yuan-era", "change");
+    x.input("#search", source.title);
+    await new Promise((r) => setTimeout(r, 180));
+    for (
+      let i = 0;
+      i < 100 && !x.$(".poem-choice")?.textContent.includes(source.title);
+      i++
+    )
+      await new Promise((r) => setTimeout(r, 10));
+    const choice = [...x.w.document.querySelectorAll(".poem-choice")].find(
+      (b) => b.firstElementChild.textContent === source.title,
+    );
+    assert(choice, "exact long-work title must be present");
+    choice.click();
+    assert(x.$("#excerpt-enabled").checked);
+    x.input("#excerpt-start", "2");
+    x.input("#excerpt-end", "3");
+    x.$("#preview-use").click();
+    assert.equal(
+      x.editor.state.source.text,
+      source.text.split("\n").slice(1, 3).join("\n"),
+    );
+    assert.equal(x.editor.state.source.author, source.author);
+    assert.equal(
+      x.editor.state.source.provenance.sha256,
+      source.provenance.sha256,
+    );
+    assert(x.$("#source-reference").textContent.includes("第 2–3 段"));
+  } finally {
+    globalThis.fetch = previousFetch;
+    x.close();
+  }
+});
+
+test("5A black-square lacuna is selectable, returnable and preserved in PNG", async () => {
+  const source = JSON.parse(
+    readFileSync("dist/data/yuan-era.json", "utf8"),
+  ).find((p) => p.title === "延陵公承庆堂诗");
+  const x = setup({ source, tokens: [], title: "", signature: "" });
+  try {
+    const tile = [...x.w.document.querySelectorAll("#source-poem button")].find(
+      (b) => b.textContent === "■",
+    );
+    assert(tile);
+    const id = tile.dataset.sourceId;
+    tile.click();
+    assert.equal(x.editor.textOf(), "■");
+    x.$(`#source-poem [data-source-id="${id}"]`).click();
+    assert.equal(x.editor.textOf(), "");
+    x.$("#undo").click();
+    assert.equal(x.editor.textOf(), "■");
+    await x.$("#export").onclick();
+    const calls = x.records.find((r) => r.canvas === x.downloads.at(-1)).calls;
+    assert(calls.some((c) => c[0] === "fillText" && c[1] === "■"));
+    assert.equal(x.editor.state.source.text, source.text);
+  } finally {
+    x.close();
+  }
+});

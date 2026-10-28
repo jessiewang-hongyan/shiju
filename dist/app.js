@@ -2,9 +2,9 @@ import { initEditorPaper } from "./modules/editor-paper.js?v=20261028paperstreng
 import { initUI } from "./modules/ui.js";
 import { poems } from "./modules/poems.js";
 import { createStore } from "./modules/storage.js";
-import { createEditor } from "./modules/editor.js?v=20261028batch1";
+import { createEditor } from "./modules/editor.js?v=20261028batch5a";
 import { initCollection } from "./modules/collection.js";
-import { initLibrary } from "./modules/library.js?v=20261028fields1";
+import { initLibrary } from "./modules/library.js?v=20261028batch5a";
 import { createTypography, initTypography } from "./modules/typography.js";
 import { createFontLoader } from "./modules/fonts.js?v=20261028author1";
 import { createAppearance } from "./modules/appearance.js?v=20261028paperstrength2";

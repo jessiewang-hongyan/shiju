@@ -1,0 +1,134 @@
+[
+  {
+    "key": "jin",
+    "category": "金",
+    "count": 2741,
+    "source": {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "金.csv",
+      "bytes": 714586,
+      "git_blob": "c26d6c1fa0eb0f9994e6b7a9e1215ee9083256f4",
+      "group": "Werneror/金",
+      "kind": "正文",
+      "sha256": "724ca7dd3a8c08bfe97f7192826eb2a445ec85c4fac0eab34147ef577ba45ec0",
+      "parsed_records": 2741
+    },
+    "outputSha256": "71af9790ca893731daea2f5ebe02484a5585fe8376c6d32b52f7f906d9f4993e",
+    "exactDuplicateExtra": 0,
+    "gapRecords": 9,
+    "parentheses": [],
+    "maxTextLength": 1920
+  },
+  {
+    "key": "yuan-era",
+    "category": "元",
+    "count": 37375,
+    "source": {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "元.csv",
+      "bytes": 10451847,
+      "git_blob": "87faa8936241a2db2705d0af50ee91b37c531095",
+      "group": "Werneror/元",
+      "kind": "正文",
+      "sha256": "83a9b19069eb9d0a23ec0c2824878cf918a857896ec1ca33cebdf7438cc165a8",
+      "parsed_records": 37375
+    },
+    "outputSha256": "52d757bc485e99bb5583dd10969c572c1befc02f828b26efa2fc0ef528969d52",
+    "exactDuplicateExtra": 0,
+    "gapRecords": 693,
+    "parentheses": [
+      {
+        "pointer": 32312,
+        "title": "延陵公承庆堂诗",
+        "text": "大江苍苍兀龙虎，辅元之家百神頫。望拜受釐若稽古，上清真人阅众甫。新宫洁斋导天语，纷云郁霞错承宇。虚皇穆然阳卫武，左飙右欻降軨羽。县钟镗镗迅击鼓，赫金蔡服赭朱户。双珠月明带宝璐，挟以流黄玉■（木昙）具。既竣大礼私事举，吉日宗族奉爵俎。青紫系地簪绶组，魏张代剑新捧土。饶国开观治宿莽，报君亲师物咸睹。抚己一念或未溥，西壁考书玄范府。寒冰层阴发春煦，日若休明沐仁雨。道德大非方仙五，月佩六印非适取。持旌召趣迹旁午，下土滓?宁久处。天关会规足蹈矩，愿天愿地多黍稌。毕志万年奉明主，小史作书孰敢侮。吁嗟厚德番之祖。"
+      }
+    ],
+    "maxTextLength": 3232
+  },
+  {
+    "key": "song-jin",
+    "category": "宋末金初",
+    "count": 234,
+    "source": {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "宋末金初.csv",
+      "bytes": 50546,
+      "git_blob": "502188d9e9dab5bad7ef054df81176b2ad8c0b99",
+      "group": "Werneror/宋末金初",
+      "kind": "正文",
+      "sha256": "c6109460760a25bbc25e0740544eca5f0ea8ac1cab3ffbb4005014f8a8ff649d",
+      "parsed_records": 234
+    },
+    "outputSha256": "64bc0d2ccf20eda636ecff072ce7987e14dd5d19cf58f444ac19e4cae562eb5e",
+    "exactDuplicateExtra": 0,
+    "gapRecords": 0,
+    "parentheses": [],
+    "maxTextLength": 240
+  },
+  {
+    "key": "jin-yuan",
+    "category": "金末元初",
+    "count": 3019,
+    "source": {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "金末元初.csv",
+      "bytes": 832741,
+      "git_blob": "dc88dbe51ec9ed9b5299fe03a745c75f92274ed6",
+      "group": "Werneror/金末元初",
+      "kind": "正文",
+      "sha256": "060690a7e31859907dbbb768048b96288d6bd9ea30711f108a14b8f9a874576e",
+      "parsed_records": 3019
+    },
+    "outputSha256": "6c635d74442c80aa3b9e4e0ec6b08791e4292d943d5838e10479bb43cccd4046",
+    "exactDuplicateExtra": 0,
+    "gapRecords": 104,
+    "parentheses": [],
+    "maxTextLength": 2400
+  },
+  {
+    "key": "song-yuan",
+    "category": "宋末元初",
+    "count": 12058,
+    "source": {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "宋末元初.csv",
+      "bytes": 3557972,
+      "git_blob": "b98835ff05490502e7e67a105fcc904fddc213ef",
+      "group": "Werneror/宋末元初",
+      "kind": "正文",
+      "sha256": "472d136ba142938f73d71ca3d2fd7a0fa6b2908290001e25e5a7e4a562b239b8",
+      "parsed_records": 12058
+    },
+    "outputSha256": "4f8525c5cb1bea9313e7df8598e6eb5bd0a1029ac4b9b8456d8f13bafde2f2d5",
+    "exactDuplicateExtra": 3,
+    "gapRecords": 408,
+    "parentheses": [],
+    "maxTextLength": 3136
+  },
+  {
+    "key": "yuan-ming",
+    "category": "元末明初",
+    "count": 15736,
+    "source": {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "元末明初.csv",
+      "bytes": 4799507,
+      "git_blob": "ac066cd900b8e52a2ae847fa3cc19832508a1222",
+      "group": "Werneror/元末明初",
+      "kind": "正文",
+      "sha256": "e2e411b7b708d994056dbe022a77862f13e3bfddbb441220249443ddf0319215",
+      "parsed_records": 15736
+    },
+    "outputSha256": "70646c02fb434b21fa24f81b0fbcf632acdac5a2486a4c1044e25d23059637b5",
+    "exactDuplicateExtra": 0,
+    "gapRecords": 179,
+    "parentheses": [],
+    "maxTextLength": 3408
+  }
+]

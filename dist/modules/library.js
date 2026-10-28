@@ -1,9 +1,9 @@
 import { $, toast } from "./ui.js";
-import { createLibrarySearch } from "./library-search.js?v=20261028fields1";
+import { createLibrarySearch } from "./library-search.js?v=20261028batch5a";
 import { poems } from "./poems.js";
-import { isLetter } from "./editor.js?v=20261028batch1";
-import { libraryCatalog } from "./library-loader.js?v=20261028search1";
-import { createIndexedLibrary } from "./library-index.js?v=20261028fields1";
+import { isLetter } from "./editor.js?v=20261028batch5a";
+import { libraryCatalog } from "./library-loader.js?v=20261028batch5a";
+import { createIndexedLibrary } from "./library-index.js?v=20261028batch5a";
 export function initLibrary({ editor, typography }) {
   const { displayText } = typography;
   const searchLibrary = createLibrarySearch();
