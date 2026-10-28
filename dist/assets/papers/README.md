@@ -10,3 +10,7 @@ Downloaded 2026-10-27. Distributed with 拾句.
 - newsprint.jpg: TextureCan Paper 0027, oxidized newsprint, https://www.texturecan.com/details/529/ . Runtime opacity 65% over ivory.
 - kraft.jpg: TextureCan Paper 0023, slightly crumpled parcel paper, https://www.texturecan.com/details/463/ . Runtime opacity 65% over ivory.
 - These three color maps are from the official 1K packages, licensed CC0 1.0. https://www.texturecan.com/terms/ explicitly allows modification, commercial use and redistribution with projects. Retrieved 2026-10-27. They are seamless procedural materials, not historical paper scans. No normal/roughness/height maps are shipped.
+
+## Runtime variants (2026-10-28)
+
+Dark cloud reuses cloud.jpg, composited in grayscale at 18% over #26363b. No additional texture download is introduced. Both panels independently support texture strength 0–200%: 100% preserves the default treatment documented above; lower values blend toward a fixed material base, higher values amplify RGB differences from that base while preserving decoration alpha. Cut pieces use the source panel's strength and source coordinates.
