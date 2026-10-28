@@ -16,6 +16,7 @@
 | `modules/editor-paper.js`   | 编辑页拼贴覆盖层；复用毛边绘图，按原文字位和实际换行合并纸片，不拦截编辑操作     |
 | `modules/collection.js`     | 诗集列表、保存、恢复、删除；恢复通过 editor 命令完成                             |
 | `modules/library-loader.js` | 与 DOM 无关的加载服务；请求队列、分批校验、缓存、重试；可注入 fetch 和计时器测试 |
+| `modules/library-search.js` | 搜索字段 WeakMap 缓存、按文集复用结果、关键词细化筛选；不修改原文 |
 | `modules/library.js`        | 文集选择、全文搜索、预览、片段校验、自定义原文                                   |
 | `modules/typography.js`     | OpenCC 加载及显示转换，原始字符与位置保持不变                                    |
 | `modules/fonts.js`          | 字体配置与按作品用字加载分片；通过 getState 获取最新作品                         |
@@ -23,7 +24,7 @@
 | `modules/image.js`          | 当前作品两行预览、PNG 导出、图片字号和字体控件                                   |
 | `modules/appearance.js`     | 夜览、页面字号、图片配色、拼贴与毛边选项                                         |
 
-此外三个模块职责如下（共 16 个功能模块，加 `app.js` 入口为 17 个 JavaScript 检查文件）：
+此外三个模块职责如下（共 17 个功能模块，加 `app.js` 入口为 18 个 JavaScript 检查文件）：
 
 | 文件                         | 职责                                                     |
 | ---------------------------- | -------------------------------------------------------- |

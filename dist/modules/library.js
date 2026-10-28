@@ -1,12 +1,14 @@
 import { $, toast } from "./ui.js";
+import { createLibrarySearch } from "./library-search.js";
 import { poems } from "./poems.js";
 import { isLetter } from "./editor.js?v=20261028batch1";
 import {
   createLibraryLoader,
   libraryCatalog,
-} from "./library-loader.js?v=20261028batch1";
+} from "./library-loader.js?v=20261028search1";
 export function initLibrary({ editor, typography }) {
   const { displayText } = typography;
+  const searchLibrary = createLibrarySearch();
   let libraryLimit = 40,
     previewPoem = null;
   const loader = createLibraryLoader({ onChange: renderLibrary });
@@ -179,31 +181,19 @@ export function initLibrary({ editor, typography }) {
     }
   };
   function renderLibrary() {
-    const q = $("#search")
-        .value.trim()
-        .toLocaleLowerCase()
-        .split(/\s+/)
-        .filter(Boolean),
+    const query = $("#search").value,
       scope = $("#library-scope").value;
     const keys = scopeKeys(),
       loading = keys.some((k) => libraryPending.has(k)),
       failed = keys.filter((k) => libraryErrors.has(k));
-    const items = [
-      ...(scope === "selected" || scope === "all" ? poems : []),
-      ...keys.flatMap((k) => libraryCache.get(k) || []),
+    const matches = [
+      ...(scope === "selected" || scope === "all"
+        ? searchLibrary("selected", poems, query)
+        : []),
+      ...keys.flatMap((k) =>
+        searchLibrary(k, libraryCache.get(k) || [], query),
+      ),
     ];
-    const matches = items.filter((p) => {
-      const text = (
-        [p.title, p.label, p.collection, p.sourceWork]
-          .filter(Boolean)
-          .join(" ") +
-        " " +
-        p.author +
-        " " +
-        p.text
-      ).toLocaleLowerCase();
-      return q.every((word) => text.includes(word));
-    });
     const list = $("#poem-list");
     list.replaceChildren();
     const loaded = keys.reduce(

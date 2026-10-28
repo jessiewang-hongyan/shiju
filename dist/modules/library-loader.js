@@ -96,27 +96,40 @@ export function createLibraryLoader({
         if (!libraryParts.has(key)) libraryParts.set(key, new Map());
         const parts = libraryParts.get(key);
         // Preserve completed batches, original order and available poems on failure.
-        for (let i = 0; i < manifest.length; i++) {
-          if (parts.has(i)) continue;
-          const data = await fetchLibraryJSON(
-            base + manifest[i].file,
-            (data) =>
-              Array.isArray(data) &&
-              data.length === manifest[i].count &&
-              data.every(
-                (p) =>
-                  typeof p.title === "string" &&
-                  typeof p.author === "string" &&
-                  typeof p.text === "string",
-              ),
-          );
-          parts.set(i, data);
-          libraryCache.set(
-            key,
-            manifest.flatMap((_, index) => parts.get(index) || []),
-          );
-          onChange();
+        let next = 0;
+        let failed = false;
+        async function worker() {
+          while (next < manifest.length) {
+            const i = next++;
+            if (parts.has(i)) continue;
+            try {
+              const data = await fetchLibraryJSON(
+                base + manifest[i].file,
+                (data) =>
+                  Array.isArray(data) &&
+                  data.length === manifest[i].count &&
+                  data.every(
+                    (p) =>
+                      typeof p.title === "string" &&
+                      typeof p.author === "string" &&
+                      typeof p.text === "string",
+                  ),
+              );
+              parts.set(i, data);
+              libraryCache.set(
+                key,
+                manifest.flatMap((_, index) => parts.get(index) || []),
+              );
+              onChange();
+            } catch {
+              failed = true;
+            }
+          }
         }
+        // Two producers also use the global two-request queue. A failed shard
+        // does not prevent later shards from becoming searchable.
+        await Promise.all([worker(), worker()]);
+        if (failed) throw new Error("incomplete");
         libraryComplete.add(key);
       } catch {
         libraryErrors.add(key);
