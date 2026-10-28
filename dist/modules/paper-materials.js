@@ -176,10 +176,26 @@ const paperBases = {
   newsprint: "#f6f1e6",
   kraft: "#f6f1e6",
 };
+// Amplify each pixel's difference from the paper base, preserving cutout alpha.
+export function strengthenPaperPixels(data, base, factor) {
+  const rgb = [1, 3, 5].map((i) => parseInt(base.slice(i, i + 2), 16));
+  for (let i = 0; i < data.length; i += 4)
+    for (let c = 0; c < 3; c++)
+      data[i + c] = Math.max(
+        0,
+        Math.min(255, Math.round(rgb[c] + (data[i + c] - rgb[c]) * factor)),
+      );
+}
+function enhanceTexture(tile, base, factor) {
+  const ctx = tile.getContext("2d");
+  const pixels = ctx.getImageData(0, 0, tile.width, tile.height);
+  strengthenPaperPixels(pixels.data, base, factor);
+  ctx.putImageData(pixels, 0, 0);
+}
 export function getPaper(key, strength = 100) {
   const p = cache.get(key);
   if (!p?.tile) return null;
-  const amount = Math.max(0, Math.min(100, Number(strength)));
+  const amount = Math.max(0, Math.min(200, Number(strength)));
   if (!Number.isFinite(amount) || amount === 100) return p;
   const previous = strengthCache.get(key);
   if (previous?.amount === amount) return previous.paper;
@@ -187,14 +203,16 @@ export function getPaper(key, strength = 100) {
     ctx = tile.getContext("2d");
   ctx.fillStyle = paperBases[key];
   ctx.fillRect(0, 0, 840, 840);
-  ctx.globalAlpha = amount / 100;
+  ctx.globalAlpha = Math.min(1, amount / 100);
   ctx.drawImage(p.tile, 0, 0);
+  if (amount > 100) enhanceTexture(tile, paperBases[key], amount / 100);
   let decoration;
   if (p.decoration) {
     decoration = canvas(p.decoration.width, p.decoration.height);
     const d = decoration.getContext("2d");
-    d.globalAlpha = amount / 100;
+    d.globalAlpha = Math.min(1, amount / 100);
     d.drawImage(p.decoration, 0, 0);
+    if (amount > 100) enhanceTexture(decoration, paperBases[key], amount / 100);
   }
   const paper = {
     tile,

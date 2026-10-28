@@ -53,6 +53,9 @@ function setup(draft) {
     const calls = [];
     records.push({ canvas: this, calls });
     const ctx = {
+      getImageData: () => ({
+        data: new Uint8ClampedArray([230, 225, 210, 255]),
+      }),
       measureText: (t) => ({
         width: Array.from(t).length * 20,
         actualBoundingBoxLeft: 0,
@@ -66,6 +69,7 @@ function setup(draft) {
       "clip",
       "scale",
       "drawImage",
+      "putImageData",
       "createPattern",
       "clearRect",
       "fillRect",
@@ -1153,7 +1157,7 @@ test("paper strength is independent, persistent, bounded and shared by fields an
   x.w.HTMLCanvasElement.prototype.toDataURL = () =>
     "data:image/png;base64,test";
   const papers = await import(
-    "../dist/modules/paper-materials.js?v=20261027paperstrength1"
+    "../dist/modules/paper-materials.js?v=20261028paperstrength2"
   );
   for (const kind of ["source", "poem"]) {
     x.$(`#${kind}-paper`).value = "cloud";
@@ -1184,8 +1188,27 @@ test("paper strength is independent, persistent, bounded and shared by fields an
     papers.getPaper("cloud", 0).tile.getContext("2d").globalAlpha,
     0,
   );
-  x.input("#source-paper-strength-value", "120");
-  assert.equal(x.appearance.sourcePaperStrength, 100);
+  x.input("#source-paper-strength-value", "150");
+  assert.equal(x.appearance.sourcePaperStrength, 150);
+  assert.equal(x.$("#source-paper-strength").value, "150");
+  assert.equal(localStorage.getItem("shiju-paper-strength-source"), "150");
+  const strong = papers.getPaper("cloud", 150);
+  assert.equal(strong.tile.getContext("2d").globalAlpha, 1);
+  assert(
+    x.records
+      .find((r) => r.canvas === strong.tile)
+      .calls.some((c) => c[0] === "putImageData"),
+  );
+  const pixels = new Uint8ClampedArray([
+    100, 120, 140, 80, 128, 128, 128, 255, 255, 0, 128, 0,
+  ]);
+  papers.strengthenPaperPixels(pixels, "#808080", 2);
+  assert.deepEqual(
+    [...pixels],
+    [72, 112, 152, 80, 128, 128, 128, 255, 255, 0, 128, 0],
+  );
+  x.input("#source-paper-strength-value", "250");
+  assert.equal(x.appearance.sourcePaperStrength, 200);
   x.$("#source-paper").value = "none";
   await x.$("#source-paper").onchange({ target: x.$("#source-paper") });
   assert.equal(x.$("#source-paper-strength-row").hidden, true);

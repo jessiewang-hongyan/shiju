@@ -1,7 +1,7 @@
 import {
   paperKeys,
   loadPaper,
-} from "./paper-materials.js?v=20261027paperstrength1";
+} from "./paper-materials.js?v=20261028paperstrength2";
 import { $, toast } from "./ui.js";
 import { paperEdgePoints } from "./image-drawing.js";
 export function mixColors(a, b, weight) {
@@ -31,7 +31,7 @@ export function createAppearance({
   function setPaperStrength(kind, value, save = false) {
     const number = Number(value);
     if (value === "" || !Number.isFinite(number)) return;
-    const amount = Math.max(0, Math.min(100, Math.round(number)));
+    const amount = Math.max(0, Math.min(200, Math.round(number)));
     paperStrength[kind] = amount;
     $("#" + kind + "-paper-strength").value = amount;
     $("#" + kind + "-paper-strength-value").value = amount;

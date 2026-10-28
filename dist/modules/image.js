@@ -1,4 +1,4 @@
-import { syncSettingsGroups } from "./settings-groups.js?v=20261027paperstrength1";
+import { syncSettingsGroups } from "./settings-groups.js?v=20261028paperstrength2";
 import {
   sourceParts,
   partCells,
@@ -8,7 +8,7 @@ import {
   paperInk,
   paintPaperField,
   paintPaperCrop,
-} from "./paper-materials.js?v=20261027paperstrength1";
+} from "./paper-materials.js?v=20261028paperstrength2";
 import { $, toast } from "./ui.js";
 import { exportFonts, songtiFamily } from "./fonts.js?v=20261027release3";
 import {

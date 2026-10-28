@@ -2,7 +2,7 @@ import {
   paperInk,
   paperCSS,
   paintPaperCrop,
-} from "./paper-materials.js?v=20261027paperstrength1";
+} from "./paper-materials.js?v=20261028paperstrength2";
 import {
   paintPaperRect,
   handmadePlacement,
