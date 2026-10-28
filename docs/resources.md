@@ -52,3 +52,5 @@ python3 scripts/split-fonts.py bakudai
 ## 下一批文集候选
 
 南北朝、隋、花间集、南唐二主词的固定来源、许可、实际篇数、缺字和重复明细见 [接入清单](next-collections.md)。按用户确认沿用上游分类；候选数据未加入 `dist/data`。复现统计使用 `scripts/audit-next-collections.py`，不要将审计报告当作可直接上线的作品库。
+
+宋、金、元、明、清进一步扩展的统计与接入边界见 [五类扩展审计](next-collections-extended.md)。未合并跨代分类，原始大文件仅用于离线审计，不作为首屏资源。

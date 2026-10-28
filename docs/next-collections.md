@@ -74,3 +74,8 @@ python3 scripts/audit-next-collections.py SNAPSHOT_DIR /tmp/next-collections-aud
 ```
 
 脚本不联网、不写入站点数据。现库发生变化后交叉重复数量可能改变，应比较报告中的现库哈希。
+
+
+## 第二批扩展审计
+
+宋、金、元、明、清的独立扩展审计见 [五类接入审计](next-collections-extended.md)。本文件与 `next-collections-audit.json` 保留首批四类结果，扩展报告另存，并检查两批之间的重复候选。

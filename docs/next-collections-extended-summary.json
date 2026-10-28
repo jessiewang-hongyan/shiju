@@ -1,0 +1,453 @@
+{
+  "method": {
+    "normalization": "NFC; strip whitespace and Unicode punctuation; no simplified/traditional conversion; body-only matches are review candidates, not automatic deletions",
+    "markers": "ASCII ?, U+FFFD, □, 〓 in title, author, body; flags require review",
+    "existing_scope": "dist/data/*.json full collections; excludes built-in selections in modules/poems.js",
+    "index": "SHA-256 body/exact keys in temporary SQLite; no candidate body stored in report"
+  },
+  "sources": [
+    {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "南北朝.csv",
+      "sha256": "37613cc6957a48f2e0ce4d6f8a44923f08a7b7f0f8d6b923e2415edddd59b839",
+      "bytes": 1254175
+    },
+    {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "隋.csv",
+      "sha256": "a19e4ce64d0cefae1dcc721221eaa79f86c11e11ded7d343347a23cf7fbf4c7b",
+      "bytes": 285717
+    },
+    {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "LICENSE",
+      "sha256": "3c2630eb84efab60868d5195aa656b954f77d3cc1127dc886601e21cfd9fb63b",
+      "bytes": 1063
+    },
+    {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "README.md",
+      "sha256": "3782e8e3c2da473c8717a246f51a72177d096769686650af26df92a0154a1755",
+      "bytes": 3558
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "LICENSE",
+      "sha256": "c195319aeaa3ffcbe16aa5d26eec19eae5a42f84337dd2b3dc3c9d5ccbbd6507",
+      "bytes": 1076
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/huajianji/README.md",
+      "sha256": "d127b74542153d72a73be1e35323641289da86e5150f63af4181a1c1caf6304a",
+      "bytes": 1499
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/huajianji/huajianji-0-preface.json",
+      "sha256": "91452492223b39c4cfc3ff754d29da5222a6ce780af01cb750bb0a993b87b669",
+      "bytes": 3723
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/huajianji/huajianji-1-juan.json",
+      "sha256": "d8e29efa6cfa1fc7db9972bec2c645eb0a7788d724c7b6fe5eac6021de5bc694",
+      "bytes": 28137
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/huajianji/huajianji-2-juan.json",
+      "sha256": "14e26a139a59b47a9a997859e79831b4e759b5386a96b042b24f31690204925d",
+      "bytes": 22574
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/huajianji/huajianji-3-juan.json",
+      "sha256": "bca0f20f1ca510505f438a67527b4928b615aac5e13b9c5ca5622aaa83384e31",
+      "bytes": 24848
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/huajianji/huajianji-4-juan.json",
+      "sha256": "22c5c6ad952d13be7c0cb61967798a6cce9a1d4663cd3c3870136d6f0b0ca1d5",
+      "bytes": 22678
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/huajianji/huajianji-5-juan.json",
+      "sha256": "f4b8cbe33b40d2fe6f603ef004c2f9621eb7e781ef25673951688f5dbd27ecb9",
+      "bytes": 26902
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/huajianji/huajianji-6-juan.json",
+      "sha256": "af03c291db648b7dd86fd1c170a15a27f570bff41aa7f290d371535a7bea4b3b",
+      "bytes": 24327
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/huajianji/huajianji-7-juan.json",
+      "sha256": "4d8757138a535b85a321ec1aa1e558e069b84453aaee77603605c931b4f3ccc4",
+      "bytes": 21678
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/huajianji/huajianji-8-juan.json",
+      "sha256": "5a41780f5eac4611d9ad40acf1691f4bea034296e1b68a854f8c6ae5cb20ef59",
+      "bytes": 24476
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/huajianji/huajianji-9-juan.json",
+      "sha256": "0d81d1218e79e2853ef9c946899b258bbaef5af1f926ece8bc99f9a5c4f27547",
+      "bytes": 23790
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/huajianji/huajianji-x-juan.json",
+      "sha256": "47eefa4b7802647fa909293a718b93da5038bab8d2cf48ab98d6f58f869126fa",
+      "bytes": 21955
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/nantang/README.md",
+      "sha256": "cd4074a8066d793311e10f41048a54a7f94aeadb97b57ee9408c4c30d70b742e",
+      "bytes": 4502
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/nantang/authors.json",
+      "sha256": "12b12abb232dfd7b333acd59873083056493863ad3c669617b57bd4b839eca54",
+      "bytes": 2251
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/nantang/intro.json",
+      "sha256": "12a72747a0e8ef6ceb27d0e3e0f33c2b0f3289672e8514d5e2a1c1df8588f251",
+      "bytes": 595
+    },
+    {
+      "repo": "chinese-poetry/chinese-poetry",
+      "commit": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "path": "五代诗词/nantang/poetrys.json",
+      "sha256": "278cb8b6f768cff315a00a8cb71d16400cc00bb442ad8e5c9eb3b832515eb079",
+      "bytes": 71500
+    },
+    {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "元.csv",
+      "sha256": "83a9b19069eb9d0a23ec0c2824878cf918a857896ec1ca33cebdf7438cc165a8",
+      "bytes": 10451847,
+      "git_blob": "87faa8936241a2db2705d0af50ee91b37c531095"
+    },
+    {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "宋_1.csv",
+      "sha256": "18413bf73b9d113baa963a97950b84db1032d48e773bb7501dd506c738b4292a",
+      "bytes": 18910821,
+      "git_blob": "01b96cceb80158d43b86ad9d6be705cdf6fb35a2"
+    },
+    {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "宋_2.csv",
+      "sha256": "803c6a90ea341892bf1b9f1a81277053e512e8f979efc9c41cd59a283ba061d3",
+      "bytes": 18850773,
+      "git_blob": "5a12dd1a77e419be0f798742aab2b9b29ba5a404"
+    },
+    {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "宋_3.csv",
+      "sha256": "ed4f93e4cb01a4d649806dad023e91c64a5ee54610a6a94832e9721a01e307e1",
+      "bytes": 15033309,
+      "git_blob": "8fc72c83b270c6561886484a26bd8ed245555d79"
+    },
+    {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "宋_4.csv",
+      "sha256": "1b045fa2dd3ab3468e9fdf6659b7a150090f60cf8115e7a4663c55b017b46066",
+      "bytes": 23449497,
+      "git_blob": "941beb693a09acf2665abee27d702bd6e401211b"
+    },
+    {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "明_1.csv",
+      "sha256": "0e5ded52c96c8e34ab2eff2ca89a15a7de75b039194ad001baa98286d2e2e10d",
+      "bytes": 15189072,
+      "git_blob": "d41919fc857bdd4265f7cdce66dc156ee08b30a6"
+    },
+    {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "明_2.csv",
+      "sha256": "ed4816f919f168ab037d2a481a87ac236867458ea2f19effc11ac858978991a3",
+      "bytes": 14494521,
+      "git_blob": "4e0efddbab82faf4736d3a78f9cc973c8b61aa04"
+    },
+    {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "明_3.csv",
+      "sha256": "dc0f9be95fde68d0587a89f7f11526c1b01ac96ad263e94221e979e35a2b94cc",
+      "bytes": 14468379,
+      "git_blob": "c39d19ceef8d6039c779a9cae7d253d99762225b"
+    },
+    {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "明_4.csv",
+      "sha256": "d4c6bdc86d2bd9fcbfe4f5f3e747aedf1814e37aaa1f3848834d8e9316029b79",
+      "bytes": 21654794,
+      "git_blob": "abc1e09608d217d85ee5606f7f1bd6055a2c94b7"
+    },
+    {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "清_1.csv",
+      "sha256": "5fb98e6c1f019fdac176e7c42c73bfc5154cf881dab9da8d2e50ad0603fbca1d",
+      "bytes": 13582872,
+      "git_blob": "4dd1a19db14e4641766f049c6b85501b76823a06"
+    },
+    {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "清_2.csv",
+      "sha256": "a1fbd8db5f1605565e4bb98e0e76a1c272c3eb132126b08b18d8cae883b36fd4",
+      "bytes": 15130232,
+      "git_blob": "f5cc31fa5fc8a46a9dddc0e596b787dd5eeab4e3"
+    },
+    {
+      "repo": "Werneror/Poetry",
+      "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+      "path": "金.csv",
+      "sha256": "724ca7dd3a8c08bfe97f7192826eb2a445ec85c4fac0eab34147ef577ba45ec0",
+      "bytes": 714586,
+      "git_blob": "c26d6c1fa0eb0f9994e6b7a9e1215ee9083256f4"
+    }
+  ],
+  "existing_files": [
+    {
+      "file": "dist/data/chuci.json",
+      "sha256": "901bcf022c3001b04106e7508938732600b2546728c2a1225db283fb9f24c4b7"
+    },
+    {
+      "file": "dist/data/han-yuefu.json",
+      "sha256": "a99c6127670e3b579b91b308188f731280df7dc4410c6c1f0d54de04499f2345"
+    },
+    {
+      "file": "dist/data/han.json",
+      "sha256": "520aa76aa041bb625a15d03eaba6850cb97e2e380280839ee6a58af90d45558a"
+    },
+    {
+      "file": "dist/data/shijing.json",
+      "sha256": "5a443f39bcd34fa5362033a96d746236c7ff2cadebcebf1193f89d3f7c9649d4"
+    },
+    {
+      "file": "dist/data/song-ci.json",
+      "sha256": "f9ec2371e9c3520ff7d113719b0b4466f464ac90f8cb6e7ba202ec14ada6b01c"
+    },
+    {
+      "file": "dist/data/tang.json",
+      "sha256": "c4073a0c040380daad0ff094ba5176ac2b6283ed4f20e2d1ae447303762631d9"
+    },
+    {
+      "file": "dist/data/weijin.json",
+      "sha256": "737f0a2623dba72fa62c41f780ffc45cacd0f593423da0e6ba8d736a64121d82"
+    },
+    {
+      "file": "dist/data/yuan.json",
+      "sha256": "8287d5157f1f0f987a20950e81d13f1201ff4b34f53c507b396e93b8faa5c216"
+    }
+  ],
+  "collections": {
+    "南北朝": {
+      "rows": 4586,
+      "authors": 434,
+      "flagged_rows": 94,
+      "existing_overlap_rows": 2,
+      "dynasties": {
+        "南北朝": 4586
+      },
+      "max_body_length": 3396,
+      "marker_field_rows": {
+        "author": 6,
+        "text": 86,
+        "title": 3
+      },
+      "empty_field_rows": 0,
+      "existing_author_difference_rows": 2,
+      "exact_duplicate_extra": 0,
+      "normalized_body_duplicate_extra": 0
+    },
+    "隋": {
+      "rows": 1170,
+      "authors": 84,
+      "flagged_rows": 17,
+      "existing_overlap_rows": 3,
+      "dynasties": {
+        "隋": 1170
+      },
+      "max_body_length": 2023,
+      "marker_field_rows": {
+        "text": 17
+      },
+      "empty_field_rows": 0,
+      "existing_author_difference_rows": 3,
+      "exact_duplicate_extra": 0,
+      "normalized_body_duplicate_extra": 3
+    },
+    "花间集": {
+      "rows": 497,
+      "authors": 18,
+      "flagged_rows": 0,
+      "existing_overlap_rows": 132,
+      "dynasties": {
+        "未提供": 497
+      },
+      "max_body_length": 114,
+      "marker_field_rows": {},
+      "empty_field_rows": 0,
+      "existing_author_difference_rows": 21,
+      "exact_duplicate_extra": 0,
+      "normalized_body_duplicate_extra": 0
+    },
+    "南唐二主词": {
+      "rows": 45,
+      "authors": 2,
+      "flagged_rows": 1,
+      "existing_overlap_rows": 6,
+      "dynasties": {
+        "未提供": 45
+      },
+      "max_body_length": 75,
+      "marker_field_rows": {
+        "text": 1
+      },
+      "empty_field_rows": 0,
+      "existing_author_difference_rows": 2,
+      "exact_duplicate_extra": 0,
+      "normalized_body_duplicate_extra": 0
+    },
+    "宋": {
+      "rows": 287114,
+      "authors": 9446,
+      "flagged_rows": 4609,
+      "existing_overlap_rows": 14220,
+      "dynasties": {
+        "宋": 287114
+      },
+      "max_body_length": 21848,
+      "marker_field_rows": {
+        "text": 4167,
+        "title": 305,
+        "author": 230
+      },
+      "empty_field_rows": 0,
+      "existing_author_difference_rows": 666,
+      "exact_duplicate_extra": 16,
+      "normalized_body_duplicate_extra": 145
+    },
+    "金": {
+      "rows": 2741,
+      "authors": 253,
+      "flagged_rows": 38,
+      "existing_overlap_rows": 1,
+      "dynasties": {
+        "金": 2741
+      },
+      "max_body_length": 1920,
+      "marker_field_rows": {
+        "text": 33,
+        "title": 4,
+        "author": 1
+      },
+      "empty_field_rows": 0,
+      "existing_author_difference_rows": 1,
+      "exact_duplicate_extra": 0,
+      "normalized_body_duplicate_extra": 0
+    },
+    "元": {
+      "rows": 37375,
+      "authors": 1209,
+      "flagged_rows": 960,
+      "existing_overlap_rows": 32,
+      "dynasties": {
+        "元": 37375
+      },
+      "max_body_length": 3232,
+      "marker_field_rows": {
+        "text": 912,
+        "title": 55,
+        "author": 3
+      },
+      "empty_field_rows": 0,
+      "existing_author_difference_rows": 9,
+      "exact_duplicate_extra": 0,
+      "normalized_body_duplicate_extra": 8
+    },
+    "明": {
+      "rows": 236957,
+      "authors": 4439,
+      "flagged_rows": 4187,
+      "existing_overlap_rows": 6,
+      "dynasties": {
+        "明": 236957
+      },
+      "max_body_length": 9144,
+      "marker_field_rows": {
+        "text": 3865,
+        "title": 330,
+        "author": 57
+      },
+      "empty_field_rows": 0,
+      "existing_author_difference_rows": 6,
+      "exact_duplicate_extra": 1,
+      "normalized_body_duplicate_extra": 15
+    },
+    "清": {
+      "rows": 90089,
+      "authors": 8872,
+      "flagged_rows": 1172,
+      "existing_overlap_rows": 2,
+      "dynasties": {
+        "清": 90089
+      },
+      "max_body_length": 10080,
+      "marker_field_rows": {
+        "text": 1050,
+        "author": 87,
+        "title": 45
+      },
+      "empty_field_rows": 0,
+      "existing_author_difference_rows": 2,
+      "exact_duplicate_extra": 3,
+      "normalized_body_duplicate_extra": 21
+    }
+  },
+  "cross_collection_body_group_count": 49
+}
