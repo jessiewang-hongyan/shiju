@@ -1,0 +1,43 @@
+{
+  "openapi": "3.0.3",
+  "info": { "title": "Versioned static poem blocks", "version": "0.1" },
+  "paths": {
+    "/{version}/{collection}/{file}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "collection",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "file",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "UTF-8 original poem array, SHA-256 pinned by matching summary entry (32 KiB target; single long poems remain intact); CORS required",
+            "content": {
+              "application/json": {
+                "schema": { "type": "array", "items": { "type": "object" } }
+              }
+            }
+          },
+          "404": { "description": "Immutable version or file absent" },
+          "429": { "description": "Rate limited" },
+          "503": { "description": "Temporary failure" }
+        }
+      }
+    }
+  }
+}

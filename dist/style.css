@@ -2417,3 +2417,15 @@ html[data-night-colors] #new-poem.editor-textured .poem-token {
 #poem-paper-strength-row input[type="number"] {
   width: 64px;
 }
+
+/* Search and body loading: retain a readable status with restrained motion. */
+#library-status.is-loading { display: inline-flex; align-items: center; gap: .55em; }
+#library-status.is-loading::before {
+  content: ""; width: .85em; height: .85em; flex: 0 0 .85em;
+  border: 2px solid currentColor; border-right-color: transparent;
+  border-radius: 50%; opacity: .65; animation: library-loading .85s linear infinite;
+}
+@keyframes library-loading { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  #library-status.is-loading::before { animation: none; }
+}

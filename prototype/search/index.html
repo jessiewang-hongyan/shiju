@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="zh-CN">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  /><title>拾句 · 搜索服务试用</title
+  ><style>
+    body {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+      background: #faf9f6;
+      color: #292b28;
+      font: 16px/1.7 system-ui;
+    }
+    h1 {
+      font-size: 25px;
+    }
+    input,
+    select,
+    button {
+      font: inherit;
+      padding: 8px;
+      border: 1px solid #bbb;
+      background: white;
+      border-radius: 5px;
+    }
+    input {
+      box-sizing: border-box;
+      width: 100%;
+      margin-bottom: 12px;
+    }
+    .filters {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    #results button {
+      display: block;
+      text-align: left;
+      width: 100%;
+      margin: 12px 0;
+      padding: 16px;
+      background: transparent;
+    }
+    small {
+      display: block;
+      color: #666;
+    }
+    #status {
+      color: #666;
+    }
+    dialog {
+      max-width: 680px;
+      max-height: 85vh;
+      width: 85%;
+      border: 1px solid #aaa;
+      padding: 24px;
+      background: #faf9f6;
+    }
+    dialog::backdrop {
+      background: #0006;
+    }
+    pre {
+      white-space: pre-wrap;
+      line-height: 1.9;
+      font-family: serif;
+    }
+    #close {
+      float: right;
+    }
+    #more {
+      margin: 12px 0;
+    }
+    p.note {
+      font-size: 14px;
+      color: #666;
+    }
+  </style>
+  <h1>搜索服务试用</h1>
+  <p class="note">支持繁简通搜，优先显示篇名更贴近的结果。打开作品后加载原文。</p>
+  <input
+    id="q"
+    aria-label="搜索原文"
+    placeholder="篇名、作者或正文"
+    maxlength="120"
+  />
+  <div class="filters">
+    <label
+      >搜索范围
+      <select id="field">
+        <option value="title-author">篇名与作者</option>
+        <option value="title">仅篇名</option>
+        <option value="author">仅作者</option>
+        <option value="full">全文</option>
+      </select></label
+    ><label
+      >文集
+      <select id="scope">
+        <option value="all">全部文集</option>
+      </select></label
+    ><button id="go">搜索</button>
+  </div>
+  <p id="status" role="status">正在加载文集…</p>
+  <div id="results"></div>
+  <button id="more" hidden>显示更多</button>
+  <dialog id="preview">
+    <button id="close" aria-label="关闭预览">关闭</button>
+    <h2 id="title"></h2>
+    <p id="author"></p>
+    <pre id="text"></pre>
+  </dialog>
+  <script>
+    const $ = (id) => document.getElementById(id);
+    let revision = 0,
+      abort,
+      cursor = null,
+      version = "",
+      timer;
+    let detailAbort;
+    async function json(url, signal) {
+      let r;
+      try { r = await fetch(url, { signal }); }
+      catch (error) {
+        if (error.name === "AbortError") throw error;
+        throw new Error("无法连接本地搜索服务，请确认服务已启动");
+      }
+      const data = await r.json();
+      if (!r.ok) throw Error(data.error.message);
+      return data;
+    }
+    async function search(more = false) {
+      const ticket = ++revision;
+      abort?.abort();
+      abort = new AbortController();
+      const start = performance.now();
+      $("more").hidden = true;
+      $("status").textContent = "正在搜索…";
+      if (!more) {
+        cursor = null;
+        $("results").replaceChildren();
+      }
+      const params = new URLSearchParams({
+        q: $("q").value,
+        scope: $("scope").value,
+        field: $("field").value,
+        limit: 20,
+      });
+      if (more && cursor) params.set("cursor", cursor);
+      try {
+        const r = await json("/api/search?" + params, abort.signal);
+        if (ticket !== revision) return;
+        version = r.version;
+        cursor = r.nextCursor;
+        for (const item of r.items) {
+          const button = document.createElement("button"),
+            title = document.createElement("b"),
+            meta = document.createElement("small"),
+            excerpt = document.createElement("span");
+          title.textContent = item.title;
+          meta.textContent = [item.author, item.collection, item.notice]
+            .filter(Boolean)
+            .join(" · ");
+          excerpt.textContent = item.excerpt;
+          button.append(title, meta, excerpt);
+          button.onclick = () => openPoem(item, r.version);
+          $("results").append(button);
+        }
+        $("status").textContent =
+          `${r.total.toLocaleString()} 条 · 本次请求 ${Math.round(performance.now() - start)} 毫秒 · 仅加载摘要`;
+        $("more").hidden = !cursor;
+      } catch (e) {
+        if (e.name !== "AbortError" && ticket === revision) {
+          $("status").textContent = e.message + "；点击搜索重试";
+        }
+      }
+    }
+    async function openPoem(item, v) {
+      detailAbort?.abort();
+      detailAbort = new AbortController();
+      $("title").textContent = item.title;
+      $("author").textContent = item.author;
+      $("text").textContent = "正在加载全文…";
+      if (!$("preview").open) $("preview").showModal();
+      try {
+        const r = await json(
+          "/api/poems/" + encodeURIComponent(item.id) + "?version=" + v,
+          detailAbort.signal,
+        );
+        $("text").textContent = r.poem.text;
+        $("author").textContent = [
+          r.poem.author,
+          r.poem.collection,
+          r.poem.notice,
+        ]
+          .filter(Boolean)
+          .join(" · ");
+      } catch (e) {
+        if (e.name !== "AbortError") $("text").textContent = e.message;
+      }
+    }
+    function changed() {
+      clearTimeout(timer);
+      revision++;
+      abort?.abort();
+      cursor = null;
+      $("more").hidden = true;
+      timer = setTimeout(() => search(), 200);
+    }
+    $("q").oninput = changed;
+    $("field").onchange = changed;
+    $("scope").onchange = changed;
+    $("go").onclick = () => {
+      clearTimeout(timer);
+      search();
+    };
+    $("more").onclick = () => search(true);
+    $("close").onclick = () => {
+      $("preview").close();
+      detailAbort?.abort();
+    };
+    $("preview").addEventListener("close", () => detailAbort?.abort());
+    json("/api/catalog")
+      .then((r) => {
+        for (const c of r.collections) {
+          const o = document.createElement("option");
+          o.value = c.key;
+          o.textContent = `${c.name} · ${c.count.toLocaleString()}`;
+          $("scope").append(o);
+        }
+        search();
+      })
+      .catch((e) => ($("status").textContent = e.message));
+  </script>
+</html>

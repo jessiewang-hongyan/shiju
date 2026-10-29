@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="zh-CN">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  /><title>拾句 · 静态搜索对照原型</title
+  ><style>
+    body {
+      max-width: 850px;
+      margin: 32px auto;
+      padding: 0 20px;
+      font: 16px/1.7 system-ui;
+      background: #faf9f6;
+      color: #292b28;
+    }
+    input,
+    select,
+    button {
+      font: inherit;
+      padding: 8px;
+      margin: 4px;
+      border: 1px solid #aaa;
+      border-radius: 5px;
+      background: white;
+      color: inherit;
+    }
+    input {
+      width: 80%;
+    }
+    .item {
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+    .item small,
+    .item span {
+      display: block;
+    }
+    dialog {
+      max-width: 750px;
+      max-height: 80vh;
+    }
+    pre {
+      white-space: pre-wrap;
+      font: inherit;
+    }
+    #status {
+      color: #666;
+    }
+    a {
+      color: #365f55;
+    }
+  </style>
+  <h1>静态搜索对照原型</h1>
+  <p>分片索引与摘要在浏览器搜索；打开作品后加载全文。不会改动编辑页草稿。</p>
+  <p>
+    <a href="/editor/">静态搜索编辑页</a> ·
+    <a href="http://127.0.0.1:4180/editor/">独立服务编辑页</a> ·
+    <a href="http://127.0.0.1:4180/">独立服务搜索页</a>
+  </p>
+  <form>
+    <input aria-label="搜索原文" placeholder="搜索篇名或作者" />
+    <div>
+      <label
+        >搜索范围<select id="field">
+          <option value="title-author">篇名与作者</option>
+          <option value="title">仅篇名</option>
+          <option value="author">仅作者</option>
+        </select></label
+      ><label
+        >文集<select id="scope">
+          <option value="all">全部文集</option>
+        </select></label
+      ><button>搜索</button
+      ><button type="button" id="reset">清空搜索缓存</button>
+    </div>
+  </form>
+  <p id="status">正在初始化…</p>
+  <section id="list"></section>
+  <button id="more" hidden>显示更多</button>
+  <dialog>
+    <h2></h2>
+    <p id="author"></p>
+    <pre></pre>
+    <button id="close">关闭</button>
+  </dialog>
+  <script type="module">
+    const $ = (s) => document.querySelector(s);
+    let worker,
+      ticket = 0,
+      offset = 0,
+      page,
+      condition;
+    function start() {
+      worker?.terminate();
+      worker = new Worker("/prototype/static-search/worker.mjs", {
+        type: "module",
+      });
+      worker.onerror = () => {
+        $("#status").textContent = "搜索线程启动失败，请刷新重试";
+      };
+      worker.onmessage = ({ data: d }) => {
+        if (d.ticket !== ticket) return;
+        if (d.error) {
+          $("#status").textContent = d.error;
+          return;
+        }
+        if (d.result.catalog) {
+          for (const [key, c] of Object.entries(d.result.catalog)) {
+            if (![...$("#scope").options].some((o) => o.value === key))
+              $("#scope").add(new Option(c.name, key));
+          }
+          $("#status").textContent = "就绪";
+          return;
+        }
+        if (d.result.text !== undefined) {
+          $("dialog h2").textContent = d.result.title;
+          $("#author").textContent = [d.result.author, d.result.collection]
+            .filter(Boolean)
+            .join(" · ");
+          $("pre").textContent = d.result.text;
+          $("dialog").showModal();
+          return;
+        }
+        page = d.result;
+        $("#status").textContent =
+          `${page.total.toLocaleString()} 篇 · ${Math.round(d.ms)} ms · 本次 ${d.requests} 个资源，解压后 ${(d.rawBytes / 1024).toFixed(1)} KB`;
+        if (!offset) $("#list").replaceChildren();
+        for (const p of page.items) {
+          const b = document.createElement("button");
+          b.className = "item";
+          for (const [tag, text] of [
+            ["b", p.title],
+            [
+              "small",
+              [p.author, p.collection, p.notice].filter(Boolean).join(" · "),
+            ],
+            ["span", p.excerpt],
+          ]) {
+            const el = document.createElement(tag);
+            el.textContent = text;
+            b.append(el);
+          }
+          b.onclick = () => {
+            worker.postMessage({
+              kind: "poem",
+              id: p.id,
+              version: page.version,
+              ticket: ++ticket,
+            });
+          };
+          $("#list").append(b);
+        }
+        if (!page.total) $("#list").textContent = "没有找到匹配原文";
+        $("#more").hidden = page.nextOffset === null;
+      };
+      worker.postMessage({ kind: "catalog", ticket: ++ticket });
+    }
+    function run() {
+      $("#status").textContent = "正在搜索…";
+      $("#more").hidden = true;
+      worker.postMessage({ ...condition, offset, ticket: ++ticket });
+    }
+    $("form").onsubmit = (e) => {
+      e.preventDefault();
+      offset = 0;
+      condition = {
+        q: $("input[aria-label]").value,
+        scope: $("#scope").value,
+        field: $("#field").value,
+      };
+      run();
+    };
+    $("#more").onclick = () => {
+      offset = page.nextOffset;
+      run();
+    };
+    $("#reset").onclick = () => {
+      $("#list").replaceChildren();
+      $("#more").hidden = true;
+      start();
+    };
+    $("#close").onclick = () => $("dialog").close();
+    start();
+  </script>
+</html>

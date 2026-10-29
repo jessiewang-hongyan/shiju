@@ -1,0 +1,348 @@
+{
+  "date": "2026-10-29",
+  "note": "Real engine with timed shared aggregate gzip transfer simulation. Desktop CPU, no browser/device CPU, TLS, loss, cache persistence or radio scheduling. Catalog browse precedes cold query; cold includes OpenCC transfer. Not a real phone measurement.",
+  "results": [
+    {
+      "profile": {
+        "name": "moderate-4g",
+        "kbps": 1600,
+        "rtt": 150
+      },
+      "query": {
+        "q": "赤壁赋",
+        "scope": "all",
+        "field": "title-author"
+      },
+      "total": 62,
+      "catalog": {
+        "ms": 1299.193833,
+        "requests": 3,
+        "bytes": 139108
+      },
+      "cold": {
+        "ms": 5334.0530420000005,
+        "requests": 19,
+        "bytes": 712701
+      },
+      "warm": {
+        "ms": 2.77087500000016,
+        "requests": 0,
+        "bytes": 0
+      },
+      "next": {
+        "ms": 909.3492919999999,
+        "requests": 7,
+        "bytes": 43478
+      },
+      "detail": {
+        "ms": 643.9400419999993,
+        "requests": 1,
+        "bytes": 89377
+      }
+    },
+    {
+      "profile": {
+        "name": "moderate-4g",
+        "kbps": 1600,
+        "rtt": 150
+      },
+      "query": {
+        "q": "苏轼",
+        "scope": "song-era",
+        "field": "author"
+      },
+      "total": 3596,
+      "catalog": {
+        "ms": 1286.3119580000002,
+        "requests": 3,
+        "bytes": 139108
+      },
+      "cold": {
+        "ms": 5295.889999999999,
+        "requests": 17,
+        "bytes": 752583
+      },
+      "warm": {
+        "ms": 8.877792000001136,
+        "requests": 0,
+        "bytes": 0
+      },
+      "next": {
+        "ms": 6.245249999999942,
+        "requests": 0,
+        "bytes": 0
+      },
+      "detail": {
+        "ms": 285.4774580000012,
+        "requests": 1,
+        "bytes": 20252
+      }
+    },
+    {
+      "profile": {
+        "name": "moderate-4g",
+        "kbps": 1600,
+        "rtt": 150
+      },
+      "query": {
+        "q": "春",
+        "scope": "song-era",
+        "field": "title-author"
+      },
+      "total": 10072,
+      "catalog": {
+        "ms": 1261.1533329999984,
+        "requests": 3,
+        "bytes": 139108
+      },
+      "cold": {
+        "ms": 7471.384750000001,
+        "requests": 29,
+        "bytes": 1014712
+      },
+      "warm": {
+        "ms": 23.653833000000304,
+        "requests": 0,
+        "bytes": 0
+      },
+      "next": {
+        "ms": 1761.1326659999977,
+        "requests": 14,
+        "bytes": 82641
+      },
+      "detail": {
+        "ms": 220.03641699999935,
+        "requests": 1,
+        "bytes": 10320
+      }
+    },
+    {
+      "profile": {
+        "name": "weak-4g",
+        "kbps": 800,
+        "rtt": 300
+      },
+      "query": {
+        "q": "赤壁赋",
+        "scope": "all",
+        "field": "title-author"
+      },
+      "total": 62,
+      "catalog": {
+        "ms": 2459.890166000001,
+        "requests": 3,
+        "bytes": 139108
+      },
+      "cold": {
+        "ms": 10513.072708999996,
+        "requests": 19,
+        "bytes": 712701
+      },
+      "warm": {
+        "ms": 8.89416699999856,
+        "requests": 0,
+        "bytes": 0
+      },
+      "next": {
+        "ms": 1740.368957999999,
+        "requests": 7,
+        "bytes": 43478
+      },
+      "detail": {
+        "ms": 1253.125334000004,
+        "requests": 1,
+        "bytes": 89377
+      }
+    },
+    {
+      "profile": {
+        "name": "weak-4g",
+        "kbps": 800,
+        "rtt": 300
+      },
+      "query": {
+        "q": "苏轼",
+        "scope": "song-era",
+        "field": "author"
+      },
+      "total": 3596,
+      "catalog": {
+        "ms": 2471.7917919999963,
+        "requests": 3,
+        "bytes": 139108
+      },
+      "cold": {
+        "ms": 10357.068333999996,
+        "requests": 17,
+        "bytes": 752583
+      },
+      "warm": {
+        "ms": 3.9901669999962905,
+        "requests": 0,
+        "bytes": 0
+      },
+      "next": {
+        "ms": 3.1914170000018203,
+        "requests": 0,
+        "bytes": 0
+      },
+      "detail": {
+        "ms": 532.3754999999946,
+        "requests": 1,
+        "bytes": 20252
+      }
+    },
+    {
+      "profile": {
+        "name": "weak-4g",
+        "kbps": 800,
+        "rtt": 300
+      },
+      "query": {
+        "q": "春",
+        "scope": "song-era",
+        "field": "title-author"
+      },
+      "total": 10072,
+      "catalog": {
+        "ms": 2434.665291000005,
+        "requests": 3,
+        "bytes": 139108
+      },
+      "cold": {
+        "ms": 14748.618333000006,
+        "requests": 29,
+        "bytes": 1014712
+      },
+      "warm": {
+        "ms": 28.27508300000045,
+        "requests": 0,
+        "bytes": 0
+      },
+      "next": {
+        "ms": 3364.222916999992,
+        "requests": 14,
+        "bytes": 82641
+      },
+      "detail": {
+        "ms": 428.6000420000055,
+        "requests": 1,
+        "bytes": 10320
+      }
+    },
+    {
+      "profile": {
+        "name": "slow-3g",
+        "kbps": 400,
+        "rtt": 600
+      },
+      "query": {
+        "q": "赤壁赋",
+        "scope": "all",
+        "field": "title-author"
+      },
+      "total": 62,
+      "catalog": {
+        "ms": 4793.000040999992,
+        "requests": 3,
+        "bytes": 139108
+      },
+      "cold": {
+        "ms": 20879.36533300001,
+        "requests": 19,
+        "bytes": 712701
+      },
+      "warm": {
+        "ms": 4.621375000002445,
+        "requests": 0,
+        "bytes": 0
+      },
+      "next": {
+        "ms": 3379.832416999998,
+        "requests": 7,
+        "bytes": 43478
+      },
+      "detail": {
+        "ms": 2485.4852500000125,
+        "requests": 1,
+        "bytes": 89377
+      }
+    },
+    {
+      "profile": {
+        "name": "slow-3g",
+        "kbps": 400,
+        "rtt": 600
+      },
+      "query": {
+        "q": "苏轼",
+        "scope": "song-era",
+        "field": "author"
+      },
+      "total": 3596,
+      "catalog": {
+        "ms": 4814.205042000001,
+        "requests": 3,
+        "bytes": 139108
+      },
+      "cold": {
+        "ms": 20640.722542000018,
+        "requests": 17,
+        "bytes": 752583
+      },
+      "warm": {
+        "ms": 9.111458999977913,
+        "requests": 0,
+        "bytes": 0
+      },
+      "next": {
+        "ms": 6.549041999998735,
+        "requests": 0,
+        "bytes": 0
+      },
+      "detail": {
+        "ms": 1041.3412499999977,
+        "requests": 1,
+        "bytes": 20252
+      }
+    },
+    {
+      "profile": {
+        "name": "slow-3g",
+        "kbps": 400,
+        "rtt": 600
+      },
+      "query": {
+        "q": "春",
+        "scope": "song-era",
+        "field": "title-author"
+      },
+      "total": 10072,
+      "catalog": {
+        "ms": 4787.183917000017,
+        "requests": 3,
+        "bytes": 139108
+      },
+      "cold": {
+        "ms": 29267.589083,
+        "requests": 29,
+        "bytes": 1014712
+      },
+      "warm": {
+        "ms": 23.504667000001064,
+        "requests": 0,
+        "bytes": 0
+      },
+      "next": {
+        "ms": 6653.940791999979,
+        "requests": 14,
+        "bytes": 82641
+      },
+      "detail": {
+        "ms": 832.1097080000036,
+        "requests": 1,
+        "bytes": 10320
+      }
+    }
+  ]
+}

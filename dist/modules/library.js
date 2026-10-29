@@ -1,16 +1,29 @@
+import { createServiceLibrary } from "./library-service.js";
 import { $, toast } from "./ui.js";
 import { createLibrarySearch } from "./library-search.js?v=20261028batch5a";
 import { poems } from "./poems.js";
 import { isLetter } from "./editor.js?v=20261028batch5a";
 import { libraryCatalog } from "./library-loader.js?v=20261028batch5a";
 import { createIndexedLibrary } from "./library-index.js?v=20261028batch5a";
-export function initLibrary({ editor, typography }) {
+export function initLibrary({ editor, typography, searchRequest }) {
   const { displayText } = typography;
   const searchLibrary = createLibrarySearch();
   let libraryLimit = 40,
     previewPoem = null;
   const index = createIndexedLibrary();
   let revision = 0;
+  const service = document.querySelector('meta[name="shiju-search-service"]')
+    ? createServiceLibrary({
+        displayText,
+        openPoemPreview,
+        request: searchRequest,
+      })
+    : null;
+  if (service) $("#library-scope").value = "all";
+  const metadataOnly =
+    document.querySelector('meta[name="shiju-search-service"]')?.content ===
+    "static";
+  if (metadataOnly) $("#search-field option[value=full]")?.remove();
   function scopeKeys() {
     const scope = $("#library-scope").value;
     return scope === "selected"
@@ -184,6 +197,9 @@ export function initLibrary({ editor, typography }) {
     const query = $("#search").value,
       scope = $("#library-scope").value,
       field = $("#search-field").value;
+    if (service && scope !== "selected")
+      return service.render(query, scope, field, libraryLimit);
+    service?.cancel();
     const keys = scopeKeys();
     const list = $("#poem-list");
     list.replaceChildren();
@@ -253,7 +269,8 @@ export function initLibrary({ editor, typography }) {
     $("#library-more").hidden = total <= libraryLimit;
     if (!matches.length && !failed.length) {
       list.textContent = "没有找到匹配的原文，可以换个关键词或粘贴原文。";
-      $("#search-full-hint").hidden = !query.trim() || field === "full";
+      $("#search-full-hint").hidden =
+        metadataOnly || !query.trim() || field === "full";
     }
   }
   $("#search-full-hint").onclick = () => {

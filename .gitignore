@@ -3,3 +3,13 @@
 *-preview.png
 node_modules/
 *.log
+
+release-artifacts/
+
+_site/
+.release-data/
+
+# Machine-specific prototype output inventories (rebuild locally)
+prototype/release/package-inventory.json
+prototype/static-search/package-audit.json
+prototype/remote-body/build.json

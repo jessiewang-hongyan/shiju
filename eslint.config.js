@@ -16,6 +16,7 @@ export default [
           "setTimeout",
           "clearTimeout",
           "URL",
+          "URLSearchParams",
           "console",
           "innerWidth",
           "addEventListener",

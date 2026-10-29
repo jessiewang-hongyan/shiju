@@ -1,0 +1,7 @@
+{
+  "date": "2026-10-29",
+  "assertions": 32,
+  "pass": true,
+  "cases": 6,
+  "checks": "first and second pages, counts, source equality, mixed scripts, lacuna, full text, metadata-only index requests, no bodies during search, version mismatch"
+}

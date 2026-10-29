@@ -1,0 +1,34 @@
+{
+  "poemsVerified": 443692,
+  "siteBytes": 534941036,
+  "summaryExtraGzipAll": 986372,
+  "examples": [
+    {
+      "key": "guwen",
+      "oldBytes": 304060,
+      "newBytes": 32647,
+      "oldGzip": 122445,
+      "newGzip": 12479,
+      "summaryExtraGzip": 948,
+      "file": "a43b9f1990309297ffbb-b32k-v1/guwen/b60bb3f0ef2f1a33e4be801c52452e557286cad1f69bfa68ca8bf6a1fd31b665.json"
+    },
+    {
+      "key": "chuci",
+      "oldBytes": 104058,
+      "newBytes": 32019,
+      "oldGzip": 49484,
+      "newGzip": 15806,
+      "summaryExtraGzip": 340,
+      "file": "a43b9f1990309297ffbb-b32k-v1/chuci/f07df026ba68f2ba8ef957cd0336d23ecc0571506b6183908d9544c3d6360643.json"
+    },
+    {
+      "key": "song-era",
+      "oldBytes": 56419,
+      "newBytes": 32421,
+      "oldGzip": 13406,
+      "newGzip": 8828,
+      "summaryExtraGzip": 212,
+      "file": "a43b9f1990309297ffbb-b32k-v1/song-era/0544f350f01b5394c5d6c6ec6d980013304ca43788eb204ecea8341d9d5c92a9.json"
+    }
+  ]
+}

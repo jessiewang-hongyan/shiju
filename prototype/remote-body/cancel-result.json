@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "started": [
+    1,
+    3
+  ],
+  "aborted": [
+    1
+  ],
+  "replied": [
+    3
+  ],
+  "elapsedMs": 66,
+  "simulation": "Postman /weak/ 400kbps + 600ms; cancel after 50ms, new request normal speed"
+}

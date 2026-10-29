@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "blocksVerified": 6959,
+  "sample": "a43b9f1990309297ffbb-b32k-v1/guwen/b60bb3f0ef2f1a33e4be801c52452e557286cad1f69bfa68ca8bf6a1fd31b665.json",
+  "sampleBytes": 32647,
+  "sampleGzip": 12479,
+  "descriptorGzip": 0,
+  "httpCalls": 11
+}

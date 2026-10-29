@@ -1,0 +1,12 @@
+version: 1
+id: 02122f65-082f-4b31-ad25-4c5386cefcce
+name: Versioned static poem blocks
+slug: versioned-static-poem-blocks
+protocol: http
+port: 4500
+scenarios:
+  - name: default
+    path: ./default.js
+    default: true
+
+interceptRequests: true

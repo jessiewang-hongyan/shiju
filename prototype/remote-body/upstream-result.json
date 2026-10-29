@@ -1,0 +1,13 @@
+{
+  "url": "https://raw.githubusercontent.com/Werneror/Poetry/4cfe49c06858e00d15f84d192fe5294295f79689/%E5%AE%8B_1.csv",
+  "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1007)>",
+  "seconds": 0.699,
+  "curl": {
+    "status": 200,
+    "expectedBytes": 18910821,
+    "receivedBytes": 14673768,
+    "seconds": 45.001501,
+    "exitCode": 28,
+    "complete": false
+  }
+}

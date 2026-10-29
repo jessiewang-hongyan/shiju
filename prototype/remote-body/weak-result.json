@@ -1,0 +1,38 @@
+{
+  "conditions": "Local HTTP simulation: 400 kbps / 600 ms per request; gzip. Post-search body stage only. Old figures are transfer model, not live measurement.",
+  "results": [
+    {
+      "collection": "guwen",
+      "newMeasuredMs": 905,
+      "oldTransferModelMs": 6535,
+      "newTransferModelMs": 850,
+      "oldRequests": 2,
+      "newRequests": 1,
+      "oldGzipBytes": 266751,
+      "newGzipBytes": 12479,
+      "summaryExtraGzip": 948
+    },
+    {
+      "collection": "chuci",
+      "newMeasuredMs": 929,
+      "oldTransferModelMs": 5076,
+      "newTransferModelMs": 916,
+      "oldRequests": 2,
+      "newRequests": 1,
+      "oldGzipBytes": 193790,
+      "newGzipBytes": 15806,
+      "summaryExtraGzip": 340
+    },
+    {
+      "collection": "song-era",
+      "newMeasuredMs": 796,
+      "oldTransferModelMs": 4354,
+      "newTransferModelMs": 777,
+      "oldRequests": 2,
+      "newRequests": 1,
+      "oldGzipBytes": 157712,
+      "newGzipBytes": 8828,
+      "summaryExtraGzip": 212
+    }
+  ]
+}

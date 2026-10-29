@@ -1,0 +1,16 @@
+scope: Local static-body transport only; no provider deployment.
+contract: Immutable JSON arrays, SHA-256 from matching search-summary entry, CORS.
+assumptions:
+  - Production host provides HTTPS and compression.
+  - Body target is 32768 UTF-8 bytes; a single long poem stays intact.
+evidence:
+  - All 443692 poems match original records after byte-based regrouping.
+  - HTTP checks cover 404, 503, corruption, timeout and persistent cache repair.
+  - Weak route delays gzip responses by 600 ms plus byte length at 400 kbps.
+limitations:
+  - Weak-network tests are local simulations, not actual iPhone or GitHub measurements.
+  - Old weak-network timings are a transfer model, not a newly measured baseline.
+
+cancellation_evidence:
+  - Active fetch aborts with AbortError; queued canceled job never starts.
+  - Only newest job returns; completed cache survives cancellation.

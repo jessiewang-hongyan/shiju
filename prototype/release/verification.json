@@ -1,0 +1,9 @@
+{
+  "pass": true,
+  "files": 34173,
+  "imports": 39,
+  "HTTP": "all inventory paths HEAD 200; root data deliberately 404",
+  "searches": 3,
+  "fonts": 5,
+  "date": "2026-10-29"
+}

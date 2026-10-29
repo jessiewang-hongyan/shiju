@@ -1,0 +1,96 @@
+{
+  "pass": true,
+  "assertions": 174,
+  "cases": [
+    {
+      "q": "其",
+      "scope": "all",
+      "field": "title-author"
+    },
+    {
+      "q": "其",
+      "scope": "all",
+      "field": "title"
+    },
+    {
+      "q": "其",
+      "scope": "all",
+      "field": "author"
+    },
+    {
+      "q": "春",
+      "scope": "song-era",
+      "field": "title-author"
+    },
+    {
+      "q": "春",
+      "scope": "song-era",
+      "field": "title"
+    },
+    {
+      "q": "春",
+      "scope": "song-era",
+      "field": "author"
+    },
+    {
+      "q": "一",
+      "scope": "all",
+      "field": "title-author"
+    },
+    {
+      "q": "一",
+      "scope": "all",
+      "field": "title"
+    },
+    {
+      "q": "一",
+      "scope": "all",
+      "field": "author"
+    },
+    {
+      "q": "二",
+      "scope": "all",
+      "field": "title-author"
+    },
+    {
+      "q": "二",
+      "scope": "all",
+      "field": "title"
+    },
+    {
+      "q": "二",
+      "scope": "all",
+      "field": "author"
+    },
+    {
+      "q": "其 春",
+      "scope": "all",
+      "field": "title-author"
+    },
+    {
+      "q": "其 春",
+      "scope": "all",
+      "field": "title"
+    },
+    {
+      "q": "其 春",
+      "scope": "all",
+      "field": "author"
+    },
+    {
+      "q": "赤壁賦",
+      "scope": "all",
+      "field": "title-author"
+    },
+    {
+      "q": "赤壁賦",
+      "scope": "all",
+      "field": "title"
+    },
+    {
+      "q": "赤壁賦",
+      "scope": "all",
+      "field": "author"
+    }
+  ]
+}

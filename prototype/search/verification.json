@@ -1,0 +1,236 @@
+{
+  "date": "2026-10-29",
+  "base": "http://127.0.0.1:4180",
+  "version": "b0474fbbdd8c92488983",
+  "records": 443692,
+  "assertions": 231,
+  "scenarios": [
+    {
+      "field": "title-author",
+      "q": "苏轼",
+      "scope": "song-era",
+      "total": 3599,
+      "ms": 56.960165999999845,
+      "bytes": 6813,
+      "gzipBytes": 2472
+    },
+    {
+      "field": "title-author",
+      "q": "陆游",
+      "scope": "song-era",
+      "total": 10567,
+      "ms": 43.25725000000057,
+      "bytes": 7088,
+      "gzipBytes": 2603
+    },
+    {
+      "field": "title-author",
+      "q": "春",
+      "scope": "song-era",
+      "total": 10072,
+      "ms": 52.210959,
+      "bytes": 6135,
+      "gzipBytes": 2152
+    },
+    {
+      "field": "title-author",
+      "q": "水调歌头",
+      "scope": "song-era",
+      "total": 740,
+      "ms": 43.29816699999992,
+      "bytes": 6303,
+      "gzipBytes": 1957
+    },
+    {
+      "field": "title-author",
+      "q": "明月",
+      "scope": "song-era",
+      "total": 97,
+      "ms": 54.566125000000284,
+      "bytes": 6390,
+      "gzipBytes": 2285
+    },
+    {
+      "field": "title-author",
+      "q": "山 水",
+      "scope": "song-era",
+      "total": 707,
+      "ms": 68.0585000000001,
+      "bytes": 6527,
+      "gzipBytes": 2450
+    },
+    {
+      "field": "title-author",
+      "q": "不存在xyz",
+      "scope": "song-era",
+      "total": 0,
+      "ms": 23.707625000000007,
+      "bytes": 73,
+      "gzipBytes": 93
+    },
+    {
+      "field": "title-author",
+      "q": "",
+      "scope": "song-era",
+      "total": 287114,
+      "ms": 90.0063339999997,
+      "bytes": 6302,
+      "gzipBytes": 2295
+    },
+    {
+      "field": "full",
+      "q": "苏轼",
+      "scope": "song-era",
+      "total": 3601,
+      "ms": 39.11175000000003,
+      "bytes": 6802,
+      "gzipBytes": 2456
+    },
+    {
+      "field": "full",
+      "q": "陆游",
+      "scope": "song-era",
+      "total": 10574,
+      "ms": 36.34437499999967,
+      "bytes": 7077,
+      "gzipBytes": 2588
+    },
+    {
+      "field": "full",
+      "q": "春",
+      "scope": "song-era",
+      "total": 61333,
+      "ms": 71.17979099999957,
+      "bytes": 6124,
+      "gzipBytes": 2137
+    },
+    {
+      "field": "full",
+      "q": "水调歌头",
+      "scope": "song-era",
+      "total": 740,
+      "ms": 47.4375,
+      "bytes": 6292,
+      "gzipBytes": 1943
+    },
+    {
+      "field": "full",
+      "q": "明月",
+      "scope": "song-era",
+      "total": 4517,
+      "ms": 155.80004200000076,
+      "bytes": 6381,
+      "gzipBytes": 2269
+    },
+    {
+      "field": "full",
+      "q": "山 水",
+      "scope": "song-era",
+      "total": 24953,
+      "ms": 102.20229199999994,
+      "bytes": 6518,
+      "gzipBytes": 2442
+    },
+    {
+      "field": "full",
+      "q": "不存在xyz",
+      "scope": "song-era",
+      "total": 0,
+      "ms": 41.35175000000072,
+      "bytes": 73,
+      "gzipBytes": 93
+    },
+    {
+      "field": "full",
+      "q": "",
+      "scope": "song-era",
+      "total": 287114,
+      "ms": 95.07379100000071,
+      "bytes": 6291,
+      "gzipBytes": 2280
+    },
+    {
+      "field": "title",
+      "q": "水调歌头",
+      "scope": "song-era",
+      "total": 740,
+      "ms": 47.26104200000009,
+      "bytes": 6293,
+      "gzipBytes": 1947
+    },
+    {
+      "field": "author",
+      "q": "苏轼",
+      "scope": "song-era",
+      "total": 3596,
+      "ms": 36.64204199999949,
+      "bytes": 6908,
+      "gzipBytes": 2499
+    },
+    {
+      "field": "title-author",
+      "q": "苏轼",
+      "scope": "all",
+      "total": 3978,
+      "ms": 48.94250000000011,
+      "bytes": 10037,
+      "gzipBytes": 3972
+    },
+    {
+      "field": "full",
+      "q": "明月",
+      "scope": "all",
+      "total": 8117,
+      "ms": 165.76187500000015,
+      "bytes": 6271,
+      "gzipBytes": 2241
+    },
+    {
+      "field": "full",
+      "q": "■",
+      "scope": "yuan-era",
+      "total": 29,
+      "ms": 30.482709000001705,
+      "bytes": 6768,
+      "gzipBytes": 2248
+    },
+    {
+      "field": "title-author",
+      "q": "赤壁赋",
+      "scope": "all",
+      "total": 62,
+      "ms": 68.5614999999998,
+      "bytes": 8467,
+      "gzipBytes": 2966
+    },
+    {
+      "field": "title-author",
+      "q": "赤壁賦",
+      "scope": "all",
+      "total": 62,
+      "ms": 33.514916000000085,
+      "bytes": 8467,
+      "gzipBytes": 2969
+    },
+    {
+      "field": "title-author",
+      "q": "蘇轼 赤壁赋",
+      "scope": "all",
+      "total": 2,
+      "ms": 34.736166000000594,
+      "bytes": 838,
+      "gzipBytes": 600
+    },
+    {
+      "field": "title-author",
+      "q": "蘇軾",
+      "scope": "all",
+      "total": 3978,
+      "ms": 24.088540999999168,
+      "bytes": 10037,
+      "gzipBytes": 3973
+    }
+  ],
+  "overload503": 23,
+  "notes": "Real loopback HTTP; sequential measurements include warm caches, not cold Internet or iPhone performance."
+}
