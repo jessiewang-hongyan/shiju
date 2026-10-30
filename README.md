@@ -80,6 +80,7 @@ npm run format
 - [下一批文集接入清单（审计候选，未上线）](docs/next-collections.md)
 - [全部数据源接入总表与古典文本审计](docs/source-catalog.md)
 - [文集上线批次与第一批交付](docs/collection-rollout.md)
+- [明清扩容搜索优化与本地验收](docs/ming-qing-search-optimization.md)
 
 ## 复现正式发布包
 
@@ -91,3 +92,10 @@ node scripts/verify-release.mjs
 ```
 
 输出 `_site/` 必须是新目录；可通过 `RELEASE_DATA_DIR` 和 `RELEASE_OUT` 指定输入与输出。入口脚本、样式、模块目录和配置均使用版本化名称。验证脚本检查资源引用、字体分片、全部正文校验和摘要映射，并运行真实生产搜索引擎。验收报告保存在本地 `release-artifacts/`，不随站点公开。
+
+- [摘要压缩与旧版兼容资源审计](docs/summary-compression-and-legacy-audit.md)：815 MB 本地候选、慢网对照与兼容退役方案（未上线）。
+
+- [搜索索引去重原型](docs/search-index-deduplication.md)：782 MB 候选、性能／请求数／内存对照（未上线）。
+
+- [兼容资源精简准备](docs/compatibility-retirement-preparation.md)：版本提示、草稿恢复、当前线上资源保留与分代退出边界（仅本地）。
+- [正式迁移候选](docs/formal-migration-candidate.md)：固定候选数据、可复现兼容快照、正式包与本地回退验收（网页未部署）。

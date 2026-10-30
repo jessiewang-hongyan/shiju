@@ -34,10 +34,22 @@ http
         res.end();
         return;
       }
-      if (!url.pathname.startsWith("/shiju/")) throw Error("outside prefix");
-      const name = decodeURIComponent(url.pathname.slice(7)) || "index.html";
-      const p = resolve(root, name);
-      if (!p.startsWith(root + sep) || !statSync(p).isFile())
+      const isBody =
+        url.pathname.startsWith("/bodies/") && process.env.SHIJU_PREVIEW_BODIES;
+      if (!isBody && !url.pathname.startsWith("/shiju/"))
+        throw Error("outside prefix");
+      const control = process.env.SHIJU_PREVIEW_CONTROL
+        ? JSON.parse(readFileSync(process.env.SHIJU_PREVIEW_CONTROL))
+        : {};
+      const servingRoot = isBody
+        ? resolve(process.env.SHIJU_PREVIEW_BODIES)
+        : control.useAlternate && process.env.SHIJU_PREVIEW_ALTERNATE_ROOT
+          ? resolve(process.env.SHIJU_PREVIEW_ALTERNATE_ROOT)
+          : root;
+      const name =
+        decodeURIComponent(url.pathname.slice(isBody ? 8 : 7)) || "index.html";
+      const p = resolve(servingRoot, name);
+      if (!p.startsWith(servingRoot + sep) || !statSync(p).isFile())
         throw Error("missing");
       const type = types[extname(p)] || "application/octet-stream";
       res.setHeader("Content-Type", type);
@@ -54,15 +66,15 @@ http
         res.end();
         return;
       }
-      const control = process.env.SHIJU_PREVIEW_CONTROL
-        ? JSON.parse(readFileSync(process.env.SHIJU_PREVIEW_CONTROL))
-        : {};
       if (control.failJSON && extname(p) === ".json") {
         res.writeHead(503);
         res.end("{}");
         return;
       }
-      const raw = readFileSync(p);
+      let raw = readFileSync(p);
+      // Local migration acceptance only: simulate a newer release announcement.
+      if (name === "release.json" && /^[a-f0-9]{16}$/.test(control.releaseRuntime || ""))
+        raw = Buffer.from(JSON.stringify({ ...JSON.parse(raw), runtime: control.releaseRuntime }));
       const delay = Number(process.env.SHIJU_PREVIEW_DELAY_MS || 0);
       if (delay && extname(p) === ".json")
         await new Promise((resolve) => setTimeout(resolve, delay));

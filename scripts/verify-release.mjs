@@ -13,11 +13,14 @@ const out = resolve(process.env.RELEASE_OUT || "_site"),
   dataset = resolve(process.env.RELEASE_DATA_DIR || ".release-data");
 const release = JSON.parse(readFileSync(out + "/release.json")),
   c = JSON.parse(readFileSync(out + "/" + release.config));
-const bodyBase = `https://raw.githubusercontent.com/${release.data.repository}/${release.data.commit}/bodies/`;
+const bodyBase = release.data.preview
+  ? release.data.baseURL
+  : `https://raw.githubusercontent.com/${release.data.repository}/${release.data.commit}/bodies/`;
 let files = 0,
   imports = 0,
   bytes = 0,
   rows = 0;
+const unpack = c.format === 2 ? (await import(pathToFileURL(out + "/" + release.modules + "/search/unpack.mjs"))).unpack : value => value;
 const bodyCache = new Map();
 function walk(d) {
   return readdirSync(d).flatMap((f) => {
@@ -49,7 +52,8 @@ for (const entry of [
   "modules/library.js",
   "data/parts/guwen/manifest.json",
 ])
-  assert.ok(existsSync(out + "/" + entry), "Missing legacy URL: " + entry);
+  if (["retire-preview", "retain-current"].includes(release.compatibilityMode)) assert.ok(!existsSync(out + "/" + entry), "Unexpected retired URL: " + entry);
+  else assert.ok(existsSync(out + "/" + entry), "Missing legacy URL: " + entry);
 for (const key of ["kangxi", "chenyu", "wenkai", "huiwen", "bakudai"])
   for (const part of JSON.parse(
     readFileSync(out + "/fonts/" + key + "/manifest.json"),
@@ -66,31 +70,51 @@ for (const key of c.keys) {
   assert.equal(m.body.baseURL, bodyBase);
   assert.equal(m.body.version, c.version);
   assert.equal(m.detail, undefined);
+  bodyCache.clear();
+  let collectionRows = 0;
   for (const f of m.summaries) {
-    const page = JSON.parse(readFileSync(dir + f));
+    const page = unpack(JSON.parse(readFileSync(dir + f)));
     for (const item of page) {
       const b =
         typeof item.body === "number" ? page[item.body].body : item.body;
       assert.ok(b && b.hash);
       assert.ok(inv.files[m.body.prefix + b.hash + ".json"] === b.hash);
+      const path = m.body.prefix + b.hash + ".json";
+      if (!bodyCache.has(path))
+        bodyCache.set(
+          path,
+          JSON.parse(readFileSync(dataset + "/bodies/" + path)),
+        );
+      const row = Number(item.id.slice(item.id.lastIndexOf(":") + 1));
+      assert.equal(item.id, key + ":" + collectionRows++);
+      const poem = bodyCache.get(path)[row - b.start];
+      assert.ok(poem && poem.text);
+      assert.equal(item.title, poem.title || poem.label || "无题");
+      assert.equal(item.author, poem.author);
       rows++;
     }
   }
+  assert.equal(collectionRows, m.count);
 }
 assert.equal(
   rows,
   Object.values(c.counts).reduce((a, b) => a + b, 0),
 );
-for (const [, f] of Object.values(c.chars))
-  assert.ok(existsSync(out + "/static-data/" + c.version + "/" + f));
+const indexRoot = out + "/static-data/" + c.version + "/";
+const indexRead = f => unpack(JSON.parse(readFileSync(indexRoot + f)));
+const directories = c.chars ? [c.chars] : [indexRead(c.charsFile), ...(c.authorCharsFile ? [indexRead(c.authorCharsFile)] : []), ...Object.values(c.scopeIndexes).map(indexRead)];
+for (const directory of directories) for (const [, file] of Object.values(directory)) assert.ok(existsSync(indexRoot + file));
 for (const f of Object.values(c.hot)) {
-  const m = JSON.parse(
-    readFileSync(out + "/static-data/" + c.version + "/" + f),
-  );
-  for (const scopes of Object.values(m.fields))
-    for (const group of Object.values(scopes))
-      for (const file of group.files)
-        assert.ok(existsSync(out + "/static-data/" + c.version + "/" + file));
+  const m = indexRead(f);
+  for (const scopes of Object.values(m.fields)) for (const group of Object.values(scopes)) {
+    for (const file of group.files) assert.ok(existsSync(indexRoot + file));
+    if (group.preview) {
+      const preview = indexRead(group.preview);
+      assert.equal(preview.length, Math.min(40, group.count));
+      const pairs = group.count ? indexRead(group.files[0]).slice(0, 40) : [];
+      assert.deepEqual(preview.map(p => p.id), pairs.map(([k,row]) => c.keys[k] + ":" + row));
+    }
+  }
 }
 const { createMetadataSearch } = await import(
   pathToFileURL(out + "/" + release.modules + "/search/metadata-engine.mjs")
@@ -120,22 +144,26 @@ const engine = createMetadataSearch({
     return reader(...a);
   },
 });
-for (const [q, scope, field, total] of [
-  ["赤壁赋", "all", "title-author", 62],
-  ["赤壁賦", "all", "title", 62],
-  ["其", "all", "title-author", 144468],
-  ["歐陽修", "song-era", "author", 1253],
-]) {
+const fixturesPath = process.env.RELEASE_SEARCH_FIXTURES || (existsSync(dataset + "/search-fixtures.json") ? dataset + "/search-fixtures.json" : null);
+const fixtures = fixturesPath
+  ? JSON.parse(readFileSync(fixturesPath))
+  : [
+      ["赤壁赋", "all", "title-author", 62],
+      ["赤壁賦", "all", "title", 62],
+      ["其", "all", "title-author", 144468],
+      ["歐陽修", "song-era", "author", 1253],
+    ];
+for (const [q, scope, field, total] of fixtures) {
   const before = detailRequests;
   const a = await engine.search({ q, scope, field });
   assert.equal(a.total, total);
   assert.equal(detailRequests, before);
-  assert.equal(a.items.length, 40);
+  assert.equal(a.items.length, Math.min(40, total));
   const p = await engine.poem(a.items[0].id, a.version);
   assert.ok(p.text);
   const next = await engine.search({ q, scope, field, offset: 40 });
-  assert.ok(next.items.length);
-  assert.notEqual(next.items[0].id, a.items[0].id);
+  assert.equal(next.items.length, Math.min(40, Math.max(0, total - 40)));
+  if (next.items.length) assert.notEqual(next.items[0].id, a.items[0].id);
 }
 await assert.rejects(() => engine.poem("guwen:0", "wrong"));
 for (const name of [
@@ -156,7 +184,8 @@ const result = {
   mode: "Local files plus real production engine; remote data fetch mapped to pinned local checkout",
 };
 writeFileSync(
-  "release-artifacts/production-verification.json",
+  process.env.RELEASE_VERIFICATION ||
+    "release-artifacts/production-verification.json",
   JSON.stringify(result, null, 2),
 );
 console.log(result);

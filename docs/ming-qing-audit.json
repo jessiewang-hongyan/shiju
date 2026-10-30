@@ -1,0 +1,115 @@
+[
+  {
+    "key": "ming-era",
+    "name": "明",
+    "count": 236957,
+    "sources": [
+      {
+        "repo": "Werneror/Poetry",
+        "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+        "path": "明_1.csv",
+        "bytes": 15189072,
+        "git_blob": "d41919fc857bdd4265f7cdce66dc156ee08b30a6",
+        "group": "Werneror/明",
+        "kind": "正文",
+        "sha256": "0e5ded52c96c8e34ab2eff2ca89a15a7de75b039194ad001baa98286d2e2e10d",
+        "parsed_records": 59478
+      },
+      {
+        "repo": "Werneror/Poetry",
+        "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+        "path": "明_2.csv",
+        "bytes": 14494521,
+        "git_blob": "4e0efddbab82faf4736d3a78f9cc973c8b61aa04",
+        "group": "Werneror/明",
+        "kind": "正文",
+        "sha256": "ed4816f919f168ab037d2a481a87ac236867458ea2f19effc11ac858978991a3",
+        "parsed_records": 59000
+      },
+      {
+        "repo": "Werneror/Poetry",
+        "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+        "path": "明_3.csv",
+        "bytes": 14468379,
+        "git_blob": "c39d19ceef8d6039c779a9cae7d253d99762225b",
+        "group": "Werneror/明",
+        "kind": "正文",
+        "sha256": "dc0f9be95fde68d0587a89f7f11526c1b01ac96ad263e94221e979e35a2b94cc",
+        "parsed_records": 59479
+      },
+      {
+        "repo": "Werneror/Poetry",
+        "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+        "path": "明_4.csv",
+        "bytes": 21654794,
+        "git_blob": "abc1e09608d217d85ee5606f7f1bd6055a2c94b7",
+        "group": "Werneror/明",
+        "kind": "正文",
+        "sha256": "d4c6bdc86d2bd9fcbfe4f5f3e747aedf1814e37aaa1f3848834d8e9316029b79",
+        "parsed_records": 59000
+      }
+    ],
+    "sha256": "c64c0fbb71fa1987cceec42ad345523cc832fc47021bc892cb09399f9feadc42",
+    "missing": {},
+    "exactDuplicateExtra": 1,
+    "gapRecords": 2365,
+    "maxTextLength": 9905
+  },
+  {
+    "key": "qing-era",
+    "name": "清",
+    "count": 90089,
+    "sources": [
+      {
+        "repo": "Werneror/Poetry",
+        "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+        "path": "清_1.csv",
+        "bytes": 13582872,
+        "git_blob": "4dd1a19db14e4641766f049c6b85501b76823a06",
+        "group": "Werneror/清",
+        "kind": "正文",
+        "sha256": "5fb98e6c1f019fdac176e7c42c73bfc5154cf881dab9da8d2e50ad0603fbca1d",
+        "parsed_records": 45091
+      },
+      {
+        "repo": "Werneror/Poetry",
+        "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+        "path": "清_2.csv",
+        "bytes": 15130232,
+        "git_blob": "f5cc31fa5fc8a46a9dddc0e596b787dd5eeab4e3",
+        "group": "Werneror/清",
+        "kind": "正文",
+        "sha256": "a1fbd8db5f1605565e4bb98e0e76a1c272c3eb132126b08b18d8cae883b36fd4",
+        "parsed_records": 44998
+      }
+    ],
+    "sha256": "15f8fdf0c0c763e010befe81ac543784669c449dfb1aee1c7601cbfe1fe1ffe1",
+    "missing": {},
+    "exactDuplicateExtra": 3,
+    "gapRecords": 445,
+    "maxTextLength": 10723
+  },
+  {
+    "key": "ming-qing",
+    "name": "明末清初",
+    "count": 17700,
+    "sources": [
+      {
+        "repo": "Werneror/Poetry",
+        "commit": "4cfe49c06858e00d15f84d192fe5294295f79689",
+        "path": "明末清初.csv",
+        "bytes": 5402894,
+        "git_blob": "5bc95b862728e3f1402544563f78d2a86e81abef",
+        "group": "Werneror/明末清初",
+        "kind": "正文",
+        "sha256": "e0987d82e81e86c470b3cfc377b42f602a847f07513d066f74ace71d94e5d613",
+        "parsed_records": 17700
+      }
+    ],
+    "sha256": "1d93dcadd84f52f92ab16c0aec64a0541e3c7aaa99af005987e07b3aec2cab7e",
+    "missing": {},
+    "exactDuplicateExtra": 0,
+    "gapRecords": 111,
+    "maxTextLength": 5167
+  }
+]

@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import assert from "node:assert/strict";
-const expected = JSON.parse(readFileSync("_site/release.json"));
+const expected = JSON.parse(readFileSync((process.env.RELEASE_OUT || "_site") + "/release.json"));
 const inventory = JSON.parse(
   readFileSync(
     (process.env.RELEASE_DATA_DIR || ".release-data") + "/body-inventory.json",
@@ -29,10 +29,17 @@ if (base) {
     results.push({ entry, status: 200 });
   }
 }
-const samples = new Map();
+const grouped = new Map();
 for (const [path, hash] of Object.entries(inventory.files)) {
   const key = path.split("/")[1];
-  if (!samples.has(key)) samples.set(key, { path, hash });
+  if (!grouped.has(key)) grouped.set(key, []);
+  grouped.get(key).push({path,hash});
+}
+const samples = new Map();
+for (const [key, rows] of grouped) {
+  const indices = ["ming-era", "qing-era", "ming-qing"].includes(key)
+    ? [...new Set([0, Math.floor(rows.length/2), rows.length-1])] : [0];
+  for (const i of indices) samples.set(key + ":" + i, rows[i]);
 }
 for (const [key, { path, hash }] of samples) {
   const { r, start } = await get(bodyBase + path);
@@ -56,7 +63,7 @@ const report = {
   results,
 };
 writeFileSync(
-  "release-artifacts/public-verification.json",
+  process.env.RELEASE_PUBLIC_VERIFICATION || "release-artifacts/public-verification.json",
   JSON.stringify(report, null, 2),
 );
 console.log(JSON.stringify(report, null, 2));

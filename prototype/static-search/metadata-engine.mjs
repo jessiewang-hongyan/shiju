@@ -1,3 +1,4 @@
+import { postingRows } from "./posting-codec.mjs";
 import { relevance } from "./relevance.mjs";
 export function createMetadataSearch({
   fetchJSON,
@@ -16,7 +17,12 @@ export function createMetadataSearch({
       cache.set(url, s);
       return JSON.parse(s);
     }
-    const data = await fetchJSON(url);
+    let data = await fetchJSON(url);
+    if (data?.encoding === "gzip-base64-v1") {
+      const { unpack } = await import("./unpack.mjs");
+      signal?.throwIfAborted();
+      data = unpack(data);
+    }
     signal?.throwIfAborted();
     const s = JSON.stringify(data),
       size = s.length * 2;
@@ -56,6 +62,7 @@ export function createMetadataSearch({
     const query = normalize(q).trim().split(/\s+/).filter(Boolean).join(" "),
       words = query.split(/\s+/).filter(Boolean);
     let found = [];
+    let directItems = null;
     let preselected = null,
       total;
     if (c.hot?.[query]) {
@@ -64,9 +71,12 @@ export function createMetadataSearch({
       const group = m.fields[field][scope];
       total = group.count;
       preselected = [];
+      if (group.preview && offset + limit <= 40) {
+        directItems = (await read(base + group.preview)).slice(offset, offset + limit);
+      }
       for (
         let page = Math.floor(offset / m.size);
-        page <= Math.floor(Math.min(offset + limit - 1, total - 1) / m.size);
+        !directItems && page <= Math.floor(Math.min(offset + limit - 1, total - 1) / m.size);
         page++
       ) {
         const rows = await read(base + group.files[page]);
@@ -80,12 +90,23 @@ export function createMetadataSearch({
       }
     } else if (query) {
       const chars = [...new Set(query.replace(/\s/g, ""))];
-      if (chars.every((ch) => c.chars[ch])) {
-        chars.sort((a, b) => c.chars[a][0] - c.chars[b][0]);
+      let directory = c.chars;
+      if (!directory) {
+        const counts = field === "author" ? c.authorCharCounts : c.charCounts;
+        const totalRecords = Object.values(c.counts).reduce((a, b) => a + b, 0);
+        if (counts && (scope === "all" || field === "author" || c.counts[scope] > totalRecords * 0.1)) {
+          const prefix = field === "author" ? "a-" : "p-";
+          directory = Object.fromEntries(chars.filter(ch => counts[ch]).map(ch => [ch, [counts[ch], prefix + ch.codePointAt(0).toString(16) + ".json"]]));
+        } else {
+          directory = await read("static-data/" + c.version + "/" + (field === "author" && c.authorCharsFile ? c.authorCharsFile : scope === "all" ? c.charsFile : c.scopeIndexes[scope]));
+        }
+      }
+      if (chars.every((ch) => directory[ch])) {
+        chars.sort((a, b) => directory[a][0] - directory[b][0]);
         const candidates = await read(
-          "static-data/" + c.version + "/" + c.chars[chars[0]][1],
+          "static-data/" + c.version + "/" + directory[chars[0]][1],
         );
-        for (const [k, row, title, author] of candidates) {
+        for (const [k, row, title, author] of postingRows(candidates)) {
           const key = c.keys[k];
           if (scope !== "all" && key !== scope) continue;
           const text =
@@ -105,19 +126,23 @@ export function createMetadataSearch({
         );
       }
     } else {
-      for (const key of c.keys)
-        if (scope === "all" || key === scope)
-          for (let row = 0; row < c.counts[key]; row++)
-            found.push({ key, row });
+      total = 0;
+      preselected = [];
+      for (const key of c.keys) if (scope === "all" || key === scope) {
+        const start = Math.max(0, offset - total);
+        const end = Math.min(c.counts[key], offset + limit - total);
+        for (let row = start; row < end; row++) preselected.push({ key, row });
+        total += c.counts[key];
+      }
     }
     const chosen = preselected || found.slice(offset, offset + limit),
-      items = [],
+      items = directItems || [],
       local = new Map();
     async function once(url) {
       if (!local.has(url)) local.set(url, read(url));
       return local.get(url);
     }
-    // Four concurrent block reads, sharing promises within this page.
+    // Eight concurrent block reads, sharing promises within this page.
     async function item({ key, row }) {
       const base = "static-data/" + c.sourceVersion + "/" + key + "/";
       const m = await once(base + "manifest.json");
@@ -125,8 +150,8 @@ export function createMetadataSearch({
         row % m.size
       ];
     }
-    for (let i = 0; i < chosen.length; i += 4)
-      items.push(...(await Promise.all(chosen.slice(i, i + 4).map(item))));
+    for (let i = 0; i < chosen.length; i += 8)
+      items.push(...(await Promise.all(chosen.slice(i, i + 8).map(item))));
     return {
       version: c.version,
       total: total ?? found.length,

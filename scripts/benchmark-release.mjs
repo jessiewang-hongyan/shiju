@@ -18,7 +18,9 @@ const { normalize } = await import(
 const { createRemoteReader } = await import(
   pathToFileURL(modulePath + "remote-reader.mjs")
 );
-const base = `https://raw.githubusercontent.com/${release.data.repository}/${release.data.commit}/bodies/`;
+const base = release.data.preview
+  ? release.data.baseURL
+  : `https://raw.githubusercontent.com/${release.data.repository}/${release.data.commit}/bodies/`;
 const cases = [
   { q: "赤壁赋", scope: "all", field: "title-author" },
   { q: "歐陽修", scope: "song-era", field: "author" },
@@ -67,10 +69,17 @@ for (const profile of [
         };
       }
       const catalog = await measure(() =>
-        engine.search({ q: "", scope: "all" }),
+        (async () => {
+          if (release.compactSummaries) await file(modulePath + "unpack.mjs");
+          return engine.search({ q: "", scope: "all" });
+        })(),
       );
       const cold = await measure(async () => {
         await file(modulePath + "search-converter.mjs");
+        // Include lazy decoder transfer in cold runs, even though Node has imported it.
+        if (release.compactIndex && !release.compactSummaries) {
+          await file(modulePath + "unpack.mjs");
+        }
         return engine.search(query);
       });
       const warm = await measure(() => engine.search(query));
@@ -103,7 +112,8 @@ for (const profile of [
       );
     }
 writeFileSync(
-  "release-artifacts/production-performance.json",
+  process.env.RELEASE_PERFORMANCE ||
+    "release-artifacts/production-performance.json",
   JSON.stringify(
     {
       runtime: release.runtime,

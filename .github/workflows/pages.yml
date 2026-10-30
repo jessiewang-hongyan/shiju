@@ -41,6 +41,10 @@ jobs:
         run: |
           node scripts/build-release.mjs
           node scripts/verify-release.mjs
+          if [ -f .release-data/compatibility-policy.json ]; then
+            prior=$(node -p "require('./.release-data/compatibility-policy.json').retainedDirectory")
+            RETAINED_INVENTORY=".release-data/$prior/inventory.json" node scripts/verify-retained-release.mjs ".release-data/$prior" _site .release-data release-artifacts/retained-verification.json
+          fi
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

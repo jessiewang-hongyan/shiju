@@ -1,5 +1,6 @@
 import {
   readFileSync,
+  existsSync,
   writeFileSync,
   cpSync,
   mkdirSync,
@@ -8,13 +9,33 @@ import {
   renameSync,
   unlinkSync,
 } from "node:fs";
-import { join, relative, resolve } from "node:path";
+import { join, relative, resolve, dirname } from "node:path";
 import { createHash } from "node:crypto";
-const pin = JSON.parse(readFileSync("release-data.json"));
+const pin = JSON.parse(readFileSync(process.env.RELEASE_DATA_PIN || "release-data.json"));
 if (!/^[a-f0-9]{40}$/.test(pin.commit))
   throw Error("Pin data to a full commit");
 const dataset = resolve(process.env.RELEASE_DATA_DIR || ".release-data"),
   out = resolve(process.env.RELEASE_OUT || "_site");
+const policyPath = join(dataset, "compatibility-policy.json");
+const policy = existsSync(policyPath) ? JSON.parse(readFileSync(policyPath)) : null;
+const legacyMode = process.env.RELEASE_LEGACY_MODE || policy?.mode || "keep";
+let retainSite = process.env.RELEASE_RETAIN_SITE;
+if (legacyMode === "retain-current") {
+  if (policy?.schema !== 1 || policy.mode !== "retain-current" || policy.retiredLegacy !== "e231436" || !/^[a-f0-9]{16}$/.test(policy.retainedRuntime) || policy.retainedDirectory !== "compatibility/" + policy.retainedRuntime || policy.inventory !== policy.retainedDirectory + "/inventory.json")
+    throw Error("Invalid immutable compatibility policy");
+  if (retainSite) throw Error("Do not override pinned compatibility snapshot");
+  retainSite = join(dataset, policy.retainedDirectory);
+  const raw = readFileSync(join(dataset, policy.inventory));
+  if (createHash("sha256").update(raw).digest("hex") !== policy.inventorySha256) throw Error("Compatibility inventory mismatch");
+  const saved = JSON.parse(raw);
+  if (saved.runtime !== policy.retainedRuntime) throw Error("Compatibility runtime mismatch");
+  for (const f of saved.files) {
+    if (typeof f.path !== "string" || f.path.split("/").includes("..") || f.path.startsWith("/")) throw Error("Invalid compatibility path");
+    if (createHash("sha256").update(readFileSync(join(retainSite, f.path))).digest("hex") !== f.sha256) throw Error("Compatibility file mismatch: " + f.path);
+  }
+}
+if (!["keep", "retire-preview", "retain-current"].includes(legacyMode)) throw Error("Invalid compatibility mode");
+if (legacyMode === "retire-preview" && !process.env.RELEASE_PREVIEW_BODY_BASE) throw Error("Legacy retirement is local-preview only pending migration acceptance");
 mkdirSync(out, { recursive: false });
 function copyTree(src, dest, filter = () => true) {
   mkdirSync(dest, { recursive: true });
@@ -31,7 +52,15 @@ copyTree("dist", out, (p) => {
 });
 cpSync(dataset + "/static-data", out + "/static-data", { recursive: true });
 cpSync(dataset + "/licenses", out + "/licenses", { recursive: true });
-const base = `https://raw.githubusercontent.com/${pin.repository}/${pin.commit}/bodies/`;
+const previewBase = process.env.RELEASE_PREVIEW_BODY_BASE;
+if (
+  previewBase &&
+  !/^http:\/\/(127\.0\.0\.1|localhost):\d+\//.test(previewBase)
+)
+  throw Error("Preview body base must be localhost");
+const base =
+  previewBase ||
+  `https://raw.githubusercontent.com/${pin.repository}/${pin.commit}/bodies/`;
 const config = JSON.parse(
   readFileSync(out + "/static-data/metadata-current.json"),
 );
@@ -53,6 +82,7 @@ writeFileSync(out + "/static-data/" + configName, configText);
 unlinkSync(out + "/static-data/metadata-current.json");
 mkdirSync(out + "/modules/search", { recursive: true });
 for (const f of [
+  "release-update.mjs",
   "jobs.mjs",
   "worker.mjs",
   "transport.mjs",
@@ -61,6 +91,8 @@ for (const f of [
   "search-converter.mjs",
 ])
   cpSync("prototype/static-search/" + f, out + "/modules/search/" + f);
+cpSync("prototype/static-search/unpack-bundled.mjs", out + "/modules/search/unpack.mjs");
+cpSync("prototype/static-search/vendor", out + "/modules/search/vendor", { recursive: true });
 cpSync(
   "prototype/remote-body/reader.mjs",
   out + "/modules/search/remote-reader.mjs",
@@ -74,6 +106,9 @@ function replaceRequired(s, a, b) {
   return s.replace(a, b);
 }
 edit("modules/search/metadata-engine.mjs", (s) => {
+  // Inline the small reader so dictionary postings add no bootstrap request.
+  const codec = readFileSync("prototype/static-search/posting-codec.mjs", "utf8");
+  s = replaceRequired(s, 'import { postingRows } from "./posting-codec.mjs";', codec.slice(codec.indexOf("export function* postingRows")).replace("export function*", "function*"));
   s = replaceRequired(
     s,
     "  getSignal = () => undefined,",
@@ -123,7 +158,7 @@ edit("modules/fonts.js", (s) =>
 edit(
   "app.js",
   (s) =>
-    'import {staticRequest} from "./modules/search/transport.mjs";\n' +
+    'import {initReleaseUpdate} from "./modules/search/release-update.mjs";\nimport {staticRequest} from "./modules/search/transport.mjs";\n' +
     replaceRequired(
       s,
       "initLibrary({ editor, typography })",
@@ -138,6 +173,8 @@ edit("index.html", (s) =>
     )
     .replace(/\s*<option value="full">[^<]*<\/option>/, ""),
 );
+edit("app.js", s => s + "\ninitReleaseUpdate({store});\n");
+edit("modules/search/transport.mjs", s => s.replace('data.error ? p.reject(Error(data.error)) : p.resolve(data.result);', 'if(data.error){windowError();p.reject(Error(data.error));}else p.resolve(data.result);') + '\nfunction windowError(){globalThis.dispatchEvent?.(new Event("shiju-search-error"));}\n');
 // Version the runtime and entry assets; old cached HTML never mixes new modules.
 function walk(dir) {
   return readdirSync(dir)
@@ -167,8 +204,32 @@ edit("index.html", (s) =>
 );
 // First migration: keep URLs used by cached HTML and already-open legacy tabs.
 // These assets are not referenced by the new entry point.
-for (const name of ["app.js", "style.css", "modules", "data"])
+if (legacyMode === "keep") for (const name of ["app.js", "style.css", "modules", "data"])
   cpSync("dist/" + name, out + "/" + name, { recursive: true });
+// Preserve the exact versioned resources of the saved current production release.
+let retainedRuntime;
+if (retainSite) {
+  const previous = resolve(retainSite);
+  const prior = JSON.parse(readFileSync(previous + "/release.json"));
+  if (!/^[a-f0-9]{16}$/.test(prior.runtime) || prior.modules !== "modules-" + prior.runtime)
+    throw Error("Invalid retained runtime");
+  retainedRuntime = prior.runtime;
+  if (policy && retainedRuntime !== policy.retainedRuntime) throw Error("Retained snapshot runtime mismatch");
+  for (const name of ["app-"+prior.runtime+".js", "style-"+prior.runtime+".css", prior.modules, "static-data"]) {
+    const src = previous + "/" + name;
+    const paths = statSync(src).isDirectory() ? walk(src) : [src];
+    for (const path of paths) {
+      const rel = relative(previous, path);
+      // Mutable discovery files belong to the new release; old runtimes pin hashed config URLs.
+      if (["static-data/current.json", "static-data/metadata-current.json"].includes(rel)) continue;
+      const destination = out + "/" + rel;
+      if (existsSync(destination)) {
+        if (!readFileSync(destination).equals(readFileSync(path))) throw Error("Retained URL collision: " + rel);
+      } else { mkdirSync(dirname(destination), { recursive: true }); cpSync(path, destination); }
+    }
+  }
+}
+
 writeFileSync(out + "/.nojekyll", "");
 writeFileSync(
   out + "/licenses/SEARCH-CONVERTER.md",
@@ -179,10 +240,15 @@ writeFileSync(
   JSON.stringify(
     {
       runtime: version,
-      data: pin,
+      compactIndex: config.format === 2,
+      compactSummaries: config.summaryEncoding === "gzip-base64-v1",
+      data: previewBase ? { preview: true, baseURL: previewBase } : pin,
       config: "static-data/" + configName,
       modules,
-      legacyCompatibility: "e231436",
+      legacyCompatibility: legacyMode === "keep" ? "e231436" : null,
+      compatibilityMode: legacyMode,
+      retainedRuntime,
+      compatibilityPolicySHA256: policy ? createHash("sha256").update(readFileSync(policyPath)).digest("hex") : undefined,
     },
     null,
     2,
@@ -196,9 +262,14 @@ const inventory = walk(out).map((p) => {
     sha256: createHash("sha256").update(b).digest("hex"),
   };
 });
+const siteBytes = inventory.reduce((n, f) => n + f.bytes, 0);
+// Use a conservative decimal 1 GB ceiling; local previews may exceed it for audits.
+if (!previewBase && siteBytes > 1_000_000_000)
+  throw Error(`发布包 ${siteBytes} B 超过 1 GB，停止发布；请先精简资源。`);
 mkdirSync("release-artifacts", { recursive: true });
 writeFileSync(
-  "release-artifacts/production-inventory.json",
+  process.env.RELEASE_INVENTORY ||
+    "release-artifacts/production-inventory.json",
   JSON.stringify(
     {
       out,

@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import assert from "node:assert/strict";
 const inv = JSON.parse(
-    readFileSync("release-artifacts/production-inventory.json"),
+    readFileSync(process.env.RELEASE_INVENTORY || "release-artifacts/production-inventory.json"),
   ),
   base = process.env.VERIFY_URL || "http://127.0.0.1:4188/shiju/";
 let i = 0;
@@ -17,7 +17,7 @@ await Promise.all(
   }),
 );
 writeFileSync(
-  "release-artifacts/production-http-verification.json",
+  process.env.RELEASE_HTTP_VERIFICATION || "release-artifacts/production-http-verification.json",
   JSON.stringify({ passed: true, base, files: inv.files.length }),
 );
 console.log("HTTP paths verified:", inv.files.length);
