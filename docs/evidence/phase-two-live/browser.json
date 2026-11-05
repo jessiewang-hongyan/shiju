@@ -24,5 +24,20 @@
   },
   "pngGenerated": true,
   "consoleErrors": [],
-  "downloadFileVerified": false
+  "downloadFileVerified": true,
+  "downloadVerification": {
+    "verifiedOn": "2026-11-05",
+    "filename": "shiju-online-verification.png",
+    "bytes": 1159865,
+    "width": 1080,
+    "height": 1440,
+    "format": "PNG",
+    "mode": "RGBA",
+    "sha256": "dbb15ee57ec04f9080625ec6ee3e5447d4689d6946d061db57b867695beac677",
+    "integrityVerified": true,
+    "fullDecodePassed": true,
+    "visualReview": "集句、挖空原文、纸纹和毛边完整可见，未见文字截断。",
+    "saveMethod": "用户在 Chrome 系统保存窗口完成保存，随后检查实际落盘文件。",
+    "imagePublished": false
+  }
 }

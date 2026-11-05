@@ -113,4 +113,4 @@ node scripts/verify-release.mjs
 
 二期精简发布的最新结论、固定构建入口和发布边界见[最后发布验收](docs/phase-two-final-acceptance.md)。正式二期构建使用 scripts/build-phase-two-release.py，由 phase-two-release-lock.json 锁定已验收产物；当前仍为本地准备，尚未部署。
 
-2026-11-05：二期精简版已上线，当前运行时 72f42ed38a93ae68。详见[正式发布记录](docs/phase-two-production-release.md)，含公网回归、独立回退包及尚待解锁确认的线上 PNG 落盘项。
+2026-11-05：二期精简版已上线，当前运行时 72f42ed38a93ae68。详见[正式发布记录](docs/phase-two-production-release.md)，含已通过的公网搜索、正文加载、线上 PNG 落盘验收及独立回退包记录。
