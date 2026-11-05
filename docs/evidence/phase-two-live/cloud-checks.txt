@@ -1,0 +1,4 @@
+deploy	Check modules and regression tests	2026-11-05T03:53:23.0944848Z # pass 124
+deploy	Check modules and regression tests	2026-11-05T03:53:23.0945035Z # fail 0
+deploy	Build and verify pinned static release	2026-11-05T03:55:08.2468118Z {"baselineCommit": "c66b1e1a36d11df111201bac98e227f2c91650c6", "runtime": "72f42ed38a93ae68", "files": 84356, "bytes": 489993894, "retiredFiles": 30171, "comparedCandidate": null}
+deploy	Build and verify pinned static release	2026-11-05T03:55:12.1412216Z {"pass": true, "files": 84356, "imports": 160, "bytes": 489993894, "runtime": "72f42ed38a93ae68"}

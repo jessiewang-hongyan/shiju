@@ -1,0 +1,110 @@
+{
+  "passed": true,
+  "runtime": "72f42ed38a93ae68",
+  "at": "2026-11-05T03:57:35.394Z",
+  "results": [
+    {
+      "path": "release.json",
+      "status": 200,
+      "bytes": 495,
+      "sha256": "1392e44810e4e00f198824c7c1bf6ed002a47984e4b4008e8a7c1a7620b65119"
+    },
+    {
+      "path": "index.html",
+      "status": 200,
+      "bytes": 34671,
+      "sha256": "c7e9fc00563eba4f5581cff0cf343f206e79807fae2d01c294618f1bb332f552"
+    },
+    {
+      "path": "style-72f42ed38a93ae68.css",
+      "status": 200,
+      "bytes": 51280,
+      "sha256": "861b982aef93bd2ffbf3af031f99f7b5a44536a0fd49c3a56b3f590ed58c1809"
+    },
+    {
+      "path": "modules-72f42ed38a93ae68/app-v2.js",
+      "status": 200,
+      "bytes": 12119,
+      "sha256": "61b7259536ce38f250e0782353612ad0f5a80738f9ef7b78557148d9f9118934"
+    },
+    {
+      "path": "modules-72f42ed38a93ae68/search/transport.mjs",
+      "status": 200,
+      "bytes": 83,
+      "sha256": "fd54e04f0a3a1ea427a5b6934cd42dd29a474ae5c13edb944b2ab2578320f59e"
+    },
+    {
+      "path": "modules-7aab5f4c84cde74f/search/worker.mjs",
+      "status": 200,
+      "bytes": 1751,
+      "sha256": "58136e07d40bb74a0c4f80eaeabc82d063d4d09b43c537dc216f01806c232edd"
+    },
+    {
+      "path": "static-data/config-d70973c921163c86fa8b.json",
+      "status": 200,
+      "bytes": 112227,
+      "sha256": "d70973c921163c86fa8baf1bcb02d8de24351d74ec987b9b5b8864f3efca032f"
+    },
+    {
+      "path": "fonts/wenkai/manifest.json",
+      "status": 200,
+      "bytes": 291175,
+      "sha256": "27ac16958fdeca44d09bc3d444c791fd08363e89fedf34ae05b65dba8fe3bda5"
+    },
+    {
+      "path": "fonts/kangxi/manifest.json",
+      "status": 200,
+      "bytes": 157206,
+      "sha256": "a73a025df95b43c3281215ee5cfedac2ec1c8792a3d00c0d9b1c71d88254ba87"
+    },
+    {
+      "path": "fonts/chenyu/manifest.json",
+      "status": 200,
+      "bytes": 62031,
+      "sha256": "a6935de64cfcfd713e71f18749213de073b7c95a497d1bf7b17ef871eb2342af"
+    },
+    {
+      "path": "fonts/bakudai/manifest.json",
+      "status": 200,
+      "bytes": 146765,
+      "sha256": "6782908188c1df8e9185a667ddd88b2cd32bd4c3aff47d5def116341d07c4dec"
+    },
+    {
+      "path": "fonts/huiwen/manifest.json",
+      "status": 200,
+      "bytes": 86064,
+      "sha256": "7b245db11c45ce11dafee1884ec1ee43ef6b36ffc8c9a0e1d581b3a0b3c53bcb"
+    },
+    {
+      "path": "assets/papers/ten-bamboo.jpg",
+      "status": 200,
+      "bytes": 91333,
+      "sha256": "f21fd25e39c92890338d94dfdf669bf380ced071c606f97f4b531e6045178135"
+    },
+    {
+      "path": "assets/papers/lokta.jpg",
+      "status": 200,
+      "bytes": 991273,
+      "sha256": "771f49c8eca4734b5d4a0f8d79a940c21938cdd248a8594ef3d749029fe052f5"
+    },
+    {
+      "path": "assets/papers/cloud.jpg",
+      "status": 200,
+      "bytes": 241019,
+      "sha256": "28a8e8366907be2ff290adbb6d5fc5c55517456b96c908b96cd5a5d58df956b9"
+    },
+    {
+      "path": "assets/papers/newsprint.jpg",
+      "status": 200,
+      "bytes": 88792,
+      "sha256": "2215d7ed1812f8469334159739b781ca661f5834b039f00965c8f87f00a639fc"
+    },
+    {
+      "path": "assets/papers/kraft.jpg",
+      "status": 200,
+      "bytes": 346067,
+      "sha256": "921a82d554b8c3ad90eb9ef76b9b2b26e97476fba86d897d0940144bcf90bf70"
+    }
+  ],
+  "retiredConfigStatus": 404
+}
