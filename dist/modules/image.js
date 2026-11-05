@@ -18,7 +18,14 @@ import {
   paintCenteredGlyph,
   paintPaperRect,
 } from "./image-drawing.js?v=20261027sourcesizes1";
-export function createImage({ editor, typography, fonts, appearance }) {
+export function createImage({
+  editor,
+  typography,
+  fonts,
+  appearance,
+  storage = globalThis.localStorage,
+  renderer,
+}) {
   const { displayText, displayTokens } = typography;
   const { loadExportFont } = fonts;
   const { getExportColors } = appearance;
@@ -87,11 +94,11 @@ export function createImage({ editor, typography, fonts, appearance }) {
     "poem-only",
   ];
   try {
-    const saved = localStorage.getItem("shiju-image-layout");
+    const saved = storage.getItem("shiju-image-layout");
     if (layouts.includes(saved)) $("#image-layout").value = saved;
   } catch {}
   try {
-    const saved = localStorage.getItem("shiju-image-orientation");
+    const saved = storage.getItem("shiju-image-orientation");
     $("#image-orientation").value = ["landscape", "portrait"].includes(saved)
       ? saved
       : ["source-top", "source-bottom"].includes($("#image-layout").value)
@@ -115,10 +122,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
   $("#image-orientation").onchange = () => {
     syncOrientation();
     try {
-      localStorage.setItem(
-        "shiju-image-orientation",
-        $("#image-orientation").value,
-      );
+      storage.setItem("shiju-image-orientation", $("#image-orientation").value);
     } catch {}
     $("#image-layout").onchange();
   };
@@ -141,7 +145,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
   $("#image-layout").onchange = () => {
     syncOrientation();
     try {
-      localStorage.setItem("shiju-image-layout", $("#image-layout").value);
+      storage.setItem("shiju-image-layout", $("#image-layout").value);
     } catch {}
     drawImagePreview();
   };
@@ -162,13 +166,13 @@ export function createImage({ editor, typography, fonts, appearance }) {
       range.value = input.value = n;
       if (persist) {
         try {
-          localStorage.setItem("shiju-image-" + key, String(n));
+          storage.setItem("shiju-image-" + key, String(n));
         } catch {}
         drawImagePreview();
       }
     };
     try {
-      const saved = localStorage.getItem("shiju-image-" + key);
+      const saved = storage.getItem("shiju-image-" + key);
       if (saved !== null) set(saved, false);
     } catch {}
     $("#colors-reset").addEventListener("click", () => set(40));
@@ -177,6 +181,11 @@ export function createImage({ editor, typography, fonts, appearance }) {
     input.onblur = () => set(input.value || range.value);
   }
   function drawImagePreview() {
+    if (renderer) {
+      syncSettingsGroups();
+      renderer.preview();
+      return;
+    }
     syncSettingsGroups();
     const c = $("#image-preview"),
       ctx = c.getContext("2d"),
@@ -254,11 +263,14 @@ export function createImage({ editor, typography, fonts, appearance }) {
           : "当前集句预览，最多两行"
         : "当前集句与挖空原文预览，各最多两行",
     );
-    $(".export-note").textContent = single
-      ? showSource
-        ? "图片仅包含挖空后的原文。"
-        : "图片仅包含集句。"
-      : "图片包含挖空的原文和新诗。";
+    $(".export-note").textContent =
+      editor.multiSource && editor.document.sources.length > 1
+        ? "多原文图片导出将在 2D 接入，目前可保存作品备份。"
+        : single
+          ? showSource
+            ? "图片仅包含挖空后的原文。"
+            : "图片仅包含集句。"
+          : "图片包含挖空的原文和新诗。";
     $("#image-panel-gap-row").hidden = single;
     $("#image-panel-gap").disabled = $("#image-panel-gap-value").disabled =
       single;
@@ -454,8 +466,8 @@ export function createImage({ editor, typography, fonts, appearance }) {
     appearance.setSourceSize(n);
     drawImagePreview();
     try {
-      localStorage.setItem("shiju-source-size", n);
-      localStorage.setItem("shiju-image-size", n);
+      storage.setItem("shiju-source-size", n);
+      storage.setItem("shiju-image-size", n);
     } catch {}
   }
   $("#image-size").oninput = (e) => {
@@ -469,6 +481,7 @@ export function createImage({ editor, typography, fonts, appearance }) {
   $("#image-size-plus").onclick = () =>
     setImageSize(Number($("#image-size").value) + 1);
   async function exportImage() {
+    if (renderer) return renderer.exportImage();
     if ($("#export").disabled) return;
     if (!editor.pickedCount() && layoutOptions().showPoem) {
       toast("请先从原文中选字");

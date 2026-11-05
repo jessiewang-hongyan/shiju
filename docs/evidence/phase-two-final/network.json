@@ -1,0 +1,565 @@
+{
+  "rows": [
+    {
+      "name": "搜索中断",
+      "details": "Failed to fetch"
+    },
+    {
+      "name": "搜索重试",
+      "details": "关雎"
+    },
+    {
+      "name": "选段前正文中断",
+      "details": "正文暂时无法连接，请重试"
+    },
+    {
+      "name": "正文恢复和离线选段",
+      "details": [
+        "山居秋暝 · 1 字",
+        "关雎 · 0 字"
+      ]
+    },
+    {
+      "name": "字体分片中断",
+      "details": "霞鹜文楷加载失败，请检查网络并点击重试（点击重试）"
+    },
+    {
+      "name": "字体重试",
+      "details": "FontFace 已加载；图片预览恢复"
+    },
+    {
+      "name": "离线修改草稿",
+      "details": {
+        "original": [
+          "山居秋暝 · 1 字",
+          "关雎 · 1 字"
+        ],
+        "picked": [
+          "空",
+          "关"
+        ]
+      }
+    },
+    {
+      "name": "断网重新访问网址",
+      "details": "HTML 请求被阻断；当前版本不能保证离线从网址启动"
+    },
+    {
+      "name": "网络恢复后重开作品",
+      "details": "离线修改的草稿、两篇原文和两个字块均恢复"
+    }
+  ],
+  "trace": [
+    {
+      "path": "/shiju/",
+      "time": 1793849782074,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/style-72f42ed38a93ae68.css",
+      "time": 1793849782120,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/app-v2.js",
+      "time": 1793849782122,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/preferences-v2.js",
+      "time": 1793849782256,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/confirm-dialog.js",
+      "time": 1793849782257,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/ui.js",
+      "time": 1793849782258,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/poems.js",
+      "time": 1793849782258,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/document-model.js",
+      "time": 1793849782260,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/document-migrations.js",
+      "time": 1793849782261,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/document-storage.js",
+      "time": 1793849782262,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/draft-session.js",
+      "time": 1793849782263,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/editor-v2.js",
+      "time": 1793849782264,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/library.js",
+      "time": 1793849782265,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/typography.js",
+      "time": 1793849782268,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/fonts.js",
+      "time": 1793849782268,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/appearance.js",
+      "time": 1793849782270,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/image.js",
+      "time": 1793849782270,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/editor-paper-v2.js",
+      "time": 1793849782272,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/source-paper-settings.js",
+      "time": 1793849782273,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/image-v2.js",
+      "time": 1793849782274,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/source-paper.js",
+      "time": 1793849782275,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/source-parts.js",
+      "time": 1793849782276,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/source-layout.js",
+      "time": 1793849782276,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/document-commands.js",
+      "time": 1793849782276,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/library-service.js",
+      "time": 1793849782278,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/library-search.js",
+      "time": 1793849782278,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/editor.js",
+      "time": 1793849782281,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/library-loader.js",
+      "time": 1793849782281,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/library-index.js",
+      "time": 1793849782282,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/paper-materials.js",
+      "time": 1793849782282,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/image-drawing.js",
+      "time": 1793849782283,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/settings-groups.js",
+      "time": 1793849782284,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/source-parts.js",
+      "time": 1793849782286,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/fonts.js",
+      "time": 1793849782286,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/image-drawing.js",
+      "time": 1793849782286,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/image-layout-v2.js",
+      "time": 1793849782287,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/editor.js",
+      "time": 1793849782287,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/favicon.ico",
+      "time": 1793849782299,
+      "mode": "online",
+      "result": 404
+    },
+    {
+      "path": "/shiju/modules-72f42ed38a93ae68/search/transport.mjs",
+      "time": 1793849782378,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-7aab5f4c84cde74f/search/transport.mjs",
+      "time": 1793849782381,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-7aab5f4c84cde74f/search/worker.mjs",
+      "time": 1793849794317,
+      "mode": "slow",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-7aab5f4c84cde74f/search/remote-reader.mjs",
+      "time": 1793849795481,
+      "mode": "slow",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-7aab5f4c84cde74f/search/jobs.mjs",
+      "time": 1793849795482,
+      "mode": "slow",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-7aab5f4c84cde74f/search/metadata-engine.mjs",
+      "time": 1793849795482,
+      "mode": "slow",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-7aab5f4c84cde74f/search/relevance.mjs",
+      "time": 1793849796637,
+      "mode": "slow",
+      "result": 200
+    },
+    {
+      "path": "/shiju/static-data/config-d70973c921163c86fa8b.json",
+      "time": 1793849797797,
+      "mode": "slow",
+      "result": "disconnected"
+    },
+    {
+      "path": "/shiju/static-data/config-d70973c921163c86fa8b.json",
+      "time": 1793849797809,
+      "mode": "slow",
+      "result": "disconnected"
+    },
+    {
+      "path": "/shiju/static-data/config-d70973c921163c86fa8b.json",
+      "time": 1793849797826,
+      "mode": "offline",
+      "result": "disconnected"
+    },
+    {
+      "path": "/shiju/static-data/config-d70973c921163c86fa8b.json",
+      "time": 1793849797828,
+      "mode": "offline",
+      "result": "disconnected"
+    },
+    {
+      "path": "/shiju/static-data/config-d70973c921163c86fa8b.json",
+      "time": 1793849797829,
+      "mode": "offline",
+      "result": "disconnected"
+    },
+    {
+      "path": "/shiju/static-data/config-d70973c921163c86fa8b.json",
+      "time": 1793849797897,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-7aab5f4c84cde74f/search/search-converter.mjs",
+      "time": 1793849797917,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/static-data/6232011b885ca65c14fd/42bf4c78ec9d6e654816.json",
+      "time": 1793849797932,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/modules-7aab5f4c84cde74f/search/unpack.mjs",
+      "time": 1793849797938,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/static-data/6232011b885ca65c14fd/616568ba4cc97d845a43.json",
+      "time": 1793849797944,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/static-data/cd604eda6a76f51410b4-remote-v2-index-876978309ad96b584d2d-summaries-aafbd9af005fb5305048-index-6232011b885ca65c14fd/shijing/manifest.json",
+      "time": 1793849797953,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/static-data/cd604eda6a76f51410b4-remote-v2-index-876978309ad96b584d2d-summaries-aafbd9af005fb5305048-index-6232011b885ca65c14fd/shijing/23cd0257e7d656b94df3.json",
+      "time": 1793849797958,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/__bodies/a43b9f1990309297ffbb-b32k-v1/shijing/5c8d43bdd80178dbcdd3a7499c255fde573f92598d32f9e28f8589048864b395.json",
+      "time": 1793849797982,
+      "mode": "slow",
+      "result": "disconnected"
+    },
+    {
+      "path": "/__bodies/a43b9f1990309297ffbb-b32k-v1/shijing/5c8d43bdd80178dbcdd3a7499c255fde573f92598d32f9e28f8589048864b395.json",
+      "time": 1793849798928,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/fonts/wenkai/manifest.json",
+      "time": 1793849799148,
+      "mode": "slow",
+      "result": 200
+    },
+    {
+      "path": "/shiju/fonts/wenkai/000.woff2",
+      "time": 1793849806090,
+      "mode": "slow",
+      "result": "disconnected"
+    },
+    {
+      "path": "/shiju/fonts/wenkai/001.woff2",
+      "time": 1793849806091,
+      "mode": "slow",
+      "result": "disconnected"
+    },
+    {
+      "path": "/shiju/fonts/wenkai/002.woff2",
+      "time": 1793849806091,
+      "mode": "slow",
+      "result": "disconnected"
+    },
+    {
+      "path": "/shiju/fonts/wenkai/000.woff2",
+      "time": 1793849806993,
+      "mode": "offline",
+      "result": "disconnected"
+    },
+    {
+      "path": "/shiju/fonts/wenkai/001.woff2",
+      "time": 1793849806993,
+      "mode": "offline",
+      "result": "disconnected"
+    },
+    {
+      "path": "/shiju/fonts/wenkai/000.woff2",
+      "time": 1793849806994,
+      "mode": "offline",
+      "result": "disconnected"
+    },
+    {
+      "path": "/shiju/fonts/wenkai/000.woff2",
+      "time": 1793849807049,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/fonts/wenkai/001.woff2",
+      "time": 1793849807050,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/fonts/wenkai/002.woff2",
+      "time": 1793849807051,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/fonts/wenkai/003.woff2",
+      "time": 1793849807062,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/fonts/wenkai/004.woff2",
+      "time": 1793849807063,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/fonts/wenkai/005.woff2",
+      "time": 1793849807064,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/fonts/wenkai/006.woff2",
+      "time": 1793849807073,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/fonts/wenkai/007.woff2",
+      "time": 1793849807074,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/fonts/wenkai/008.woff2",
+      "time": 1793849807074,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/fonts/wenkai/009.woff2",
+      "time": 1793849807080,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/fonts/wenkai/010.woff2",
+      "time": 1793849807080,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/fonts/wenkai/017.woff2",
+      "time": 1793849807080,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/fonts/wenkai/021.woff2",
+      "time": 1793849807086,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/shiju/",
+      "time": 1793849807198,
+      "mode": "offline",
+      "result": "disconnected"
+    },
+    {
+      "path": "/shiju/",
+      "time": 1793849807198,
+      "mode": "offline",
+      "result": "disconnected"
+    },
+    {
+      "path": "/shiju/",
+      "time": 1793849807199,
+      "mode": "offline",
+      "result": "disconnected"
+    },
+    {
+      "path": "/shiju/",
+      "time": 1793849807199,
+      "mode": "offline",
+      "result": "disconnected"
+    },
+    {
+      "path": "/shiju/",
+      "time": 1793849807200,
+      "mode": "offline",
+      "result": "disconnected"
+    },
+    {
+      "path": "/shiju/",
+      "time": 1793849807211,
+      "mode": "online",
+      "result": "pending"
+    }
+  ],
+  "finished": true
+}

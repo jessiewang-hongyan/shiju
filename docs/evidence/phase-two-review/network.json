@@ -1,0 +1,793 @@
+{
+  "rows": [
+    {
+      "name": "搜索中断",
+      "details": "Failed to fetch"
+    },
+    {
+      "name": "搜索重试",
+      "details": "关雎"
+    },
+    {
+      "name": "选段前正文中断",
+      "details": "正文暂时无法连接，请重试"
+    },
+    {
+      "name": "正文恢复和离线选段",
+      "details": [
+        "山居秋暝 · 1 字",
+        "关雎 · 0 字"
+      ]
+    },
+    {
+      "name": "字体分片中断",
+      "details": "霞鹜文楷加载失败，请检查网络并点击重试（点击重试）"
+    },
+    {
+      "name": "字体重试",
+      "details": "FontFace 已加载；图片预览恢复"
+    },
+    {
+      "name": "离线打开收藏",
+      "details": {
+        "original": [
+          "山居秋暝 · 1 字",
+          "关雎 · 1 字"
+        ],
+        "picked": [
+          "空",
+          "关"
+        ]
+      }
+    },
+    {
+      "name": "断网重新访问网址",
+      "details": "HTML 请求被阻断；当前版本不能保证离线从网址启动"
+    },
+    {
+      "name": "网络恢复后重开作品",
+      "details": "草稿、两篇原文、两个字块和收藏均恢复"
+    }
+  ],
+  "trace": [
+    {
+      "path": "/prototype/multi-source/network-lab.html",
+      "time": 1793845722012,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/prototype/multi-source/network-lab.js",
+      "time": 1793845722189,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/",
+      "time": 1793845722220,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/phase-two.css",
+      "time": 1793845722297,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/style.css",
+      "time": 1793845722298,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/app-v2.js",
+      "time": 1793845722304,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/preferences-v2.js",
+      "time": 1793845722445,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/confirm-dialog.js",
+      "time": 1793845722448,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/ui.js",
+      "time": 1793845722453,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/document-storage.js",
+      "time": 1793845722459,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/poems.js",
+      "time": 1793845722459,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/draft-session.js",
+      "time": 1793845722460,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/editor-v2.js",
+      "time": 1793845722460,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/document-model.js",
+      "time": 1793845722460,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/document-migrations.js",
+      "time": 1793845722462,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/library.js",
+      "time": 1793845722464,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/typography.js",
+      "time": 1793845722466,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/fonts.js",
+      "time": 1793845722467,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/appearance.js",
+      "time": 1793845722469,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/image.js",
+      "time": 1793845722470,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/editor-paper-v2.js",
+      "time": 1793845722472,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/source-paper-settings.js",
+      "time": 1793845722472,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/image-v2.js",
+      "time": 1793845722472,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/source-layout.js",
+      "time": 1793845722473,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/source-parts.js",
+      "time": 1793845722473,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/document-commands.js",
+      "time": 1793845722474,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/source-paper.js",
+      "time": 1793845722477,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/library-service.js",
+      "time": 1793845722479,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/library-search.js",
+      "time": 1793845722480,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/editor.js",
+      "time": 1793845722480,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/library-loader.js",
+      "time": 1793845722480,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/library-index.js",
+      "time": 1793845722481,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/paper-materials.js",
+      "time": 1793845722482,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/image-drawing.js",
+      "time": 1793845722483,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/settings-groups.js",
+      "time": 1793845722483,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/source-parts.js",
+      "time": 1793845722484,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/fonts.js",
+      "time": 1793845722485,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/image-drawing.js",
+      "time": 1793845722487,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/image-layout-v2.js",
+      "time": 1793845722488,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/editor.js",
+      "time": 1793845722489,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/favicon.ico",
+      "time": 1793845722512,
+      "mode": "online",
+      "result": 404
+    },
+    {
+      "path": "/modules/search/transport.mjs",
+      "time": 1793845722572,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/search/worker.mjs",
+      "time": 1793845727006,
+      "mode": "slow",
+      "result": 200
+    },
+    {
+      "path": "/modules/search/remote-reader.mjs",
+      "time": 1793845727922,
+      "mode": "slow",
+      "result": 200
+    },
+    {
+      "path": "/modules/search/jobs.mjs",
+      "time": 1793845727922,
+      "mode": "slow",
+      "result": 200
+    },
+    {
+      "path": "/modules/search/metadata-engine.mjs",
+      "time": 1793845727922,
+      "mode": "slow",
+      "result": 200
+    },
+    {
+      "path": "/modules/search/relevance.mjs",
+      "time": 1793845728832,
+      "mode": "slow",
+      "result": 200
+    },
+    {
+      "path": "/static-data/config-d70973c921163c86fa8b.json",
+      "time": 1793845729738,
+      "mode": "slow",
+      "result": "disconnected"
+    },
+    {
+      "path": "/static-data/config-d70973c921163c86fa8b.json",
+      "time": 1793845729738,
+      "mode": "slow",
+      "result": "disconnected"
+    },
+    {
+      "path": "/static-data/config-d70973c921163c86fa8b.json",
+      "time": 1793845730640,
+      "mode": "offline",
+      "result": "disconnected"
+    },
+    {
+      "path": "/static-data/config-d70973c921163c86fa8b.json",
+      "time": 1793845730641,
+      "mode": "offline",
+      "result": "disconnected"
+    },
+    {
+      "path": "/static-data/config-d70973c921163c86fa8b.json",
+      "time": 1793845730642,
+      "mode": "offline",
+      "result": "disconnected"
+    },
+    {
+      "path": "/static-data/config-d70973c921163c86fa8b.json",
+      "time": 1793845730663,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/search/search-converter.mjs",
+      "time": 1793845730680,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/static-data/6232011b885ca65c14fd/42bf4c78ec9d6e654816.json",
+      "time": 1793845730689,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/search/unpack.mjs",
+      "time": 1793845730692,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/static-data/6232011b885ca65c14fd/616568ba4cc97d845a43.json",
+      "time": 1793845730700,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/static-data/cd604eda6a76f51410b4-remote-v2-index-876978309ad96b584d2d-summaries-aafbd9af005fb5305048-index-6232011b885ca65c14fd/shijing/manifest.json",
+      "time": 1793845730704,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/static-data/cd604eda6a76f51410b4-remote-v2-index-876978309ad96b584d2d-summaries-aafbd9af005fb5305048-index-6232011b885ca65c14fd/shijing/23cd0257e7d656b94df3.json",
+      "time": 1793845730706,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/__bodies/a43b9f1990309297ffbb-b32k-v1/shijing/5c8d43bdd80178dbcdd3a7499c255fde573f92598d32f9e28f8589048864b395.json",
+      "time": 1793845730741,
+      "mode": "slow",
+      "result": "disconnected"
+    },
+    {
+      "path": "/__bodies/a43b9f1990309297ffbb-b32k-v1/shijing/5c8d43bdd80178dbcdd3a7499c255fde573f92598d32f9e28f8589048864b395.json",
+      "time": 1793845731714,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/fonts/wenkai/manifest.json",
+      "time": 1793845732037,
+      "mode": "slow",
+      "result": 200
+    },
+    {
+      "path": "/fonts/wenkai/000.woff2",
+      "time": 1793845732964,
+      "mode": "slow",
+      "result": "disconnected"
+    },
+    {
+      "path": "/fonts/wenkai/001.woff2",
+      "time": 1793845732965,
+      "mode": "slow",
+      "result": "disconnected"
+    },
+    {
+      "path": "/fonts/wenkai/002.woff2",
+      "time": 1793845732965,
+      "mode": "slow",
+      "result": "disconnected"
+    },
+    {
+      "path": "/fonts/wenkai/000.woff2",
+      "time": 1793845733867,
+      "mode": "offline",
+      "result": "disconnected"
+    },
+    {
+      "path": "/fonts/wenkai/000.woff2",
+      "time": 1793845733868,
+      "mode": "offline",
+      "result": "disconnected"
+    },
+    {
+      "path": "/fonts/wenkai/000.woff2",
+      "time": 1793845733929,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/fonts/wenkai/001.woff2",
+      "time": 1793845733929,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/fonts/wenkai/002.woff2",
+      "time": 1793845733929,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/fonts/wenkai/003.woff2",
+      "time": 1793845733938,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/fonts/wenkai/004.woff2",
+      "time": 1793845733939,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/fonts/wenkai/005.woff2",
+      "time": 1793845733939,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/fonts/wenkai/006.woff2",
+      "time": 1793845733945,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/fonts/wenkai/007.woff2",
+      "time": 1793845733945,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/fonts/wenkai/008.woff2",
+      "time": 1793845733948,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/fonts/wenkai/009.woff2",
+      "time": 1793845733951,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/fonts/wenkai/010.woff2",
+      "time": 1793845733952,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/fonts/wenkai/017.woff2",
+      "time": 1793845733954,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/fonts/wenkai/021.woff2",
+      "time": 1793845733958,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/",
+      "time": 1793845734143,
+      "mode": "offline",
+      "result": "disconnected"
+    },
+    {
+      "path": "/",
+      "time": 1793845734143,
+      "mode": "offline",
+      "result": "disconnected"
+    },
+    {
+      "path": "/",
+      "time": 1793845734144,
+      "mode": "offline",
+      "result": "disconnected"
+    },
+    {
+      "path": "/",
+      "time": 1793845734144,
+      "mode": "offline",
+      "result": "disconnected"
+    },
+    {
+      "path": "/",
+      "time": 1793845734222,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/phase-two.css",
+      "time": 1793845734230,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/style.css",
+      "time": 1793845734231,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/app-v2.js",
+      "time": 1793845734231,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/preferences-v2.js",
+      "time": 1793845734238,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/confirm-dialog.js",
+      "time": 1793845734239,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/ui.js",
+      "time": 1793845734239,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/poems.js",
+      "time": 1793845734240,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/document-model.js",
+      "time": 1793845734241,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/document-storage.js",
+      "time": 1793845734242,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/draft-session.js",
+      "time": 1793845734242,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/document-migrations.js",
+      "time": 1793845734243,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/editor-v2.js",
+      "time": 1793845734243,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/library.js",
+      "time": 1793845734245,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/typography.js",
+      "time": 1793845734245,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/fonts.js",
+      "time": 1793845734246,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/appearance.js",
+      "time": 1793845734247,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/image.js",
+      "time": 1793845734248,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/editor-paper-v2.js",
+      "time": 1793845734250,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/source-paper-settings.js",
+      "time": 1793845734252,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/image-v2.js",
+      "time": 1793845734254,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/source-paper.js",
+      "time": 1793845734255,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/source-layout.js",
+      "time": 1793845734256,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/source-parts.js",
+      "time": 1793845734257,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/document-commands.js",
+      "time": 1793845734258,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/library-service.js",
+      "time": 1793845734259,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/library-search.js",
+      "time": 1793845734260,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/editor.js",
+      "time": 1793845734262,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/library-loader.js",
+      "time": 1793845734263,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/library-index.js",
+      "time": 1793845734263,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/paper-materials.js",
+      "time": 1793845734264,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/image-drawing.js",
+      "time": 1793845734265,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/settings-groups.js",
+      "time": 1793845734266,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/source-parts.js",
+      "time": 1793845734269,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/fonts.js",
+      "time": 1793845734270,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/image-drawing.js",
+      "time": 1793845734270,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/image-layout-v2.js",
+      "time": 1793845734270,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/editor.js",
+      "time": 1793845734271,
+      "mode": "online",
+      "result": 200
+    },
+    {
+      "path": "/modules/search/transport.mjs",
+      "time": 1793845734301,
+      "mode": "online",
+      "result": 200
+    }
+  ],
+  "finished": true
+}

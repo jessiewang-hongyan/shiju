@@ -1,0 +1,30 @@
+[
+  {
+    "word": "竹喧",
+    "pixels": 408,
+    "max": 1,
+    "paper_mae": 0.006,
+    "shift8_mae": 3.141
+  },
+  {
+    "word": "家书",
+    "pixels": 2052,
+    "max": 4,
+    "paper_mae": 0.821,
+    "shift8_mae": 17.105
+  },
+  {
+    "word": "渔舟",
+    "pixels": 1992,
+    "max": 1,
+    "paper_mae": 0.298,
+    "shift8_mae": 3.497
+  },
+  {
+    "word": "三月",
+    "pixels": 2514,
+    "max": 4,
+    "paper_mae": 0.778,
+    "shift8_mae": 16.001
+  }
+]

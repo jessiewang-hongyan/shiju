@@ -1,0 +1,14 @@
+{
+  "archive": "release-artifacts/phase-two-94d8108b9fd9308c.tar.gz",
+  "runtime": "94d8108b9fd9308c",
+  "baseline": "7aab5f4c84cde74f",
+  "files": 114527,
+  "oldFiles": 114491,
+  "bytes": 950308936,
+  "oldBytes": 949994922,
+  "growth": 314014,
+  "headroom": 49691064,
+  "compressed": 541889980,
+  "sha256": "038b23cf4b9947a26630ce32f0725fe9b63f310565232ad95f879a4fbced2723",
+  "preservedFiles": 114489
+}

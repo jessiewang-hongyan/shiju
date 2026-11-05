@@ -20,6 +20,7 @@ export function mixColors(a, b, weight) {
   );
 }
 export function createAppearance({
+  storage = globalThis.localStorage,
   drawImagePreview,
   updateFontPreview,
   onSourceSizeChange = () => {},
@@ -37,14 +38,14 @@ export function createAppearance({
     $("#" + kind + "-paper-strength-value").value = amount;
     if (save) {
       try {
-        localStorage.setItem("shiju-paper-strength-" + kind, String(amount));
+        storage.setItem("shiju-paper-strength-" + kind, String(amount));
       } catch {}
       syncColorControls();
     }
   }
   for (const kind of ["source", "poem"]) {
     try {
-      const saved = localStorage.getItem("shiju-paper-strength-" + kind);
+      const saved = storage.getItem("shiju-paper-strength-" + kind);
       if (saved !== null) setPaperStrength(kind, saved);
     } catch {}
     for (const suffix of ["", "-value"]) {
@@ -56,7 +57,7 @@ export function createAppearance({
 
     let key;
     try {
-      key = localStorage.getItem("shiju-paper-" + kind);
+      key = storage.getItem("shiju-paper-" + kind);
     } catch {}
     if (!paperKeys.includes(key)) key = "none";
     if (kind === "source") sourcePaper = key;
@@ -73,7 +74,7 @@ export function createAppearance({
         if (kind === "source") sourcePaper = next;
         else poemPaper = next;
         try {
-          localStorage.setItem("shiju-paper-" + kind, next);
+          storage.setItem("shiju-paper-" + kind, next);
         } catch {}
         syncColorControls();
       } catch {
@@ -97,13 +98,13 @@ export function createAppearance({
     $("#source-size-plus").disabled = size === 25;
     if (save)
       try {
-        localStorage.setItem("shiju-source-size", String(size));
+        storage.setItem("shiju-source-size", String(size));
       } catch {}
     if (save) onSourceSizeChange(size);
   }
   setSourceSize(23);
   try {
-    const size = localStorage.getItem("shiju-source-size");
+    const size = storage.getItem("shiju-source-size");
     if (size !== null) setSourceSize(size);
   } catch {}
   $("#source-size").oninput = (e) => setSourceSize(e.target.value, true);
@@ -153,23 +154,23 @@ export function createAppearance({
     collageGap = 0,
     collageBackground = "#ffffff";
   try {
-    const gap = Number(localStorage.getItem("shiju-collage-gap"));
+    const gap = Number(storage.getItem("shiju-collage-gap"));
     if (Number.isInteger(gap) && gap >= 0 && gap <= 24) collageGap = gap;
-    const strength = Number(localStorage.getItem("shiju-rough-strength"));
+    const strength = Number(storage.getItem("shiju-rough-strength"));
     if (Number.isInteger(strength) && strength >= 1 && strength <= 100)
       roughStrength = strength;
     for (const kind of ["tilt", "drift"]) {
-      const raw = localStorage.getItem("shiju-handmade-" + kind);
+      const raw = storage.getItem("shiju-handmade-" + kind);
       const n = Number(raw);
       if (raw !== null && Number.isInteger(n) && n >= 0 && n <= 100) {
         if (kind === "tilt") handmadeTilt = n;
         else handmadeDrift = n;
       }
     }
-    handmade = localStorage.getItem("shiju-handmade") === "true";
-    exportRough = localStorage.getItem("shiju-export-rough") === "true";
-    exportCollage = localStorage.getItem("shiju-export-collage") === "true";
-    const bg = localStorage.getItem("shiju-collage-background");
+    handmade = storage.getItem("shiju-handmade") === "true";
+    exportRough = storage.getItem("shiju-export-rough") === "true";
+    exportCollage = storage.getItem("shiju-export-collage") === "true";
+    const bg = storage.getItem("shiju-collage-background");
     if (validHex(bg)) collageBackground = bg;
   } catch {}
   function setCollageGap(value) {
@@ -179,7 +180,7 @@ export function createAppearance({
     collageGap = n;
     syncColorControls();
     try {
-      localStorage.setItem("shiju-collage-gap", String(n));
+      storage.setItem("shiju-collage-gap", String(n));
     } catch {}
   }
   $("#collage-gap").oninput = (e) => setCollageGap(e.target.value);
@@ -189,7 +190,7 @@ export function createAppearance({
     roughStrength = Math.max(1, Math.min(100, Number(e.target.value) || 35));
     syncColorControls();
     try {
-      localStorage.setItem("shiju-rough-strength", String(roughStrength));
+      storage.setItem("shiju-rough-strength", String(roughStrength));
     } catch {}
   };
   for (const kind of ["tilt", "drift"]) {
@@ -201,7 +202,7 @@ export function createAppearance({
       else handmadeDrift = n;
       syncColorControls();
       try {
-        localStorage.setItem("shiju-handmade-" + kind, String(n));
+        storage.setItem("shiju-handmade-" + kind, String(n));
       } catch {}
     };
     $("#handmade-" + kind).oninput = set;
@@ -212,28 +213,28 @@ export function createAppearance({
     handmade = e.target.checked;
     syncColorControls();
     try {
-      localStorage.setItem("shiju-handmade", String(handmade));
+      storage.setItem("shiju-handmade", String(handmade));
     } catch {}
   };
   $("#export-rough").onchange = (e) => {
     exportRough = e.target.checked;
     syncColorControls();
     try {
-      localStorage.setItem("shiju-export-rough", String(exportRough));
+      storage.setItem("shiju-export-rough", String(exportRough));
     } catch {}
   };
   $("#export-collage").onchange = (e) => {
     exportCollage = e.target.checked;
     syncColorControls();
     try {
-      localStorage.setItem("shiju-export-collage", String(exportCollage));
+      storage.setItem("shiju-export-collage", String(exportCollage));
     } catch {}
   };
   try {
-    const p = JSON.parse(localStorage.getItem("shiju-export-colors") || "null");
+    const p = JSON.parse(storage.getItem("shiju-export-colors") || "null");
     if (p && validHex(p.bg) && validHex(p.fg))
       exportPalette = { bg: p.bg, fg: p.fg };
-    const n = localStorage.getItem("shiju-night-preset");
+    const n = storage.getItem("shiju-night-preset");
     if (Object.hasOwn(nightPresets, n)) nightPreset = n;
   } catch {}
   function applyTheme(dark) {
@@ -272,11 +273,8 @@ export function createAppearance({
   }
   function persistNight() {
     try {
-      localStorage.setItem(
-        "shiju-theme",
-        document.documentElement.dataset.theme,
-      );
-      localStorage.setItem("shiju-night-preset", nightPreset);
+      storage.setItem("shiju-theme", document.documentElement.dataset.theme);
+      storage.setItem("shiju-night-preset", nightPreset);
     } catch {
       toast("已切换，当前浏览器无法保存偏好");
     }
@@ -297,10 +295,7 @@ export function createAppearance({
   $("#night-done").onclick = () => $("#night-dialog").close();
   function persistColors() {
     try {
-      localStorage.setItem(
-        "shiju-export-colors",
-        JSON.stringify(exportPalette),
-      );
+      storage.setItem("shiju-export-colors", JSON.stringify(exportPalette));
     } catch {
       toast("配色已更新，当前浏览器无法保存偏好");
     }
@@ -398,7 +393,7 @@ export function createAppearance({
     collageBackground = value.toLowerCase();
     syncColorControls();
     try {
-      localStorage.setItem("shiju-collage-background", collageBackground);
+      storage.setItem("shiju-collage-background", collageBackground);
     } catch {}
   }
   $("#collage-background-color").oninput = (e) =>
@@ -470,7 +465,7 @@ export function createAppearance({
       setPaperStrength(kind, 100, true);
       $("#" + kind + "-paper").value = "none";
       try {
-        localStorage.setItem("shiju-paper-" + kind, "none");
+        storage.setItem("shiju-paper-" + kind, "none");
       } catch {}
     }
     setCollageBackground("#ffffff");

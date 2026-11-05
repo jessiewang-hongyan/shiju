@@ -10,6 +10,16 @@ export function initLibrary({ editor, typography, searchRequest }) {
   const searchLibrary = createLibrarySearch();
   let libraryLimit = 40,
     previewPoem = null;
+  let previewSourceId = null,
+    previewGeneration = 0,
+    usingPreview = false,
+    excerptController = null;
+  function cancelExcerpt() {
+    editor.cancelPendingAdd?.();
+    previewGeneration++;
+    excerptController?.abort();
+    excerptController = null;
+  }
   const index = createIndexedLibrary();
   let revision = 0;
   const service = document.querySelector('meta[name="shiju-search-service"]')
@@ -38,10 +48,12 @@ export function initLibrary({ editor, typography, searchRequest }) {
   };
   $("#library-retry").onclick = renderLibrary;
   $("#library-scope").onchange = () => {
+    cancelExcerpt();
     libraryLimit = 40;
     renderLibrary();
   };
   $("#search-field").onchange = () => {
+    cancelExcerpt();
     libraryLimit = 40;
     $("#search").placeholder = {
       "title-author": "搜索篇名或作者",
@@ -106,7 +118,9 @@ export function initLibrary({ editor, typography, searchRequest }) {
         );
       });
   }
-  function openPoemPreview(p) {
+  function openPoemPreview(p, replaceSourceId = null) {
+    cancelExcerpt();
+    previewSourceId = replaceSourceId;
     previewPoem = p;
     $("#preview-title").textContent = displayText(p.title || p.label || "无题");
     $("#preview-author").textContent = displayText(
@@ -135,9 +149,17 @@ export function initLibrary({ editor, typography, searchRequest }) {
     $("#excerpt-end").value = Math.min(8, lines.length);
     $("#excerpt-start").max = lines.length;
     $("#excerpt-end").max = lines.length;
-    const replacing = !!(editor.state.tokens.length || editor.state.title);
+    const replacing =
+      !editor.multiSource &&
+      !!(editor.state.tokens.length || editor.state.title);
     $("#preview-warning").hidden = !replacing;
-    $("#preview-use").textContent = replacing ? "确认替换原文" : "确认使用";
+    $("#preview-use").textContent = editor.multiSource
+      ? previewSourceId
+        ? "确认调整选段"
+        : "确认添加原文"
+      : replacing
+        ? "确认替换原文"
+        : "确认使用";
     updateExcerpt();
     $("#poem-preview").showModal();
     root.scrollTop = 0;
@@ -153,7 +175,9 @@ export function initLibrary({ editor, typography, searchRequest }) {
           [range.start - 1]?.scrollIntoView({ block: "start" });
     };
   }
-  $("#preview-use").onclick = () => {
+  $("#preview-use").onclick = async () => {
+    if (usingPreview) return;
+    const ticket = previewGeneration;
     if (!previewPoem) return;
     const range = excerptBounds();
     if (!range.valid) return;
@@ -186,12 +210,36 @@ export function initLibrary({ editor, typography, searchRequest }) {
       toast("这部分没有可选取的文字，请调整范围");
       return;
     }
-    if (editor.changeSource(source, true)) {
-      $("#poem-preview").close();
-      toast("已选择《" + (source.title || source.label || "无题") + "》");
-      $("#source-title").scrollIntoView({ block: "start" });
+    usingPreview = true;
+    $("#preview-use").disabled = true;
+    try {
+      const result = editor.changeSource(source, true, {
+        original: previewPoem,
+        range: partial ? range : null,
+        replaceSourceId: previewSourceId,
+      });
+      const accepted = editor.multiSource ? await result : result;
+      if (accepted) {
+        $("#poem-preview").close();
+        toast("已选择《" + (source.title || source.label || "无题") + "》");
+        $("#source-title").scrollIntoView({ block: "start" });
+      }
+    } catch (error) {
+      toast(error.message || "添加失败，请重试");
+    } finally {
+      usingPreview = false;
+      if (ticket === previewGeneration && $("#poem-preview")?.open)
+        updateExcerpt();
     }
   };
+  $("#poem-preview").addEventListener("close", () => previewGeneration++);
+  $("#picker").addEventListener("close", () => {
+    cancelExcerpt();
+    revision++;
+    previewGeneration++;
+    clearTimeout(searchTimer);
+    service?.cancel();
+  });
   async function renderLibrary() {
     const ticket = ++revision;
     const query = $("#search").value,
@@ -279,6 +327,7 @@ export function initLibrary({ editor, typography, searchRequest }) {
   };
   let searchTimer;
   $("#search").oninput = () => {
+    cancelExcerpt();
     revision++; // Invalidate older requests immediately, including during debounce.
     clearTimeout(searchTimer);
     searchTimer = setTimeout(() => {
@@ -289,6 +338,7 @@ export function initLibrary({ editor, typography, searchRequest }) {
   document.querySelectorAll("[data-tab]").forEach(
     (b) =>
       (b.onclick = () => {
+        cancelExcerpt();
         document
           .querySelectorAll("[data-tab]")
           .forEach((x) => x.classList.toggle("active", x === b));
@@ -304,10 +354,43 @@ export function initLibrary({ editor, typography, searchRequest }) {
       return;
     }
     openPoemPreview({
-      title: $("#custom-title").value.trim() || "无题",
-      author: $("#custom-author").value.trim() || "自选诗材",
+      title:
+        $("#custom-title").value.trim() || (editor.multiSource ? "" : "无题"),
+      author:
+        $("#custom-author").value.trim() ||
+        (editor.multiSource ? "" : "自选诗材"),
       text,
     });
   };
+  editor.setExcerptHandler?.(async (source) => {
+    cancelExcerpt();
+    const ticket = previewGeneration;
+    excerptController = new AbortController();
+    $("#picker").showModal();
+    try {
+      let original = source.originalSnapshot || source.snapshot;
+      const catalog = source.provenance;
+      if (source.selection && catalog.provider && searchRequest) {
+        $("#library-status").textContent = "正在加载完整原文…";
+        const response = await searchRequest(
+          "/api/poems/" +
+            encodeURIComponent(catalog.recordId) +
+            "?version=" +
+            encodeURIComponent(catalog.dataCommit || ""),
+          { signal: excerptController.signal },
+        );
+        if (!response.ok) throw Error("完整原文读取失败，请重试");
+        original = {
+          ...(await response.json()).poem,
+          catalogIdentity: catalog,
+        };
+      }
+      if (ticket !== previewGeneration || !$("#picker").open) return;
+      openPoemPreview(original, source.instanceId);
+    } catch (error) {
+      if (ticket === previewGeneration && error.name !== "AbortError")
+        toast(error.message || "读取失败，已保留原选段");
+    }
+  });
   return { renderLibrary };
 }

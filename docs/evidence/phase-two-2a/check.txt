@@ -1,0 +1,5 @@
+
+> check
+> node scripts/check-modules.js && eslint dist/app.js dist/modules
+
+PASS: 23 modules parse, all imports exist, no circular imports

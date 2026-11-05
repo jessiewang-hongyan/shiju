@@ -119,7 +119,15 @@ export function createServiceLibrary({
             if (detailTicket !== generation || !$("#picker").open) return;
             $("#library-status").textContent =
               `${cache.total.toLocaleString()} 篇`;
-            openPoemPreview(data.poem);
+            openPoemPreview({
+              ...data.poem,
+              catalogIdentity: {
+                provider: "shiju",
+                collection: item.id.split(":")[0],
+                recordId: item.id,
+                dataCommit: version,
+              },
+            });
           } catch (e) {
             if (detailTicket === generation) {
               $("#library-status").textContent =

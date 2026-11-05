@@ -1,0 +1,11 @@
+{
+  "baselineCommit": "c66b1e1a36d11df111201bac98e227f2c91650c6",
+  "runtime": "72f42ed38a93ae68",
+  "files": 84356,
+  "bytes": 489993894,
+  "retiredFiles": 30171,
+  "treeSha256": "efa347be6fb744bcedc54ee8e8fa50737475501a25cc1daa5b829e02271f984a",
+  "comparedCandidate": "release-artifacts/candidate-retirement-local.tar.gz",
+  "nonMetadataFilesIdentical": true,
+  "metadataChange": "compatibilityMode: local-retirement-audit -> refresh-earlier-tabs"
+}

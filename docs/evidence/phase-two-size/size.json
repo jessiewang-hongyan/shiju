@@ -1,0 +1,27 @@
+{
+  "baselineBytes": 949994922,
+  "groups": {
+    ".nojekyll": 0,
+    "app-15a52e2940ed593e.js": 2121,
+    "app-7aab5f4c84cde74f.js": 2238,
+    "assets": 1761587,
+    "fonts": 71370845,
+    "index.html": 30065,
+    "licenses": 2268,
+    "modules-15a52e2940ed593e": 200743,
+    "modules-7aab5f4c84cde74f": 302092,
+    "release.json": 525,
+    "static-data/6232011b885ca65c14fd": 362635808,
+    "static-data/8e1ac91380039623313c": 379882570,
+    "static-data/a43b9f1990309297ffbb-remote-v2": 80162317,
+    "static-data/cd604eda6a76f51410b4-remote-v2-index-876978309ad96b584d2d-summaries-aafbd9af005fb5305048-index-6232011b885ca65c14fd": 51952329,
+    "static-data/config-92e9af008a108b43e4b9.json": 268556,
+    "static-data/config-d70973c921163c86fa8b.json": 112227,
+    "static-data/current.json": 1281,
+    "style-15a52e2940ed593e.css": 45700,
+    "style-7aab5f4c84cde74f.css": 45700,
+    "vendor": 1215950
+  },
+  "binaryGzipEligibleFiles": 72624,
+  "binaryGzipGrossSaving": 105212135
+}

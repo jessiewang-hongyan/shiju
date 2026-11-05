@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+  <meta charset="utf-8" /><title>2C 纸张验收</title
+  ><link rel="stylesheet" href="/style.css" /><link
+    rel="stylesheet"
+    href="/phase-two.css"
+  /><style>
+    body {
+      padding: 20px;
+    }
+    #fixture {
+      width: 640px;
+    }
+    #report {
+      white-space: pre-wrap;
+      font: 14px monospace;
+    }
+    #new-poem {
+      min-height: 70px;
+    }
+    #run {
+      padding: 12px;
+      border: 1px solid;
+    }
+  </style>
+  <h1>2C 纸张验收</h1>
+  <button id="run">运行本地验收</button
+  ><select id="export-font">
+    <option value="songti">宋体</option>
+  </select>
+  <p id="status">尚未运行</p>
+  <pre id="report"></pre>
+  <div id="fixture">
+    <div id="new-poem" class="new-poem"></div>
+    <div id="source-paper-surface" class="source-paper-surface">
+      <div class="source-heading">
+        <p class="source-part-reference dialog-note" id="source-reference"></p>
+        <h2 id="source-title" class="source-part-title"></h2>
+        <p id="source-author" class="source-part-author"></p>
+      </div>
+      <div id="source-poem" class="source-poem source-part-text"></div>
+    </div>
+  </div>
+  <script type="module" src="paper-lab.js"></script>
+</html>

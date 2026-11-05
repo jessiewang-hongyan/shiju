@@ -1,0 +1,203 @@
+{
+  "rows": [
+    {
+      "name": "古文观止",
+      "key": "guwen",
+      "title": "鄭伯克段於鄢",
+      "id": "guwen:0",
+      "hits": 2,
+      "codePoints": 726,
+      "pass": true
+    },
+    {
+      "name": "幽梦影",
+      "key": "youmengying",
+      "title": "第 1 则",
+      "id": "youmengying:0",
+      "hits": 130,
+      "codePoints": 42,
+      "pass": true
+    },
+    {
+      "name": "声律启蒙",
+      "key": "shenglv",
+      "title": "一 東",
+      "id": "shenglv:0",
+      "hits": 1,
+      "codePoints": 280,
+      "pass": true
+    },
+    {
+      "name": "南唐二主词",
+      "key": "nantang",
+      "title": "应天长·一钩初月临妆镜",
+      "id": "nantang:0",
+      "hits": 1,
+      "codePoints": 61,
+      "pass": true
+    },
+    {
+      "name": "诗经",
+      "key": "shijing",
+      "title": "关雎",
+      "id": "shijing:0",
+      "hits": 1,
+      "codePoints": 104,
+      "pass": true
+    },
+    {
+      "name": "楚辞",
+      "key": "chuci",
+      "title": "离骚",
+      "id": "chuci:0",
+      "hits": 1,
+      "codePoints": 3072,
+      "pass": true
+    },
+    {
+      "name": "汉乐府",
+      "key": "han-yuefu",
+      "title": "上邪",
+      "id": "han-yuefu:0",
+      "hits": 1,
+      "codePoints": 50,
+      "pass": true
+    },
+    {
+      "name": "汉诗",
+      "key": "han",
+      "title": "大招",
+      "id": "han:0",
+      "hits": 1,
+      "codePoints": 1250,
+      "pass": true
+    },
+    {
+      "name": "魏晋诗",
+      "key": "weijin",
+      "title": "俞儿舞歌四首 其四 行辞新福歌",
+      "id": "weijin:86",
+      "hits": 1,
+      "codePoints": 59,
+      "pass": true
+    },
+    {
+      "name": "唐诗",
+      "key": "tang",
+      "title": "忆秦娥",
+      "id": "tang:0",
+      "hits": 2,
+      "codePoints": 53,
+      "pass": true
+    },
+    {
+      "name": "宋词",
+      "key": "song",
+      "title": "秋夜月・相见欢",
+      "id": "song:100",
+      "hits": 1,
+      "codePoints": 109,
+      "pass": true
+    },
+    {
+      "name": "元曲",
+      "key": "yuan",
+      "title": "诈妮子调风月・仙吕/点绛唇",
+      "id": "yuan:0",
+      "hits": 1,
+      "codePoints": 38,
+      "pass": true
+    },
+    {
+      "name": "金",
+      "key": "jin",
+      "title": "村居五首 其一",
+      "id": "jin:0",
+      "hits": 1,
+      "codePoints": 33,
+      "pass": true
+    },
+    {
+      "name": "元",
+      "key": "yuan-era",
+      "title": "赠歌者杜氏入道三首 其三",
+      "id": "yuan-era:0",
+      "hits": 1,
+      "codePoints": 33,
+      "pass": true
+    },
+    {
+      "name": "宋末金初",
+      "key": "song-jin",
+      "title": "杂诗二首 其一",
+      "id": "song-jin:0",
+      "hits": 1,
+      "codePoints": 33,
+      "pass": true
+    },
+    {
+      "name": "金末元初",
+      "key": "jin-yuan",
+      "title": "赠医师范子和",
+      "id": "jin-yuan:0",
+      "hits": 1,
+      "codePoints": 311,
+      "pass": true
+    },
+    {
+      "name": "宋末元初",
+      "key": "song-yuan",
+      "title": "水调歌头 其十三 甲午九日牛山作",
+      "id": "song-yuan:0",
+      "hits": 1,
+      "codePoints": 121,
+      "pass": true
+    },
+    {
+      "name": "元末明初",
+      "key": "yuan-ming",
+      "title": "画蝉",
+      "id": "yuan-ming:0",
+      "hits": 1,
+      "codePoints": 25,
+      "pass": true
+    },
+    {
+      "name": "宋",
+      "key": "song-era",
+      "title": "长信宫词",
+      "id": "song-era:0",
+      "hits": 2,
+      "codePoints": 167,
+      "pass": true
+    },
+    {
+      "name": "明",
+      "key": "ming-era",
+      "title": "圮上有怀张子房",
+      "id": "ming-era:56",
+      "hits": 1,
+      "codePoints": 233,
+      "pass": true
+    },
+    {
+      "name": "清",
+      "key": "qing-era",
+      "title": "吾所植荷既开尽而风雨频至坐见其萎谢慰别以诗",
+      "id": "qing-era:0",
+      "hits": 1,
+      "codePoints": 298,
+      "pass": true
+    },
+    {
+      "name": "明末清初",
+      "key": "ming-qing",
+      "title": "琴河感旧 其一",
+      "id": "ming-qing:0",
+      "hits": 1,
+      "codePoints": 67,
+      "pass": true
+    }
+  ],
+  "finished": true
+}

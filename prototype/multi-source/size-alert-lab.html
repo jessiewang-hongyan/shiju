@@ -1,0 +1,18 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>导出尺寸验收</title>
+<h1>导出尺寸验收</h1><p>独立测试作品，不读取或保存草稿。两篇原文：四百行长诗及一行短诗。</p>
+<div id="controls"></div><p id="result">准备中</p>
+<script type="module">
+import {createSource,createDocument} from '/modules/document-model.js';
+import {createMultiImage} from '/modules/image-v2.js';
+const template = new DOMParser().parseFromString(await (await fetch('/phase-two.html')).text(),'text/html');
+const root=document.querySelector('#controls');
+for(const selector of ['#colors-dialog','#export','.export-note','#toast','#size-warning']){
+  const el=template.querySelector(selector); root.append(el);
+}
+const dialog=root.querySelector('dialog');dialog.setAttribute('open','');
+document.querySelector('#multi-target').value='source-only';
+const documentFixture=createDocument(await Promise.all([['长诗',Array(400).fill('山').join('\n')],['短诗','山色有无中']].map(([title,text])=>createSource({title,text,author:'测试'}))));
+const renderer=createMultiImage({editor:{document:documentFixture},appearance:{sourcePaper:'none',poemPaper:'none',exportCollage:false,sourcePaperStrength:100,poemPaperStrength:100,getExportColors:()=>({'#f7f5ef':'#eeeeee','#343b31':'#333333',poemBackground:'#ffffff'})},typography:{displayText:t=>t},fonts:{loadExportFont:async()=>{}}});
+document.querySelector('#colors-export').onclick=async()=>{await renderer.exportImage();document.querySelector('#result').textContent='导出操作已结束';};
+renderer.preview();
+</script></html>

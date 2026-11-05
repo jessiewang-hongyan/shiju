@@ -1,0 +1,162 @@
+{
+  "date": "2026-11-03T11:56:08.019Z",
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "results": [
+    {
+      "name": "hidden sources produce their own paper without opening Tabs",
+      "pass": true
+    },
+    {
+      "name": "no persistent measurement DOM",
+      "pass": true
+    },
+    {
+      "name": "switching active source does not change piece pixels",
+      "pass": true
+    },
+    {
+      "name": "gap applies between pieces, not inside joined piece",
+      "pass": true
+    },
+    {
+      "name": "measured crop matches visible source ten-bamboo:text",
+      "pass": true,
+      "details": {
+        "crop": [
+          131.28125,
+          160.296875,
+          64.6875,
+          35.6953125
+        ],
+        "actual": [
+          131.28125,
+          160.296875
+        ]
+      }
+    },
+    {
+      "name": "measured crop matches visible source gold:text",
+      "pass": true,
+      "details": {
+        "crop": [
+          131.28125,
+          160.296875,
+          31.34375,
+          35.6953125
+        ],
+        "actual": [
+          131.28125,
+          160.296875
+        ]
+      }
+    },
+    {
+      "name": "measured crop matches visible source cloud-dark:title",
+      "pass": true,
+      "details": {
+        "crop": [
+          321,
+          46,
+          34.25,
+          39.5
+        ],
+        "actual": [
+          321,
+          46
+        ]
+      }
+    },
+    {
+      "name": "measured crop matches visible source cloud-dark:author",
+      "pass": true,
+      "details": {
+        "crop": [
+          327,
+          105.5,
+          15.3984375,
+          14.796875
+        ],
+        "actual": [
+          327,
+          105.5
+        ]
+      }
+    },
+    {
+      "name": "piece pattern matches original field pixel",
+      "pass": true,
+      "details": {
+        "piece": [
+          233,
+          209,
+          181,
+          255
+        ],
+        "original": [
+          233,
+          209,
+          181,
+          255
+        ]
+      }
+    },
+    {
+      "name": "font size invalidates hidden-source geometry",
+      "pass": true
+    },
+    {
+      "name": "rough edges and handmade pose survive switching",
+      "pass": true
+    },
+    {
+      "name": "different sources have independent handmade placement",
+      "pass": true
+    },
+    {
+      "name": "bounded retained layout / DOM at 1",
+      "pass": true
+    },
+    {
+      "name": "bounded retained layout / DOM at 3",
+      "pass": true
+    },
+    {
+      "name": "bounded retained layout / DOM at 5",
+      "pass": true
+    },
+    {
+      "name": "bounded retained layout / DOM at 10",
+      "pass": true
+    }
+  ],
+  "timings": [
+    {
+      "sources": 1,
+      "codePointsPerSource": 3000,
+      "renderAndWaitMs": 197,
+      "cacheEntries": 1,
+      "retainedMeasurementNodes": 0
+    },
+    {
+      "sources": 3,
+      "codePointsPerSource": 3000,
+      "renderAndWaitMs": 777,
+      "cacheEntries": 3,
+      "retainedMeasurementNodes": 0
+    },
+    {
+      "sources": 5,
+      "codePointsPerSource": 3000,
+      "renderAndWaitMs": 1232,
+      "cacheEntries": 5,
+      "retainedMeasurementNodes": 0
+    },
+    {
+      "sources": 10,
+      "codePointsPerSource": 3000,
+      "renderAndWaitMs": 1975,
+      "cacheEntries": 10,
+      "retainedMeasurementNodes": 0
+    }
+  ]
+}

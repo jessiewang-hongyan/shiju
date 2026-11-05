@@ -73,6 +73,13 @@ npm run format
 ```
 
 - [架构与数据约定](docs/architecture.md)
+- [二阶段开发方案：多原文集句](docs/phase-two-plan.md)（2A／2B／2C 已本地验收；2D 已实现、视觉验收待完成；未部署）
+  - [数据结构与旧作品迁移](docs/phase-two-data.md)
+  - [分阶段验收清单](docs/phase-two-acceptance.md)
+  - [2A 实施与容量实验](docs/phase-two-2a.md)
+  - [2B 多原文编辑与验收](docs/phase-two-2b.md)
+  - [2C 多原文纸张与验收](docs/phase-two-2c.md)
+  - [2D 多原文导出：实现与待验收项](docs/phase-two-2d.md)
 - [诗词与字体资源维护](docs/resources.md)
 - [功能验收与检查记录](docs/acceptance.md)
 - [静态搜索正式发布与回滚记录](docs/production-release.md)
@@ -101,3 +108,7 @@ node scripts/verify-release.mjs
 
 - [兼容资源精简准备](docs/compatibility-retirement-preparation.md)：版本提示、草稿恢复、当前线上资源保留与分代退出边界（仅本地）。
 - [正式迁移候选](docs/formal-migration-candidate.md)：固定候选数据、可复现兼容快照、正式包与本地回退验收（网页未部署）。
+
+二期最新变更：[移除诗集与资源包体积审计](docs/phase-two-size-review.md)。
+
+二期精简发布的最新结论、固定构建入口和发布边界见[最后发布验收](docs/phase-two-final-acceptance.md)。正式二期构建使用 scripts/build-phase-two-release.py，由 phase-two-release-lock.json 锁定已验收产物；当前仍为本地准备，尚未部署。

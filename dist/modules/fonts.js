@@ -40,7 +40,8 @@ export function createFontLoader({ getState, typography }) {
       "拾句拾自集句原诗摘取后新诗重新排列从旧诗里拾一首新诗字句有来处诗意无边界拾句的人"
     );
   }
-  async function loadExportFont(key) {
+  async function loadExportFont(key, textOverride) {
+    const requestedText = textOverride ?? fontText();
     const font = exportFonts[key];
     if (!font) return;
     if (typeof FontFace === "undefined" || !document.fonts)
@@ -67,7 +68,7 @@ export function createFontLoader({ getState, typography }) {
       );
     try {
       const manifest = await fontManifests.get(key),
-        codes = new Set(Array.from(fontText(), (c) => c.codePointAt(0)));
+        codes = new Set(Array.from(requestedText, (c) => c.codePointAt(0)));
       const needed = manifest.filter((part) =>
         part.codes.some((code) => codes.has(code)),
       );
@@ -117,7 +118,7 @@ export function createFontLoader({ getState, typography }) {
           }
         }),
       );
-      await document.fonts.load('24px "' + font.family + '"', fontText());
+      await document.fonts.load('24px "' + font.family + '"', requestedText);
     } catch {
       throw new Error(font.label + "加载失败，请检查网络并点击重试");
     }

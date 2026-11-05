@@ -1,0 +1,83 @@
+{
+  "date": "2026-11-04T07:12:11.009Z",
+  "runtime": "v20.18.0",
+  "scope": "pure layout; excludes browser, fonts, bitmap and PNG",
+  "results": [
+    {
+      "sources": 1,
+      "codePointsPerSource": 3000,
+      "portrait": false,
+      "layoutMs": 22,
+      "width": 5280,
+      "height": 3960,
+      "pixels": 20908800,
+      "rgbaMiB": 80,
+      "completeBodyCodePoints": 3000
+    },
+    {
+      "sources": 1,
+      "codePointsPerSource": 3000,
+      "portrait": true,
+      "layoutMs": 17,
+      "width": 2952,
+      "height": 3936,
+      "pixels": 11619072,
+      "rgbaMiB": 44,
+      "completeBodyCodePoints": 3000
+    },
+    {
+      "sources": 3,
+      "codePointsPerSource": 3000,
+      "portrait": false,
+      "layoutMs": 93,
+      "width": 9228,
+      "height": 6921,
+      "pixels": 63866988,
+      "rgbaMiB": 244,
+      "completeBodyCodePoints": 9000
+    },
+    {
+      "sources": 3,
+      "codePointsPerSource": 3000,
+      "portrait": true,
+      "layoutMs": 66,
+      "width": 5004,
+      "height": 6672,
+      "pixels": 33386688,
+      "rgbaMiB": 127,
+      "completeBodyCodePoints": 9000
+    },
+    {
+      "sources": 5,
+      "codePointsPerSource": 3000,
+      "portrait": false,
+      "rejected": "图片尺寸超限，请减少原文、缩短选段或调小字号",
+      "layoutMs": 132
+    },
+    {
+      "sources": 5,
+      "codePointsPerSource": 3000,
+      "portrait": true,
+      "layoutMs": 151,
+      "width": 6516,
+      "height": 8688,
+      "pixels": 56611008,
+      "rgbaMiB": 216,
+      "completeBodyCodePoints": 15000
+    },
+    {
+      "sources": 10,
+      "codePointsPerSource": 3000,
+      "portrait": false,
+      "rejected": "图片尺寸超限，请减少原文、缩短选段或调小字号",
+      "layoutMs": 323
+    },
+    {
+      "sources": 10,
+      "codePointsPerSource": 3000,
+      "portrait": true,
+      "rejected": "图片尺寸超限，请减少原文、缩短选段或调小字号",
+      "layoutMs": 269
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "candidate": {
+    "files": 84356,
+    "bytes": 489993896,
+    "archive": "release-artifacts/candidate-retirement-local.tar.gz",
+    "compressed": 393160669,
+    "sha256": "e839ab692c06898c4a17e687ea0ac8b8121071825d9b7950dc6225ccff87cecd"
+  },
+  "rollback": {
+    "files": 114491,
+    "bytes": 949994922,
+    "archive": "release-artifacts/rollback-retirement-local.tar.gz",
+    "compressed": 541800127,
+    "sha256": "6ec0838b35db74d60c7727c8a68b50446b6b82a015becd1f72733e78f335d505"
+  },
+  "removedBytes": 460313443,
+  "removedFiles": 30171,
+  "previousCandidate": 950307430
+}

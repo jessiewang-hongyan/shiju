@@ -1,0 +1,551 @@
+
+> test
+> node --test tests/*.test.js
+
+TAP version 13
+# Subtest: 5A source hashes, counts, gaps, row pointers and original categories remain intact
+ok 1 - 5A source hashes, counts, gaps, row pointers and original categories remain intact
+  ---
+  duration_ms: 230.716208
+  ...
+# Subtest: compact indexes preserve ranking, fields, scopes and pages, dedup=0
+ok 2 - compact indexes preserve ranking, fields, scopes and pages, dedup=0
+  ---
+  duration_ms: 5468.0765
+  ...
+# Subtest: compact indexes preserve ranking, fields, scopes and pages, dedup=1
+ok 3 - compact indexes preserve ranking, fields, scopes and pages, dedup=1
+  ---
+  duration_ms: 520.681709
+  ...
+# Subtest: packed Unicode payload decodes without native DecompressionStream, and corrupt data rejects
+ok 4 - packed Unicode payload decodes without native DecompressionStream, and corrupt data rejects
+  ---
+  duration_ms: 0.822417
+  ...
+# Subtest: legacy uncompressed metadata remains searchable with the new reader
+ok 5 - legacy uncompressed metadata remains searchable with the new reader
+  ---
+  duration_ms: 0.169209
+  ...
+# Subtest: V2 migration preserves all regions, Unicode, missing marks, old IDs and order
+ok 6 - V2 migration preserves all regions, Unicode, missing marks, old IDs and order
+  ---
+  duration_ms: 5.946167
+  ...
+# Subtest: V2 identities distinguish catalog records and keep source references stable
+ok 7 - V2 identities distinguish catalog records and keep source references stable
+  ---
+  duration_ms: 1.20875
+  ...
+# Subtest: V2 rejects corrupt positions, text mismatch, future schema and stale export IDs
+ok 8 - V2 rejects corrupt positions, text mismatch, future schema and stale export IDs
+  ---
+  duration_ms: 1.308333
+  ...
+# Subtest: V2 initialization is isolated, idempotent and keeps an exact raw backup
+ok 9 - V2 initialization is isolated, idempotent and keeps an exact raw backup
+  ---
+  duration_ms: 5.795167
+  ...
+# Subtest: V2 malformed legacy data stops migration after recoverable backup
+ok 10 - V2 malformed legacy data stops migration after recoverable backup
+  ---
+  duration_ms: 2.667458
+  ...
+# Subtest: V2 transaction failures and silent dropped writes never report success
+ok 11 - V2 transaction failures and silent dropped writes never report success
+  ---
+  duration_ms: 5.163958
+  ...
+# Subtest: V2 concurrent connections reject stale writers; reload preserves winner
+ok 12 - V2 concurrent connections reject stale writers; reload preserves winner
+  ---
+  duration_ms: 3.082625
+  ...
+# Subtest: V2 old-page edits import only explicitly as saved copies and deduplicate
+ok 13 - V2 old-page edits import only explicitly as saved copies and deduplicate
+  ---
+  duration_ms: 5.6435
+  ...
+# Subtest: V2 backup restores exact content and preserves the previous record
+ok 14 - V2 backup restores exact content and preserves the previous record
+  ---
+  duration_ms: 4.312167
+  ...
+# Subtest: V2 corrupt persisted records never fall back to or overwrite legacy
+ok 15 - V2 corrupt persisted records never fall back to or overwrite legacy
+  ---
+  duration_ms: 1.854292
+  ...
+# Subtest: V2 interrupted initial commit retries without duplicate documents
+ok 16 - V2 interrupted initial commit retries without duplicate documents
+  ---
+  duration_ms: 2.919666
+  ...
+# Subtest: V2 conflict-copy recovery keeps the current draft and local unsaved work
+ok 17 - V2 conflict-copy recovery keeps the current draft and local unsaved work
+  ---
+  duration_ms: 2.684417
+  ...
+# Subtest: V2 simultaneous initialization has a single committed migration
+ok 18 - V2 simultaneous initialization has a single committed migration
+  ---
+  duration_ms: 2.432125
+  ...
+# Subtest: V2 backup failure prevents first migration; draft mutation during migration is detected
+ok 19 - V2 backup failure prevents first migration; draft mutation during migration is detected
+  ---
+  duration_ms: 2.009125
+  ...
+# Subtest: editor paper joins only consecutive source occurrences on the same source and display row, without inserted gaps
+ok 20 - editor paper joins only consecutive source occurrences on the same source and display row, without inserted gaps
+  ---
+  duration_ms: 0.727666
+  ...
+# Subtest: editor paper follows settings, redraws after returns, and leaves interactive text intact
+ok 21 - editor paper follows settings, redraws after returns, and leaves interactive text intact
+  ---
+  duration_ms: 68.8145
+  ...
+# Subtest: editor: occurrence IDs, return holes, reorder, drag, newline/space/punctuation, undo, empty title and persisted draft
+ok 22 - editor: occurrence IDs, return holes, reorder, drag, newline/space/punctuation, undo, empty title and persisted draft
+  ---
+  duration_ms: 169.799042
+  ...
+# Subtest: collection: save, restore, delete; persisted drafts survive reload; storage errors are recoverable
+ok 23 - collection: save, restore, delete; persisted drafts survive reload; storage errors are recoverable
+  ---
+  duration_ms: 75.683458
+  ...
+# Subtest: custom source and excerpt validation/confirmation preserve exact consecutive lines
+ok 24 - custom source and excerpt validation/confirmation preserve exact consecutive lines
+  ---
+  duration_ms: 76.525125
+  ...
+# Subtest: appearance: separate night/export colors, size bounds, collage, roughness and current two-line preview
+ok 25 - appearance: separate night/export colors, size bounds, collage, roughness and current two-line preview
+  ---
+  duration_ms: 187.031458
+  ...
+# Subtest: real OpenCC conversion retains source positions and supports original/simplified/traditional
+ok 26 - real OpenCC conversion retains source positions and supports original/simplified/traditional
+  ---
+  duration_ms: 99.606708
+  ...
+# Subtest: image export contains source and composition; blank/long titles, all sizes and collage render
+ok 27 - image export contains source and composition; blank/long titles, all sizes and collage render
+  ---
+  duration_ms: 249.615208
+  ...
+# Subtest: paper geometry joins only adjacent source positions in same row and order; glyph ink is centered
+ok 28 - paper geometry joins only adjacent source positions in same row and order; glyph ink is centered
+  ---
+  duration_ms: 0.675791
+  ...
+# Subtest: empty-state guards, keyboard movement/deletion, double-click return and typing focus
+ok 29 - empty-state guards, keyboard movement/deletion, double-click return and typing focus
+  ---
+  duration_ms: 76.422083
+  ...
+# Subtest: long source extends image; excessive length fails gracefully and restores export button
+ok 30 - long source extends image; excessive length fails gracefully and restores export button
+  ---
+  duration_ms: 189.459167
+  ...
+# Subtest: source size controls the actual exported font size in both poem sections
+ok 31 - source size controls the actual exported font size in both poem sections
+  ---
+  duration_ms: 79.447209
+  ...
+# Subtest: traditional font hint is optional and converts through the existing script control
+ok 32 - traditional font hint is optional and converts through the existing script control
+  ---
+  duration_ms: 122.439208
+  ...
+# Subtest: all four image layouts position source, poem, background and signature consistently
+ok 33 - all four image layouts position source, poem, background and signature consistently
+  ---
+  duration_ms: 201.389458
+  ...
+# Subtest: collage spacing preserves connected cuts, wraps with gaps and changes exported positions
+ok 34 - collage spacing preserves connected cuts, wraps with gaps and changes exported positions
+  ---
+  duration_ms: 98.722416
+  ...
+# Subtest: handmade collage rotates each connected piece once and persists the optional setting
+ok 35 - handmade collage rotates each connected piece once and persists the optional setting
+  ---
+  duration_ms: 111.201541
+  ...
+# Subtest: handmade strengths control independent bounded per-piece amplitudes and persist
+ok 36 - handmade strengths control independent bounded per-piece amplitudes and persist
+  ---
+  duration_ms: 69.260875
+  ...
+# Subtest: paper choices are independent, persisted and reset without changing poem content
+ok 37 - paper choices are independent, persisted and reset without changing poem content
+  ---
+  duration_ms: 376.0635
+  ...
+# Subtest: single-panel exports omit the other section and use only the visible content height
+ok 38 - single-panel exports omit the other section and use only the visible content height
+  ---
+  duration_ms: 279.440417
+  ...
+# Subtest: source-only export works without picked characters
+ok 39 - source-only export works without picked characters
+  ---
+  duration_ms: 72.043375
+  ...
+# Subtest: orientation filters layouts, maps the current pair, and exports both single panels at the chosen ratio
+ok 40 - orientation filters layouts, maps the current pair, and exports both single panels at the chosen ratio
+  ---
+  duration_ms: 129.213459
+  ...
+# Subtest: long original grows the page without changing orientation or clipping text
+ok 41 - long original grows the page without changing orientation or clipping text
+  ---
+  duration_ms: 179.864209
+  ...
+# Subtest: collage gaps move connected pieces without stretching their internal letter spacing
+ok 42 - collage gaps move connected pieces without stretching their internal letter spacing
+  ---
+  duration_ms: 109.57075
+  ...
+# Subtest: module padding and gap control actual export geometry and persist
+ok 43 - module padding and gap control actual export geometry and persist
+  ---
+  duration_ms: 201.050916
+  ...
+# Subtest: title and author picks keep occurrence IDs, return independently, undo and survive reload
+ok 44 - title and author picks keep occurrence IDs, return independently, undo and survive reload
+  ---
+  duration_ms: 114.982709
+  ...
+# Subtest: metadata holes export with body picks and remain available for single-poem paper crops
+ok 45 - metadata holes export with body picks and remain available for single-poem paper crops
+  ---
+  duration_ms: 178.845583
+  ...
+# Subtest: settings export uses current configuration and shares the busy state with page export
+ok 46 - settings export uses current configuration and shares the busy state with page export
+  ---
+  duration_ms: 73.134583
+  ...
+# Subtest: cut title, author and body keep source font and paper dimensions at every body size
+ok 47 - cut title, author and body keep source font and paper dimensions at every body size
+  ---
+  duration_ms: 85.97225
+  ...
+# Subtest: settings groups default to layout and summarize changes while exposing only active effect controls
+ok 48 - settings groups default to layout and summarize changes while exposing only active effect controls
+  ---
+  duration_ms: 159.536916
+  ...
+# Subtest: dark cloud paper preserves independent selections and readable ink on transferred pieces
+ok 49 - dark cloud paper preserves independent selections and readable ink on transferred pieces
+  ---
+  duration_ms: 102.697875
+  ...
+# Subtest: paper strength is independent, persistent, bounded and shared by fields and crops
+ok 50 - paper strength is independent, persistent, bounded and shared by fields and crops
+  ---
+  duration_ms: 187.913375
+  ...
+# Subtest: preview and export load author, source title and poem title without requiring them in the body
+ok 51 - preview and export load author, source title and poem title without requiring them in the body
+  ---
+  duration_ms: 50.22375
+  ...
+# Subtest: batch one: real shards, chapter search, preview, confirmation and metadata survive selection
+ok 52 - batch one: real shards, chapter search, preview, confirmation and metadata survive selection
+  ---
+  duration_ms: 349.301417
+  ...
+# Subtest: lacunae: real residual poem keeps occurrence IDs, contiguous runs, return, draft and PNG glyphs
+ok 53 - lacunae: real residual poem keeps occurrence IDs, contiguous runs, return, draft and PNG glyphs
+  ---
+  duration_ms: 89.518
+  ...
+# Subtest: long prose excerpt retains original author and provenance without adding navigation text to selectable author
+ok 54 - long prose excerpt retains original author and provenance without adding navigation text to selectable author
+  ---
+  duration_ms: 249.837416
+  ...
+# Subtest: indexed search ignores stale scope responses and retries a failed search
+ok 55 - indexed search ignores stale scope responses and retries a failed search
+  ---
+  duration_ms: 220.460042
+  ...
+# Subtest: search field defaults, explicit full-text hint and collection scope work together
+ok 56 - search field defaults, explicit full-text hint and collection scope work together
+  ---
+  duration_ms: 646.2305
+  ...
+# Subtest: batch 5A: all six real collections load, preview and confirm with provenance
+ok 57 - batch 5A: all six real collections load, preview and confirm with provenance
+  ---
+  duration_ms: 362.051334
+  ...
+# Subtest: 5A long poem excerpt retains original author and provenance without adding navigation text to selectable author
+ok 58 - 5A long poem excerpt retains original author and provenance without adding navigation text to selectable author
+  ---
+  duration_ms: 1512.713167
+  ...
+# Subtest: 5A black-square lacuna is selectable, returnable and preserved in PNG
+ok 59 - 5A black-square lacuna is selectable, returnable and preserved in PNG
+  ---
+  duration_ms: 165.732917
+  ...
+# Subtest: font shards: select needed characters, retry failure, reuse cache and load newly added characters
+ok 60 - font shards: select needed characters, retry failure, reuse cache and load newly added characters
+  ---
+  duration_ms: 1.451459
+  ...
+# Subtest: author and both titles request their own shards after script conversion
+ok 61 - author and both titles request their own shards after script conversion
+  ---
+  duration_ms: 0.698334
+  ...
+# {"query":"明月","results":957,"requests":6,"gzipBytes":400037,"previousGzipBytes":6490595}
+# {"keyword":"王维","metadataIndexGzip":81971,"fullIndexGzip":199575}
+# Subtest: positional index equals exact full scan across all collections; records preserve provenance
+ok 62 - positional index equals exact full scan across all collections; records preserve provenance
+  ---
+  duration_ms: 1310.474541
+  ...
+# Subtest: cold Tang search fetches only required buckets and visible source shards, with reduced compressed bytes
+ok 63 - cold Tang search fetches only required buckets and visible source shards, with reduced compressed bytes
+  ---
+  duration_ms: 313.635375
+  ...
+# Subtest: failed index requests recover and malformed source never becomes selectable
+ok 64 - failed index requests recover and malformed source never becomes selectable
+  ---
+  duration_ms: 0.77625
+  ...
+# Subtest: three metadata modes match independent field scans across every collection
+ok 65 - three metadata modes match independent field scans across every collection
+  ---
+  duration_ms: 1058.805375
+  ...
+# Subtest: cold title/author search transfers less index data and mode changes do not reuse wrong results
+ok 66 - cold title/author search transfers less index data and mode changes do not reuse wrong results
+  ---
+  duration_ms: 36.594
+  ...
+# Subtest: partial results, retries, deduplication, resumable loading and global concurrency
+ok 67 - partial results, retries, deduplication, resumable loading and global concurrency
+  ---
+  duration_ms: 72.2335
+  ...
+# Subtest: HTTP error, malformed data and timeout do not become cached successes
+ok 68 - HTTP error, malformed data and timeout do not become cached successes
+  ---
+  duration_ms: 310.587
+  ...
+# Subtest: single collection loads concurrently, preserves order and continues after a failed shard
+ok 69 - single collection loads concurrently, preserves order and continues after a failed shard
+  ---
+  duration_ms: 16.697917
+  ...
+# Subtest: cached search preserves substring AND semantics, refinements, deletion and scope changes
+ok 70 - cached search preserves substring AND semantics, refinements, deletion and scope changes
+  ---
+  duration_ms: 1.106625
+  ...
+# Subtest: all deployed records match the previous full scan for representative queries
+ok 71 - all deployed records match the previous full scan for representative queries
+  ---
+  duration_ms: 1345.643042
+  ...
+# Subtest: service adapter: summaries only, cursor paging, detail on click and version binding
+ok 72 - service adapter: summaries only, cursor paging, detail on click and version binding
+  ---
+  duration_ms: 107.947833
+  ...
+# Subtest: service adapter: recover from HTTP failure; stale detail cannot open after close
+ok 73 - service adapter: recover from HTTP failure; stale detail cannot open after close
+  ---
+  duration_ms: 32.002542
+  ...
+# Subtest: service adapter: newer search wins even when old request ignores cancellation
+ok 74 - service adapter: newer search wins even when old request ignores cancellation
+  ---
+  duration_ms: 24.922
+  ...
+# Subtest: local static transport: injected request avoids fetch and no full-search hint is offered
+ok 75 - local static transport: injected request avoids fetch and no full-search hint is offered
+  ---
+  duration_ms: 19.605542
+  ...
+# Subtest: loading state survives stale requests and ends on success or cancellation
+ok 76 - loading state survives stale requests and ends on success or cancellation
+  ---
+  duration_ms: 28.961959
+  ...
+# Subtest: debounced render after closing picker or switching tabs makes no requests
+ok 77 - debounced render after closing picker or switching tabs makes no requests
+  ---
+  duration_ms: 18.818833
+  ...
+# Subtest: crop maps original coordinates into independently sized destination without changing the source field
+ok 78 - crop maps original coordinates into independently sized destination without changing the source field
+  ---
+  duration_ms: 0.960542
+  ...
+# Subtest: texture painter is clipped to the same paper mask, including rough edges
+ok 79 - texture painter is clipped to the same paper mask, including rough edges
+  ---
+  duration_ms: 0.88425
+  ...
+# Subtest: plain paper remains available without loading images or allocating a long bitmap
+ok 80 - plain paper remains available without loading images or allocating a long bitmap
+  ---
+  duration_ms: 0.10725
+  ...
+# Subtest: procedural paper is drawable after loading and reused on later loads
+ok 81 - procedural paper is drawable after loading and reused on later loads
+  ---
+  duration_ms: 17.695167
+  ...
+# Subtest: 2B three-source cut/return, clear, reorder and remove are atomic and undoable
+ok 82 - 2B three-source cut/return, clear, reorder and remove are atomic and undoable
+  ---
+  duration_ms: 4.445375
+  ...
+# Subtest: 2B history shares immutable source snapshots and retains at most 100 steps
+ok 83 - 2B history shares immutable source snapshots and retains at most 100 steps
+  ---
+  duration_ms: 8.408125
+  ...
+# Subtest: 2B excerpt editing is blocked while used and reference identity survives allowed changes
+ok 84 - 2B excerpt editing is blocked while used and reference identity survives allowed changes
+  ---
+  duration_ms: 1.139375
+  ...
+# Subtest: 2B each draft save writes only one document plus metadata, never a saved work
+ok 85 - 2B each draft save writes only one document plus metadata, never a saved work
+  ---
+  duration_ms: 36.547334
+  ...
+# Subtest: 2B DB upgrade preserves the old workspace and backup in one transaction
+ok 86 - 2B DB upgrade preserves the old workspace and backup in one transaction
+  ---
+  duration_ms: 1.454833
+  ...
+# Subtest: 2B save queue preserves rapid edits and blocks stale writes on conflict
+ok 87 - 2B save queue preserves rapid edits and blocks stale writes on conflict
+  ---
+  duration_ms: 0.370583
+  ...
+# Subtest: 2B editor tabs, provenance, hidden-source return, removal undo, keyboard and empty state
+ok 88 - 2B editor tabs, provenance, hidden-source return, removal undo, keyboard and empty state
+  ---
+  duration_ms: 172.865542
+  ...
+# Subtest: 2B custom search dialog adds and deduplicates without clearing current poem; excerpt can be revised
+ok 89 - 2B custom search dialog adds and deduplicates without clearing current poem; excerpt can be revised
+  ---
+  duration_ms: 92.31725
+  ...
+# Subtest: 2B closed preview cannot add a pending async source
+ok 90 - 2B closed preview cannot add a pending async source
+  ---
+  duration_ms: 29.174125
+  ...
+# Subtest: 2B queued collection writes do not race rapid edits
+ok 91 - 2B queued collection writes do not race rapid edits
+  ---
+  duration_ms: 1.641459
+  ...
+# Subtest: 2B keyboard movement retains token focus
+ok 92 - 2B keyboard movement retains token focus
+  ---
+  duration_ms: 43.098958
+  ...
+# Subtest: 2B ordinary undo preserves current preferences; undo opening a work restores its prior preferences
+ok 93 - 2B ordinary undo preserves current preferences; undo opening a work restores its prior preferences
+  ---
+  duration_ms: 0.686333
+  ...
+# Subtest: checkpoint preserves custom text, gaps, source IDs, title, signature and saved poems across refresh
+ok 94 - checkpoint preserves custom text, gaps, source IDs, title, signature and saved poems across refresh
+  ---
+  duration_ms: 1.154458
+  ...
+# Subtest: update notice is explicit; no automatic reload; save failure prevents navigation
+ok 95 - update notice is explicit; no automatic reload; save failure prevents navigation
+  ---
+  duration_ms: 35.7005
+  ...
+# Subtest: offline or malformed manifest does not suggest an update; modal notice remains reachable
+ok 96 - offline or malformed manifest does not suggest an update; modal notice remains reachable
+  ---
+  duration_ms: 6.84075
+  ...
+# Subtest: blocked storage, silent discarded writes and corrupt collection stop checkpoint
+ok 97 - blocked storage, silent discarded writes and corrupt collection stop checkpoint
+  ---
+  duration_ms: 0.23875
+  ...
+# Subtest: formal build rejects compatibility retirement before writing output
+ok 98 - formal build rejects compatibility retirement before writing output
+  ---
+  duration_ms: 512.288708
+  ...
+# Subtest: formal pinned policy rejects corrupted compatibility inventory before creating output
+ok 99 - formal pinned policy rejects corrupted compatibility inventory before creating output
+  ---
+  duration_ms: 473.388917
+  ...
+# Subtest: all bundled collections preserve every poem, order and metadata across batches
+ok 100 - all bundled collections preserve every poem, order and metadata across batches
+  ---
+  duration_ms: 837.620625
+  ...
+# Subtest: all font manifests reference present WOFF2 shards and unique code points
+ok 101 - all font manifests reference present WOFF2 shards and unique code points
+  ---
+  duration_ms: 493.485042
+  ...
+# Subtest: batch one keeps source references and lacunae while separating reviewed inline notes
+ok 102 - batch one keeps source references and lacunae while separating reviewed inline notes
+  ---
+  duration_ms: 21.007042
+  ...
+# Subtest: cancel aborts active work, drops queued work and keeps newest result
+ok 103 - cancel aborts active work, drops queued work and keeps newest result
+  ---
+  duration_ms: 2.395083
+  ...
+# Subtest: canceled downloads never enter cache; successful cached setup survives cancellation
+ok 104 - canceled downloads never enter cache; successful cached setup survives cancellation
+  ---
+  duration_ms: 0.413542
+  ...
+# Subtest: transport propagates abort to Worker without terminating its caches
+ok 105 - transport propagates abort to Worker without terminating its caches
+  ---
+  duration_ms: 2.086125
+  ...
+# Subtest: compressed summaries preserve Unicode, row order and body references; remove obsolete files
+ok 106 - compressed summaries preserve Unicode, row order and body references; remove obsolete files
+  ---
+  duration_ms: 6.851208
+  ...
+# Subtest: dataset compression versions manifests and indexes without mutating input
+ok 107 - dataset compression versions manifests and indexes without mutating input
+  ---
+  duration_ms: 1405.89475
+  ...
+1..107
+# tests 107
+# suites 0
+# pass 107
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 11391.045667

@@ -1,0 +1,135 @@
+{
+  "rows": [
+    {
+      "step": "旧版草稿与诗集",
+      "state": {
+        "entry": "shiju/app-7aab5f4c84cde74f.js",
+        "title": "一期留存",
+        "signature": "本地验收",
+        "poem": "空",
+        "saved": 1,
+        "tabs": [],
+        "origins": []
+      }
+    },
+    {
+      "step": "第一次升级",
+      "state": {
+        "entry": "modules-94d8108b9fd9308c/app-v2.js",
+        "title": "一期留存",
+        "signature": "本地验收",
+        "poem": "空",
+        "saved": 1,
+        "tabs": [
+          "山居秋暝 · 1 字"
+        ],
+        "origins": [
+          "[\"source-81947ddb793d623467398f3795147ac22fc88d90f3a73d0660f56eee8448cecb\",\"text\",0]"
+        ]
+      }
+    },
+    {
+      "step": "新版混合摘字并保存",
+      "state": {
+        "entry": "modules-94d8108b9fd9308c/app-v2.js",
+        "title": "二期混合",
+        "signature": "本地验收",
+        "poem": "空清",
+        "saved": 2,
+        "tabs": [
+          "山居秋暝 · 1 字",
+          "第二原文 · 1 字"
+        ],
+        "origins": [
+          "[\"source-81947ddb793d623467398f3795147ac22fc88d90f3a73d0660f56eee8448cecb\",\"text\",0]",
+          "[\"80610ea6-a554-4602-81e3-3ca854f36cdb\",\"text\",0]"
+        ]
+      }
+    },
+    {
+      "step": "回退旧包",
+      "state": {
+        "entry": "shiju/app-7aab5f4c84cde74f.js",
+        "title": "一期留存",
+        "signature": "本地验收",
+        "poem": "空",
+        "saved": 1,
+        "tabs": [],
+        "origins": []
+      }
+    },
+    {
+      "step": "回退期间继续创作",
+      "state": {
+        "entry": "shiju/app-7aab5f4c84cde74f.js",
+        "title": "回退期间新作",
+        "signature": "本地验收",
+        "poem": "空山",
+        "saved": 2,
+        "tabs": [],
+        "origins": []
+      }
+    },
+    {
+      "step": "再次升级",
+      "state": {
+        "entry": "modules-94d8108b9fd9308c/app-v2.js",
+        "title": "二期混合",
+        "signature": "本地验收",
+        "poem": "空清",
+        "saved": 2,
+        "tabs": [
+          "山居秋暝 · 1 字",
+          "第二原文 · 1 字"
+        ],
+        "origins": [
+          "[\"source-81947ddb793d623467398f3795147ac22fc88d90f3a73d0660f56eee8448cecb\",\"text\",0]",
+          "[\"80610ea6-a554-4602-81e3-3ca854f36cdb\",\"text\",0]"
+        ]
+      }
+    },
+    {
+      "step": "导入旧页新作",
+      "state": {
+        "entry": "modules-94d8108b9fd9308c/app-v2.js",
+        "title": "二期混合",
+        "signature": "本地验收",
+        "poem": "空清",
+        "saved": 4,
+        "tabs": [
+          "山居秋暝 · 1 字",
+          "第二原文 · 1 字"
+        ],
+        "origins": [
+          "[\"source-81947ddb793d623467398f3795147ac22fc88d90f3a73d0660f56eee8448cecb\",\"text\",0]",
+          "[\"80610ea6-a554-4602-81e3-3ca854f36cdb\",\"text\",0]"
+        ]
+      },
+      "titles": [
+        "回退期间新作",
+        "回退期间新作",
+        "二期混合",
+        "一期留存"
+      ]
+    },
+    {
+      "step": "再次刷新验证幂等",
+      "state": {
+        "entry": "modules-94d8108b9fd9308c/app-v2.js",
+        "title": "二期混合",
+        "signature": "本地验收",
+        "poem": "空清",
+        "saved": 4,
+        "tabs": [
+          "山居秋暝 · 1 字",
+          "第二原文 · 1 字"
+        ],
+        "origins": [
+          "[\"source-81947ddb793d623467398f3795147ac22fc88d90f3a73d0660f56eee8448cecb\",\"text\",0]",
+          "[\"80610ea6-a554-4602-81e3-3ca854f36cdb\",\"text\",0]"
+        ]
+      }
+    }
+  ],
+  "finished": true
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "file": "poem-download.png",
+    "bytes": 52764,
+    "sha256": "86fd8fcc5d097891b105738e3e2084e3567bf5353e1fad1453c3e2bdd4934bb2",
+    "dimensions": [
+      1080,
+      1440
+    ],
+    "source": "Chrome native download in ~/Downloads, copied byte-for-byte"
+  },
+  {
+    "file": "source-download.png",
+    "bytes": 52879,
+    "sha256": "88447b3756bcb73ebe54758c4aa059bbb7a195eb659076bc4fa9cfe8d0382899",
+    "dimensions": [
+      1080,
+      1440
+    ],
+    "source": "Chrome native download in ~/Downloads, copied byte-for-byte"
+  }
+]

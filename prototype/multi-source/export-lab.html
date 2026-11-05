@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <base href="/" />
+    <title>2D 导出验收</title>
+    <style>
+      body {
+        max-width: 1100px;
+        margin: 30px auto;
+        padding: 20px;
+        font: 16px system-ui;
+        background: #faf9f5;
+        color: #222;
+      }
+      button,
+      a {
+        margin: 8px;
+        padding: 8px;
+      }
+      #images {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+      }
+      img {
+        width: 100%;
+        border: 1px solid #ddd;
+      }
+      pre {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>2D 导出验收</h1>
+    <p>
+      独立测试夹具，不读取或修改现有作品。生成八种排列的真实
+      PNG，并检查纸纹、边界和字体失败处理。
+    </p>
+    <button id="run">运行验收</button><span id="status">尚未运行</span>
+    <pre id="report"></pre>
+    <div id="images"></div>
+    <script type="module" src="/prototype/multi-source/export-lab.js"></script>
+  </body>
+</html>

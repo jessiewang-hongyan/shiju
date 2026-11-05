@@ -1,0 +1,94 @@
+{
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+  "results": [
+    {
+      "name": "倾斜毛边后，竹喧的字与纸共同变换，内部无白底",
+      "pass": true
+    },
+    {
+      "name": "倾斜毛边后，家書的字与纸共同变换，内部无白底",
+      "pass": true
+    },
+    {
+      "name": "倾斜毛边后，漁舟的字与纸共同变换，内部无白底",
+      "pass": true
+    },
+    {
+      "name": "倾斜毛边后，三月的字与纸共同变换，内部无白底",
+      "pass": true
+    },
+    {
+      "name": "重排原文并重新读取作品后，手工拼贴 PNG 像素不变",
+      "pass": true
+    },
+    {
+      "name": "关闭毛边改变轮廓",
+      "pass": true
+    },
+    {
+      "name": "关闭倾斜与起伏改变输出",
+      "pass": true
+    },
+    {
+      "name": "单篇 PNG source-left 横",
+      "pass": true
+    },
+    {
+      "name": "单篇 PNG source-right 横",
+      "pass": true
+    },
+    {
+      "name": "单篇 PNG poem-only 横",
+      "pass": true
+    },
+    {
+      "name": "单篇 PNG source-only 横",
+      "pass": true
+    },
+    {
+      "name": "单篇 PNG source-top 竖",
+      "pass": true
+    },
+    {
+      "name": "单篇 PNG source-bottom 竖",
+      "pass": true
+    },
+    {
+      "name": "单篇 PNG poem-only 竖",
+      "pass": true
+    },
+    {
+      "name": "单篇 PNG source-only 竖",
+      "pass": true
+    },
+    {
+      "name": "字体 霞鹜文楷 实际加载并生成不同于宋体的 PNG",
+      "pass": true
+    },
+    {
+      "name": "字体 康熙字典体 实际加载并生成不同于宋体的 PNG",
+      "pass": true
+    },
+    {
+      "name": "字体 拾句细手写 实际加载并生成不同于宋体的 PNG",
+      "pass": true
+    },
+    {
+      "name": "字体 莫大毛笔字体 实际加载并生成不同于宋体的 PNG",
+      "pass": true
+    },
+    {
+      "name": "字体 汇文明朝体 实际加载并生成不同于宋体的 PNG",
+      "pass": true
+    },
+    {
+      "name": "仅指定 山居秋暝：两行预览、完整 PNG",
+      "pass": true
+    },
+    {
+      "name": "仅指定 春望：两行预览、完整 PNG",
+      "pass": true
+    }
+  ],
+  "finished": true
+}

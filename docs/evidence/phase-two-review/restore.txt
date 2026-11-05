@@ -1,0 +1,71 @@
+- banner:
+  - link "拾句":
+    - /url: ./
+  - navigation:
+    - button "夜览"
+    - button "我的诗集 0"
+    - button "玩法说明": 使用说明
+- main:
+  - status: 已保存到此浏览器
+  - button "备份作品"
+  - generic: 恢复备份
+  - text: 检测到旧版页面的修改。
+  - button "作为独立作品导入"
+  - paragraph: 从原文中选字，重新排列成诗。
+  - generic: 文字转换
+  - combobox "文字转换":
+    - option "保持原样" [selected]
+    - option "转为简体"
+    - option "转为繁体"
+  - generic: 保留原有字形。
+  - article:
+    - generic: 集句
+    - button "撤销上一步" [disabled]: 撤销
+    - button "清空新诗": 清空
+    - generic: 题目 选填
+    - textbox "新诗标题":
+      - /placeholder: ""
+      - text: 恢复样本
+    - generic "新诗编辑区":
+      - button "明，点选调整，双击归还": 明
+      - button "月，点选调整，双击归还": 月
+    - textbox "署名":
+      - /placeholder: 署名（选填）
+    - button "↵ 换行"
+    - button "␣ 空格"
+    - button "，标点"
+    - generic: 已选 2 字
+    - paragraph: 拖动调整顺序，双击归还。也可选中字后用 ← → 移动。
+  - article:
+    - generic: 原文
+    - button "＋ 添加原文"
+    - tablist "原文列表":
+      - tab "甲 · 1 字" [selected]
+      - tab "乙 · 1 字"
+    - button "当前原文选项": ⋯
+    - button "正在更新纸张…"
+    - generic: 字号
+    - slider "原文与集句字号": "23"
+    - group "原文与集句字号调整":
+      - button "减小原文与集句字号": −
+      - spinbutton "输入原文与集句字号": "23"
+      - button "增大原文与集句字号": +
+    - button "重置"
+    - tabpanel "甲 · 1 字":
+      - paragraph
+      - heading "摘取：甲" [level=2]:
+        - button "摘取：甲": 甲
+      - paragraph:
+        - button "摘取：验": 验
+        - button "摘取：收": 收
+      - generic "点击原文中的字或缺文标记以摘取":
+        - button "归还：明": 明
+        - button "摘取：月": 月
+    - generic: 标题、作者、正文均可选字，点击摘走后的空位归还
+    - generic: 1 字已选
+  - paragraph: 图片包含挖空的原文和新诗。
+  - button "图片设置"
+  - button "存入诗集"
+  - button "保存图片"
+- text: − + + +
+- status

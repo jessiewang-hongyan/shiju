@@ -1,0 +1,12 @@
+{
+  "runtime": "72f42ed38a93ae68",
+  "baseline": "7aab5f4c84cde74f",
+  "archive": "release-artifacts/phase-two-72f42ed38a93ae68.tar.gz",
+  "files": 114527,
+  "bytes": 950307430,
+  "oldFiles": 114491,
+  "oldBytes": 949994922,
+  "headroom": 49692570,
+  "compressed": 541889857,
+  "sha256": "fe223a3ff35e4b1bc1d25ce169ab69a4c90355818f325f992020e2f8d1913e07"
+}

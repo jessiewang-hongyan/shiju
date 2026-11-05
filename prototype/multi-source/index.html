@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+  <meta charset="UTF-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  /><title>拾句 · 2A 数据实验</title
+  ><style>
+    body {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 0 20px;
+      background: #f7f6f2;
+      color: #242722;
+      font: 16px/1.7 system-ui;
+    }
+    button {
+      font: inherit;
+      padding: 8px 16px;
+      margin: 4px;
+    }
+    pre {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      background: white;
+      padding: 20px;
+      border: 1px solid #ddd;
+    }
+    small {
+      display: block;
+    }
+  </style>
+  <h1>2A 数据实验</h1>
+  <p>隔离的原生 IndexedDB 实验，不读取或修改现有创作。页面尚未接入编辑器。</p>
+  <button id="run">运行迁移与容量实验</button
+  ><button id="download" disabled>下载实验记录</button
+  ><small id="status" role="status">尚未运行</small>
+  <pre id="report"></pre>
+  <script type="module" src="./lab.js"></script>
+</html>

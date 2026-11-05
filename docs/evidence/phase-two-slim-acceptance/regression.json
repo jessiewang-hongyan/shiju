@@ -1,0 +1,38 @@
+{
+  "rows": [
+    {
+      "step": "完整备份",
+      "sources": 2
+    },
+    {
+      "step": "完整工作区恢复",
+      "pass": true,
+      "state": {
+        "title": "二期混合",
+        "poem": "空清",
+        "origins": [
+          "[\"source-81947ddb793d623467398f3795147ac22fc88d90f3a73d0660f56eee8448cecb\",\"text\",0]",
+          "[\"4fafada3-7eee-4020-b748-a7802f0ca7ad\",\"text\",0]"
+        ],
+        "tabs": "山居秋暝 · 1 字第二原文 · 1 字"
+      }
+    },
+    {
+      "step": "仅集句 PNG",
+      "type": "image/png",
+      "bytes": 48168,
+      "width": 1440,
+      "height": 1080,
+      "pass": true
+    },
+    {
+      "step": "指定原文 PNG",
+      "type": "image/png",
+      "bytes": 43743,
+      "width": 1440,
+      "height": 1080,
+      "pass": true
+    }
+  ],
+  "finished": true
+}

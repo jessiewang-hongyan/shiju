@@ -1,0 +1,333 @@
+{
+  "date": "2026-11-03T07:54:30.204Z",
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "hardwareConcurrency": 12,
+  "notes": "3 samples per capacity row; includes validation/clone/readback. No rendering, export, or real-device memory measurement.",
+  "functional": [
+    {
+      "name": "native migration / idempotence / Unicode",
+      "result": "pass"
+    },
+    {
+      "name": "two native connections / conflict detection",
+      "result": "pass"
+    },
+    {
+      "name": "explicit conflict copy",
+      "result": "pass"
+    },
+    {
+      "name": "old-page isolation / explicit import",
+      "result": "pass"
+    },
+    {
+      "name": "JSON backup / restore",
+      "result": "pass"
+    }
+  ],
+  "capacity": [
+    {
+      "sources": 1,
+      "codePointsPerSource": 80,
+      "savedCopies": 0,
+      "utf8Bytes": 13975,
+      "utf16EstimatedBytes": 27298,
+      "serializeMedianMs": 0,
+      "writeMedianMs": 1.2,
+      "readMedianMs": 0.5,
+      "samples": {
+        "writes": [
+          0.8,
+          1.2,
+          5.3
+        ],
+        "reads": [
+          0.9,
+          0.5,
+          0.3
+        ]
+      },
+      "legacyFullSnapshotHistory100Bytes": 1394400,
+      "localStorage": {
+        "writeMs": 4.4,
+        "result": "pass"
+      }
+    },
+    {
+      "sources": 3,
+      "codePointsPerSource": 80,
+      "savedCopies": 0,
+      "utf8Bytes": 41221,
+      "utf16EstimatedBytes": 80486,
+      "serializeMedianMs": 0,
+      "writeMedianMs": 2.5,
+      "readMedianMs": 0.7,
+      "samples": {
+        "writes": [
+          2.1,
+          3.1,
+          2.5
+        ],
+        "reads": [
+          0.7,
+          0.7,
+          0.7
+        ]
+      },
+      "legacyFullSnapshotHistory100Bytes": 4119000,
+      "localStorage": {
+        "writeMs": 0,
+        "result": "pass"
+      }
+    },
+    {
+      "sources": 5,
+      "codePointsPerSource": 80,
+      "savedCopies": 0,
+      "utf8Bytes": 68467,
+      "utf16EstimatedBytes": 133674,
+      "serializeMedianMs": 0.1,
+      "writeMedianMs": 4.3,
+      "readMedianMs": 1.1,
+      "samples": {
+        "writes": [
+          4.3,
+          4.3,
+          3.3
+        ],
+        "reads": [
+          1.1,
+          1.2,
+          1.1
+        ]
+      },
+      "legacyFullSnapshotHistory100Bytes": 6843600,
+      "localStorage": {
+        "writeMs": 0.2,
+        "result": "pass"
+      }
+    },
+    {
+      "sources": 10,
+      "codePointsPerSource": 80,
+      "savedCopies": 0,
+      "utf8Bytes": 136582,
+      "utf16EstimatedBytes": 266644,
+      "serializeMedianMs": 0.1,
+      "writeMedianMs": 6.6,
+      "readMedianMs": 2,
+      "samples": {
+        "writes": [
+          5.9,
+          6.7,
+          6.6
+        ],
+        "reads": [
+          2.7,
+          1.9,
+          2
+        ]
+      },
+      "legacyFullSnapshotHistory100Bytes": 13655100,
+      "localStorage": {
+        "writeMs": 0.2,
+        "result": "pass"
+      }
+    },
+    {
+      "sources": 1,
+      "codePointsPerSource": 3000,
+      "savedCopies": 0,
+      "utf8Bytes": 26583,
+      "utf16EstimatedBytes": 40754,
+      "serializeMedianMs": 0,
+      "writeMedianMs": 1,
+      "readMedianMs": 0.4,
+      "samples": {
+        "writes": [
+          3,
+          1,
+          1
+        ],
+        "reads": [
+          0.4,
+          0.8,
+          0.3
+        ]
+      },
+      "legacyFullSnapshotHistory100Bytes": 2655200,
+      "localStorage": {
+        "writeMs": 0.1,
+        "result": "pass"
+      }
+    },
+    {
+      "sources": 3,
+      "codePointsPerSource": 3000,
+      "savedCopies": 0,
+      "utf8Bytes": 79045,
+      "utf16EstimatedBytes": 120854,
+      "serializeMedianMs": 0.1,
+      "writeMedianMs": 2.4,
+      "readMedianMs": 0.8,
+      "samples": {
+        "writes": [
+          1.9,
+          2.5,
+          2.4
+        ],
+        "reads": [
+          0.8,
+          0.8,
+          1.9
+        ]
+      },
+      "legacyFullSnapshotHistory100Bytes": 7901400,
+      "localStorage": {
+        "writeMs": 0,
+        "result": "pass"
+      }
+    },
+    {
+      "sources": 5,
+      "codePointsPerSource": 3000,
+      "savedCopies": 0,
+      "utf8Bytes": 131507,
+      "utf16EstimatedBytes": 200954,
+      "serializeMedianMs": 0,
+      "writeMedianMs": 4.9,
+      "readMedianMs": 1.4,
+      "samples": {
+        "writes": [
+          3.7,
+          9.4,
+          4.9
+        ],
+        "reads": [
+          3.3,
+          1.4,
+          1.3
+        ]
+      },
+      "legacyFullSnapshotHistory100Bytes": 13147600,
+      "localStorage": {
+        "writeMs": 0.2,
+        "result": "pass"
+      }
+    },
+    {
+      "sources": 10,
+      "codePointsPerSource": 3000,
+      "savedCopies": 0,
+      "utf8Bytes": 262662,
+      "utf16EstimatedBytes": 401204,
+      "serializeMedianMs": 0.2,
+      "writeMedianMs": 7.9,
+      "readMedianMs": 2.9,
+      "samples": {
+        "writes": [
+          7.4,
+          7.9,
+          8
+        ],
+        "reads": [
+          2.9,
+          3.3,
+          2.3
+        ]
+      },
+      "legacyFullSnapshotHistory100Bytes": 26263100,
+      "localStorage": {
+        "writeMs": 0.4,
+        "result": "pass"
+      }
+    },
+    {
+      "sources": 10,
+      "codePointsPerSource": 3000,
+      "savedCopies": 10,
+      "utf8Bytes": 2888981,
+      "utf16EstimatedBytes": 4412642,
+      "serializeMedianMs": 1.4,
+      "writeMedianMs": 77.8,
+      "readMedianMs": 25.4,
+      "samples": {
+        "writes": [
+          80.6,
+          74.5,
+          77.8
+        ],
+        "reads": [
+          25.6,
+          25.2,
+          25.4
+        ]
+      },
+      "legacyFullSnapshotHistory100Bytes": 26263100,
+      "localStorage": {
+        "writeMs": 3.2,
+        "result": "pass"
+      }
+    },
+    {
+      "sources": 10,
+      "codePointsPerSource": 3000,
+      "savedCopies": 50,
+      "utf8Bytes": 13394261,
+      "utf16EstimatedBytes": 20458402,
+      "serializeMedianMs": 11.5,
+      "writeMedianMs": 344.1,
+      "readMedianMs": 117,
+      "samples": {
+        "writes": [
+          309.4,
+          399.7,
+          344.1
+        ],
+        "reads": [
+          117,
+          120.2,
+          111.9
+        ]
+      },
+      "legacyFullSnapshotHistory100Bytes": 26263100,
+      "localStorage": {
+        "result": "QuotaExceededError"
+      }
+    },
+    {
+      "sources": 10,
+      "codePointsPerSource": 3000,
+      "savedCopies": 100,
+      "utf8Bytes": 26525861,
+      "utf16EstimatedBytes": 40515602,
+      "serializeMedianMs": 23.2,
+      "writeMedianMs": 685,
+      "readMedianMs": 236.8,
+      "samples": {
+        "writes": [
+          646.2,
+          726.3,
+          685
+        ],
+        "reads": [
+          236.8,
+          224.8,
+          238.9
+        ]
+      },
+      "legacyFullSnapshotHistory100Bytes": 26263100,
+      "localStorage": {
+        "result": "QuotaExceededError"
+      }
+    }
+  ],
+  "storageEstimate": {
+    "quota": 10744515513,
+    "usage": 7097273,
+    "usageDetails": {
+      "indexedDB": 7097273
+    }
+  },
+  "result": "pass"
+}

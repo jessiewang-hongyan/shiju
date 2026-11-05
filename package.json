@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "eslint": "9.39.1",
+    "fake-indexeddb": "^6.2.7",
     "jsdom": "26.1.0",
     "prettier": "3.6.2"
   }
